@@ -1,0 +1,333 @@
+# japan-remix-video-factory — notes for Claude
+
+## Iron rules (owner, 16/11/2026) — they come before everything else in this file
+1. **The video is in the channel's language: Japanese (tiếng Nhật).** The voice is the channel's Japanese VOICEVOX voice (`voice` in `channels/<id>.json`: 青山龍星 for all four channels until the owner chooses others), and the script lines, subtitles and
+   on-screen text are in Japanese (tiếng Nhật). A script that arrives in another language is translated faithfully into Japanese (tiếng Nhật)
+   first. Never a voice or text of another language: check the language of `lines` and the voice before the voice
+   step, and again on the finished video. A video in the wrong language is not delivered: fix it and render again.
+2. **No video under 60 seconds.** Before the voice step, estimate the length from the script (use the seconds per
+   line of this channel's earlier videos); after the voice step, read the real length of the speech (the machine
+   comment gives it). If the video would be under 60 seconds, **write the script longer** (more true facts and
+   detail on the same subject, in the owner's tone, nothing invented) until it passes 60 seconds, tell the owner on
+   the issue what was added, and only then go on. This is the one exception to "never change the owner's script".
+   Never render or deliver a video under 60 seconds. Only exception: a trial or sample video — the owner says so,
+   or the issue title or notes say `thử`, `mẫu`, `test` or `demo`.
+3. **Every video is vertical (1080×1920) and 80–160 seconds long** (owner, 18/11/2026: "tất cả các kênh đều làm
+   dạng dọc, 80-160s thôi"). Write the script for that length: under 80 s add true scenes and details of the same
+   story (never padding), over 160 s cut repetition. Trial or sample videos are the exception, as in rule 2.
+
+The machine holds to rule 2 too: `python -m news` refuses a voice under 60 s (the run fails and the issue says why)
+unless the story carries `"trial": true` (a trial or sample, as rule 2 says), and writes a warning in the run when
+the voice is outside 80–160 s; such a video is not delivered (rule 3): fix the script and render again.
+
+The owner is Vietnamese and not technical: answer in short, simple Vietnamese, no jargon. They write "tao" (I) and
+"mày" (you); answer the same way, "tao" for yourself and "mày" for them. Their standing decisions are in
+`maihaianh2911-bit/japan-video-factory` → `docs/HANDOVER.md`, and the plan of their 14 Japanese channels with the
+decisions and risks of each, the script lessons and the hook rules in `docs/KENH-NHAT.md` of that repo (18/11/2026):
+read it before any work on a channel of this repo. Real pictures only (never AI pictures), Claude looks at every
+picture, quality is not traded for usage.
+
+## What this repo makes
+Vertical Japanese shorts (1080×1920, 80–160 s) for four of the owner's 14 Japanese channels, all made the same way:
+the owner sends someone else's short or video, Claude retells it in its own words in Japanese (the same story and
+facts, a better telling), finds real pictures, the machine voices it with VOICEVOX and renders it, and Claude checks
+every scene. One issue `[K8] …` / `[K9] …` / `[K10] …` / `[K11] …` = one video of that channel. The machine steps
+run in `.github/workflows/remix-video.yml` (results on the `renders` branch); Claude's steps at each label are in
+`AGENT_REMIX.md`. The engine (`news/`, `tools/`) is the one of `maihaianh2911-bit/japan-news-video-factory` (Tin Nhật,
+which retells the owner's morning source videos the same way), changed only for the channels: a fix to the engine is
+made in both repos, by hand.
+
+| Kênh | id, issue tag | What a video is | Reference channel (its videos are the sources) |
+| --- | --- | --- | --- |
+| 8 | `k8`, `[K8]` | 芸能人3人: three entertainers who share one thing (「実は…な芸能人3人」) | 芸能トピ速 (@geinou.topisoku); also 芸能バナシのツボ (@バナシのツボ) |
+| 9 | `k9`, `[K9]` | ネット炎上: one online uproar about a known person, a shop or an event | メシアの告発 (@メシアの告発), horizontal 26–34 min |
+| 10 | `k10`, `[K10]` | 世界の王室: world royals, above all the British royal family and the old Chinese dynasties | 皇室の記憶 (@ImperialEcho-v1c) |
+| 11 | `k11`, `[K11]` | 歴史のなぜ: one "why" question of history and its main answer | ヒューマン伝 (@humanden_history), horizontal 22–30 min |
+
+Each channel is a file `channels/<id>.json` (`news/channels.py`): its names, its issue tag, its VOICEVOX voice, the
+hashtags every caption of it carries, `"edit": "tin-nhat"` (it edits as Tin Nhật does, below), and the defaults its
+stories inherit (the same for all four: `style` `story`, a `kicker` of its own — 芸能人3人, ネット炎上, 世界の王室,
+歴史のなぜ —, `pace` speed 1.2 with pauses of 0.1 and 0.2 s, and the four picture effects `fx`). **Looks and voices
+of their own come later**: each channel may get additions on top of the Tin Nhật edit (a persistent title, rank
+badges for k8, its colours, another voice) only after the owner approves a 20-second trial of it (owner, 18/11/2026).
+Until then do not add any: all four share the Tin Nhật edit and 青山龍星. A new look or voice is a change of the
+channel file (and of the frame code when the look is new), never of each story.
+
+### The rules and risks of each channel (`docs/KENH-NHAT.md`, told to the owner)
+- **All four** retell another channel's video: YouTube penalises reused content, so rewrite in our own words, add
+  value (a clear meaning, our own angle), and never reuse their voice, their music or whole stretches of their
+  pictures; a picture cut out of the source video only when clean (no burnt-in caption), credited `元動画`, a few.
+  Never two channels on the same story: k10's Chinese side and k11 border on channel 7 (the dark side of history,
+  `japan-dark-history-video-factory`), k11 on channel 12 (a historical person's life, `japan-figures-video-factory`);
+  k10 is never the Japanese imperial family (channels 1–2, `japan-news-video-factory`).
+- **k8 (芸能人3人):** only facts the press has clearly reported; prefer positive or neutral topics (lineage, degrees,
+  a rare name, remembering someone who died); no mocking. Many of the reference channel's topics speak ill of living
+  people (cosmetic surgery, baldness, scandals): in Japan that is a defamation risk even when true, and YouTube has a
+  harassment policy. The second reference, 芸能バナシのツボ, keeps to positive or neutral topics (Kyoto University,
+  fluent French, a medical licence…): the safer source.
+- **k9 (炎上):** only what the press reported. **Never name or show private people** (only public figures; no face of
+  a private person, no name, no blurred-but-recognisable picture); no mocking words; add our own angle and meaning,
+  never copy their opinions. The source is a 26–34-minute horizontal video: one case per video, only its main thread.
+- **k10 (世界の王室):** no tabloid rumours (e.g. "Camilla plotted against Kate's parents"); what is not certain is said
+  to be reported (「…と報じられています」), once. British royal photos are mostly press photos (copyright risk, as Tin
+  Nhật's, accepted by the owner); Qing pictures are mostly out of copyright. The Chinese side is the old dynasties
+  (Cixi, Wanrong, Puyi…), never a story channel 7 tells.
+- **k11 (歴史のなぜ):** one "why" question per video and its main answer, taken from the long source; big, well-known
+  events (not small customs). Sensitive topics (Hitler, the persecution of the Jews, wars) are told as a neutral
+  explanation, never praising, **no Nazi symbol in the first frame**; accepted history only, a hypothesis said to be
+  one, no "shocking truth" titles.
+
+## The edit: these four channels edit as Tin Nhật does
+Owner, 18/11/2026: "cho 4 kênh này học cách edit của kênh tin nhật đi, học tốt vào" — the four channels edit exactly as
+the Tin Nhật channel (`japan-news-video-factory`) does now, with every one of its decisions:
+- **The `story` frame** (trial of 15/11/2026, used for every source video since): the old-newspaper page, the picture
+  filling most of it, the scene's `era` at the top, the headline on the foot of the picture, the captions printed on
+  the page.
+- **The four picture effects on** (17/11/2026): the camera's rhythm, a light depth in the pictures, text that comes
+  in with the voice and a caption that darkens as it is read, the display typeface; a **flat picture** (a document, a
+  newspaper page, a collage, a chart, a screenshot, a banknote) gets `"depth": false`, or it bends.
+- **Music under the voice** in every video: a `music:` search and a quiet recording picked from it (a free licence on
+  Wikimedia Commons, about 17 dB under the voice, credited on screen and in credits.txt).
+- **Read fast like the source** (16/11/2026: "đọc nhanh như video gốc"): speed 1.2, short pauses (inherited).
+- **Two pictures a scene** (14/11/2026: a new picture every 4–5 seconds) and **every scene its own fitting picture**
+  (12/11/2026: "a video with only a few pictures is not acceptable"); a text card only for a pure figure.
+- **Every picture a `move`, every scene a `cut` and a `why`**, chosen by the meaning of its lines from the catalogue
+  (14/11/2026; table "Bảng cách edit" in `AGENT_REMIX.md`).
+- **The hook** (next section): line 1 printed big on the first picture while it is spoken.
+- **One flowing narration**, shown to the owner as one continuous text (18/11/2026), with a meaning, an ending that
+  comes back to the opening, nothing invented (the script rules, "When the owner sends a source video").
+- **The picture review before the render** (18/11/2026: "đọc lại hình ảnh đã chọn xem đã phù hợp với nội dung cần thể
+  hiện chưa, chưa thì chọn lại, duyệt lại, khi nào ổn mới lấy"), recorded in the story as `"review": "<n>/<n>"`.
+- **Delivery:** only the finished video, with its posting caption (16/11/2026: every video comes with its caption;
+  18/11/2026: "gửi video cuối cùng đã xong thôi, không cần gửi nhiều").
+
+The machine knows this list: `python -m news.custom stories/<name>.json` (and the preview, and the workflow's check
+of a pushed story) prints a warning for each part a story leaves out — the frame, the effects, the pace, the hook
+line, an ending asking the viewer, the `music:` search; and from stage `render` the music pick, a scene with fewer
+than two pictures or none, a picture without `move`, a scene without `cut` or `why`, the review. Push a story for its
+render only when it prints none; a trial may leave something out on purpose, and the closing comment then says what
+and why.
+
+## The hook (owner, 18/11/2026: "phần hook cũng có luật")
+The owner's hook rules, common to every new channel (mirrored from `docs/KENH-NHAT.md`, "Luật hook"):
+1. **The first spoken line, about 5 seconds, says the whole story and what it means, plainly** (17/11/2026, the Tin
+   Nhật channel). Example: 「離婚を申し出た雅子さまに、皇太子さまが返した答えは、『僕は、皇太子である前に、君の夫だ』。」
+   About 45–50 characters at speed 1.2 (`python -m news.custom` warns above 55).
+2. **Someone who has never heard of the story must understand it** (18/11/2026, after a script that opened on two dogs
+   nobody knew: "5s đầu ko giữ chân đc những ng ko biết đến câu chuyện, đọc k hiểu đang nói đến cái gì"): the situation
+   in plain words (who, what, where); a name the audience does not know comes later; a name everyone knows (雅子さま,
+   木村拓哉) may come at once. Then the surprise, then that it is a true story.
+3. **A story with a love, couple or mother-and-child side puts that side in the first line** (17/11/2026: the love
+   story `masako-rikon` was the only video with views), and the story is built on it (true facts only).
+4. **The hook is on screen from the very first frame, big** (18/11/2026, on the legends channel: "cải thiện phần hook"
+   → a hook of at most 20 characters printed huge on the first picture). In this engine: line 1 is a `"quote": true`
+   line, printed big on the foot of the first picture over a soft dark band while it is spoken; the faces above stay
+   bright, the whole picture is never darkened, and the hook is never printed on the paper under the picture
+   (17/11/2026 and 18/11/2026: "kiểu này thì hợp lí hơn"). `python -m news.custom` warns when line 1 is not a quote.
+   *Open item:* here the hook is the spoken line itself, its rows come in one after the other over about the first
+   second (frame 0 shows the picture alone; `cover.jpg` shows the whole hook), and there is no separate short hook
+   title shown from frame 0 as on the legends channel; that would be a new look, made only after the owner approves
+   it in a trial.
+5. **The hook picture is one the Japanese audience recognises at once, and it matches the hook line** (18/11/2026):
+   the best-known face of the person the hook names, or a famous place or thing, sharp, and right for what the line
+   says. The picture review checks it first (`AGENT_REMIX.md` §2 step 5).
+
+The owner took two older rules out of the hook (18/11/2026): the video's meaning with its ending coming back to the
+opening, and never inventing. Both stay in the script rules below; they are just not hook rules.
+
+## When you were started by GitHub (a Claude task, nobody in the chat)
+The prompt may be as short as "Làm việc đang chờ trong repo này" ("do the work waiting in this repo"), and GitHub
+adds a line such as "Phiếu kênh 11 số 3: ảnh đã tìm xong, chờ chọn ảnh". Then: follow `AGENT_REMIX.md` from §0 (its
+first check lists the `remix-*` issues waiting for you). Nobody answers questions, so do not ask; comments go on the
+issues (🤖, Vietnamese). This repo's own Claude task (its prompt: "Làm theo AGENT_REMIX.md của repo
+maihaianh2911-bit/japan-remix-video-factory.") or the owner's shared task "japan-video-factory" once its
+`AGENT_NIGHTLY.md` lists this repo (not yet on 18/11/2026) does these steps; either needs the secrets
+`CLAUDE_TASK_URL` and `CLAUDE_TASK_TOKEN` in this repo. There is no hourly run: a missed call waits for the button
+"Gọi Claude ngay" (`wake.yml`) or a chat.
+
+## When the owner sends a source video in a chat (the usual way)
+The owner sends someone else's short or video (a file or a link) and says which channel (8, 9, 10, 11); when that is
+not clear from the chat or from the reference channel, ask (in a chat you may).
+1. **Read the source.** Every word is the content; the narration starts at 0 s, so an opening title is spoken too.
+   - Burnt-in captions (most shorts): sheets of one frame a second,
+     `ffmpeg -i <video> -vf "fps=1,crop=1080:500:0:700,scale=540:-1,drawtext=text='%{pts\:hms}':x=5:y=5:fontcolor=yellow:fontsize=24,tile=3x10" cap%02d.jpg`
+     (move the crop to where the captions are), and look at every sheet.
+   - A long source (k9, k11: 20–30-minute horizontal videos) or one without captions: its voice. Take its subtitle
+     file when the platform has one (`pip install -q yt-dlp`, then
+     `yt-dlp --skip-download --write-subs --write-auto-subs --sub-langs ja -o src <link>`), else transcribe its
+     sound (`ffmpeg -i <video> -vn -ac 1 -ar 16000 src.wav`, then a speech-to-text model such as
+     `pip install faster-whisper`, model `small`, language `ja`). Neither was tried in this repo yet: if both fail,
+     say so in one line and ask the owner for the words. From a long source keep one case (k9) or one question and
+     its main answer (k11).
+   - A source too thin for a story (a few captions, no events): tell the owner before making it.
+2. **Rewrite it in Japanese** (the script rules; owner, 16–18/11/2026, and the lessons of `docs/KENH-NHAT.md`):
+   - Decide the meaning first, in one sentence (what the viewer keeps); the whole story leads to it. A story that
+     only lists events is not enough (owner, 18/11/2026: "chả thấy có tí ý nghĩa gì").
+   - Open with the hook (section "The hook"): the first line says the whole story and its meaning to a stranger, its
+     love or family side first when it has one, printed big (`"quote": true`). The source's opening is often a list
+     title (「実は血筋がヤバすぎる芸能人3人」): ours says in one plain sentence what the three share.
+   - **One flowing narration** (17/11/2026, after finding the scripts of that morning dull): sentences linked by
+     connectives (けれど, そんなある深夜, その言葉が本物だったことを…), the warm narrator's です/ます, no chopped fragments
+     such as 「1993年。ハーバード、東大。」. **Show the owner a script as one continuous text** (the Japanese in one piece,
+     then its Vietnamese meaning in one piece), never cut into numbered scenes or bullet points (owner, 18/11/2026:
+     "Kịch bản phải liền mạch, nói bao nhiêu lần rồi, đừng bao giờ chia đoạn ra như thế"). The scenes exist only for
+     the pictures.
+   - **The ending comes back to the opening**, never a question to the viewer (no 「あなたはどう感じますか？」).
+   - **Never invent.** The same story and facts in the same order, our own sentences, more gripping (owner,
+     16/11/2026: "chỉnh sửa nhẹ kịch bản, giữ khung nội dung nhưng làm cho hay hơn, cuốn hơn, có thể thêm bớt"); keep
+     the people's quotes as they are; cut repetition; add a few true, well-known details of the same subject (dates,
+     ages, what became of a person). A story the sources do not confirm is framed **once**
+     (「…と伝えられています」, 「…と口にしたといいます」 at the key line), not on every line. The rules of the channel
+     come first: a fact the press did not report, a private person's name, a rumour, a mocking word is left out even
+     when the source has it.
+   - Length (iron rules 2 and 3): 80–160 s. Estimate about 6.5 kana-reading characters a second at speed 1.0, plus
+     the pauses; the channels read at speed 1.2. Under 80 s add true scenes and feelings of the same story (never
+     encyclopedic padding such as numbers of trees or treaty years); over 160 s cut repetition.
+   - Tell the owner in the chat what you added or left out, and why.
+3. **Open the issue** in this repo: title `[K<n>] <Japanese title> — <main idea in Vietnamese>`, body with the
+   sections of the channel's issue form (`.github/ISSUE_TEMPLATE/k<n>.yml`): `### Video gốc (bắt buộc)` = the link,
+   or "đã gửi trong chat"; `### Lời của video gốc (không bắt buộc)` = the source words as you read them;
+   `### Ghi chú (không bắt buộc)` = the owner's wishes and "kịch bản đã viết lại bằng lời của mình (biến tấu)"
+   (`_No response_` when empty). No labels: the workflow adds `remix`, the channel label and `remix-plan`. **Right
+   after creating it, add `remix-busy`** (the workflow wakes the Claude task at the same time; the label keeps it off
+   this issue), then do the steps of `AGENT_REMIX.md` for that issue right away. Keep `remix-busy` while you work and
+   wait in the chat: for an issue with a fresh `remix-busy` (added less than 2 hours ago) the workflow does not call
+   the Claude task after a machine step. On a longer chat remove and add it again; remove it after the closing
+   comment. While a machine step runs, say so in one line and wait; if the owner does not want to wait, stop right
+   after one of your pushes (once the workflow has moved the step label, see "Claim" in `AGENT_REMIX.md` §0) and
+   remove `remix-busy`: the Claude task continues from the labels when GitHub calls it after that step.
+4. **Delivery:** send the owner the finished video file and its caption file in the chat (they want them there, not
+   only as links), and the links (video, subtitles, caption, credits, the channel's list). Send only the finished
+   video: no previews, stills or progress pictures (owner, 18/11/2026).
+
+The workflow only runs for files on `main`: story files and their picks are pushed to `main` (the owner's way of
+working since 12/11/2026). If the session may only push to its own branch, say so in one line and ask the owner to
+allow `main`.
+
+## Story format, pictures and preview (used by `AGENT_REMIX.md`)
+1. Write `stories/<channel>-<YYYY-MM-DD>-<short-name>.json` (e.g. `stories/k11-2026-11-19-nihonbashi.json`; ASCII
+   letters, digits, `.`, `_`, `-` only; the samples `stories/mau-k8.json` … `mau-k11.json` show the whole edit) and
+   push it to `main`. Every story file added, changed or renamed in a push gets its own run.
+   - `"channel": "k11"` (required; the file name starts with it, `python -m news.custom` refuses another), `title`
+     (not shown in the video), `date` (shown at the top of a scene without `era`), `source` (shown as 出典; usually
+     left out: the source video is not credited as a news source), `stage: "find"`, `issue` (the issue number: the
+     workflow then moves its labels, comments and calls Claude after each step).
+   - **Inherited from the channel** (`defaults` of `channels/<id>.json`) when the story leaves them out: `style`,
+     `kicker`, `pace`, `fx`. A story may set any of them (the edit warnings then say what departs from the Tin Nhật
+     edit); a dict is merged key by key (`"fx": {"depth": false}` keeps the three other effects); `null` inherits
+     nothing. The voice is always the channel's: a story has no voice key. `"trial": true` marks a trial or sample
+     video (iron rule 2's exception: the machine renders it even under 60 s). `"review": "<n>/<n>"` records the
+     picture review (step 3).
+   - `scenes`: one idea each. `label` (short tag), `headline` (≤ 2 lines, `\n` between; longer ones get a smaller
+     font, up to 3 lines), `lines` (a list: the script, in Japanese, sentence by sentence), optional `era` (the year
+     of the scene at the top: `"1952年"`, `"江戸時代"`), `value` (a big figure such as `70年`) and `evidence` (small
+     text). A scene without a picture is a text card: headline, value, then evidence (only for a pure figure, with a
+     `value`). A line the voice may misread is written `{"text": "caption", "say": "reading in kana"}`; a line
+     `{"text": …, "quote": true}` is printed big on the foot of the picture, over a soft dark band, while it is
+     spoken (the hook; see "The hook").
+   - Pictures and music: a picture `"tone": "sepia"` / `"mono"` / `"color"` (sepia for the old years, colour as the
+     story reaches today). `"music": {"pick": "<k>-<n>", "volume": 1}` from a search `music:<words>` (recordings on
+     Wikimedia Commons with a free licence, e.g. `music:Schumann Träumerei piano`, `music:Gymnopédie Satie piano`;
+     index.json gives title, `seconds` and licence; the piece loops, fades in and out, about 17 dB under the voice,
+     credited on screen and in credits.txt). (`"style": "news"` and `"paper"`, the other frames of the engine, are
+     not part of the edit of these channels.)
+   - `"fx"` (inherited, all four on): `motion` (the camera starts quick and settles), `depth` (a picture that fills
+     the frame gets a light depth from a depth map, Depth Anything V2 Small; **a flat picture gets `"depth": false`**
+     in its picture entry; a picture with `"fit": "contain"` never gets it), `text` (the tag, the headline and a
+     quote come in piece by piece; the caption is there from the start, paler, and darkens as the voice reads it, at
+     the real moment of each sound VOICEVOX gives), `face` (the large text in Shippori Mincho B1 ExtraBold, SIL Open
+     Font License; the workflow fetches it into `fonts/`, not kept in the repository). `motion` and `depth` act on
+     pictures that carry a `move`, so give every picture one. If the effects cannot be installed on GitHub the video
+     is still made, flat or in the usual typeface, and the run log says `warning: depth effect off` or
+     `warning: display font … not found`: say so in the closing comment. To preview with the effects here:
+     `pip install numpy opencv-python-headless onnxruntime`, the typeface in `fonts/ShipporiMinchoB1-ExtraBold.ttf`
+     (or `NEWS_DISPLAY_FONT=<file>`); the depth model is downloaded on first use (99 MB, or `DEPTH_MODEL=<file>`).
+   - `searches`, numbered from 1 in order; only append to the list later (the picks use the numbers, and a pick
+     whose search text changed is refused):
+     - `wiki:<name or Wikidata item>`: every picture **about one thing** (a person, a place, a building, an event)
+       through its Wikidata item: the item's own pictures, the pictures of its Japanese and English Wikipedia
+       articles, its Commons category, photos taken at its coordinates; up to 24, free licences with author and
+       licence for `credits.txt`. `"wiki:エリザベス2世"`, `"wiki:日本銀行"`; the name is the title of its Wikipedia
+       article, or the item itself (`"wiki:Q9682"`) when a name fits several things; `index.json` says which item
+       was found (`"wikidata"`): check it. **Write one `wiki:` search for every person and place of a story, before
+       the `web:` searches** (k9: never for a private person).
+     - `geo:<lat>,<lon> <metres>`: Commons photos taken around a point, nearest first (up to 12; 500 m by default).
+     - `web:<words>`: a free web image search (Bing, else Yahoo! JAPAN, else DuckDuckGo; Japanese words work; stock
+       sites with watermarks are left out); 2–3 per scene, for the moments of the story and for living people, of
+       whom Commons has little. Their licence is unknown and the site is credited (owner, 14/11/2026: pictures may
+       come from anywhere on the web; the copyright risk was told and accepted).
+     - `music:<words>`: at least one in every story (the edit).
+     - Commons words without a prefix (English works best; `incategory:"…"`), `url:<picture> [<page>]` (one
+       picture), `file:stories/media/<story>/<name>.jpg` (a picture kept in the repository, credited 元動画: a clean
+       moment cut out of the source video, without its blurred background or burnt-in caption; prefer a web copy of
+       the same picture when it is larger).
+     - A wish: ` => <what the picture must show, in English>` at the end of a `wiki:`, `geo:`, Commons or `web:`
+       search (`"web:エリザベス女王 戴冠式 1953 => a young queen crowned in Westminster Abbey"`): the machine looks
+       at more pictures than it keeps, scores each against the wish (CLIP) and keeps the best, best first; pictures
+       that do not show it (score under 0.18) or look unsuitable are left out, so a group can come back small or
+       empty: then ask with other words. The score is `match` in `index.json` and `~0.31` on the contact sheet
+       (about 0.30 and more: it shows the thing; near 0.20: doubtful). The wish is always English; never add one to
+       a search that was already run (append a new search instead).
+   - Check before pushing: `python -m news.custom stories/<name>.json` lists every problem (a missing or wrong
+     `channel`, a file name of another channel, unknown keys, bad `focus`/`fit`), the scenes without a picture, and
+     the edit warnings.
+2. The push runs the workflow (find stage, ~2 min). Check that the run for your commit succeeded (the session's
+   GitHub tools `actions_list` / `actions_get`); then `git fetch --depth 1 origin +refs/heads/renders:refs/remotes/origin/renders`
+   and check that `<name>/find/status.json` has your commit before trusting the folder. Look at
+   `<name>/find/sheet_<k>.jpg` yourself. A search with no usable picture has no sheet (0 results in `index.json`);
+   a search that failed has `"error"` in `index.json` and the run is red (`"outcome": "partial"`): run it again
+   (Run workflow → `story` + the name) and only the failed searches are tried again. Wikimedia refuses requests
+   from Claude's cloud session (429), which is why the search runs on GitHub.
+3. Put the picks in the scenes: `"photo": "<k>-<n>"`, `{"pick": "<k>-<n>", "focus": [x, y]}` (the point kept in the
+   frame, 0–1), `{"pick": …, "fit": "contain"}` (the whole picture: portraits, documents), or a list of 1–4 of these
+   shown one after the other: two a scene (the edit). The move of each picture and the cut of each scene are yours,
+   by the meaning of the lines: `"move"` in a picture entry, `"cut"` and `"why"` (one short Vietnamese sentence) in
+   the scene, from the table "Bảng cách edit" in `AGENT_REMIX.md`. Pick the music. Preview before rendering:
+   `python -m news --story stories/<name>.json --pictures <find folder> --stills <out>` and look at `sheet.jpg`
+   (needs `sudo apt-get update -qq && sudo apt-get install -y fonts-noto-cjk` and `pip install -r requirements.txt`;
+   `<find folder>`: `git archive origin/renders <name>/find | tar -x -C <dir>`). Then **review the pictures** (owner,
+   18/11/2026): `python tools/review_picks.py stories/<name>.json <find folder> <stills folder>` puts every pick
+   beside the words spoken while it is on screen and its source title; check each row as `AGENT_REMIX.md` §2 step 5
+   says (the hook picture first), re-pick and review again until every row passes, then write `"review": "<n>/<n>"`.
+   Only then set `stage: "render"` and push.
+4. The render (~3–6 min) replaces `renders/<name>/` (keeping `find/`): `video.mp4`, `subtitles.srt`, `sources.json`,
+   `credits.txt` (for the video description), `caption.txt`, `stills/sheet.jpg`, `status.json`, and writes the list
+   of the channel's videos again (`renders/kenh-<n>.md`, newest first, with the links to each video, caption,
+   subtitles and credits: the page the owner downloads from). Check the run succeeded and that `status.json` has
+   your commit (an old video stays there when a render fails). Links:
+   `https://github.com/maihaianh2911-bit/japan-remix-video-factory/blob/renders/<name>/video.mp4` (and
+   `subtitles.srt`, `credits.txt`, `caption.txt`), the list `…/blob/renders/kenh-<n>.md`. GitHub refuses a file over
+   100 MB, so the video is kept under about 88 MB (`news/render.py`). Old videos are deleted from `renders` every
+   week (`renders-cleanup.yml`: issue closed for 2 days, or no activity for 14 days), so tell the owner to download
+   the video.
+
+### Posting caption (owner, 16/11/2026: every video comes with its caption)
+`captions/<name>.txt` beside the story (UTF-8, Japanese, ≤ 2000 characters; examples `captions/mau-k8.txt` …
+`mau-k11.txt`): line 1 a hook title (≤ 80 characters, true to the script), then 2–4 short sentences on the video, a
+blank line, one line of 5–8 hashtags **that include every hashtag of the channel** (`hashtags` in
+`channels/<id>.json`: k8 `#芸能人 #芸能 #shorts`, k9 `#炎上 #SNS #shorts`, k10 `#世界の王室 #王室 #shorts`, k11
+`#歴史 #歴史のなぜ #shorts`), a blank line, and the credit line
+`画像出典: <元動画 when source-video pictures are used>、<main sites> ほか（写真・音楽の全出典は credits.txt）`. Only
+facts of the script. `python -m news.captions captions/<name>.txt` checks it (`python -m news.custom` too). The
+render publishes it as `renders/<name>/caption.txt`; a push that changes only the caption publishes only the
+caption (no new render). Write it before the closing comment and link it there.
+
+## Changing the pipeline
+Before pushing a change of `news/`, `tools/`, `channels/` or `tests/`: `bash tools/check.sh <out folder>` (add
+`--fx` when the effects' libraries, model and typeface are installed, see `fx` above), and look at
+`<out>/mau-k8/sheet.jpg` … `<out>/mau-k11/sheet.jpg`, `<out>/moves.jpg`, `<out>/cuts.jpg` (and `<out>/fx/sheet.jpg`).
+It needs no network: it compiles the code, checks the channel files (`python -m news.channels`), every story and
+caption, runs `tools/find_test.py` (the picture search on made-up answers) and `tools/channel_test.py` (story names,
+inherited defaults, the edit warnings, the voice taken from the channel file, caption hashtags, issue titles, the
+channel lists, the 60-second refusal), draws the stills of every sample story from `tests/fixtures/pictures/`
+(Wikimedia Commons pictures of the Bank of Japan, banknotes, supermarkets and Edo-period boxes, and 20 seconds of
+Schumann's Träumerei, all under free licences, downsized; authors and licences in its `index.json`: the samples'
+pictures are stand-ins, so samples carry no `review`), encodes 3 seconds of video in the three frames and every move
+and cut of the catalogue (`tools/encode_test.py`, `tools/edits_test.py`), and with `--fx` checks the effects
+(`tools/fx_test.py`). A push of code to `main` runs the same with `--fx` on GitHub (the stills are in the run's
+Artifacts); a change of a sample story `stories/mau-*.json` or its caption runs it too (samples are never voiced or
+published). A new channel: `channels/k<n>.json`, `.github/ISSUE_TEMPLATE/k<n>.yml`, its label in `labels.yml`,
+`stories/mau-k<n>.json` and `captions/mau-k<n>.txt` (`tools/channel_test.py` checks that they exist).
+`tools/publish.sh` replaces a folder of `renders` as a whole, writes `status.json` and the channel lists. Never touch
+secrets. Comments posted on GitHub start with 🤖 (they come from the owner's account). No pull requests unless asked.
+The session cannot delete branches or tags.
