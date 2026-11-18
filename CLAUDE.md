@@ -60,8 +60,9 @@ channel file (and of the frame code when the look is new), never of each story.
   Never two channels on the same story: k10's Chinese side and k11 border on channel 7 (the dark side of history,
   `japan-dark-history-video-factory`), k11 on channel 12 (a historical person's life, `japan-figures-video-factory`);
   k10 is never the Japanese imperial family (channels 1–2, `japan-news-video-factory`).
-- **k8 (芸能人3人):** only facts the press has clearly reported; prefer positive or neutral topics (lineage, degrees,
-  a rare name, remembering someone who died); no mocking. Many of the reference channel's topics speak ill of living
+- **k8 (芸能人3人):** keep the source's details (unconfirmed ones framed as told, see the script rules: owner,
+  18/11/2026); prefer positive or neutral topics (lineage, degrees, a rare name, remembering someone who died); no
+  mocking words of our own. Many of the reference channel's topics speak ill of living
   people (cosmetic surgery, baldness, scandals): in Japan that is a defamation risk even when true, and YouTube has a
   harassment policy. The second reference, 芸能バナシのツボ, keeps to positive or neutral topics (Kyoto University,
   fluent French, a medical licence…): the safer source.
@@ -177,9 +178,15 @@ not clear from the chat or from the reference channel, ask (in a chat you may).
      16/11/2026: "chỉnh sửa nhẹ kịch bản, giữ khung nội dung nhưng làm cho hay hơn, cuốn hơn, có thể thêm bớt"); keep
      the people's quotes as they are; cut repetition; add a few true, well-known details of the same subject (dates,
      ages, what became of a person). A story the sources do not confirm is framed **once**
-     (「…と伝えられています」, 「…と口にしたといいます」 at the key line), not on every line. The rules of the channel
-     come first: a fact the press did not report, a private person's name, a rumour, a mocking word is left out even
-     when the source has it.
+     (「…と伝えられています」, 「…と口にしたといいます」 at the key line), not on every line.
+   - **Keep the source's colourful details** (owner, 18/11/2026, after a k8 script that dropped every detail the press
+     had not confirmed: "nếu m cứ kiểm tra rồi chỉ ghi y như báo chí thì kịch bản sẽ chán hơn rất nhiều luôn"): a
+     nickname, a quote, a rumour the source tells, its cliffhanger (「画面を2回タップ！」) all stay; one that is not
+     confirmed is framed as told (「…といいます」, 「…だとか」, 「…と噂されています」, 「週刊誌によると」), never cut for that
+     alone. Leave out only what could really harm someone or is known to be false: a crime or a serious accusation
+     against a private person stated as fact, a private person's name or face (k9), a tabloid rumour about a living
+     royal (k10), mocking words of our own about someone's body. Check the facts to frame them right, not to strip the
+     story to what a newspaper would print.
    - Length (iron rules 2 and 3): 80–160 s. Estimate about 6.5 kana-reading characters a second at speed 1.0, plus
      the pauses; the channels read at speed 1.2. Under 80 s add true scenes and feelings of the same story (never
      encyclopedic padding such as numbers of trees or treaty years); over 160 s cut repetition.

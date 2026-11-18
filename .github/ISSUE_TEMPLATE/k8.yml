@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         **Cách dùng:** dán link video gốc (hoặc kéo thả file video vào ô dưới), thêm lời của video nếu có, rồi bấm **Create**. Không cần làm gì thêm: Claude đọc video gốc, viết lại bằng lời của mình bằng tiếng Nhật (giữ đúng sự thật, không bịa), máy tìm ảnh, Claude chọn ảnh hợp từng cảnh, máy tạo giọng và dựng video, Claude kiểm tra lại từng cảnh. Link video và caption sẽ hiện ở bình luận cuối.
-        Kênh 8 chỉ kể chuyện đã được báo chí đưa tin rõ ràng, ưu tiên chuyện tích cực hoặc trung tính (dòng dõi, bằng cấp, tưởng nhớ người đã mất), không chế giễu ai.
+        Kênh 8 giữ các chi tiết hấp dẫn của video gốc (chuyện chưa chắc thì nói "nghe nói"), ưu tiên chuyện tích cực hoặc trung tính (dòng dõi, bằng cấp, tưởng nhớ người đã mất), không tự chế giễu ai.
         Muốn sửa gì thì viết bình luận (ví dụ "cảnh 3 đổi ảnh khác").
   - type: textarea
     id: source

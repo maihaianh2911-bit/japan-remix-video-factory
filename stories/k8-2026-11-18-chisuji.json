@@ -1,7 +1,7 @@
 {
   "channel": "k8",
   "issue": 1,
-  "stage": "render",
+  "stage": "find",
   "title": "実は血筋がヤバすぎる芸能人3人",
   "date": "2026-11-18",
   "searches": [
@@ -33,7 +33,11 @@
     "web:ぱーてぃーちゃん 3人 => three Japanese gyaru women comedians together",
     "web:ぱーてぃーちゃん 信子 笑顔 => a smiling Japanese gyaru woman",
     "music:Satie Gnossienne piano",
-    "music:Schumann Träumerei piano"
+    "music:Schumann Träumerei piano",
+    "wiki:三つ葉葵",
+    "wiki:徳川家康",
+    "web:スマホ 画面 タップ 指 => a finger tapping a smartphone screen",
+    "web:家紋 並ぶ 和室 屋敷 => Japanese family crests displayed in a traditional room"
   ],
   "scenes": [
     {
@@ -69,8 +73,9 @@
     {
       "label": "1人目",
       "headline": "父と兄の\n噂",
+      "cut": "fade",
       "lines": [
-        "師匠のビートたけしさんの発言から、父親とお兄さんは、「その筋」の人だったと噂されています。"
+        "師匠・ビートたけしさんの発言から、父親とお兄さんは、暴力団員だったと噂されています。"
       ],
       "photo": [
         {
@@ -90,14 +95,18 @@
           "move": "pull-back"
         }
       ],
-      "cut": "fade",
       "why": "Nhắc lời ông Takeshi: tiến vào mặt ông, rồi lùi ra từ mặt Taka khi nói đến lời đồn."
     },
     {
       "label": "1人目",
       "headline": "「バルタン星から\n来たんですか？」",
+      "cut": "fade",
       "lines": [
-        "たけしさんがお兄さんに会ったときには、その手の指が少ないのを見て、「お兄さん、バルタン星から来たんですか？」と聞いたといいます。"
+        "すでに亡くなっているお兄さんに、たけしさんが会ったときのこと。その手の指が少ないのを見て、こう聞いたといいます。",
+        {
+          "text": "「お兄さん、バルタン星から来たんですか？」",
+          "quote": true
+        }
       ],
       "photo": [
         {
@@ -117,15 +126,15 @@
           "move": "reveal"
         }
       ],
-      "cut": "fade",
-      "why": "Chuyện ông Takeshi gặp anh trai Taka: tiến vào mặt ông Takeshi, rồi bung ra hình người Baltan đúng câu đùa."
+      "why": "Chuyện ông Takeshi gặp anh trai Taka: tiến vào mặt ông Takeshi, rồi bung ra hình người Baltan đúng câu đùa in to."
     },
     {
       "label": "2人目",
       "headline": "ぼる塾・あんり",
+      "cut": "page",
       "lines": [
         "二人目は、ぼる塾のあんりさん。",
-        "父親は元暴走族、母親は元レディースで、二人とも地元では有名だったそうです。"
+        "父は元暴走族の総長だったといわれ、母は元レディース。筋金入りのヤンキー一家です。"
       ],
       "photo": [
         {
@@ -145,14 +154,19 @@
           "move": "pan-right"
         }
       ],
-      "cut": "page",
       "why": "Người thứ hai: lật trang, lia dọc lên mặt Anri, rồi lia ngang chiếc xe kiểu băng đua xe khi nói về bố mẹ cô."
     },
     {
       "label": "2人目",
-      "headline": "姫のように\n育てた父",
+      "headline": "「嘘だけは\n許さねぇ」",
+      "cut": "dip",
       "lines": [
-        "両親はあんりさんが幼稚園のころに離婚し、5人きょうだいの4番目だったあんりさんを、姫のように大切に育てたのは父親でした。"
+        "小さいころから、父にこう叩き込まれて育ったといいます。",
+        {
+          "text": "「嘘だけは、絶対に許さねぇ」。",
+          "quote": true
+        },
+        "両親が離婚したあと、そんなあんりさんを姫のように大切に育てたのも、その父でした。"
       ],
       "photo": [
         {
@@ -172,19 +186,19 @@
           "move": "push-in"
         }
       ],
-      "cut": "dip",
-      "why": "Quay về tuổi thơ (tối rồi sáng lại): lùi ra ảnh bố với các con, rồi tiến vào ảnh Anri mặc váy công chúa bên bố."
+      "why": "Quay về tuổi thơ (tối rồi sáng lại): lùi ra ảnh bố với các con khi câu dạy của bố in to, rồi tiến vào ảnh Anri mặc váy công chúa bên bố."
     },
     {
       "label": "2人目",
       "headline": "「あと20万は\n俺が出す」",
+      "cut": "fade",
       "lines": [
-        "芸人になりたいと打ち明けた日、父は不機嫌そうでしたが、数日後、20万円の入った封筒を差し出して、こう言ったのです。",
+        "芸人になりたいと打ち明けると、父は不機嫌そうでした。ところが数日後、20万円の入った封筒を差し出して、ひと言。",
         {
           "text": "「あと20万は、俺が出す」。",
           "quote": true
         },
-        "養成所に入るには40万円が必要で、あんりさんの貯金は、ちょうどその半分でした。"
+        "養成所の費用、40万円の、ちょうど半分でした。"
       ],
       "photo": [
         {
@@ -212,18 +226,18 @@
           "move": "pan-right"
         }
       ],
-      "cut": "fade",
       "why": "Ngày Anri nói muốn làm hài: lùi ra từ mặt cô, tiến vào phong bì tiền lúc bố đưa, rồi lia ngang lớp học của trường đào tạo."
     },
     {
       "label": "2人目",
-      "headline": "父の「墓流塾」\nTシャツ",
+      "headline": "超がつく\n親バカ",
+      "cut": "fade",
       "lines": [
+        "そんな父も、今では、超がつく親バカ。",
         {
-          "text": "そんな父が、今、実家で着ているのは、大きく「墓流塾」と書かれたTシャツ。",
-          "say": "そんな父が、今、実家で着ているのは、大きく、ぼるじゅく、と書かれたティーシャツ。"
-        },
-        "あんりさんは、「たぶん、お父さんなりの応援だと思う」と笑います。"
+          "text": "「墓流塾」と大きく書かれたTシャツを着て歩く姿は、地元でも有名だとか。",
+          "say": "ぼるじゅく、と大きく書かれたティーシャツを着て歩く姿は、地元でも有名だとか。"
+        }
       ],
       "photo": [
         {
@@ -243,15 +257,16 @@
           "move": "push-in"
         }
       ],
-      "cut": "fade",
-      "why": "Chiếc áo in chữ 墓流塾 (Borujuku): lia ngang cả nhóm Borujuku, rồi tiến vào nụ cười của Anri."
+      "why": "Ông bố giờ là 'siêu cuồng con': lia ngang cả nhóm Borujuku (tên in trên áo 墓流塾), rồi tiến vào nụ cười của Anri."
     },
     {
       "label": "3人目",
       "headline": "豪邸を建てた父",
+      "value": "33億円",
+      "cut": "page",
       "lines": [
         "そして、最後の3人目。",
-        "父親は、大阪で「伝説のヤクザ」と呼ばれた元組長だと週刊誌に報じられ、33億円の豪邸を建てた男です。"
+        "週刊誌によると、父は大阪の元暴力団組長で、33億円の家を建てた男。"
       ],
       "photo": [
         {
@@ -271,16 +286,29 @@
           "move": "pull-back"
         }
       ],
-      "cut": "page",
-      "why": "Người thứ ba: lật trang, lia ngang thành phố Sakai (Osaka), nơi có căn dinh thự, rồi lùi ra toàn cảnh thành phố với con số 33 tỷ yên in to (ảnh thật của căn nhà không công khai).",
-      "value": "33億円"
+      "why": "Người thứ ba: lật trang, lia ngang thành phố Sakai (Osaka), nơi có căn dinh thự, rồi lùi ra toàn cảnh thành phố với con số 33 tỷ yên in to (ảnh thật của căn nhà không công khai)."
     },
     {
       "label": "3人目",
-      "headline": "豪邸は今\nお寺に",
+      "headline": "徳川の血を\n誇る豪邸",
+      "cut": "fade",
       "lines": [
-        "ところがその豪邸も、バブルがはじけると人手に渡り、今はお寺になっているといいます。",
-        "そんな家に生まれた、意外な人物とは……"
+        "家の中には家紋がずらりと並び、まるで徳川の血を誇るような豪邸だったといいます。"
+      ],
+      "photo": [],
+      "why": ""
+    },
+    {
+      "label": "3人目",
+      "headline": "競売、そして\nお寺に",
+      "cut": "dip",
+      "lines": [
+        "しかし、バブル崩壊で競売にかけられ、今はお寺として残っているのだとか。",
+        "そんな家に生まれた、意外な人物とは……",
+        {
+          "text": "画面を2回タップ！",
+          "quote": true
+        }
       ],
       "photo": [
         {
@@ -300,21 +328,18 @@
           "move": "pull-back"
         }
       ],
-      "cut": "dip",
-      "why": "Bong bóng kinh tế vỡ (tối rồi sáng lại, ảnh sàn chứng khoán năm ấy), rồi lùi ra mái chùa (ảnh minh họa)."
+      "why": "Bong bóng kinh tế vỡ (tối rồi sáng lại, ảnh sàn chứng khoán năm ấy), lùi ra mái chùa (ảnh minh họa), rồi câu nhử in to."
     },
     {
       "label": "3人目",
       "headline": "ぱーてぃーちゃん・\n信子",
+      "cut": "hard",
       "lines": [
         {
           "text": "ぱーてぃーちゃんの信子さんです。",
           "say": "ぱーてぃーちゃんの、のぶこさんです。"
         },
-        {
-          "text": "信子さんは、その大豪邸に3歳まで住んでいたと語っていて、事務所は報道に対し、父の仕事は不動産経営だと聞いていた、と答えています。",
-          "say": "のぶこさんは、その大豪邸に3歳まで住んでいたと語っていて、事務所は報道に対し、父の仕事は不動産経営だと聞いていた、と答えています。"
-        }
+        "本人も、その大豪邸に3歳まで住んでいたと語っています。"
       ],
       "photo": [
         {
@@ -334,15 +359,15 @@
           "move": "push-in"
         }
       ],
-      "cut": "hard",
-      "why": "Lộ diện người thứ ba: chuyển cảnh ngay, giật vào mặt Nobuko, rồi tiến vào ảnh cô khi kể lời cô và công ty quản lý."
+      "why": "Lộ diện người thứ ba: chuyển cảnh ngay, giật vào mặt Nobuko, rồi tiến vào ảnh cô khi kể lời cô."
     },
     {
       "label": "3人の血筋",
       "headline": "血筋は\n選べない",
+      "cut": "dip",
       "lines": [
         "血筋は、選べません。",
-        "けれど3人は、その血筋さえ笑いに変えて、芸人として生きてきたのです。"
+        "けれど3人とも、その血筋さえ笑いに変えて、芸人として生きてきたのです。"
       ],
       "photo": [
         {
@@ -370,12 +395,10 @@
           "move": "pull-back"
         }
       ],
-      "cut": "dip",
       "why": "Lời kết (tối rồi sáng lại): ba người lần lượt hiện ra cười, ảnh cuối lùi ra để khép lại câu chuyện."
     }
   ],
   "music": {
     "pick": "28-1"
-  },
-  "review": "24/24"
+  }
 }

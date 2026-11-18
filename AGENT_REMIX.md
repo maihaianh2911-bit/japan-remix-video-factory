@@ -72,9 +72,11 @@ gh api "repos/$R/issues?state=open&labels=remix&per_page=50" --jq '[.[] | select
   the hook picture is one the Japanese audience recognises at once and matches the line.
 - The script is **a retelling** of someone else's video, not the owner's script and not a translation: the same
   story and facts in the same order, our own sentences, the script rules of `CLAUDE.md` ("When the owner sends a
-  source video", step 2). The channel's rules come first (k8 only well-reported facts, k9 no private people, k10 no
-  rumours, k11 accepted history): leave out what breaks them, even when the source has it, and say so on the issue.
-  Never invent.
+  source video", step 2). Keep the source's colourful details, framing the unconfirmed ones as told (owner,
+  18/11/2026: a script that keeps only what the press printed "sẽ chán hơn rất nhiều"); leave out only what the
+  channel's rules forbid (k9 no private people, k10 no tabloid rumours about living royals, k11 accepted history,
+  no crime or serious accusation against a private person stated as fact) or what is known to be false, and say so
+  on the issue. Never invent.
 - Pictures may come from anywhere on the web (owner, 14/11/2026, risk accepted): `web:` searches next to Commons
   ones. Skip pictures with a watermark, a logo or text burnt in, or a small blurred copy.
 - Every scene gets its own fitting picture (owner, 12/11/2026): 2–3 searches per scene from the start, search again
