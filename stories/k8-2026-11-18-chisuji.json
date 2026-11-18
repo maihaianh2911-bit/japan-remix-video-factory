@@ -1,7 +1,7 @@
 {
   "channel": "k8",
   "issue": 1,
-  "stage": "find",
+  "stage": "render",
   "title": "実は血筋がヤバすぎる芸能人3人",
   "date": "2026-11-18",
   "searches": [
@@ -241,23 +241,23 @@
       ],
       "photo": [
         {
-          "pick": "15-3",
-          "focus": [
-            0.5,
-            0.35
-          ],
-          "move": "pan-left"
-        },
-        {
           "pick": "14-10",
           "focus": [
             0.5,
             0.35
           ],
           "move": "push-in"
+        },
+        {
+          "pick": "15-3",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "pan-left"
         }
       ],
-      "why": "Ông bố giờ là 'siêu cuồng con': lia ngang cả nhóm Borujuku (tên in trên áo 墓流塾), rồi tiến vào nụ cười của Anri."
+      "why": "Ông bố giờ 'siêu cuồng con': tiến vào nụ cười của Anri, rồi lia ngang cả nhóm Borujuku khi nói chiếc áo in chữ 墓流塾."
     },
     {
       "label": "3人目",
@@ -295,7 +295,24 @@
       "lines": [
         "家の中には家紋がずらりと並び、まるで徳川の血を誇るような豪邸だったといいます。"
       ],
-      "why": "Nhà đầy gia huy như khoe dòng máu Tokugawa: ảnh gia huy ba lá thục quỳ và chân dung Tokugawa Ieyasu (chọn sau khi máy tìm ảnh)."
+      "why": "Nhà đầy gia huy như khoe dòng máu Tokugawa: hiện nguyên gia huy ba lá thục quỳ của nhà Tokugawa (ai cũng nhận ra), rồi tiến vào chân dung Tokugawa Ieyasu.",
+      "photo": [
+        {
+          "pick": "30-15",
+          "fit": "contain",
+          "move": "push-in",
+          "depth": false
+        },
+        {
+          "pick": "31-1",
+          "focus": [
+            0.42,
+            0.4
+          ],
+          "move": "push-in",
+          "depth": false
+        }
+      ]
     },
     {
       "label": "3人目",
@@ -327,7 +344,7 @@
           "move": "pull-back"
         }
       ],
-      "why": "Bong bóng kinh tế vỡ (tối rồi sáng lại, ảnh sàn chứng khoán năm ấy), lùi ra mái chùa (ảnh minh họa), rồi câu nhử in to."
+      "why": "Bong bóng kinh tế vỡ (tối rồi sáng lại, sàn chứng khoán năm ấy), rồi lùi ra mái chùa (ảnh minh họa) khi câu nhử 'chạm 2 lần' in to."
     },
     {
       "label": "3人目",
@@ -399,5 +416,6 @@
   ],
   "music": {
     "pick": "28-1"
-  }
+  },
+  "review": "26/26"
 }
