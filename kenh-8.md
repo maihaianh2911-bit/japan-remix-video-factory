@@ -4,4 +4,4 @@ Video của kênh, mới nhất ở trên. Bấm **video**, rồi nút tải v�
 
 Video bị xóa khỏi đây 2 ngày sau khi đóng phiếu, hoặc sau 14 ngày phiếu không có hoạt động: hãy tải về sớm.
 
-_Chưa có video nào._
+- 2026-11-18 · **実は血筋がヤバすぎる芸能人3人** (1:35) — [video](k8-2026-11-18-chisuji/video.mp4) · [caption](k8-2026-11-18-chisuji/caption.txt) · [phụ đề](k8-2026-11-18-chisuji/subtitles.srt) · [nguồn ảnh](k8-2026-11-18-chisuji/credits.txt)
