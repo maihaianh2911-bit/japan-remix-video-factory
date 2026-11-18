@@ -14,7 +14,7 @@ from pathlib import Path
 import tempfile
 import wave
 
-from .custom import StoryError, load_story
+from .custom import StoryError, load_story, read, report_edit
 from .render import encode, stills, use_fx, use_style, write_subtitles
 from .story import voice_credit
 from .voice import narration
@@ -55,6 +55,7 @@ def main():
         release, beats, scene_photos = load_story(args.story, args.pictures)
     except StoryError as error:
         raise SystemExit(f"error: {error}") from None
+    report_edit(read(args.story), args.story)   # what the story leaves out of the Tin Nhật edit (warnings)
     use_style(release.style)
     use_fx(release.fx)
     if args.stills:

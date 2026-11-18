@@ -7,6 +7,11 @@ A channel file holds
     tag               what the titles of its issues start with: "[K8]"
     voice             its VOICEVOX voice, {"speaker": …, "style": …}: the narration and the credit VOICEVOX:<speaker>
     hashtags          the hashtags every posting caption of the channel carries (captions/<story>.txt)
+    edit              "tin-nhat": the channel edits as the Tin Nhật channel of japan-news-video-factory does (owner,
+                      18/11/2026: "cho 4 kênh này học cách edit của kênh tin nhật"): the story frame, the four picture
+                      effects, music, the hook line printed big, two pictures a scene, a move for every picture, a cut
+                      and a why for every scene, the picture review. python -m news.custom warns about what a story
+                      leaves out of it (custom.edit_warnings).
     defaults          what a story of the channel inherits for the keys it leaves out: style, kicker, pace, fx. A dict
                       ("pace", "fx") is inherited key by key; a key the story sets to null inherits nothing.
 Only the Python standard library is used here: the caption check runs without the requirements.
@@ -25,8 +30,9 @@ import sys
 
 FOLDER = Path(__file__).resolve().parent.parent / "channels"
 ID = re.compile(r"^k[1-9][0-9]*$")
-KEYS = {"id", "number", "name_ja", "name_vi", "tag", "voice", "hashtags", "defaults"}
+KEYS = {"id", "number", "name_ja", "name_vi", "tag", "voice", "hashtags", "edit", "defaults"}
 DEFAULT_KEYS = {"style", "kicker", "pace", "fx"}
+EDITS = ("tin-nhat",)   # the edits a channel may follow (CLAUDE.md, "The edit")
 STORY_NAME = re.compile(r"^(k[1-9][0-9]*)-([0-9]{4}-[0-9]{2}-[0-9]{2})-[A-Za-z0-9._-]+$")
 SAMPLE_NAME = re.compile(r"^mau-(k[1-9][0-9]*)(?:-[A-Za-z0-9._-]+)?$")
 HASHTAG = re.compile(r"^#[^\s#]+$")
@@ -129,6 +135,9 @@ def problems(data, stem):
             or not all(isinstance(tag, str) and HASHTAG.match(tag) for tag in tags)):
         found.append(f'{where}: "hashtags" must be 1 to 4 different hashtags (a caption has 5 to 8 in all), '
                      f"got {tags!r}")
+    if data.get("edit") not in EDITS:
+        found.append(f'{where}: "edit" must be one of {", ".join(EDITS)} (the edit the channel follows), '
+                     f"got {data.get('edit')!r}")
     defaults = data.get("defaults")
     if not isinstance(defaults, dict):
         found.append(f'{where}: "defaults" must be an object (style, kicker, pace, fx), got {defaults!r}')

@@ -318,5 +318,23 @@
     "file": "6-8.jpg"
    }
   ]
+ },
+ {
+  "k": 7,
+  "query": "music:Schumann Träumerei piano",
+  "results": [
+   {
+    "title": "File:Robert Schumann - scenes from childhood, op. 15 - vii. dreaming.ogg",
+    "page": "https://commons.wikimedia.org/wiki/File:Robert_Schumann_-_scenes_from_childhood,_op._15_-_vii._dreaming.ogg",
+    "size": 108044,
+    "license": "Public domain",
+    "license_url": "",
+    "artist": "Robert Schumann (1810-1856) (see Musopen for performance author information)",
+    "description": "Robert Schumann: Scenes from Childhood, Op. 15, No. 7 \"Dreaming\"",
+    "file": "7-1.ogg",
+    "seconds": 20.0,
+    "excerpt": "the first 20 seconds of the recording, mono, for the offline check (found by the same search for another story)"
+   }
+  ]
  }
 ]

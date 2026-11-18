@@ -5,6 +5,9 @@
 - the story file names (<channel>-<YYYY-MM-DD>-<short>, mau-<channel>) and the refusal of a story without a channel
   or with a name of another channel;
 - the defaults a story inherits from its channel, key by key, without changing the channel;
+- the Tin Nhật edit every channel follows ("edit": "tin-nhat"): what a story leaves out of it is warned about
+  (news/custom.py edit_warnings: hook line, music, two pictures a scene, moves, cuts, whys, review…), and every
+  sample story carries all of it;
 - the voice comes from the channel file, not from the code: a stand-in channel with another VOICEVOX speaker is
   voiced (against a stand-in engine) and credited (on the frame, in both layouts) with that speaker;
 - the posting caption must carry the channel's hashtags and be named after its story;
@@ -104,6 +107,69 @@ def defaults():
     assert channels.inherit({**STORY, "fx": None})["fx"] is None   # null: nothing inherited, no effects
     assert channels.inherit({"title": "no channel"}) == {"title": "no channel"}
     assert '"style" must be one of' in problems(lambda story: story.update(style="neon"))
+
+
+def edit_rules():
+    """The Tin Nhật edit ("edit": "tin-nhat"): a story with all of it has no warning, each part left out is named, a
+    story still at stage find is only checked for its script, and every sample story carries the whole edit."""
+    from news.custom import edit_warnings
+
+    def scene(number):
+        made = {"headline": "見出し", "lines": ["一行目です。"], "why": "lý do",
+                "photo": [{"pick": "1-1", "move": "push-in"}, {"pick": "1-2", "focus": [0.5, 0.4], "move": "pull-back"}]}
+        if number > 1:
+            made["cut"] = "fade"
+        return made
+    full = {"channel": "k9", "title": "t", "date": "2026-11-19", "stage": "render", "review": "4/4",
+            "searches": ["web:x", "music:Satie piano"], "music": {"pick": "2-1"}, "scenes": [scene(1), scene(2)]}
+    full["scenes"][0]["lines"] = [{"text": "たった一枚の写真が、一晩で何万人もの批判を集めました。", "quote": True}, "二行目です。"]
+    assert validate(full, "k9-2026-11-19-x") == [], validate(full, "k9-2026-11-19-x")
+
+    def warned(change, **options):
+        story = json.loads(json.dumps(full))
+        change(story)
+        return "\n".join(edit_warnings(channels.inherit(story), **options))
+    assert warned(lambda story: None) == "", warned(lambda story: None)
+    cases = (
+        (lambda story: story.pop("music"), 'no "music" chosen'),
+        (lambda story: story.update(searches=["web:x", "web:y"]), 'no "music:" search'),
+        (lambda story: story["scenes"][1]["photo"].pop(), "scene 2: 1 picture; the edit has 2 a scene"),
+        (lambda story: story["scenes"][1]["photo"][0].pop("move"), 'scene 2: picture 1 without a "move"'),
+        (lambda story: story["scenes"][1].pop("cut"), 'scene 2: no "cut"'),
+        (lambda story: story["scenes"][0].pop("why"), 'scene 1: no "why"'),
+        (lambda story: story["scenes"][0]["lines"][0].pop("quote"), "the hook: line 1 of scene 1 must be printed big"),
+        (lambda story: story["scenes"][0]["lines"][0].update(text="あ" * 60), "the hook: line 1 has 60 characters"),
+        (lambda story: story["scenes"][0].pop("photo"), "the hook: scene 1 has no picture"),
+        (lambda story: story["scenes"][-1]["lines"].append("あなたはどう感じますか？"), "the ending is a question"),
+        (lambda story: story.update(fx={"depth": False}), "picture effects off: depth"),
+        (lambda story: story.update(style="paper"), "\"style\" is 'paper'"),
+        (lambda story: story.update(pace={"speed": 0.9}), '"pace" is'),
+        (lambda story: story["scenes"][1].pop("photo"), "scene 2: no picture (a text card only for a pure figure"),
+        (lambda story: story.pop("review"), 'no "review": run tools/review_picks.py'),
+        (lambda story: story.update(review="3/4"), "\"review\" is '3/4'"),
+        (lambda story: story.update(review="3/3"), "every one of the 4 pictures must pass"),
+    )
+    for change, expected in cases:
+        assert expected in warned(change), (expected, warned(change))
+
+    def before_the_pictures(story):   # stage find: no pictures, edits, music or review yet
+        story.update(stage="find")
+        for key in ("music", "review"):
+            story.pop(key)
+        for each in story["scenes"]:
+            for key in ("photo", "cut", "why"):
+                each.pop(key, None)
+    assert warned(before_the_pictures) == "", warned(before_the_pictures)
+    assert warned(lambda story: story.pop("review"), sample=True) == ""   # a sample's pictures are stand-ins
+
+    def figure_card(story):   # a text card with a figure is part of the edit
+        story["scenes"][1].pop("photo")
+        story["scenes"][1]["value"] = "70年"
+        story["review"] = "2/2"
+    assert warned(figure_card) == "", warned(figure_card)
+    assert '"review" must be "<pictures that passed>/<pictures>"' in problems(lambda story: story.update(review="all"))
+    for path in sorted((REPO / "stories").glob("mau-*.json")):
+        assert edit_warnings(read(path), sample=True) == [], (path.name, edit_warnings(read(path), sample=True))
 
 
 def stand_in_engine(asked, seconds=0.5):
@@ -222,12 +288,13 @@ def length_rules():
     video; as a trial it is voiced, made and credited with the channel's voice."""
     from news import __main__ as make
     names = ("GITHUB_ENV", "GITHUB_OUTPUT", "GITHUB_STEP_SUMMARY")
-    real = voice.request, sys.argv, {name: os.environ.get(name) for name in names}
+    real = voice.request, sys.argv, {name: os.environ.get(name) for name in (*names, "GITHUB_ACTIONS")}
     with tempfile.TemporaryDirectory(prefix="channel-length-") as scratch:
         scratch = Path(scratch)
         try:
             for name in names:   # never the files of the run this test may be part of
                 os.environ[name] = str(scratch / name.lower())
+            os.environ.pop("GITHUB_ACTIONS", None)   # its edit warnings are not annotations of that run
             voice.request = stand_in_engine([], 1.6)
             story = json.loads(json.dumps(STORY))
             story["scenes"][0]["lines"].append("二行目です。")
@@ -266,6 +333,7 @@ def main():
     repository_files()
     names_and_channel()
     defaults()
+    edit_rules()
     voice_of_channel()
     caption_checks()
     lists()

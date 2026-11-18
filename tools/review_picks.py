@@ -10,6 +10,8 @@ Usage:
     python -m news --story stories/<name>.json --pictures <find folder> --stills <stills>
     python tools/review_picks.py stories/<name>.json <find folder> <stills> [<out folder>]
 Writes <out>/review-<page>.jpg (six rows a page) and <out>/review.md (one line a picture, with an empty verdict).
+When every row passes, the story records it: "review": "<n>/<n>" (news/custom.py warns at stage render until the
+number matches its pictures).
 """
 import json
 import subprocess
@@ -121,6 +123,9 @@ def main():
         sheet.save(out / f"review-{page_number}.jpg", quality=85)
     (out / "review.md").write_text("\n".join(notes) + "\n", encoding="utf-8")
     print(f"{len(rows)} pictures, {len(pages)} pages: {out}/review-1.jpg … review.md")
+    print(f'Check every row (the first row is the hook picture: one the Japanese audience recognises at once, right for '
+          f'the hook line). When all {len(rows)} pass, write "review": "{len(rows)}/{len(rows)}" in the story '
+          f"(python -m news.custom warns until it matches the pictures).")
 
 
 if __name__ == "__main__":

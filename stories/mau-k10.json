@@ -3,13 +3,17 @@
   "stage": "render",
   "title": "【見本】木の上で女王になった王女",
   "date": "2026-11-18",
+  "music": {
+    "pick": "7-1"
+  },
   "searches": [
     "incategory:\"Bank of Japan Head Office\" exterior",
     "Japanese yen banknotes 10000",
     "Tokyo housing residential aerial",
     "Japan supermarket shoppers",
     "incategory:\"Bank of Japan Head Office\"",
-    "Tokyo residential houses"
+    "Tokyo residential houses",
+    "music:Schumann Träumerei piano"
   ],
   "scenes": [
     {
@@ -94,6 +98,12 @@
       ],
       "photo": [
         {
+          "pick": "5-8",
+          "fit": "contain",
+          "depth": false,
+          "move": "push-in"
+        },
+        {
           "pick": "6-7",
           "focus": [
             0.5,
@@ -103,7 +113,7 @@
         }
       ],
       "cut": "dip",
-      "why": "Kết quay về đêm ở Kenya của câu mở đầu: lùi ra toàn cảnh."
+      "why": "Kết quay về đêm ở Kenya của câu mở đầu: bưu thiếp cũ (ảnh phẳng), rồi lùi ra ảnh mở đầu."
     }
   ]
 }

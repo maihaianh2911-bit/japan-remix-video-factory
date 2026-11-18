@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from datetime import date
 from difflib import get_close_matches
 import json
+import os
 from pathlib import Path
 import re
 import sys
@@ -23,7 +24,9 @@ from .story import Beat
 from .visuals import Photo
 
 STORY_KEYS = {"stage", "title", "date", "source", "source_url", "searches", "scenes", "issue", "style", "kicker",
-              "music", "pace", "fx", "channel", "trial"}
+              "music", "pace", "fx", "channel", "trial", "review"}
+REVIEW = re.compile(r"^([0-9]+)/([0-9]+)$")   # "review": "<pictures that passed>/<pictures>" (tools/review_picks.py)
+HOOK_LIMIT = 55   # the hook line is said in about 5 seconds: 45-50 characters at speed 1.2; warned above this
 STYLES = ("news", "paper", "story")
 SCENE_KEYS = {"label", "headline", "lines", "value", "evidence", "photo", "cut", "why", "era"}
 LINE_KEYS = {"text", "say", "quote"}
@@ -181,6 +184,9 @@ def validate(data, name=None):
     if "trial" in data and not isinstance(data["trial"], bool):
         problems.append(f'"trial" must be true or false (true: a trial or sample video, the length rules do not '
                         f'stop its render), got {data["trial"]!r}')
+    if "review" in data and not (isinstance(data["review"], str) and REVIEW.match(data["review"])):
+        problems.append(f'"review" must be "<pictures that passed>/<pictures>", e.g. "23/23" (the picture review, '
+                        f'tools/review_picks.py), got {data["review"]!r}')
     problems += unknown(data, STORY_KEYS, "story")
     problems += text_problem(data.get("title"), '"title"')
     try:
@@ -331,6 +337,80 @@ def report_without_picture(data):
         print(f"  scene {number} {label}" + ("" if has_value else "  (no value: not a pure-figure scene)"))
 
 
+def line_text(line):
+    return line if isinstance(line, str) else line.get("text", "") if isinstance(line, dict) else ""
+
+
+def edit_warnings(data, sample=False):
+    """What a story of a channel with the Tin Nhật edit ("edit": "tin-nhat" in channels/<id>.json; owner, 18/11/2026:
+    "cho 4 kênh này học cách edit của kênh tin nhật đi, học tốt vào") leaves out of that edit (CLAUDE.md, "The edit"
+    and "The hook"). Warnings, not errors: a trial may leave something out on purpose, and the closing comment then
+    says why. `data` is the story with its channel's defaults (read()). While the pictures are not chosen yet
+    (stage find) only the script is checked; at stage render the pictures, edits, music and review too. A sample
+    (stories/mau-*.json, `sample`) shows the format on the fixture's stand-in pictures: it carries no review."""
+    channel = channels.get(data.get("channel"))
+    if not channel or channel.get("edit") != "tin-nhat" or not data.get("scenes"):
+        return []
+    found, scenes = [], data["scenes"]
+    if data.get("style") != "story":
+        found.append(f'"style" is {data.get("style")!r}: the edit uses the "story" frame')
+    if off := [key for key in sorted(FX_KEYS) if not (data.get("fx") or {}).get(key)]:
+        found.append(f'picture effects off: {", ".join(off)} (the edit has "fx" with all four on)')
+    if (data.get("pace") or {}) != channel["defaults"].get("pace"):
+        found.append(f'"pace" is {data.get("pace")!r}, not the channel\'s {channel["defaults"].get("pace")!r} (read fast, '
+                     "like the source video)")
+    first = scenes[0].get("lines") or [""]
+    if not (isinstance(first[0], dict) and first[0].get("quote")):
+        found.append('the hook: line 1 of scene 1 must be printed big while it is spoken, {"text": …, "quote": true}')
+    if (size := len("".join(line_text(first[0]).split()))) > HOOK_LIMIT:
+        found.append(f"the hook: line 1 has {size} characters; it is said in about 5 seconds (45-50 characters, "
+                     f"{HOOK_LIMIT} at most): the whole story and its meaning in one plain line")
+    last = line_text((scenes[-1].get("lines") or [""])[-1]).strip()
+    if last.endswith(("？", "?")) or "あなたは" in last:
+        found.append("the ending is a question to the viewer: end on a line that comes back to the opening")
+    if not any(isinstance(search, str) and search.startswith("music:") for search in data.get("searches", [])):
+        found.append('no "music:" search: every video has a quiet piece under the voice, e.g. '
+                     '"music:Schumann Träumerei piano"')
+    if data.get("stage", "find") != "render":
+        return found
+    if not data.get("music"):
+        found.append('no "music" chosen: pick a recording of the "music:" search, {"pick": "<k>-<n>"}')
+    if not picks_of(scenes[0]):
+        found.append("the hook: scene 1 has no picture; the hook line is printed on the first picture, which the "
+                     "Japanese audience must recognise at once")
+    for number, scene in enumerate(scenes, 1):
+        picks = picks_of(scene)
+        if not picks and not scene.get("value"):
+            found.append(f"scene {number}: no picture (a text card only for a pure figure, with a \"value\")")
+        elif picks and len(picks) < 2:
+            found.append(f"scene {number}: 1 picture; the edit has 2 a scene (a new picture every 4-5 seconds)")
+        if without := [str(index) for index, pick in enumerate(picks, 1) if not pick.get("move")]:
+            found.append(f"scene {number}: picture {', '.join(without)} without a \"move\" (the effects act on named moves)")
+        if number > 1 and not scene.get("cut"):
+            found.append(f'scene {number}: no "cut" (how the scene arrives)')
+        if not scene.get("why"):
+            found.append(f'scene {number}: no "why" (the reason of its edits, for the owner)')
+    if not sample:
+        count = sum(len(picks_of(scene)) for scene in scenes)
+        review = REVIEW.match(data.get("review") or "")
+        if not review:
+            found.append(f'no "review": run tools/review_picks.py, check every row (the hook picture first), re-pick '
+                         f'until all pass, then write "review": "{count}/{count}"')
+        elif review[1] != review[2] or int(review[2]) != count:
+            found.append(f'"review" is {data["review"]!r}, but every one of the {count} pictures must pass the review '
+                         f'("{count}/{count}"): re-pick and review again')
+    return found
+
+
+def report_edit(data, path):
+    """Print the edit warnings of a story (GitHub annotations in a workflow)."""
+    found = edit_warnings(data, Path(path).stem.startswith("mau-"))
+    prefix = "::warning::" if os.environ.get("GITHUB_ACTIONS") else "warning: "
+    for warning in found:
+        print(f"{prefix}{Path(path).name}, the edit: {warning}")
+    return found
+
+
 def toned(image, tone):
     """Old-photograph tones: "sepia" (warm brown, as old prints), "mono" (black and white), "color" (as it is)."""
     if tone == "color":
@@ -399,6 +479,7 @@ def main():
     except StoryError as error:
         sys.exit(f"error: {error}")
     report_without_picture(data)
+    warned = report_edit(data, sys.argv[1])
     caption = caption_path(sys.argv[1])
     if caption.exists():
         if problems := check_caption(caption):
@@ -406,7 +487,7 @@ def main():
         print(f"{caption}: OK")
     else:
         print(f"note: no posting caption yet ({caption}); write it before the closing comment")
-    print(f"{sys.argv[1]}: OK")
+    print(f"{sys.argv[1]}: OK" + (f" ({len(warned)} edit warning(s) above)" if warned else ""))
 
 
 if __name__ == "__main__":

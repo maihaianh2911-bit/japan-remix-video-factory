@@ -3,13 +3,17 @@
   "stage": "render",
   "title": "【見本】ひとつの投稿は、なぜ一晩で炎上するのか",
   "date": "2026-11-18",
+  "music": {
+    "pick": "7-1"
+  },
   "searches": [
     "incategory:\"Bank of Japan Head Office\" exterior",
     "Japanese yen banknotes 10000",
     "Tokyo housing residential aerial",
     "Japan supermarket shoppers",
     "incategory:\"Bank of Japan Head Office\"",
-    "Tokyo residential houses"
+    "Tokyo residential houses",
+    "music:Schumann Träumerei piano"
   ],
   "scenes": [
     {
@@ -73,13 +77,30 @@
     {
       "label": "このチャンネルでは",
       "headline": "伝えるのは\n報道された事実だけ",
-      "evidence": "報道された事実だけ ／ 一般の人の名前と顔は出さない",
       "lines": [
         "このチャンネルでは、新聞やテレビが報じた事実だけをもとに、炎上の流れをたどります。",
         "一般の人の名前や顔は出さず、だれかを笑いものにすることもしません。"
       ],
       "cut": "page",
-      "why": "Luật của kênh: thẻ chữ, không ảnh."
+      "why": "Luật của kênh: lật trang, lia ngang kệ hàng rồi tiến vào (không có mặt người).",
+      "photo": [
+        {
+          "pick": "4-1",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "move": "pan-right"
+        },
+        {
+          "pick": "4-4",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "move": "push-in"
+        }
+      ]
     },
     {
       "label": "炎上のあと",
@@ -94,11 +115,19 @@
             0.5,
             0.5
           ],
+          "move": "fall"
+        },
+        {
+          "pick": "4-8",
+          "focus": [
+            0.4,
+            0.5
+          ],
           "move": "pull-back"
         }
       ],
       "cut": "dip",
-      "why": "Kết: lùi ra con hẻm, quay về ý của câu mở đầu."
+      "why": "Kết: tối dần rồi sáng lại, lia xuống con hẻm, rồi lùi ra cửa hàng của câu mở đầu."
     }
   ]
 }

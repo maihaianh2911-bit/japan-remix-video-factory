@@ -3,13 +3,17 @@
   "stage": "render",
   "title": "【見本】なぜ日本銀行の本店は日本橋にあるのか",
   "date": "2026-11-18",
+  "music": {
+    "pick": "7-1"
+  },
   "searches": [
     "incategory:\"Bank of Japan Head Office\" exterior",
     "Japanese yen banknotes 10000",
     "Tokyo housing residential aerial",
     "Japan supermarket shoppers",
     "incategory:\"Bank of Japan Head Office\"",
-    "Tokyo residential houses"
+    "Tokyo residential houses",
+    "music:Schumann Träumerei piano"
   ],
   "scenes": [
     {
