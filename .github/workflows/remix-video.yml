@@ -1,0 +1,544 @@
+name: Japan Remix Video
+
+# One issue "[K8] …", "[K9] …", "[K10] …" or "[K11] …" = one video of that channel (channels/<id>.json). The owner
+# sends someone else's video; Claude retells it in its own words. The owner opens the issue → Claude writes
+# stories/<channel>-<YYYY-MM-DD>-<short>.json with "issue": N → this workflow finds pictures → Claude picks them →
+# this workflow makes the voice (the channel's VOICEVOX voice) and the video → Claude checks every scene → done. An
+# owner comment → Claude fixes. Claude's side: AGENT_REMIX.md. GitHub calls Claude after every step (secrets
+# CLAUDE_TASK_URL / CLAUDE_TASK_TOKEN); no hourly run.
+on:
+  issues:
+    types: [opened]
+  issue_comment:
+    types: [created]
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'story: tìm ảnh hoặc dựng video của một kịch bản · check: kiểm tra mã (không cần mạng)'
+        type: choice
+        options: [story, check]
+        default: story
+      story:
+        description: 'Tên file trong stories/ (không có .json), ví dụ k11-2026-11-19-nihonbashi, cho chế độ story'
+        type: string
+  push:
+    branches: [main]
+    paths:
+      - 'news/**'
+      - 'stories/**'
+      - 'captions/**'
+      - 'channels/**'
+      - 'tools/**'
+      - 'tests/**'
+      - 'requirements.txt'
+      - '.github/workflows/remix-video.yml'
+
+# Each job asks for what it needs (the video job alone may write to the renders branch).
+permissions:
+  contents: read
+
+# No concurrency group for the whole workflow: a group keeps only one pending run and cancels the others, which
+# silently dropped the pushes of other stories. The video job has one group per story instead (below): two runs
+# of the same story never work at the same time, and of several waiting runs only the newest is kept, which is
+# the one with the newest story file. Different stories may overlap; tools/publish.sh rebuilds on the newest
+# renders tip, so none is lost.
+
+jobs:
+  # 1) The owner opens an issue whose title starts with a channel's tag → labels, a comment, and Claude is called
+  start:
+    if: >-
+      github.event_name == 'issues' && startsWith(github.event.issue.title, '[K')
+      && github.event.issue.user.login == github.repository_owner
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions: { contents: read, issues: write }
+    env: { GH_TOKEN: '${{ github.token }}', GH_REPO: '${{ github.repository }}', N: '${{ github.event.issue.number }}' }
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            channels
+            news
+            tools
+      - name: Kênh của phiếu
+        id: channel
+        env:
+          TITLE: ${{ github.event.issue.title }}
+        run: |
+          # the channel whose tag ("tag" in channels/<id>.json, any case) starts the title: "[K8] …" → k8
+          CH= NUM= NAME=
+          IFS=$'\t' read -r CH NUM NAME < <(python3 -m news.channels --title "$TITLE") || true
+          if [[ -z "$CH" ]]; then
+            TAGS=$(python3 -c 'from news import channels; print(", ".join(c["tag"] for c in channels.channels().values()))')
+            gh issue comment "$N" --body "🤖 Không nhận ra kênh của phiếu này: tiêu đề phải bắt đầu bằng một trong các nhãn $TAGS. Hãy mở phiếu mới bằng mẫu của kênh (nút New issue), hoặc nhờ Claude trong chat."
+            echo "found=no" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          { echo "found=yes"; echo "id=$CH"; echo "number=$NUM"; echo "name=$NAME"; } >> "$GITHUB_OUTPUT"
+      - name: Gắn nhãn
+        if: steps.channel.outputs.found == 'yes'
+        env: { CH: '${{ steps.channel.outputs.id }}' }
+        run: gh issue edit "$N" --add-label "remix,$CH,remix-plan"
+      - name: Gọi Claude
+        id: wake
+        if: steps.channel.outputs.found == 'yes'
+        env:
+          CLAUDE_TASK_URL: ${{ secrets.CLAUDE_TASK_URL }}
+          CLAUDE_TASK_TOKEN: ${{ secrets.CLAUDE_TASK_TOKEN }}
+          WAKE_COMMENT: 'no'   # the next step writes the one comment
+          KENH: ${{ steps.channel.outputs.number }}
+        run: bash tools/wake_claude.sh "Phiếu kênh $KENH mới số $N." "$N"
+      - name: Nhận phiếu
+        if: steps.channel.outputs.found == 'yes'
+        env:
+          WAKE: ${{ steps.wake.outputs.wake }}
+          NOTE: ${{ steps.wake.outputs.note }}
+          KENH: ${{ steps.channel.outputs.number }}
+          NAME: ${{ steps.channel.outputs.name }}
+        run: |
+          # promise the next steps only when Claude was really called (or is already on it in a chat: busy)
+          if [[ "$WAKE" == ok || "$WAKE" == busy ]]; then
+            gh issue comment "$N" --body "🤖 Đã nhận phiếu kênh $KENH ($NAME). Claude sẽ đọc video gốc, viết lại bằng lời của mình bằng tiếng Nhật và chia cảnh, máy tìm ảnh, Claude chọn ảnh cho từng cảnh, máy tạo giọng và dựng video, Claude kiểm tra lại từng cảnh. Mỗi bước xong sẽ báo ở đây."
+          else
+            gh issue comment "$N" --body "🤖 Đã nhận phiếu kênh $KENH ($NAME), nhưng Claude chưa bắt đầu làm. ${NOTE#🤖 }"
+          fi
+
+  # 2) The owner comments on a video issue → Claude reads it and fixes
+  fix:
+    if: >-
+      github.event_name == 'issue_comment' && github.event.issue.state == 'open'
+      && !github.event.issue.pull_request
+      && contains(github.event.issue.labels.*.name, 'remix')
+      && github.event.comment.user.login == github.repository_owner
+      && !startsWith(github.event.comment.body, '🤖')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions: { contents: read, issues: write }
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      N: ${{ github.event.issue.number }}
+      LABELS: ${{ join(github.event.issue.labels.*.name, ' ') }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false, sparse-checkout: tools }
+      - name: Gắn nhãn
+        run: |
+          gh issue edit "$N" --add-label remix-fix || true
+          gh issue edit "$N" --remove-label remix-done || true
+      - name: Gọi Claude
+        id: wake
+        env:
+          CLAUDE_TASK_URL: ${{ secrets.CLAUDE_TASK_URL }}
+          CLAUDE_TASK_TOKEN: ${{ secrets.CLAUDE_TASK_TOKEN }}
+          WAKE_COMMENT: 'no'   # the next step writes the one comment
+        run: |
+          KENH=   # the channel label of the issue: k8 → 8
+          for label in $LABELS; do if [[ $label =~ ^k([0-9]+)$ ]]; then KENH=${BASH_REMATCH[1]}; fi; done
+          bash tools/wake_claude.sh "Chủ kênh yêu cầu sửa phiếu ${KENH:+kênh $KENH }số $N." "$N"
+      - name: Nhận yêu cầu sửa
+        env:
+          WAKE: ${{ steps.wake.outputs.wake }}
+          NOTE: ${{ steps.wake.outputs.note }}
+        run: |
+          if [[ "$WAKE" == ok || "$WAKE" == busy ]]; then
+            gh issue comment "$N" --body "🤖 Đã nhận yêu cầu. Claude sẽ sửa và máy dựng lại."
+          else
+            gh issue comment "$N" --body "🤖 Đã nhận yêu cầu sửa, nhưng Claude chưa bắt đầu làm. ${NOTE#🤖 }"
+          fi
+
+  # 2b) The owner comments on a closed video issue → a short note instead of silence
+  closed:
+    if: >-
+      github.event_name == 'issue_comment' && github.event.issue.state == 'closed'
+      && !github.event.issue.pull_request
+      && contains(github.event.issue.labels.*.name, 'remix')
+      && github.event.comment.user.login == github.repository_owner
+      && !startsWith(github.event.comment.body, '🤖')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions: { issues: write }
+    steps:
+      - name: Báo phiếu đã đóng
+        env: { GH_TOKEN: '${{ github.token }}', GH_REPO: '${{ github.repository }}', N: '${{ github.event.issue.number }}' }
+        run: |
+          gh issue comment "$N" --body "🤖 Phiếu này đã đóng nên Claude không nhận yêu cầu ở đây. Muốn sửa video này: bấm nút Reopen issue (mở lại phiếu) ở cuối trang, rồi viết lại yêu cầu trong một bình luận mới."
+
+  # 3) A pushed story (or a manual run) → pictures, or the voice and the video; a push of code → the offline check
+  plan:
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions: { contents: read }
+    outputs:
+      items: ${{ steps.plan.outputs.items }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Choose what to make
+        id: plan
+        env:
+          MODE: ${{ inputs.mode }}
+          STORY: ${{ inputs.story }}
+          EVENT_NAME: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
+        run: |
+          # A push makes every story file it adds, changes or renames (one job each); a push that only deletes
+          # stories makes nothing. A push that changes code (or a channel, the fixture, a sample story
+          # stories/mau-*.json or its caption) runs the offline check, next to the stories of the same push: the
+          # samples are drawn there from tests/fixtures/pictures, never voiced. A posting caption
+          # (captions/<name>.txt) changed without its story only publishes the caption beside the finished video:
+          # no voice, no search, no render.
+          if [[ "$EVENT_NAME" == "push" ]]; then
+            git cat-file -e "$BEFORE^{commit}" 2>/dev/null || BEFORE=HEAD~1
+            git -c core.quotePath=false diff -z --name-only --no-renames --diff-filter=AM "$BEFORE" HEAD -- 'stories/*.json' > /tmp/stories
+            git -c core.quotePath=false diff -z --name-only --no-renames --diff-filter=AM "$BEFORE" HEAD -- 'captions/*.txt' > /tmp/captions
+            git -c core.quotePath=false diff -z --name-only --no-renames "$BEFORE" HEAD -- . ':!stories' ':!captions' > /tmp/code
+            python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          def names(path, folder, suffix):
+              return [name.removeprefix(folder).removesuffix(suffix)
+                      for name in open(path, encoding="utf-8").read().split("\0") if name]
+          stories = names("/tmp/stories", "stories/", ".json")
+          captions = names("/tmp/captions", "captions/", ".txt")
+          code = names("/tmp/code", "", "")
+          samples = [name for name in stories + captions if name.startswith("mau-")]
+          stories = [name for name in stories if not name.startswith("mau-")]
+          items = [{"mode": "story", "story": story} for story in stories]
+          items += [{"mode": "caption", "story": name} for name in captions
+                    if name not in stories and not name.startswith("mau-")]
+          if code or samples:
+              items.append({"mode": "check", "story": "mau"})
+          print("items=" + json.dumps(items, ensure_ascii=False))
+          PY
+          else
+            python3 -c 'import json, os; mode = os.environ["MODE"] or "story"; print("items=" + json.dumps([{"mode": mode, "story": os.environ["STORY"] if mode == "story" else "mau"}], ensure_ascii=False))' >> "$GITHUB_OUTPUT"
+          fi
+          cat "$GITHUB_OUTPUT"
+
+  video:
+    needs: plan
+    if: needs.plan.outputs.items != '[]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    permissions: { contents: write, issues: write }
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.plan.outputs.items) }}
+    name: ${{ matrix.mode }} ${{ matrix.story }}
+    concurrency:
+      group: remix-${{ matrix.mode }}-${{ matrix.story }}
+      cancel-in-progress: false
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      CLAUDE_TASK_URL: ${{ secrets.CLAUDE_TASK_URL }}
+      CLAUDE_TASK_TOKEN: ${{ secrets.CLAUDE_TASK_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Check the story
+        id: plan
+        env:
+          MODE: ${{ matrix.mode }}
+          STORY: ${{ matrix.story }}
+        run: |
+          STAGE=
+          if [[ "$MODE" == "story" || "$MODE" == "caption" ]] && [[ -f "stories/$STORY.json" ]]; then
+            # The issue this story belongs to, read first so that a story with problems reports to its issue.
+            # A file that is not valid JSON is searched for its "issue": N as text; if that is not found
+            # either, the failure shows only in this run (red) and the issue keeps its label.
+            ISSUE=$(python tools/story_issue.py "stories/$STORY.json")
+            echo "ISSUE=$ISSUE" >> "$GITHUB_ENV"
+          fi
+          # the channel of the story from its name (k8-… → 8), for the messages on the issue (news/channels.py)
+          KENH=$(python -c 'import sys; from news import channels; c = channels.get(channels.of_name(sys.argv[1])); print(c["number"] if c else "")' "$STORY")
+          echo "KENH=$KENH" >> "$GITHUB_ENV"
+          if [[ "$MODE" == "story" ]]; then
+            if [[ ! "$STORY" =~ ^[A-Za-z0-9._-]+$ ]]; then
+              echo "::error::Story file name 'stories/$STORY.json': use only ASCII letters, digits, '.', '_' and '-' (no spaces, no Japanese or Vietnamese characters)"; exit 1
+            fi
+            if [[ "$STORY" == mau-* ]]; then
+              echo "::error::stories/$STORY.json is a sample story: the check draws it from tests/fixtures/pictures (Run workflow → check)"; exit 1
+            fi
+            [[ -f "stories/$STORY.json" ]] || { echo "::error::stories/$STORY.json not found"; exit 1; }
+            python -m pip install -q -r requirements.txt
+            python -m news.custom "stories/$STORY.json" || {
+              echo "WHY=file kịch bản stories/$STORY.json có lỗi (sai cú pháp, thiếu mục, hoặc tên file không đúng kênh)" >> "$GITHUB_ENV"
+              echo "::error::stories/$STORY.json has problems (listed above): fix the story file and push again"; exit 1; }
+            # the story as it will be made: with its channel's defaults (style, kicker, pace, fx) in what it leaves out
+            STAGE=$(python -c "import sys; from news.custom import read; print(read(sys.argv[1]).get('stage', 'find'))" "stories/$STORY.json")
+            # a search with a wish ("… => what the picture must show") is ranked: only then is the ranking installed
+            if [[ "$STAGE" == "find" ]] && grep -q ' => ' "stories/$STORY.json"; then echo "rank=yes" >> "$GITHUB_OUTPUT"; fi
+            # a story with picture effects ("fx", inherited from its channel) gets their libraries, the depth model and the display typeface for its render
+            if [[ "$STAGE" == "render" ]] && python -c "import sys; from news.custom import read; sys.exit(0 if any((read(sys.argv[1]).get('fx') or {}).values()) else 1)" "stories/$STORY.json"; then echo "fx=yes" >> "$GITHUB_OUTPUT"; fi
+          fi
+          # the offline check draws the samples with every effect on (tools/fx_test.py)
+          if [[ "$MODE" == "check" ]]; then echo "fx=yes" >> "$GITHUB_OUTPUT"; fi
+          if [[ "$MODE" == "caption" ]]; then
+            [[ "$STORY" =~ ^[A-Za-z0-9._-]+$ ]] || { echo "::error::bad caption file name captions/$STORY.txt"; exit 1; }
+            python -m news.captions "captions/$STORY.txt" || {
+              echo "WHY=caption captions/$STORY.txt chưa đúng mẫu (xem nhật ký)" >> "$GITHUB_ENV"; exit 1; }
+          fi
+          echo "stage=$STAGE" >> "$GITHUB_OUTPUT"
+          echo "mode=$MODE story=$STORY stage=$STAGE kenh=$KENH"
+      - name: Publish the posting caption
+        # only the caption changed: it is added beside the finished video, nothing else on renders changes
+        if: matrix.mode == 'caption'
+        env:
+          STORY: ${{ matrix.story }}
+        run: |
+          mkdir -p caption-only && cp "captions/$STORY.txt" caption-only/caption.txt
+          status=0; PUBLISH_MODE=add tools/publish.sh "$STORY" caption-only caption || status=$?
+          if [[ $status == 3 ]]; then
+            echo "Chưa có video \`$STORY\` trên nhánh renders: caption sẽ được đăng cùng lần dựng video." >> "$GITHUB_STEP_SUMMARY"
+          elif [[ $status != 0 ]]; then
+            echo "WHY=không đăng được caption lên nhánh renders" >> "$GITHUB_ENV"; exit $status
+          else
+            echo "Caption: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/blob/renders/$STORY/caption.txt" >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Install video dependencies
+        if: matrix.mode != 'caption'
+        run: |
+          python -m pip install -r requirements.txt
+          # a slow package mirror once held this step for over 15 minutes: give up on a try after a few minutes
+          for try in 1 2 3; do
+            timeout 240 sudo apt-get update -qq -o Acquire::Retries=3 -o Acquire::http::Timeout=30 \
+              && timeout 420 sudo apt-get install -y -qq -o Acquire::Retries=3 -o Acquire::http::Timeout=30 ffmpeg fonts-noto-cjk \
+              && break
+            echo "::warning::apt try $try failed or timed out, trying again"; sleep 10
+          done
+          command -v ffmpeg >/dev/null
+      - name: Mô hình chấm điểm ảnh
+        # the CLIP weights (600 MB) of the picture ranking, kept between runs
+        if: steps.plan.outputs.rank == 'yes'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/find-images
+          key: clip-vit-b-32-quickgelu-laion400m-e32
+      - name: Bộ chấm điểm ảnh (không bắt buộc)
+        # optional: without it the search works as before and ignores the wishes ("ranked": false in index.json)
+        if: steps.plan.outputs.rank == 'yes'
+        run: |
+          { python -m pip install -q torch torchvision --index-url https://download.pytorch.org/whl/cpu && python -m pip install -q open_clip_torch; } \
+            || echo "::warning::không cài được bộ chấm điểm ảnh: tìm ảnh chạy không xếp hạng"
+      - name: Mô hình chiều sâu của hiệu ứng hình
+        # the depth model (99 MB; news/depth.py downloads it from its GitHub release), kept between runs
+        if: steps.plan.outputs.fx == 'yes'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/news-depth
+          key: depth-anything-v2-vits-onnx
+      - name: Phông chữ của hiệu ứng hình
+        # the display typeface Shippori Mincho B1 ExtraBold (SIL Open Font License), kept between runs
+        if: steps.plan.outputs.fx == 'yes'
+        uses: actions/cache@v4
+        with:
+          path: fonts
+          key: font-shippori-mincho-b1-extrabold
+      - name: Hiệu ứng hình (không bắt buộc)
+        # Optional, nothing here stops the run: without the libraries or the model the pictures stay flat, without
+        # the typeface the usual one is used (news/render.py warns), and the video is made all the same. Only the
+        # offline check then fails, in its own step (tools/fx_test.py), which is what it is for.
+        if: steps.plan.outputs.fx == 'yes'
+        run: |
+          python -m pip install -q numpy==2.5.3 opencv-python-headless==5.0.0.93 onnxruntime==1.29.0 \
+            || echo "::warning::không cài được thư viện cho hiệu ứng chiều sâu: ảnh sẽ phẳng như cũ"
+          python -c "from news import depth; depth.session()" \
+            || echo "::warning::không tải được mô hình chiều sâu: ảnh sẽ phẳng như cũ"
+          FONT=fonts/ShipporiMinchoB1-ExtraBold.ttf
+          if [[ ! -s "$FONT" ]]; then
+            mkdir -p fonts
+            { curl -fsSL --retry 3 --max-time 120 -o "$FONT.part" \
+                https://raw.githubusercontent.com/google/fonts/main/ofl/shipporiminchob1/ShipporiMinchoB1-ExtraBold.ttf \
+              && mv "$FONT.part" "$FONT"; } \
+              || { rm -f "$FONT.part"; echo "::warning::không tải được phông chữ Shippori Mincho B1: dùng phông chữ thường"; }
+          fi
+      - name: Get the pictures already found for the story
+        if: matrix.mode == 'story'
+        env:
+          STORY: ${{ matrix.story }}
+        run: |
+          # The renders branch must be read (3 tries): with an empty folder the picture search would start
+          # again from nothing and the pictures already chosen ("k-n") could become other pictures.
+          set -o pipefail
+          mkdir -p pictures
+          URL="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          GOT=
+          for attempt in 1 2 3; do
+            status=0; git ls-remote --exit-code --heads "$URL" renders > /dev/null || status=$?
+            if [[ $status == 2 ]]; then GOT=none; break; fi   # no renders branch yet (very first video)
+            if [[ $status == 0 ]] && git fetch -q --depth 1 "$URL" "+refs/heads/renders:refs/remotes/origin/renders"; then GOT=yes; break; fi
+            echo "could not read the renders branch (attempt $attempt)"
+            [[ $attempt == 3 ]] || sleep $((attempt * 10))
+          done
+          if [[ -z "$GOT" ]]; then
+            echo "WHY=không đọc được nhánh renders trên GitHub (lỗi mạng tạm thời), chạy lại là được" >> "$GITHUB_ENV"
+            echo "::error::Could not fetch the renders branch after 3 attempts"; exit 1
+          fi
+          if [[ $GOT == yes ]] && git cat-file -e "origin/renders:$STORY/find" 2>/dev/null; then
+            git archive origin/renders "$STORY/find" | tar -x --strip-components=2 -C pictures
+          fi
+          ls pictures | head -50 || true
+      - name: Offline check (code push)
+        if: matrix.mode == 'check'
+        run: |
+          # No live sources, no voice engine, nothing from the renders branch (the pictures of the sample stories are
+          # in tests/fixtures/pictures): compile, check the channels, every story and caption, the search and channel
+          # tests, the stills of every sample, 3 seconds of video, every edit, and the picture effects on this runner.
+          bash tools/check.sh dist/stills --fx
+          echo "Kiểm tra mã: OK (ảnh tĩnh của các kịch bản mẫu stories/mau-*.json trong Artifacts; dựng thử 3 giây video)." >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload the check stills
+        if: matrix.mode == 'check'
+        uses: actions/upload-artifact@v4
+        with:
+          name: japan-remix-check-${{ github.run_number }}
+          path: dist/stills/
+          if-no-files-found: error
+          retention-days: 7
+      - name: 'Phiếu: đang tìm ảnh'
+        if: steps.plan.outputs.stage == 'find' && env.ISSUE != ''
+        run: |
+          gh issue edit "$ISSUE" --add-label remix-find || true
+          # back to picture search from any step (also from check/done after a fix): only remix-find stays
+          for l in remix-plan remix-pick remix-render remix-check remix-done remix-fix remix-failed; do gh issue edit "$ISSUE" --remove-label "$l" || true; done
+      - name: Find pictures
+        id: find
+        if: steps.plan.outputs.stage == 'find'
+        env:
+          STORY: ${{ matrix.story }}
+        run: |
+          # Exit 3 = some searches failed: what was found is still published (status.json: "partial"),
+          # then the run is marked failed. Any other error publishes nothing.
+          set +e
+          python -m news.find "stories/$STORY.json" pictures
+          status=$?
+          set -e
+          if [[ $status != 0 && $status != 3 ]]; then exit $status; fi
+          OUTCOME=ok; [[ $status == 3 ]] && OUTCOME=partial
+          OUTCOME=$OUTCOME tools/publish.sh "$STORY/find" pictures find
+          echo "Đã tìm ảnh cho \`$STORY\` ($OUTCOME): nhánh renders, thư mục \`$STORY/find\`." >> "$GITHUB_STEP_SUMMARY"
+          if [[ $status == 3 ]]; then echo "::error::Some searches failed; see \"error\" in $STORY/find/index.json"; exit 1; fi
+      - name: 'Phiếu: ảnh đã tìm xong'
+        if: steps.find.outcome == 'success' && env.ISSUE != ''
+        env:
+          STORY: ${{ matrix.story }}
+        run: |
+          gh issue edit "$ISSUE" --add-label remix-pick || true
+          gh issue edit "$ISSUE" --remove-label remix-find || true
+          COUNT=$(python -c "import json; print(sum(len(q.get('results', [])) for q in json.load(open('pictures/index.json', encoding='utf-8'))))" 2>/dev/null || echo "?")
+          gh issue comment "$ISSUE" --body "🤖 Ảnh đã tìm xong ($COUNT ảnh). Claude sẽ chọn ảnh cho từng cảnh." || true
+          bash tools/wake_claude.sh "Phiếu ${KENH:+kênh $KENH }số $ISSUE: ảnh đã tìm xong, chờ chọn ảnh." "$ISSUE" || true
+      - name: 'Phiếu: đang dựng video'
+        if: steps.plan.outputs.stage == 'render' && env.ISSUE != ''
+        run: |
+          gh issue edit "$ISSUE" --add-label remix-render || true
+          for l in remix-plan remix-find remix-pick remix-check remix-done remix-fix remix-failed; do gh issue edit "$ISSUE" --remove-label "$l" || true; done
+      - name: Start Japanese voice engine
+        if: steps.plan.outputs.stage == 'render'
+        run: |
+          # Pinned (cpu-latest was this version on 14/11/2026): a new engine can change the voice or its timing.
+          IMAGE=voicevox/voicevox_engine:cpu-0.26.1
+          for attempt in 1 2 3; do docker pull --quiet "$IMAGE" && break; echo "docker pull failed (attempt $attempt)"; sleep $((attempt * 15)); done
+          docker run --detach --name voicevox --publish 127.0.0.1:50021:50021 "$IMAGE"
+          for attempt in $(seq 1 40); do
+            if curl --fail --silent --max-time 4 http://127.0.0.1:50021/version; then
+              exit 0
+            fi
+            sleep 3
+          done
+          docker logs voicevox
+          exit 1
+      - name: Voice and render
+        id: render
+        if: steps.plan.outputs.stage == 'render'
+        env:
+          STORY: ${{ matrix.story }}
+        run: |
+          # the voice of the story's channel (channels/<id>.json); a voice under 60 s stops here (iron rule 2)
+          python -m news --story "stories/$STORY.json" --pictures pictures --stills dist/stills
+          python -m news --story "stories/$STORY.json" --pictures pictures
+      - name: Verify video and audio
+        if: steps.render.outputs.ready == 'true'
+        run: |
+          ffprobe -v error -show_entries stream=codec_name,codec_type,width,height,r_frame_rate:format=duration -of json dist/video.mp4 > /tmp/japan-remix-probe.json
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          probe = json.loads(Path('/tmp/japan-remix-probe.json').read_text())
+          video = next(stream for stream in probe['streams'] if stream['codec_type'] == 'video')
+          audio = next(stream for stream in probe['streams'] if stream['codec_type'] == 'audio')
+          assert (video['width'], video['height'], video['r_frame_rate'], video['codec_name']) == (1080, 1920, '30/1', 'h264')
+          assert audio['codec_name'] == 'aac'
+          assert 10 < float(probe['format']['duration']) <= 600
+          print(probe)
+          # GitHub refuses a file over 100 MB on the renders branch (news/render.py aims at 88 MB at most)
+          size = Path('dist/video.mp4').stat().st_size / 1e6
+          print(f'video.mp4: {size:.1f} MB')
+          if size > 98:
+              why = f'video nặng {size:.0f} MB, quá giới hạn 100 MB của GitHub nên không đăng lên được'
+              with open(os.environ['GITHUB_ENV'], 'a', encoding='utf-8') as env:
+                  env.write(f'WHY={why}\n')
+              raise SystemExit(f'::error::{why} (video.mp4 is too large to publish)')
+          PY
+      - name: Publish the story video
+        if: steps.render.outputs.ready == 'true' && matrix.mode == 'story'
+        env:
+          STORY: ${{ matrix.story }}
+        run: |
+          # Replaces renders/<story>/ as a whole (old video, stills, subtitles), keeping the pictures in find/, and
+          # writes the channel lists kenh-<n>.md again.
+          python tools/credits.py dist/sources.json dist/credits.txt
+          # The posting caption, as it is on main now (a caption pushed while this video was made is not lost)
+          URL="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git fetch -q --depth 1 "$URL" "+refs/heads/main:refs/remotes/origin/main" \
+              && git cat-file -e "origin/main:captions/$STORY.txt" 2>/dev/null; then
+            git show "origin/main:captions/$STORY.txt" > dist/caption.txt
+          elif [[ -f "captions/$STORY.txt" ]]; then
+            cp "captions/$STORY.txt" dist/caption.txt
+          fi
+          tools/publish.sh "$STORY" dist render find
+          echo "Video: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/blob/renders/$STORY/video.mp4" >> "$GITHUB_STEP_SUMMARY"
+      - name: 'Phiếu: video đã dựng'
+        if: steps.render.outputs.ready == 'true' && matrix.mode == 'story' && env.ISSUE != ''
+        env:
+          STORY: ${{ matrix.story }}
+        run: |
+          gh issue edit "$ISSUE" --add-label remix-check || true
+          gh issue edit "$ISSUE" --remove-label remix-render || true
+          LEN=$(python -c "import json; d = round(json.load(open('dist/sources.json', encoding='utf-8'))['duration_seconds']); print(f'{d // 60} phút {d % 60:02d} giây')" 2>/dev/null || echo "?")
+          B="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/blob/renders/$STORY"
+          gh issue comment "$ISSUE" --body "🤖 Đã dựng xong bản video ($LEN). Claude đang kiểm tra lại từng cảnh trước khi giao.
+
+          - Video: $B/video.mp4
+          - Ảnh các cảnh: $B/stills/sheet.jpg
+          - Cách edit từng cảnh: $B/stills/edits.md$([[ -f dist/caption.txt ]] && printf '\n- Caption để đăng: %s/caption.txt' "$B")$([[ -n "$KENH" ]] && printf '\n- Mọi video của kênh %s: %s/blob/renders/kenh-%s.md' "$KENH" "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" "$KENH")" || true
+          bash tools/wake_claude.sh "Phiếu ${KENH:+kênh $KENH }số $ISSUE: video đã dựng, chờ kiểm tra." "$ISSUE" || true
+      - name: Upload the video and sources
+        if: steps.render.outputs.ready == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: japan-remix-video-${{ github.run_number }}-${{ strategy.job-index }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 14
+      - name: 'Phiếu: báo lỗi'
+        # any failure or cancel of a story run is reported on its issue, so it never waits silently
+        if: (failure() || cancelled()) && env.ISSUE != ''
+        env:
+          STORY: ${{ matrix.story }}
+        run: |
+          gh issue edit "$ISSUE" --add-label remix-failed || true
+          for l in remix-find remix-render; do gh issue edit "$ISSUE" --remove-label "$l" || true; done
+          gh issue comment "$ISSUE" --body "🤖 Máy gặp lỗi khi làm \`$STORY\`${WHY:+: $WHY} — xem nhật ký: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID . Claude sẽ xem và sửa." || true
+          bash tools/wake_claude.sh "Phiếu ${KENH:+kênh $KENH }số $ISSUE bị lỗi." "$ISSUE" || true

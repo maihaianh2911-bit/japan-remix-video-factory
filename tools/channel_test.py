@@ -1,6 +1,7 @@
 """Offline checks of the channel layer (news/channels.py): no network, no voice engine.
 
-- the channel files and the tags of the issue titles ("[K8]", "[k10]", never "[K1]" for "[K10] …");
+- the channel files and the tags of the issue titles ("[K8]", "[k10]", never "[K1]" for "[K10] …"), and that
+  every channel has its issue form and its label (.github/);
 - the story file names (<channel>-<YYYY-MM-DD>-<short>, mau-<channel>) and the refusal of a story without a channel
   or with a name of another channel;
 - the defaults a story inherits from its channel, key by key, without changing the channel;
@@ -52,6 +53,20 @@ def files_and_titles():
              "2026-11-19-todai": None, "k8-todai": None, "mau-boj": None, "K8-2026-11-19-x": None}
     for name, expected in names.items():
         assert channels.of_name(name) == expected, (name, channels.of_name(name))
+
+
+def repository_files():
+    """Every channel has its issue form (title = its tag) and its label; the step labels exist (labels.yml)."""
+    labels = (REPO / ".github" / "workflows" / "labels.yml").read_text(encoding="utf-8")
+    names = {line.strip().split("|", 1)[0] for line in labels.splitlines() if line.count("|") == 2}
+    steps = {f"remix-{step}" for step in ("plan", "find", "pick", "render", "check", "done", "fix", "failed", "busy")}
+    assert {"remix", *steps} <= names, sorted({"remix", *steps} - names)
+    for cid in channels.ids():
+        form = REPO / ".github" / "ISSUE_TEMPLATE" / f"{cid}.yml"
+        assert form.exists() and f'title: "{channels.get(cid)["tag"]} "' in form.read_text(encoding="utf-8"), form
+        assert cid in names, f"labels.yml has no label {cid}"
+    workflow = (REPO / ".github" / "workflows" / "remix-video.yml").read_text(encoding="utf-8")
+    assert "startsWith(github.event.issue.title, '[K')" in workflow and "jnews" not in workflow
 
 
 def names_and_channel():
@@ -248,6 +263,7 @@ def length_rules():
 
 def main():
     files_and_titles()
+    repository_files()
     names_and_channel()
     defaults()
     voice_of_channel()

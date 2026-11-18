@@ -1,0 +1,28 @@
+name: "👑 Kênh 10 · Hoàng gia thế giới"
+description: Gửi video gốc (ví dụ của 皇室の記憶) → Claude viết lại bằng lời của mình bằng tiếng Nhật, máy làm video dọc 80–160 giây
+title: "[K10] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Cách dùng:** dán link video gốc (hoặc kéo thả file video vào ô dưới), thêm lời của video nếu có, rồi bấm **Create**. Không cần làm gì thêm: Claude đọc video gốc, viết lại bằng lời của mình bằng tiếng Nhật (giữ đúng sự thật, không bịa), máy tìm ảnh, Claude chọn ảnh hợp từng cảnh, máy tạo giọng và dựng video, Claude kiểm tra lại từng cảnh. Link video và caption sẽ hiện ở bình luận cuối.
+        Kênh 10 làm hoàng gia thế giới, nhất là hoàng gia Anh và hoàng tộc Trung Quốc ngày xưa (nhà Thanh…). Không dùng tin đồn báo lá cải; chuyện chưa chắc thì nói rõ là báo chí đưa tin. Không làm lại chuyện đã làm ở kênh 7 (mặt tối lịch sử).
+        Muốn sửa gì thì viết bình luận (ví dụ "cảnh 3 đổi ảnh khác").
+  - type: textarea
+    id: source
+    attributes:
+      label: Video gốc (bắt buộc)
+      description: Link video gốc (YouTube, TikTok…), hoặc kéo thả file video vào đây. Nếu video đã gửi trong chat thì ghi "đã gửi trong chat".
+    validations:
+      required: true
+  - type: textarea
+    id: words
+    attributes:
+      label: Lời của video gốc (không bắt buộc)
+      description: Chữ hoặc lời đọc của video gốc nếu có (tiếng Nhật). Không có thì Claude tự đọc chữ trên video.
+  - type: textarea
+    id: notes
+    attributes:
+      label: Ghi chú (không bắt buộc)
+      description: Điều muốn nhấn mạnh, ảnh nên có hoặc nên tránh… Ghi "thử" hoặc "mẫu" nếu đây là video thử.
