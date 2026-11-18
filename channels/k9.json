@@ -1,0 +1,15 @@
+{
+  "id": "k9",
+  "number": 9,
+  "name_ja": "ネット炎上",
+  "name_vi": "Chuyện ồn ào trên mạng",
+  "tag": "[K9]",
+  "voice": {"speaker": "青山龍星", "style": "ノーマル"},
+  "hashtags": ["#炎上", "#SNS", "#shorts"],
+  "defaults": {
+    "style": "story",
+    "kicker": "ネット炎上",
+    "pace": {"speed": 1.2, "line_pause": 0.1, "scene_pause": 0.2},
+    "fx": {"motion": true, "depth": true, "text": true, "face": true}
+  }
+}

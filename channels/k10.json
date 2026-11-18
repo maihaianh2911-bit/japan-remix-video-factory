@@ -1,0 +1,15 @@
+{
+  "id": "k10",
+  "number": 10,
+  "name_ja": "世界の王室",
+  "name_vi": "Hoàng gia thế giới",
+  "tag": "[K10]",
+  "voice": {"speaker": "青山龍星", "style": "ノーマル"},
+  "hashtags": ["#世界の王室", "#王室", "#shorts"],
+  "defaults": {
+    "style": "story",
+    "kicker": "世界の王室",
+    "pace": {"speed": 1.2, "line_pause": 0.1, "scene_pause": 0.2},
+    "fx": {"motion": true, "depth": true, "text": true, "face": true}
+  }
+}

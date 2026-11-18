@@ -7,7 +7,7 @@
 #   Usage: tools/wake_claude.sh "<why>" [<issue number>]
 #
 # With an issue number (and GH_TOKEN + GH_REPO in the environment):
-# - an issue that carries a fresh `jnews-busy` (added less than 2 hours ago) is being worked on by a Claude in a
+# - an issue that carries a fresh `remix-busy` (added less than 2 hours ago) is being worked on by a Claude in a
 #   chat: Claude is not called and nothing is written on the issue;
 # - a call that fails (after 3 tries) or that cannot be made (no secrets) is reported on the issue, so the owner
 #   sees it without opening the run log. WAKE_COMMENT=no leaves that comment to the caller.
@@ -33,10 +33,10 @@ finish() {   # finish <result> [<note for the issue>]
 
 busy_fresh() {
   [ -n "$ISSUE" ] && [ -n "${GH_TOKEN:-}" ] && [ -n "$REPO" ] || return 1
-  gh api "repos/$REPO/issues/$ISSUE" --jq '.labels[].name' 2>/dev/null | grep -qx 'jnews-busy' || return 1
+  gh api "repos/$REPO/issues/$ISSUE" --jq '.labels[].name' 2>/dev/null | grep -qx 'remix-busy' || return 1
   local since
   since=$(gh api "repos/$REPO/issues/$ISSUE/events?per_page=100" --paginate \
-    --jq '.[] | select(.event == "labeled" and .label.name == "jnews-busy") | .created_at' 2>/dev/null | tail -n 1)
+    --jq '.[] | select(.event == "labeled" and .label.name == "remix-busy") | .created_at' 2>/dev/null | tail -n 1)
   [ -n "$since" ] || return 1
   python3 -c 'import sys
 from datetime import datetime, timedelta, timezone
@@ -45,7 +45,7 @@ sys.exit(0 if datetime.now(timezone.utc) - added < timedelta(hours=2) else 1)' "
 }
 
 if busy_fresh; then
-  echo "wake: phiếu #$ISSUE đang có nhãn jnews-busy (Claude đang làm trong chat): không gọi Claude"
+  echo "wake: phiếu #$ISSUE đang có nhãn remix-busy (Claude đang làm trong chat): không gọi Claude"
   finish busy
 fi
 

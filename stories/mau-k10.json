@@ -1,0 +1,109 @@
+{
+  "channel": "k10",
+  "stage": "render",
+  "title": "【見本】木の上で女王になった王女",
+  "date": "2026-11-18",
+  "searches": [
+    "incategory:\"Bank of Japan Head Office\" exterior",
+    "Japanese yen banknotes 10000",
+    "Tokyo housing residential aerial",
+    "Japan supermarket shoppers",
+    "incategory:\"Bank of Japan Head Office\"",
+    "Tokyo residential houses"
+  ],
+  "scenes": [
+    {
+      "label": "エリザベス2世",
+      "era": "1952年",
+      "headline": "木の上で\n女王になった王女",
+      "lines": [
+        {
+          "text": "ケニアの木の上のホテルに泊まった25歳の王女は、次の日、女王として木から降りてきました。",
+          "quote": true
+        },
+        "のちに70年にわたってイギリスの王座にあった、エリザベス2世の始まりとして、長く語り継がれてきた話です。"
+      ],
+      "photo": [
+        {
+          "pick": "6-7",
+          "focus": [
+            0.5,
+            0.45
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "5-6",
+          "focus": [
+            0.5,
+            0.45
+          ],
+          "move": "pan-left"
+        }
+      ],
+      "why": "Mở đầu: phòng tiệc lớn (ảnh tạm của bản mẫu) khi nói câu móc, rồi lia ngang tòa nhà đá."
+    },
+    {
+      "label": "即位",
+      "era": "1952年2月",
+      "headline": "旅先に届いた\n父の死の知らせ",
+      "lines": [
+        "1952年2月、父のジョージ6世が亡くなったという知らせは、旅先のケニアにいた王女のもとへ届きます。",
+        "王女はそのまま女王エリザベス2世となり、翌年、ロンドンのウェストミンスター寺院で戴冠式を迎えました。"
+      ],
+      "photo": [
+        {
+          "pick": "5-1",
+          "focus": [
+            0.5,
+            0.55
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "5-7",
+          "focus": [
+            0.5,
+            0.4
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "dip",
+      "why": "Tin cha mất: tối dần rồi sáng lại; ảnh tạm của bản mẫu, cổng rồi sân lâu đài đá."
+    },
+    {
+      "label": "在位70年",
+      "era": "1952年〜2022年",
+      "headline": "イギリス史上\n最も長い在位",
+      "value": "70年",
+      "evidence": "1952年 即位 ／ 2022年 逝去（96歳）",
+      "lines": [
+        "女王は、2022年9月に96歳で亡くなるまで、70年にわたって王座にあり続けました。",
+        "これは、イギリスの歴代の君主のなかで、最も長い在位です。"
+      ],
+      "cut": "page",
+      "why": "Con số 70 năm: thẻ chữ, không cần ảnh."
+    },
+    {
+      "label": "始まりの夜",
+      "era": "1952年",
+      "headline": "すべては\nケニアの一夜から",
+      "lines": [
+        "70年の長い道のりは、アフリカの小さな木の上のホテルで過ごした、あの一夜から始まっていたのです。"
+      ],
+      "photo": [
+        {
+          "pick": "6-7",
+          "focus": [
+            0.5,
+            0.45
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "dip",
+      "why": "Kết quay về đêm ở Kenya của câu mở đầu: lùi ra toàn cảnh."
+    }
+  ]
+}

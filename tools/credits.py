@@ -1,5 +1,5 @@
 """credits.txt for the video description, from dist/sources.json: news source, pictures (author, licence, page),
-voice. Usage: python tools/credits.py dist/sources.json dist/credits.txt"""
+music, voice (VOICEVOX:<the channel's speaker>). Usage: python tools/credits.py dist/sources.json dist/credits.txt"""
 import json
 import sys
 
@@ -23,6 +23,7 @@ if music:
     lines += ["音楽 / Nhạc nền",
               f"- {music.get('title', '')} — {music.get('creator') or 'không rõ'}{', ' + licence if licence else ''}"
               f" — {music.get('page', '')}", ""]
-lines.append(data.get("voice_credit") or "VOICEVOX:青山龍星")
+if data.get("voice_credit"):   # the channel's voice (sources.json; news/story.py voice_credit)
+    lines.append(data["voice_credit"])
 open(sys.argv[2], "w", encoding="utf-8").write("\n".join(lines) + "\n")
 print("\n".join(lines))

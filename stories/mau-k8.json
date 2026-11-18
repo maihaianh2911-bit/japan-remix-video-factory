@@ -1,0 +1,89 @@
+{
+  "channel": "k8",
+  "stage": "render",
+  "title": "【見本】実は○○な芸能人3人",
+  "date": "2026-11-18",
+  "searches": [
+    "incategory:\"Bank of Japan Head Office\" exterior",
+    "Japanese yen banknotes 10000",
+    "Tokyo housing residential aerial",
+    "Japan supermarket shoppers",
+    "incategory:\"Bank of Japan Head Office\"",
+    "Tokyo residential houses"
+  ],
+  "scenes": [
+    {
+      "label": "芸能人3人",
+      "headline": "実は○○な\n芸能人3人",
+      "lines": [
+        {
+          "text": "ここに、3人の共通点をひと言で伝える、最初の一文が入ります。",
+          "quote": true
+        },
+        "このチャンネルでは、新聞やテレビが伝えた事実だけで、3人の芸能人を紹介します。"
+      ],
+      "photo": [
+        {
+          "pick": "6-7",
+          "focus": [
+            0.5,
+            0.45
+          ],
+          "move": "push-in"
+        }
+      ],
+      "why": "Mở đầu (bản mẫu): câu móc in to trên ảnh phòng tiệc."
+    },
+    {
+      "label": "1人目",
+      "headline": "1人目の名前",
+      "lines": [
+        "1人目は、ここに名前と、共通点にまつわる話が入ります。",
+        "話は、報道で確かめられた事実だけを使います。"
+      ],
+      "photo": [
+        {
+          "pick": "6-3",
+          "focus": [
+            0.5,
+            0.45
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "page",
+      "why": "Người thứ nhất (bản mẫu): lật trang sang người mới."
+    },
+    {
+      "label": "2人目",
+      "headline": "2人目の名前",
+      "value": "2人目",
+      "evidence": "ここに名前と、共通点を表す事実が入ります",
+      "lines": [
+        "2人目は、ここに名前と、共通点を表す出来事が入ります。"
+      ],
+      "cut": "page",
+      "why": "Người thứ hai (bản mẫu): thẻ chữ."
+    },
+    {
+      "label": "3人目",
+      "headline": "3人目の名前",
+      "lines": [
+        "3人目は、ここに名前と、いちばん印象に残る話が入ります。",
+        "最後は、3人の話を、最初の一文につなげて締めくくります。"
+      ],
+      "photo": [
+        {
+          "pick": "5-7",
+          "focus": [
+            0.5,
+            0.4
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "page",
+      "why": "Người thứ ba và lời kết (bản mẫu): lùi ra toàn cảnh."
+    }
+  ]
+}

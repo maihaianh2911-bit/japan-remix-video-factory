@@ -11,7 +11,7 @@ import budoux
 from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont
 
 from .edits import AUTO_CUT, CUTS, MOVES, edit_list
-from .story import VOICE_CREDIT, japanese_date
+from .story import japanese_date, voice_credit
 
 W, H, FPS = 1080, 1920, 30
 # GitHub refuses a file over 100 MB on the renders branch: the video is kept under about 90 MB. Up to about
@@ -494,7 +494,7 @@ def story_layout(beat, release, has_photo, demo):
     draw.line((60, 1752, W - 60, 1752), fill=style.rule, width=2)
     if release.publisher:
         text(draw, 60, 1812, f"出典  {release.publisher}", 24, style.muted, bold=False)
-    text(draw, W - 60, 1774, VOICE_CREDIT, 24, style.muted, bold=False, anchor="rt")
+    text(draw, W - 60, 1774, voice_credit(release), 24, style.muted, bold=False, anchor="rt")
     if release.music:
         music = f"音楽  {release.music.title.rsplit('.', 1)[0]}"
         music, music_size = fit(music, 600, 22, 1, bold=False, smallest=16)
@@ -593,7 +593,7 @@ def plain_layout(beat, release, has_photo, demo):
     draw.line((70, 1704, W - 70, 1704), fill=style.rule, width=2)
     if release.publisher:
         text(draw, 70, 1742, f"出典  {release.publisher}", 29, style.muted, bold=False)
-    text(draw, W - 70, 1742, VOICE_CREDIT, 24, style.muted, bold=False, anchor="rt")
+    text(draw, W - 70, 1742, voice_credit(release), 24, style.muted, bold=False, anchor="rt")
 
     layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     draw = ImageDraw.Draw(layer)

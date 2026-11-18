@@ -1,0 +1,104 @@
+{
+  "channel": "k9",
+  "stage": "render",
+  "title": "【見本】ひとつの投稿は、なぜ一晩で炎上するのか",
+  "date": "2026-11-18",
+  "searches": [
+    "incategory:\"Bank of Japan Head Office\" exterior",
+    "Japanese yen banknotes 10000",
+    "Tokyo housing residential aerial",
+    "Japan supermarket shoppers",
+    "incategory:\"Bank of Japan Head Office\"",
+    "Tokyo residential houses"
+  ],
+  "scenes": [
+    {
+      "label": "ネット炎上",
+      "headline": "一晩で広がる\n批判の声",
+      "lines": [
+        {
+          "text": "たった一枚の写真や、ひと言の投稿が、一晩で何万人もの批判を集めることがあります。",
+          "quote": true
+        },
+        "ネットの炎上は、お店や会社、イベントの評判を、わずか数日で大きく変えてしまいます。"
+      ],
+      "photo": [
+        {
+          "pick": "4-5",
+          "focus": [
+            0.45,
+            0.5
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "4-8",
+          "focus": [
+            0.4,
+            0.5
+          ],
+          "move": "pan-right"
+        }
+      ],
+      "why": "Mở đầu: người mua hàng nhìn từ phía sau (không lộ mặt), rồi lia ngang mặt tiền cửa hàng."
+    },
+    {
+      "label": "広がり方",
+      "headline": "共有が\n共有を呼ぶ",
+      "lines": [
+        "投稿は、引用や共有によって、もとの投稿者を知らない人たちのあいだへと、次々に広がっていきます。",
+        "まとめサイトやニュースが取り上げると、さらに多くの人の目に届きます。"
+      ],
+      "photo": [
+        {
+          "pick": "4-3",
+          "focus": [
+            0.5,
+            0.4
+          ],
+          "move": "pan-left"
+        },
+        {
+          "pick": "4-6",
+          "focus": [
+            0.6,
+            0.5
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "fade",
+      "why": "Câu chuyện lan rộng: lia ngang quầy hàng, rồi tiến vào cửa hàng."
+    },
+    {
+      "label": "このチャンネルでは",
+      "headline": "伝えるのは\n報道された事実だけ",
+      "evidence": "報道された事実だけ ／ 一般の人の名前と顔は出さない",
+      "lines": [
+        "このチャンネルでは、新聞やテレビが報じた事実だけをもとに、炎上の流れをたどります。",
+        "一般の人の名前や顔は出さず、だれかを笑いものにすることもしません。"
+      ],
+      "cut": "page",
+      "why": "Luật của kênh: thẻ chữ, không ảnh."
+    },
+    {
+      "label": "炎上のあと",
+      "headline": "燃え広がった\n言葉のあとに",
+      "lines": [
+        "一枚の写真から始まった炎上の先に、何が残ったのか。このチャンネルは、事実だけでたどっていきます。"
+      ],
+      "photo": [
+        {
+          "pick": "6-3",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "dip",
+      "why": "Kết: lùi ra con hẻm, quay về ý của câu mở đầu."
+    }
+  ]
+}

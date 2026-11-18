@@ -12,7 +12,9 @@
 # PUBLISH_MODE=add (env): only add or replace the files of <source_dir> in an existing <dest_dir>; nothing else in
 # it is removed and status.json is left as it is (used for the posting caption beside a finished video). Exit 3
 # when <dest_dir> does not exist on renders yet (nothing to add to).
+# Every publish also writes the channel lists kenh-<n>.md at the top of renders again (tools/channel_lists.py).
 set -euo pipefail
+HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 DEST="${1:?dest_dir}"; SRC="${2:?source_dir}"; STAGE="${3:?stage}"; shift 3
 KEEP=("$@")
 [[ -d "$SRC" ]] || { echo "::error::nothing to publish: $SRC is not a folder"; exit 1; }
@@ -28,6 +30,12 @@ PUSH_LOG=$(mktemp)
 URL="${PUBLISH_REMOTE:-https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git}"
 RUN_URL="${GITHUB_SERVER_URL:-https://github.com}/${GITHUB_REPOSITORY:-local}/actions/runs/${GITHUB_RUN_ID:-0}"
 COMMIT="${GITHUB_SHA:-$(git rev-parse HEAD)}"
+
+channel_lists() {   # the lists of each channel's videos; a convenience: a failure never stops the publish
+  [[ -f "$HERE/channel_lists.py" && -d "$HERE/../channels" ]] || return 0
+  python3 "$HERE/channel_lists.py" "$1" "$HERE/../channels" > /dev/null \
+    || echo "::warning::could not write the channel lists (kenh-<n>.md) on renders"
+}
 
 attempt_publish() {
   local wt="$1" status
@@ -45,6 +53,7 @@ attempt_publish() {
   if [[ "${PUBLISH_MODE:-}" == add ]]; then
     [[ -d "$wt/$DEST" ]] || return 3
     cp -r "$SRC"/. "$wt/$DEST/" || return 1
+    channel_lists "$wt"
     git -C "$wt" add -A || return 1
     if git -C "$wt" diff --cached --quiet; then NOTHING=yes; return 0; fi
     git -C "$wt" -c user.name=render-bot -c user.email=render-bot@users.noreply.github.com \
@@ -72,6 +81,7 @@ status = {"stage": os.environ["STAGE"], "outcome": os.environ["OUTCOME"],
           "commit": os.environ["COMMIT"], "published_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}
 open(sys.argv[1], "w", encoding="utf-8").write(json.dumps(status, indent=1) + "\n")
 PY
+  channel_lists "$wt"
   local who=(-c user.name=render-bot -c user.email=render-bot@users.noreply.github.com)
   git -C "$wt" "${who[@]}" add -A &&
     git -C "$wt" "${who[@]}" commit -q -m "publish $DEST ($STAGE, run ${GITHUB_RUN_ID:-local}, ${COMMIT:0:7})" || return 1

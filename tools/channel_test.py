@@ -1,0 +1,262 @@
+"""Offline checks of the channel layer (news/channels.py): no network, no voice engine.
+
+- the channel files and the tags of the issue titles ("[K8]", "[k10]", never "[K1]" for "[K10] …");
+- the story file names (<channel>-<YYYY-MM-DD>-<short>, mau-<channel>) and the refusal of a story without a channel
+  or with a name of another channel;
+- the defaults a story inherits from its channel, key by key, without changing the channel;
+- the voice comes from the channel file, not from the code: a stand-in channel with another VOICEVOX speaker is
+  voiced (against a stand-in engine) and credited (on the frame, in both layouts) with that speaker;
+- the posting caption must carry the channel's hashtags and be named after its story;
+- the lists of each channel's videos on the renders branch (tools/channel_lists.py);
+- iron rule 2 in the machine: a story whose voice is under 60 seconds is refused before its video is made, a trial
+  ("trial": true) is made all the same (a second of video: needs ffmpeg).
+Usage: python tools/channel_test.py"""
+from io import BytesIO
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+import wave
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from news import captions, channels, render, voice   # noqa: E402
+from news.custom import StoryError, load_story, read, validate   # noqa: E402
+from news.story import voice_credit   # noqa: E402
+
+REPO = Path(__file__).resolve().parent.parent
+STORY = {"channel": "k8", "title": "見本", "date": "2026-11-19", "scenes": [{"headline": "見出し", "lines": ["一行目です。"]}]}
+
+
+def problems(change=None, name="k8-2026-11-19-test"):
+    story = json.loads(json.dumps(STORY))
+    if change:
+        change(story)
+    return "\n".join(validate(story, name))
+
+
+def files_and_titles():
+    assert channels.check() == [], channels.check()
+    assert channels.ids() == ["k8", "k9", "k10", "k11"], channels.ids()
+    for cid in channels.ids():
+        data = channels.get(cid)
+        assert data["tag"] == f"[K{data['number']}]" and "#shorts" in data["hashtags"], data
+        assert data["defaults"]["style"] == "story" and all(data["defaults"]["fx"].values()), data
+    titles = {"[K8] 実は東大卒の芸能人3人 — 3 nghệ sĩ": "k8", "[k10] エリザベス女王": "k10", "  [K11] なぜ": "k11",
+              "[K9]炎上": "k9", "[K1] x": None, "[K12] x": None, "[Tin Nhật] x": None, "K8 x": None, "": None}
+    for title, expected in titles.items():
+        found = channels.of_title(title)
+        assert (found or {}).get("id") == expected, (title, found)
+    names = {"k8-2026-11-19-todai": "k8", "k10-2026-01-02-x.y_z": "k10", "mau-k11": "k11", "mau-k9-edits": "k9",
+             "2026-11-19-todai": None, "k8-todai": None, "mau-boj": None, "K8-2026-11-19-x": None}
+    for name, expected in names.items():
+        assert channels.of_name(name) == expected, (name, channels.of_name(name))
+
+
+def names_and_channel():
+    assert problems() == "" and problems(name="mau-k8") == "" and problems(name=None) == ""
+    assert '"channel" is missing' in problems(lambda story: story.pop("channel"))
+    assert '"channel" must be one of k8, k9, k10, k11' in problems(lambda story: story.update(channel="k99"))
+    assert "names channel k9" in problems(name="k9-2026-11-19-test")
+    assert "names channel k10" in problems(name="mau-k10")
+    assert "is named k8-<YYYY-MM-DD>-<short name>" in problems(name="2026-11-19-test")
+    assert "'2026-13-45' is not a date" in problems(name="k8-2026-13-45-test")
+    assert "use only ASCII letters" in problems(name="k8-2026-11-19-テスト")
+    assert '"trial" must be true or false' in problems(lambda story: story.update(trial="yes"))
+    assert problems(lambda story: story.update(trial=True)) == ""
+    with tempfile.TemporaryDirectory(prefix="channel-test-") as scratch:   # read() refuses, with every problem listed
+        path = Path(scratch) / "k9-2026-11-19-test.json"
+        path.write_text(json.dumps(STORY, ensure_ascii=False), encoding="utf-8")
+        try:
+            read(path)
+            raise AssertionError("a story whose name names another channel must be refused")
+        except StoryError as error:
+            assert "names channel k9" in str(error), error
+
+
+def defaults():
+    k8 = channels.get("k8")["defaults"]
+    merged = channels.inherit(STORY)
+    assert {key: merged[key] for key in ("style", "kicker", "pace", "fx")} == k8, merged
+    assert "style" not in STORY, "inherit() must not change the story it is given"
+    merged["fx"]["depth"] = False
+    assert channels.get("k8")["defaults"]["fx"]["depth"] is True, "inherit() must not change the channel"
+    own = channels.inherit({**STORY, "style": "paper", "pace": {"speed": 1.0}, "fx": {"depth": False}})
+    assert own["style"] == "paper" and own["kicker"] == "芸能人3人", own
+    assert own["pace"] == {"speed": 1.0, "line_pause": 0.1, "scene_pause": 0.2}, own["pace"]
+    assert own["fx"] == {"motion": True, "depth": False, "text": True, "face": True}, own["fx"]
+    assert channels.inherit({**STORY, "fx": None})["fx"] is None   # null: nothing inherited, no effects
+    assert channels.inherit({"title": "no channel"}) == {"title": "no channel"}
+    assert '"style" must be one of' in problems(lambda story: story.update(style="neon"))
+
+
+def stand_in_engine(asked, seconds=0.5):
+    """VOICEVOX as far as narration() asks it: two voices, a reading without sounds (the captions are then
+    estimated), and `seconds` of silence a line."""
+    def engine(path, *, params=None, data=None):
+        asked.append((path, dict(params or {})))
+        if path == "/speakers":
+            return json.dumps([{"name": "青山龍星", "styles": [{"name": "ノーマル", "id": 13}]},
+                               {"name": "四国めたん", "styles": [{"name": "ノーマル", "id": 2},
+                                                             {"name": "あまあま", "id": 0}]}]).encode()
+        if path == "/audio_query":
+            return json.dumps({"accent_phrases": [], "speedScale": 1.0}).encode()
+        sound = BytesIO()
+        with wave.open(sound, "wb") as output:
+            output.setparams((1, 2, 24000, 0, "NONE", "not compressed"))
+            output.writeframes(b"\x00\x00" * round(24000 * seconds))
+        return sound.getvalue()
+    return engine
+
+
+def voice_of_channel():
+    """A stand-in channel k8 with another speaker: the story is voiced and credited with it."""
+    real_folder, real_request, real_text = channels.FOLDER, voice.request, render.text
+    with tempfile.TemporaryDirectory(prefix="channel-voice-") as scratch:
+        scratch = Path(scratch)
+        (scratch / "channels").mkdir()
+        k8 = json.loads((real_folder / "k8.json").read_text(encoding="utf-8"))
+        k8["voice"] = {"speaker": "四国めたん", "style": "あまあま"}
+        (scratch / "channels" / "k8.json").write_text(json.dumps(k8, ensure_ascii=False), encoding="utf-8")
+        path = scratch / "k8-2026-11-19-voice.json"
+        path.write_text(json.dumps(STORY, ensure_ascii=False), encoding="utf-8")
+        asked, drawn = [], []
+        try:
+            channels.FOLDER = scratch / "channels"
+            channels.channels.cache_clear()
+            release, beats, photos = load_story(path)
+            assert release.voice == ("四国めたん", "あまあま") and release.channel == "k8", release
+            assert voice_credit(release) == "VOICEVOX:四国めたん", voice_credit(release)
+            voice.request = stand_in_engine(asked)
+            intervals, said = voice.narration(beats, scratch / "voice.wav", 1.2, voice=release.voice)
+            assert intervals and said and asked[0][0] == "/speakers", asked
+            assert {params.get("speaker") for path, params in asked[1:]} == {0}, asked   # 四国めたん/あまあま
+            try:
+                voice.narration(beats, scratch / "none.wav", 1.2, voice=("ずんだもん", "ノーマル"))
+                raise AssertionError("a voice the engine does not have must be refused")
+            except RuntimeError as error:
+                assert "ずんだもん/ノーマル not found" in str(error), error
+            try:
+                voice.narration(beats, scratch / "none.wav", 1.2, voice=())
+                raise AssertionError("a narration without the channel's voice must be refused")
+            except ValueError:
+                pass
+            render.text = lambda draw, x, y, value, *args, **kwargs: drawn.append(value) or real_text(
+                draw, x, y, value, *args, **kwargs)
+            for name in ("news", "story"):
+                render.use_style(name)
+                drawn.clear()
+                render.layout(beats[0], release, False, False)
+                assert "VOICEVOX:四国めたん" in drawn and "VOICEVOX:青山龍星" not in drawn, (name, drawn)
+        finally:
+            channels.FOLDER, voice.request, render.text = real_folder, real_request, real_text
+            channels.channels.cache_clear()
+            render.use_style("news")
+    assert channels.get("k8")["voice"]["speaker"] == "青山龍星"
+
+
+def caption_checks():
+    good = ("なぜ日本銀行は日本橋にあるのか\n日本銀行の本店は、金座の跡地に建っています。\n本館は重要文化財です。\n\n"
+            "#歴史 #歴史のなぜ #日本銀行 #金座 #shorts\n\n画像出典: Wikimedia Commons ほか")
+    required = channels.get("k11")["hashtags"]
+    assert captions.problems(good, required) == [], captions.problems(good, required)
+    missing = captions.problems(good.replace("#歴史のなぜ ", "#江戸 "), required)
+    assert len(missing) == 1 and "#歴史のなぜ" in missing[0], missing
+    with tempfile.TemporaryDirectory(prefix="channel-caption-") as scratch:
+        for name, ok in (("k11-2026-11-19-nihonbashi", True), ("mau-k11", True), ("k8-2026-11-19-x", False),
+                         ("2026-11-19-nihonbashi", False)):
+            path = Path(scratch) / f"{name}.txt"
+            path.write_text(good, encoding="utf-8")
+            found = captions.check(path)
+            assert (found == []) == ok, (name, found)
+        assert "is named after its story" in captions.check(Path(scratch) / "2026-11-19-nihonbashi.txt")[0]
+
+
+def lists():
+    """kenh-<n>.md of a made-up renders branch: the videos of each channel, newest first, with their files."""
+    def folder(name, files):
+        for file, content in files.items():
+            (tree / name / file).parent.mkdir(parents=True, exist_ok=True)
+            (tree / name / file).write_text(content, encoding="utf-8")
+    with tempfile.TemporaryDirectory(prefix="channel-lists-") as scratch:
+        tree = Path(scratch)
+        folder("k8-2026-11-19-a", {"video.mp4": "v", "caption.txt": "実は[東大]卒の芸能人3人\n文。\n", "subtitles.srt": "",
+                                   "credits.txt": "", "sources.json": '{"duration_seconds": 92.4}'})
+        folder("k8-2026-11-20-b", {"video.mp4": "v", "sources.json": '{"release": {"title": "題"}, "duration_seconds": 100, '
+                                                                     '"trial": true}'})
+        folder("k8-2026-11-18-c", {"find/index.json": "[]"})   # pictures found, no video yet: not listed
+        folder("k10-2026-11-19-d", {"video.mp4": "v"})
+        folder("mau-k8", {"video.mp4": "v"})                    # not a story of a channel: not listed
+        (tree / "kenh-9.md").write_text("old", encoding="utf-8")
+        result = subprocess.run([sys.executable, str(REPO / "tools" / "channel_lists.py"), str(tree),
+                                 str(REPO / "channels")], capture_output=True, text=True, check=True)
+        k8, k9, k10 = ((tree / f"kenh-{n}.md").read_text(encoding="utf-8") for n in (8, 9, 10))
+        assert k8.startswith("# Kênh 8 · 芸能人3人 (3 nghệ sĩ…)"), k8
+        rows = [row for row in k8.splitlines() if row.startswith("- ")]
+        assert len(rows) == 2 and rows[0].startswith("- 2026-11-20 · **題** (1:40) · *thử* — [video](k8-2026-11-20-b/video.mp4)"), rows
+        assert rows[1] == ("- 2026-11-19 · **実は\\[東大\\]卒の芸能人3人** (1:32) — [video](k8-2026-11-19-a/video.mp4) · "
+                           "[caption](k8-2026-11-19-a/caption.txt) · [phụ đề](k8-2026-11-19-a/subtitles.srt) · "
+                           "[nguồn ảnh](k8-2026-11-19-a/credits.txt)"), rows[1]
+        assert "_Chưa có video nào._" in k9 and "k10-2026-11-19-d/video.mp4" in k10 and "kenh-11.md: 0" in result.stdout
+
+
+def length_rules():
+    """python -m news on a two-line story, against the stand-in engine (1.6 seconds a line, so that the loudness
+    filter has the 3 seconds it measures): refused under 60 s, with the reason for the issue in $GITHUB_ENV and no
+    video; as a trial it is voiced, made and credited with the channel's voice."""
+    from news import __main__ as make
+    names = ("GITHUB_ENV", "GITHUB_OUTPUT", "GITHUB_STEP_SUMMARY")
+    real = voice.request, sys.argv, {name: os.environ.get(name) for name in names}
+    with tempfile.TemporaryDirectory(prefix="channel-length-") as scratch:
+        scratch = Path(scratch)
+        try:
+            for name in names:   # never the files of the run this test may be part of
+                os.environ[name] = str(scratch / name.lower())
+            voice.request = stand_in_engine([], 1.6)
+            story = json.loads(json.dumps(STORY))
+            story["scenes"][0]["lines"].append("二行目です。")
+            short = scratch / "k8-2026-11-19-short.json"
+            short.write_text(json.dumps(story, ensure_ascii=False), encoding="utf-8")
+            sys.argv = ["news", "--story", str(short), "--out", str(scratch / "out")]
+            try:
+                make.main()
+                raise AssertionError("a story under 60 seconds must be refused")
+            except SystemExit as stop:
+                assert "under 60 s (iron rule 2)" in str(stop.code), stop.code
+            assert "WHY=lời đọc chỉ dài 4 giây, dưới 60 giây" in (scratch / "github_env").read_text(encoding="utf-8")
+            assert not (scratch / "out" / "video.mp4").exists()
+            trial = scratch / "k8-2026-11-19-trial.json"
+            trial.write_text(json.dumps({**story, "trial": True}, ensure_ascii=False), encoding="utf-8")
+            sys.argv = ["news", "--story", str(trial), "--out", str(scratch / "out")]
+            make.main()
+            report = json.loads((scratch / "out" / "sources.json").read_text(encoding="utf-8"))
+            assert (report["channel"], report["trial"], report["voice_credit"]) == ("k8", True, "VOICEVOX:青山龍星"), report
+            assert report["voice"] == {"speaker": "青山龍星", "style": "ノーマル"}, report
+            assert (scratch / "out" / "video.mp4").stat().st_size > 1000 and "ready=true" in (
+                scratch / "github_output").read_text(encoding="utf-8")
+        finally:
+            voice.request, sys.argv = real[0], real[1]
+            for name, value in real[2].items():
+                if value is None:
+                    os.environ.pop(name, None)
+                else:
+                    os.environ[name] = value
+            render.use_fx(None)
+            render.use_style("news")
+
+
+def main():
+    files_and_titles()
+    names_and_channel()
+    defaults()
+    voice_of_channel()
+    caption_checks()
+    lists()
+    length_rules()
+    tags = ", ".join(cid + " " + channels.get(cid)["tag"] for cid in channels.ids())
+    print(f"channel checks OK ({tags})")
+
+
+if __name__ == "__main__":
+    main()

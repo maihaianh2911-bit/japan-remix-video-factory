@@ -1,0 +1,15 @@
+{
+  "id": "k11",
+  "number": 11,
+  "name_ja": "歴史のなぜ",
+  "name_vi": "Lịch sử “vì sao…?”",
+  "tag": "[K11]",
+  "voice": {"speaker": "青山龍星", "style": "ノーマル"},
+  "hashtags": ["#歴史", "#歴史のなぜ", "#shorts"],
+  "defaults": {
+    "style": "story",
+    "kicker": "歴史のなぜ",
+    "pace": {"speed": 1.2, "line_pause": 0.1, "scene_pause": 0.2},
+    "fx": {"motion": true, "depth": true, "text": true, "face": true}
+  }
+}

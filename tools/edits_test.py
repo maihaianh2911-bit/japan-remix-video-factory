@@ -1,9 +1,11 @@
 """Try every edit of the catalogue (news/edits.py) on the pictures of the sample story, without the voice engine.
 
-python tools/edits_test.py stories/mau-boj.json <its find folder> <out folder> [<seconds per move, default 2>]
+python tools/edits_test.py stories/mau-k11.json tests/fixtures/pictures <out folder> [<seconds per move, default 2>]
 
-Writes <out>/edits-sample.json (a story that uses every move and every cut: it is read through the same checks as
-a real story), <out>/moves.jpg (each move at its start, middle and end, for a picture shown 5 seconds),
+(Any sample story of stories/mau-*.json: they all carry the searches of the fixture tests/fixtures/pictures, whose
+numbering the pictures below use.) Writes <out>/mau-<channel>-edits.json (a story that uses every move and every
+cut: it is read through the same checks as a real story), <out>/moves.jpg (each move at its start, middle and end,
+for a picture shown 5 seconds),
 <out>/cuts.jpg (each cut a quarter, half and three quarters through, in both frames), <out>/punch.jpg (eight
 frames in a row around a punch-in that follows another picture: it must arrive by a hard cut) and <out>/news/video.mp4,
 <out>/paper/video.mp4 (every move for a few seconds, the cuts in turn, silence as the voice). Also checks that
@@ -46,8 +48,11 @@ def sample(story):
             scene["cut"] = cuts[(number - 1) % len(cuts)]
             scene["lines"] = [f"{name} / {scene['cut']}"]
         scenes.append(scene)
-    return {"title": "edits", "date": data["date"], "source": data.get("source", ""), "stage": "render",
-            "searches": data["searches"], "scenes": scenes}
+    sample = {"channel": data["channel"], "title": "edits", "date": data["date"], "stage": "render",
+              "searches": data["searches"], "scenes": scenes}
+    if data.get("source"):
+        sample["source"] = data["source"]
+    return sample
 
 
 def refused(data):
@@ -151,8 +156,9 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     data = sample(story)
     refused(data)
-    (out / "edits-sample.json").write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    release, beats, photos = load_story(out / "edits-sample.json", pictures)
+    path = out / f"mau-{data['channel']}-edits.json"   # a story file name its channel accepts (news/channels.py)
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    release, beats, photos = load_story(path, pictures)
     for index in sorted(photos):
         if warning := render.move_warning(photos[index][0]):
             sys.exit(f"error: the sample picture of {beats[index].label} does not suit its move ({warning})")

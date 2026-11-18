@@ -279,14 +279,18 @@ def wikidata(out):
 
 def whole_run(folder):
     """A run over a story: searches done before are left alone, a failed one is recorded with "error" and makes
-    the exit status 3, the others are kept, and a picture of the repository costs no pause."""
-    media = sorted((REPO / "stories" / "media").glob("*/*.jpg"))[0].relative_to(REPO)
-    story = {"title": "t", "date": "2026-11-17", "searches": [f"file:{media}", "web:broken", "web:fine => a house"],
+    the exit status 3, the others are kept, and a picture of the repository costs no pause. The picture of the
+    repository (file:) is made in a stand-in repository, so that the test needs no file of stories/media/."""
+    media = Path("stories/media/k8-2026-11-17-run-test/one.jpg")
+    (folder / media).parent.mkdir(parents=True, exist_ok=True)
+    (folder / media).write_bytes(jpeg(99))
+    story = {"channel": "k8", "title": "t", "date": "2026-11-17",
+             "searches": [f"file:{media}", "web:broken", "web:fine => a house"],
              "scenes": [{"headline": "h", "lines": ["l"]}]}
-    path = folder / "run-test.json"
+    path = folder / "k8-2026-11-17-run-test.json"
     path.write_text(json.dumps(story, ensure_ascii=False), encoding="utf-8")
     out = folder / "pictures"
-    real = F.web_search, F.web_get, F.Clip, F.time.sleep, sys.argv
+    real = F.web_search, F.web_get, F.Clip, F.time.sleep, sys.argv, F.REPO
     slept = []
 
     def web_search(words, out=None):
@@ -296,6 +300,7 @@ def whole_run(folder):
     try:
         F.web_search, F.web_get = web_search, lambda url, referer=None, limit=0, timeout=0: jpeg(int(url[-5]))
         F.Clip, F.time.sleep = type("NoClip", (), {"ready": staticmethod(lambda: False)}), slept.append
+        F.REPO = folder   # file: reads pictures under <repository>/stories/media/
         sys.argv = ["find", str(path), str(out)]
         try:
             F.main()
@@ -313,7 +318,7 @@ def whole_run(folder):
         index = json.loads((out / "index.json").read_text(encoding="utf-8"))
         assert [len(group["results"]) for group in index] == [1, 1, 3] and (out / "3-1.jpg").stat().st_mtime_ns == before
     finally:
-        F.web_search, F.web_get, F.Clip, F.time.sleep, sys.argv = real
+        F.web_search, F.web_get, F.Clip, F.time.sleep, sys.argv, F.REPO = real
 
 
 def main():

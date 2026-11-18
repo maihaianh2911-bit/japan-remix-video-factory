@@ -6,14 +6,18 @@ Format (owner, 16/11/2026), UTF-8, Japanese, at most 2000 characters:
     line 1        a hook title, at most 80 characters, true to the script
     lines 2-5     2 to 4 short sentences on the video (one block, no blank line inside)
     blank line
-    one line      5 to 8 hashtags, e.g. #皇室 #昭和 #歴史 #shorts
+    one line      5 to 8 hashtags, among them every hashtag of the channel ("hashtags" in channels/<id>.json, e.g.
+                  #歴史 #歴史のなぜ #shorts for k11), then the ones of the story
     blank line
     last line     the credit line, starting with 画像出典 (e.g. 画像出典: … ／ 詳しくは credits.txt; say 元動画 when
                   pictures of the source video are used)
+The channel is read from the file name, which is the story's: k11-2026-11-19-nihonbashi.txt (a sample: mau-k11.txt).
 """
 from pathlib import Path
 import re
 import sys
+
+from . import channels
 
 LIMIT, TITLE_LIMIT = 2000, 80
 HASHTAG = re.compile(r"^#[^\s#]+$")
@@ -25,8 +29,8 @@ def caption_path(story_path):
     return story_path.parent.parent / "captions" / f"{story_path.stem}.txt"
 
 
-def problems(text):
-    """The problems of a caption (empty when it is usable)."""
+def problems(text, required=()):
+    """The problems of a caption (empty when it is usable); `required`: the hashtags of its channel."""
     found = []
     if len(text) > LIMIT:
         found.append(f"the caption has {len(text)} characters, at most {LIMIT}")
@@ -50,6 +54,9 @@ def problems(text):
         found.append(f"5 to 8 hashtags, found {len(words)}")
     elif len(set(words)) != len(words):
         found.append("a hashtag appears twice")
+    if missing := [tag for tag in required if tag not in words]:
+        found.append(f"the hashtags of the channel are missing: {' '.join(missing)} (every caption of the channel "
+                     f"carries {' '.join(required)})")
     if "\n" in credit or not credit.startswith("画像出典"):
         found.append(f"the last line is the credit line, starting with 画像出典, got {credit!r}")
     return found
@@ -61,7 +68,12 @@ def check(path):
         text = path.read_text(encoding="utf-8")
     except UnicodeDecodeError:
         return [f"{path}: not UTF-8"]
-    return [f"{path}: {problem}" for problem in problems(text)]
+    channel = channels.get(channels.of_name(path.stem))
+    if channel is None:
+        return [f"{path}: a caption is named after its story, <channel>-<YYYY-MM-DD>-<short>.txt (a sample: "
+                f"mau-<channel>.txt) with a channel of channels/ ({', '.join(channels.ids())}), e.g. "
+                "k8-2026-11-19-todai-sotsu.txt"]
+    return [f"{path}: {problem}" for problem in problems(text, channel["hashtags"])]
 
 
 def main():

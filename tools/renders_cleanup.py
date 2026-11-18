@@ -7,8 +7,9 @@ A story folder <name>/ is deleted when
   KEEP_DAYS days; or
 - it has no issue (no story file on main any more, or a story without "issue") and was last published more than
   KEEP_DAYS days ago (status.json).
-Always kept: mau-boj (the code check draws its stills from mau-boj/find), a folder whose issue or date cannot be
-read, and files at the top level. Prints what it did; the last line is "removed=<count>".
+Always kept: a folder whose issue or date cannot be read, and files at the top level (the channel lists kenh-<n>.md,
+written again after the clean-up by tools/channel_lists.py). The code check needs nothing on renders: its pictures
+are in tests/fixtures/pictures. Prints what it did; the last line is "removed=<count>".
 """
 from datetime import datetime, timedelta, timezone
 import json
@@ -18,7 +19,7 @@ import shutil
 import subprocess
 import sys
 
-ALWAYS = {"mau-boj"}
+ALWAYS = set()   # folder names never deleted (none: the code check's pictures are in the repository)
 CLOSED_GRACE = timedelta(days=2)
 
 

@@ -6,7 +6,7 @@
    The stills with every effect on are left in <out>/fx/ (sheet.jpg) to look at.
 Needs numpy, opencv-python-headless, onnxruntime, the depth model ($DEPTH_MODEL or ~/.cache/news-depth/), the
 display typeface ($NEWS_DISPLAY_FONT or fonts/ShipporiMinchoB1-ExtraBold.ttf) and ffmpeg.
-Usage: python tools/fx_test.py stories/mau-boj.json <find folder> <out folder>"""
+Usage: python tools/fx_test.py stories/mau-k11.json tests/fixtures/pictures <out folder>"""
 from dataclasses import replace
 from io import BytesIO
 import json
@@ -82,9 +82,10 @@ def timing():
     assert render.read_share(marks, 2.1 / 2.3) == 1.0   # in the pause everything is read, the mark too
 
 
-def narrated(beats):
-    """A whole narration against a stand-in engine (two sounds a kanji, one a kana, a pause at every mark): the
-    captions follow each other, keep the text and carry marks; without `exact` their times are the old ones."""
+def narrated(beats, speaking):
+    """A whole narration against a stand-in engine (two sounds a kanji, one a kana, a pause at every mark), in the
+    voice of the story's channel (`speaking`: speaker, style): the captions follow each other, keep the text and
+    carry marks; without `exact` their times are the old ones."""
     def answer(text):
         phrases, count = [], 0
         for char in text:
@@ -102,7 +103,7 @@ def narrated(beats):
 
     def engine(path, *, params=None, data=None):
         if path == "/speakers":
-            return json.dumps([{"name": voice.SPEAKER, "styles": [{"name": voice.STYLE, "id": 13}]}]).encode()
+            return json.dumps([{"name": speaking[0], "styles": [{"name": speaking[1], "id": 13}]}]).encode()
         if path == "/audio_query":
             return json.dumps(answer(params["text"])).encode()
         asked = json.loads(data)
@@ -119,8 +120,8 @@ def narrated(beats):
     try:
         voice.request = engine
         with tempfile.TemporaryDirectory(prefix="fx-voice-") as scratch:
-            _, old = voice.narration(beats, Path(scratch) / "old.wav", 1.1, 0.1, 0.2)
-            spans, new = voice.narration(beats, Path(scratch) / "new.wav", 1.1, 0.1, 0.2, exact=True)
+            _, old = voice.narration(beats, Path(scratch) / "old.wav", 1.1, 0.1, 0.2, voice=speaking)
+            spans, new = voice.narration(beats, Path(scratch) / "new.wav", 1.1, 0.1, 0.2, exact=True, voice=speaking)
     finally:
         voice.request = real
     assert [c.text for c in old] == [c.text for c in new] and len(new) >= sum(len(beat.lines) for beat in beats)
@@ -194,15 +195,15 @@ def effects(story, pictures, out):
     again.mkdir(exist_ok=True)
     render.stills(beats, release, photos, again)
     assert frames(again) == stills["plain"], "the plain stills changed after the effects were used"
-    return beats, changed
+    return release, beats, changed
 
 
 def main():
     story, pictures, out = Path(sys.argv[1]), Path(sys.argv[2]), Path(sys.argv[3])
     out.mkdir(parents=True, exist_ok=True)
     timing()
-    beats, changed = effects(story, pictures, out)
-    count, moved = narrated(beats)
+    release, beats, changed = effects(story, pictures, out)
+    count, moved = narrated(beats, release.voice)
     print(f"picture effects OK: stills that differ from the plain ones: typeface {changed['face']}, depth "
           f"{changed['depth']}, all four {changed['fx']} of {len(frames(out / 'plain'))}; caption timing on a made-up "
           f"voice: {count} captions with marks, {moved} start at another moment with \"fx\": text. Look at {out / 'fx' / 'sheet.jpg'}")

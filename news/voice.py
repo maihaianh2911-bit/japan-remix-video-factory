@@ -143,24 +143,25 @@ def request(path, *, params=None, data=None):
         return response.read()
 
 
-SPEAKER, STYLE = "青山龍星", "ノーマル"
-
-
-def speaker_id():
+def speaker_id(name, style_name):
+    """The engine's id of a voice: a speaker and one of its styles ("青山龍星", "ノーマル")."""
     speakers = json.loads(request("/speakers"))
-    found = next((style["id"] for speaker in speakers if speaker["name"] == SPEAKER
-                  for style in speaker["styles"] if style["name"] == STYLE), None)
+    found = next((style["id"] for speaker in speakers if speaker["name"] == name
+                  for style in speaker["styles"] if style["name"] == style_name), None)
     if found is None:
         available = ", ".join(f"{speaker['name']}/{style['name']}" for speaker in speakers for style in speaker["styles"])
-        raise RuntimeError(f"VOICEVOX voice {SPEAKER}/{STYLE} not found in this engine. Available: {available}")
+        raise RuntimeError(f"VOICEVOX voice {name}/{style_name} not found in this engine. Available: {available}")
     return found
 
 
-def narration(beats, destination: Path, speed, line_pause=0.0, scene_pause=0.0, exact=False):
+def narration(beats, destination: Path, speed, line_pause=0.0, scene_pause=0.0, exact=False, *, voice):
     """The voice of every line, one after the other, with `line_pause` seconds of silence after each line (a quote
     also gets one before it and a longer one after it) and `scene_pause` more at the end of each scene.
-    `exact` ("fx": text): a caption starts when the voice reaches it, not at its share of the characters."""
-    speaker = speaker_id()
+    `exact` ("fx": text): a caption starts when the voice reaches it, not at its share of the characters.
+    `voice`: (speaker, style), the voice of the story's channel (channels/<id>.json; Release.voice)."""
+    if len(voice or ()) != 2:
+        raise ValueError(f"no VOICEVOX voice given (the channel's voice, a speaker and a style), got {voice!r}")
+    speaker = speaker_id(*voice)
     captions = []
     intervals = []
     position = 0.0

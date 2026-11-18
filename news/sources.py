@@ -12,7 +12,7 @@ from zoneinfo import ZoneInfo
 from lxml import html
 
 JST = ZoneInfo("Asia/Tokyo")
-USER_AGENT = "JapanNewsVideoFactory/1.0 (https://github.com/maihaianh2911-bit/japan-news-video-factory)"
+USER_AGENT = "JapanRemixVideoFactory/1.0 (https://github.com/maihaianh2911-bit/japan-remix-video-factory)"
 PUBLISHERS = {
     "www.boj.or.jp": "日本銀行",
     "www.meti.go.jp": "経済産業省",
@@ -50,6 +50,9 @@ class Release:
     line_pause: float = 0.0      # seconds of silence after each line (more around a quote)
     scene_pause: float = 0.0     # seconds of silence at the end of each scene
     fx: object = None            # picture effects of a story (render.use_fx), or None
+    voice: tuple = ()            # (speaker, style) of VOICEVOX: the voice of the story's channel (channels/<id>.json)
+    channel: str = ""            # the channel of the story, "k8"
+    trial: bool = False          # a trial or sample video: the length rules (60 s; 80-160 s) do not stop its render
 
 
 def compact(value):

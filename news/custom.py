@@ -1,6 +1,9 @@
-"""Load a story written by hand (stories/<name>.json) with the pictures chosen for it.
+"""Load a story written by hand (stories/<channel>-<YYYY-MM-DD>-<short>.json) with the pictures chosen for it.
 
 python -m news.custom stories/<name>.json [<find folder>]   checks a story (and its picks against the find index)
+
+Every story names its channel ("channel": "k8", news/channels.py): its file name starts with it, it inherits the
+channel's defaults (style, kicker, pace, fx) for the keys it leaves out, and it is voiced with the channel's voice.
 """
 from dataclasses import dataclass
 from datetime import date
@@ -12,6 +15,7 @@ import sys
 
 from PIL import Image, ImageOps
 
+from . import channels
 from .captions import caption_path, check as check_caption
 from .edits import cut_problems, move_problems
 from .sources import Release
@@ -19,7 +23,7 @@ from .story import Beat
 from .visuals import Photo
 
 STORY_KEYS = {"stage", "title", "date", "source", "source_url", "searches", "scenes", "issue", "style", "kicker",
-              "music", "pace", "fx"}
+              "music", "pace", "fx", "channel", "trial"}
 STYLES = ("news", "paper", "story")
 SCENE_KEYS = {"label", "headline", "lines", "value", "evidence", "photo", "cut", "why", "era"}
 LINE_KEYS = {"text", "say", "quote"}
@@ -158,13 +162,25 @@ def check_photo(photo, where, searches):
 
 
 def validate(data, name=None):
-    """Return the list of problems of a story (empty when it is usable)."""
+    """Return the list of problems of a story (empty when it is usable). The story is checked with its channel's
+    defaults in the keys it leaves out (channels.inherit), as it will be made."""
     problems = []
     if name is not None and not NAME.match(name):
         problems.append(f"file name {name!r}: use only ASCII letters, digits, '.', '_' and '-' "
-                        "(no spaces, no Japanese or Vietnamese characters), e.g. 2026-11-12-boj-rate.json")
+                        "(no spaces, no Japanese or Vietnamese characters), e.g. k8-2026-11-19-todai-sotsu.json")
     if not isinstance(data, dict):
         return problems + ["the story must be a JSON object"]
+    channel = data.get("channel")
+    if channel is None:
+        problems.append(f'"channel" is missing: write the channel of the story, one of {", ".join(channels.ids())}')
+    elif channels.get(channel) is None:
+        problems.append(f'"channel" must be one of {", ".join(channels.ids())} (channels/), got {channel!r}')
+    elif name is not None and NAME.match(name):
+        problems += channels.name_problems(name, channel)
+    data = channels.inherit(data)
+    if "trial" in data and not isinstance(data["trial"], bool):
+        problems.append(f'"trial" must be true or false (true: a trial or sample video, the length rules do not '
+                        f'stop its render), got {data["trial"]!r}')
     problems += unknown(data, STORY_KEYS, "story")
     problems += text_problem(data.get("title"), '"title"')
     try:
@@ -253,7 +269,8 @@ def validate(data, name=None):
 
 
 def read(path):
-    """Read and check a story; raises StoryError listing every problem."""
+    """Read and check a story; raises StoryError listing every problem. Returns it with its channel's defaults in
+    the keys it leaves out (channels.inherit)."""
     path = Path(path)
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
@@ -262,7 +279,7 @@ def read(path):
     problems = validate(data, path.stem)
     if problems:
         raise StoryError(f"{path} has {len(problems)} problem(s):\n  - " + "\n  - ".join(problems))
-    return data
+    return channels.inherit(data)
 
 
 def found_pictures(data, pictures):
@@ -336,10 +353,13 @@ def load_story(path, pictures=None):
                       entry.get("artist") or "Wikimedia Commons", entry.get("license", ""),
                       float(data["music"].get("volume", 1.0)), float(data["music"].get("start", 0.0)))
     pace = data.get("pace") or {}
+    channel = channels.get(data["channel"])
     release = Release(data.get("source_url", ""), data["title"], date.fromisoformat(data["date"]),
                       data.get("source", ""), (), data.get("style", "news"), data.get("kicker", ""), music,
                       float(pace.get("speed", 0.96)), float(pace.get("line_pause", 0.0)),
-                      float(pace.get("scene_pause", 0.0)), data.get("fx"))
+                      float(pace.get("scene_pause", 0.0)), data.get("fx"),
+                      (channel["voice"]["speaker"], channel["voice"]["style"]), channel["id"],
+                      bool(data.get("trial")))
     report_without_picture(data)
     beats, photos = [], {}
     for index, scene in enumerate(data["scenes"]):

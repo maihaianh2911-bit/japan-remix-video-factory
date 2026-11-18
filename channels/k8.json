@@ -1,0 +1,15 @@
+{
+  "id": "k8",
+  "number": 8,
+  "name_ja": "芸能人3人",
+  "name_vi": "3 nghệ sĩ…",
+  "tag": "[K8]",
+  "voice": {"speaker": "青山龍星", "style": "ノーマル"},
+  "hashtags": ["#芸能人", "#芸能", "#shorts"],
+  "defaults": {
+    "style": "story",
+    "kicker": "芸能人3人",
+    "pace": {"speed": 1.2, "line_pause": 0.1, "scene_pause": 0.2},
+    "fx": {"motion": true, "depth": true, "text": true, "face": true}
+  }
+}
