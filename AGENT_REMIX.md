@@ -2,14 +2,15 @@
 
 > **Iron rules (owner, 16/11/2026; full text at the top of `CLAUDE.md`).** (1) Voice, script lines, subtitles and
 > on-screen text are in **Japanese**, never another language; check before the voice step and on the finished video.
-> (2) **No video under 60 seconds**: estimate before the voice step and read the real speech length after it; if it
-> would be under 60 seconds, write the script longer (true facts on the same subject, nothing invented), say on the
-> issue what was added, then go on. Never render or deliver under 60 seconds, except a trial or sample video (the
+> (2) **No video under 61 seconds**: estimate before the voice step and read the real speech length after it; if it
+> would be under 61 seconds, write the script longer (true facts on the same subject, nothing invented), say on the
+> issue what was added, then go on. Never render or deliver under 61 seconds, except a trial or sample video (the
 > owner says so, or the title or notes say `thử`, `mẫu`, `test`, `demo`; the story then carries `"trial": true`).
-> (3) **Vertical, 80–160 seconds** (owner, 18/11/2026: all channels): write the script for that length.
+> (3) **Vertical and short, a little over 61 seconds** (owner, 19/11/2026: "tất cả video, giảm xuống, luật chỉ còn
+> tối thiểu 61s thôi", replacing 80–160 s): write the script for about 63–70 s, gripping, never padded.
 
 The owner (Vietnamese, not technical) opens an issue `[K8] …`, `[K9] …`, `[K10] …` or `[K11] …` with someone else's
-video (a link or a file, sometimes its words). The result is a vertical short (1080×1920, 80–160 s) of that channel:
+video (a link or a file, sometimes its words). The result is a vertical short (1080×1920, a little over 61 s) of that channel:
 the same story retold in our own words in Japanese, real pictures, the channel's VOICEVOX voice, captions timed to the
 voice, edited exactly as the Tin Nhật channel edits (`CLAUDE.md`, "The edit" and "The hook"). The channels, their
 rules and risks, the script rules and the story format are in `CLAUDE.md`; this file says what to do at each label.
@@ -112,8 +113,9 @@ Read the issue form (Video gốc, Lời của video gốc, Ghi chú) and the own
    `stage: "find"`, `title` (the issue title in Japanese, not shown), `date`; the hook line first
    (`{"text": …, "quote": true}`); the searches (a `wiki:` for every person and place, 2–3 `web:` per scene, a
    `music:`). The channel gives the frame, kicker, pace and effects: leave them out of the story.
-3. **Length** (iron rules 2 and 3): estimate it (about 6.5 kana-reading characters a second at speed 1.0, the
-   channels read at 1.2, plus the pauses); under 80 s add true scenes of the same story, over 160 s cut repetition.
+3. **Length** (iron rules 2 and 3): estimate it (about 6.4 written characters a second at the channels' speed 1.2,
+   pauses included, punctuation not counted) and aim for about 63–70 s; under 61 s add true details of the same
+   story, longer cut to the main thread and its most gripping details.
 4. Check: `pip install -q -r requirements.txt` if needed, then `python -m news.custom stories/<name>.json`: no
    problem, and no edit warning about the script (the hook, the ending, the `music:` search).
 5. Comment (🤖, short, Vietnamese): the script **as one continuous text** (the Japanese in one piece, then its
@@ -210,7 +212,8 @@ stories/mau-k11.json tests/fixtures/pictures <out>` (`moves.jpg`, `cuts.jpg`, `p
 ## 3. `remix-check` → done
 Fetch `<name>/` (its `status.json` must have your commit). Look at `stills/sheet.jpg`, read `subtitles.srt` against
 the script (Japanese only, iron rule 1), and read the length in the machine comment (`sources.json`
-`duration_seconds`): **80–160 s** (iron rule 3; under 60 s the machine refused it already). Outside 80–160 s, a
+`duration_seconds`): **61 s or more** (iron rules 2 and 3; under 61 s the machine refused it already). Far longer
+than about 70 s (cut the script), a
 misread word (write it `{"text": …, "say": "kana"}`), a cut face, the wrong subject, a picture bent by the depth
 effect (`"depth": false`): push a corrected story (it renders again); this is not delivered. The headlines of the
 stills are in the display typeface (a mincho with strong contrast); if they are in the usual one, or the run log of
@@ -232,7 +235,7 @@ finished video file and its caption file there too, and nothing else (no preview
   and the review again; the posting caption → `captions/<name>.txt` alone (no new render); an edit ("cảnh 5 đổi sang
   kiểu …", "chậm lại", "đừng giật") → `move`/`cut` of that scene from the table (the stage stays `render`). Push,
   one-line 🤖 comment, remove `remix-fix`.
-- `remix-failed`: read the reason in the issue comment, if it gives one (e.g. "lời đọc chỉ dài 52 giây, dưới 60 giây":
+- `remix-failed`: read the reason in the issue comment, if it gives one (e.g. "lời đọc chỉ dài 52.3 giây, dưới 61 giây":
   write the script longer, iron rule 2, and say on the issue what was added), and the failed run's log (link in the
   issue; `gh api repos/$R/actions/runs/<id>/jobs`, then `gh api repos/$R/actions/jobs/<job>/logs`), fix the cause
   (your story file, or `news/*` checked as in `CLAUDE.md` "Changing the pipeline"). A push of the story starts the

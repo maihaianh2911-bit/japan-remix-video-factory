@@ -52,7 +52,7 @@ class Release:
     fx: object = None            # picture effects of a story (render.use_fx), or None
     voice: tuple = ()            # (speaker, style) of VOICEVOX: the voice of the story's channel (channels/<id>.json)
     channel: str = ""            # the channel of the story, "k8"
-    trial: bool = False          # a trial or sample video: the length rules (60 s; 80-160 s) do not stop its render
+    trial: bool = False          # a trial or sample video: the length rule (61 s at least) does not stop its render
 
 
 def compact(value):

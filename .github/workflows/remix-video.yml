@@ -460,7 +460,7 @@ jobs:
         env:
           STORY: ${{ matrix.story }}
         run: |
-          # the voice of the story's channel (channels/<id>.json); a voice under 60 s stops here (iron rule 2)
+          # the voice of the story's channel (channels/<id>.json); a voice under 61 s stops here (iron rule 2)
           python -m news --story "stories/$STORY.json" --pictures pictures --stills dist/stills
           python -m news --story "stories/$STORY.json" --pictures pictures
       - name: Verify video and audio

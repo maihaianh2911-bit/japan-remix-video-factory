@@ -5,20 +5,23 @@
    on-screen text are in Japanese (tiếng Nhật). A script that arrives in another language is translated faithfully into Japanese (tiếng Nhật)
    first. Never a voice or text of another language: check the language of `lines` and the voice before the voice
    step, and again on the finished video. A video in the wrong language is not delivered: fix it and render again.
-2. **No video under 60 seconds.** Before the voice step, estimate the length from the script (use the seconds per
-   line of this channel's earlier videos); after the voice step, read the real length of the speech (the machine
-   comment gives it). If the video would be under 60 seconds, **write the script longer** (more true facts and
-   detail on the same subject, in the owner's tone, nothing invented) until it passes 60 seconds, tell the owner on
-   the issue what was added, and only then go on. This is the one exception to "never change the owner's script".
-   Never render or deliver a video under 60 seconds. Only exception: a trial or sample video — the owner says so,
-   or the issue title or notes say `thử`, `mẫu`, `test` or `demo`.
-3. **Every video is vertical (1080×1920) and 80–160 seconds long** (owner, 18/11/2026: "tất cả các kênh đều làm
-   dạng dọc, 80-160s thôi"). Write the script for that length: under 80 s add true scenes and details of the same
-   story (never padding), over 160 s cut repetition. Trial or sample videos are the exception, as in rule 2.
+2. **No video under 61 seconds** (owner, 19/11/2026: "luật chỉ còn tối thiểu 61s thôi"). Before the voice step,
+   estimate the length from the script (use the seconds per line of this channel's earlier videos); after the voice
+   step, read the real length of the speech (the machine comment gives it). If the video would be under 61 seconds,
+   **write the script longer** (more true facts and detail on the same subject, in the owner's tone, nothing
+   invented) until it passes 61 seconds, tell the owner on the issue what was added, and only then go on. This is
+   the one exception to "never change the owner's script". Never render or deliver a video under 61 seconds. Only
+   exception: a trial or sample video — the owner says so, or the issue title or notes say `thử`, `mẫu`, `test` or
+   `demo`.
+3. **Every video is vertical (1080×1920) and short: a little over 61 seconds** (owner, 19/11/2026: "làm video ít
+   nhất 61s thôi, cuốn hút vào", then for every video "tất cả video, giảm xuống, luật chỉ còn tối thiểu 61s thôi";
+   this replaces the 80–160 s of 18/11/2026). Write the script for about 63–70 s (a margin over 61 s for the
+   estimate): keep the story's thread and its most gripping details, cut the rest; never pad. There is no upper
+   limit in the machine, but a script that runs long is cut, not delivered long. Trial or sample videos are the
+   exception, as in rule 2.
 
-The machine holds to rule 2 too: `python -m news` refuses a voice under 60 s (the run fails and the issue says why)
-unless the story carries `"trial": true` (a trial or sample, as rule 2 says), and writes a warning in the run when
-the voice is outside 80–160 s; such a video is not delivered (rule 3): fix the script and render again.
+The machine holds to rule 2 too: `python -m news` refuses a voice under 61 s (the run fails and the issue says why)
+unless the story carries `"trial": true` (a trial or sample, as rule 2 says).
 
 The owner is Vietnamese and not technical: answer in short, simple Vietnamese, no jargon. They write "tao" (I) and
 "mày" (you); answer the same way, "tao" for yourself and "mày" for them. Their standing decisions are in
@@ -28,7 +31,7 @@ read it before any work on a channel of this repo. Real pictures only (never AI 
 picture, quality is not traded for usage.
 
 ## What this repo makes
-Vertical Japanese shorts (1080×1920, 80–160 s) for four of the owner's 14 Japanese channels, all made the same way:
+Vertical Japanese shorts (1080×1920, a little over 61 s) for four of the owner's 14 Japanese channels, all made the same way:
 the owner sends someone else's short or video, Claude retells it in its own words in Japanese (the same story and
 facts, a better telling), finds real pictures, the machine voices it with VOICEVOX and renders it, and Claude checks
 every scene. One issue `[K8] …` / `[K9] …` / `[K10] …` / `[K11] …` = one video of that channel. The machine steps
@@ -187,9 +190,10 @@ not clear from the chat or from the reference channel, ask (in a chat you may).
      against a private person stated as fact, a private person's name or face (k9), a tabloid rumour about a living
      royal (k10), mocking words of our own about someone's body. Check the facts to frame them right, not to strip the
      story to what a newspaper would print.
-   - Length (iron rules 2 and 3): 80–160 s. Estimate about 6.5 kana-reading characters a second at speed 1.0, plus
-     the pauses; the channels read at speed 1.2. Under 80 s add true scenes and feelings of the same story (never
-     encyclopedic padding such as numbers of trees or treaty years); over 160 s cut repetition.
+   - Length (iron rules 2 and 3): a little over 61 s, about 63–70 s. Estimate about 6.4 written characters a second
+     at the channels' speed 1.2, pauses included (the k8 video of 18/11/2026: 607 characters, 94.7 s; punctuation
+     and spaces not counted). Under 61 s add true details of the same story (never encyclopedic padding such as
+     numbers of trees or treaty years); longer, cut to the main thread and its most gripping details.
    - Tell the owner in the chat what you added or left out, and why.
 3. **Open the issue** in this repo: title `[K<n>] <Japanese title> — <main idea in Vietnamese>`, body with the
    sections of the channel's issue form (`.github/ISSUE_TEMPLATE/k<n>.yml`): `### Video gốc (bắt buộc)` = the link,
@@ -223,7 +227,7 @@ allow `main`.
      `kicker`, `pace`, `fx`. A story may set any of them (the edit warnings then say what departs from the Tin Nhật
      edit); a dict is merged key by key (`"fx": {"depth": false}` keeps the three other effects); `null` inherits
      nothing. The voice is always the channel's: a story has no voice key. `"trial": true` marks a trial or sample
-     video (iron rule 2's exception: the machine renders it even under 60 s). `"review": "<n>/<n>"` records the
+     video (iron rule 2's exception: the machine renders it even under 61 s). `"review": "<n>/<n>"` records the
      picture review (step 3).
    - `scenes`: one idea each. `label` (short tag), `headline` (≤ 2 lines, `\n` between; longer ones get a smaller
      font, up to 3 lines), `lines` (a list: the script, in Japanese, sentence by sentence), optional `era` (the year

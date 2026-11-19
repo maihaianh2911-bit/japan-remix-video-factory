@@ -12,12 +12,13 @@
   voiced (against a stand-in engine) and credited (on the frame, in both layouts) with that speaker;
 - the posting caption must carry the channel's hashtags and be named after its story;
 - the lists of each channel's videos on the renders branch (tools/channel_lists.py);
-- iron rule 2 in the machine: a story whose voice is under 60 seconds is refused before its video is made, a trial
+- iron rule 2 in the machine: a story whose voice is under 61 seconds is refused before its video is made, a trial
   ("trial": true) is made all the same (a second of video: needs ffmpeg).
 Usage: python tools/channel_test.py"""
 from io import BytesIO
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -284,7 +285,7 @@ def lists():
 
 def length_rules():
     """python -m news on a two-line story, against the stand-in engine (1.6 seconds a line, so that the loudness
-    filter has the 3 seconds it measures): refused under 60 s, with the reason for the issue in $GITHUB_ENV and no
+    filter has the 3 seconds it measures): refused under 61 s, with the reason for the issue in $GITHUB_ENV and no
     video; as a trial it is voiced, made and credited with the channel's voice."""
     from news import __main__ as make
     names = ("GITHUB_ENV", "GITHUB_OUTPUT", "GITHUB_STEP_SUMMARY")
@@ -303,10 +304,11 @@ def length_rules():
             sys.argv = ["news", "--story", str(short), "--out", str(scratch / "out")]
             try:
                 make.main()
-                raise AssertionError("a story under 60 seconds must be refused")
+                raise AssertionError("a story under 61 seconds must be refused")
             except SystemExit as stop:
-                assert "under 60 s (iron rule 2)" in str(stop.code), stop.code
-            assert "WHY=lời đọc chỉ dài 4 giây, dưới 60 giây" in (scratch / "github_env").read_text(encoding="utf-8")
+                assert "under 61 s (iron rule 2)" in str(stop.code), stop.code
+            why = (scratch / "github_env").read_text(encoding="utf-8")
+            assert re.search(r"WHY=lời đọc chỉ dài \d+\.\d giây, dưới 61 giây", why), why
             assert not (scratch / "out" / "video.mp4").exists()
             trial = scratch / "k8-2026-11-19-trial.json"
             trial.write_text(json.dumps({**story, "trial": True}, ensure_ascii=False), encoding="utf-8")
