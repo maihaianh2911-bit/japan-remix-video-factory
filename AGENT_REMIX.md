@@ -75,7 +75,7 @@ gh api "repos/$R/issues?state=open&labels=remix&per_page=50" --jq '[.[] | select
   story and facts in the same order, our own sentences, the script rules of `CLAUDE.md` ("When the owner sends a
   source video", step 2). Keep the source's colourful details, framing the unconfirmed ones as told (owner,
   18/11/2026: a script that keeps only what the press printed "sẽ chán hơn rất nhiều"); leave out only what the
-  channel's rules forbid (k9 no private people, k11 accepted history,
+  channel's rules forbid (k11 accepted history,
   no crime or serious accusation against a private person stated as fact) or what is known to be false, and say so
   on the issue. Never invent. k10 may tell rumours, tabloid ones too (owner, 19/11/2026): framed as told, once, and
   corrected in the caption's ※ note.
@@ -87,7 +87,7 @@ gh api "repos/$R/issues?state=open&labels=remix&per_page=50" --jq '[.[] | select
 - How to write the searches (17/11/2026; syntax in `CLAUDE.md` step 1), in this order:
   1. **`wiki:<name>` for every person and place of the story** (also a building, an event): `"wiki:エリザベス2世"`,
      `"wiki:紫禁城"`. One search brings up to 24 pictures about that thing itself, with free licences and authors.
-     Never skip it (k9: never for a private person). A name that fits several things: the exact title of its
+     Never skip it. A name that fits several things: the exact title of its
      Wikipedia article, or the Wikidata item (`"wiki:Q9682"`).
   2. `geo:<lat>,<lon> <metres>` for a place whose photos carry other names; the coordinates of a `wiki:` item are in
      `index.json`.
@@ -156,9 +156,10 @@ Read the issue form (Video gốc, Lời của video gốc, Ghi chú) and the own
      one person can be someone else, e.g. a daughter), the place, the event, the era (no 2020s photo on a 1920s
      line, no other event's photo on "that day");
    - the main person is whole and seen: face not cut by the crop, not under the headline or the hook;
-   - it is clean and sharp enough: no burnt-in news captions, logos or watermarks, not a small picture blown up;
+   - it is clean and sharp enough: no burnt-in news captions, logos or watermarks, not a small picture blown up
+     (k9: TV screenshots and captioned pictures are fine, owner 19/11/2026);
    - it is not a near-duplicate of another pick (the same moment from another site);
-   - the channel's rules hold: k9 no private person's face; k11 no Nazi symbol in the first frame.
+   - the channel's rules hold: k9 shows the people of the story, private people too (owner, 19/11/2026); k11 no Nazi symbol in the first frame.
    Any row that fails: pick another picture (or append searches, step 2), preview, run the review again. When every
    row passes, write `"review": "<n>/<n>"` in the story (the number of pictures); the closing comment says
    "Đã duyệt ảnh: N/N ảnh khớp lời đọc".

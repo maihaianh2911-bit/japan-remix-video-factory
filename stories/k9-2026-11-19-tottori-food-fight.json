@@ -61,13 +61,16 @@
           "move": "push-in"
         },
         {
-          "pick": "7-3",
-          "fit": "contain",
-          "move": "pull-back",
+          "pick": "31-2",
+          "focus": [
+            0.42,
+            0.4
+          ],
+          "move": "push-in",
           "depth": false
         }
       ],
-      "why": "Câu móc in to trên ảnh thật của hội chợ vắng người, rồi lùi ra từ hình quảng bá của sự kiện."
+      "why": "Câu móc in to trên ảnh thật hội chợ vắng người, rồi tiến vào mặt Sayoto (người tổ chức) khi nói câu 'biết đáy thấp nhất'."
     },
     {
       "label": "5万人の約束",
@@ -89,16 +92,17 @@
           "depth": false
         },
         {
-          "pick": "9-6",
+          "pick": "12-4",
           "focus": [
-            0.5,
-            0.7
+            0.6,
+            0.45
           ],
-          "move": "pull-back"
+          "move": "pan-right",
+          "depth": false
         }
       ],
       "cut": "fade",
-      "why": "Poster sự kiện để nguyên (Đông – Tây, ngày 7–8/11), tiến vào chậm; rồi lùi ra bãi cỏ rộng trước bảo tàng, nơi lẽ ra có 10 vạn người."
+      "why": "Poster sự kiện để nguyên, rồi lia qua màn hình TV: Sayoto và 'người tổ chức A' khi nói ban tổ chức hứa 10 vạn người."
     },
     {
       "label": "当日",
@@ -111,12 +115,13 @@
       ],
       "photo": [
         {
-          "pick": "19-1",
+          "pick": "8-5",
           "focus": [
-            0.4,
-            0.4
+            0.5,
+            0.5
           ],
-          "move": "push-in"
+          "move": "fall",
+          "depth": false
         },
         {
           "pick": "17-1",
@@ -127,14 +132,17 @@
           "move": "pan-left"
         },
         {
-          "pick": "24-2",
-          "fit": "contain",
-          "move": "hold",
+          "pick": "31-4",
+          "focus": [
+            0.82,
+            0.25
+          ],
+          "move": "push-in",
           "depth": false
         }
       ],
       "cut": "hard",
-      "why": "Cắt thẳng vào thực tế: thiếu điện, 200 ký gà chuẩn bị, rồi màn hình lượt xem video ngắn chỉ hơn 1.000."
+      "why": "Cắt thẳng vào thực tế: ảnh ghép 'quảng cáo vs thực tế' (Matsumoto Rica hát trên đất, bãi cỏ vắng), gà chuẩn bị, rồi TV hỏi Sayoto về lượt xem 1.000–2 vạn."
     },
     {
       "label": "もう一人の主催者",
@@ -145,24 +153,26 @@
       ],
       "photo": [
         {
-          "pick": "19-5",
+          "pick": "12-7",
           "focus": [
-            0.5,
-            0.6
+            0.25,
+            0.4
           ],
-          "move": "pan-right"
+          "move": "pan-right",
+          "depth": false
         },
         {
-          "pick": "33-1",
+          "pick": "31-8",
           "focus": [
-            0.4,
-            0.6
+            0.75,
+            0.35
           ],
-          "move": "push-in"
+          "move": "push-in",
+          "depth": false
         }
       ],
       "cut": "fade",
-      "why": "Người tổ chức thứ hai (không lộ mặt, người thường): lia qua bãi dựng rạp, rồi tiến vào chiếc điện thoại khi nói chuyện thư xin lỗi."
+      "why": "Người tổ chức thứ hai (bà đại diện TOSU): lia qua ảnh giới thiệu ban tổ chức, rồi tiến vào mặt bà khi nói chuyện thư xin lỗi."
     },
     {
       "label": "実行委員長",
@@ -188,16 +198,17 @@
           "move": "push-in"
         },
         {
-          "pick": "3-4",
+          "pick": "12-2",
           "focus": [
             0.5,
-            0.6
+            0.3
           ],
-          "move": "pan-left"
+          "move": "fall",
+          "depth": false
         }
       ],
       "cut": "page",
-      "why": "Lật trang sang trưởng ban Sayoto: tiến vào mặt anh, rồi câu nói in to trên bãi cỏ trống."
+      "why": "Lật trang sang Sayoto: tiến vào mặt anh, rồi đi xuống màn hình TV đúng câu 'một trải nghiệm tốt, biết đáy thấp nhất'."
     },
     {
       "label": "一番下",
@@ -216,16 +227,17 @@
           "move": "push-in"
         },
         {
-          "pick": "1-1",
+          "pick": "14-5",
           "focus": [
             0.5,
-            0.6
+            0.55
           ],
-          "move": "pull-back"
+          "move": "pull-back",
+          "depth": false
         }
       ],
       "cut": "dip",
-      "why": "Kết: tối rồi sáng lại, tiến vào gian hàng với bàn ghế trống của người bán, rồi lùi ra bảo tàng và bãi cỏ."
+      "why": "Kết: tiến vào gian hàng bàn ghế trống, rồi lùi ra cả bãi hội chợ vắng (ảnh TV)."
     }
   ],
   "music": {

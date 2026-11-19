@@ -69,8 +69,11 @@ channel file (and of the frame code when the look is new), never of each story.
   people (cosmetic surgery, baldness, scandals): in Japan that is a defamation risk even when true, and YouTube has a
   harassment policy. The second reference, 芸能バナシのツボ, keeps to positive or neutral topics (Kyoto University,
   fluent French, a medical licence…): the safer source.
-- **k9 (炎上):** only what the press reported. **Never name or show private people** (only public figures; no face of
-  a private person, no name, no blurred-but-recognisable picture); no mocking words; add our own angle and meaning,
+- **k9 (炎上):** only what the press reported. **Faces of everyone in the story may be shown, private people too**
+  (owner, 19/11/2026, after two videos without a single face: "b" = show people as the source video does, "phần chọn
+  ảnh k phải nghĩ, cứ chọn, tù tội đâu tao chịu": the owner takes the legal risk); every scene with a person in it
+  gets that person's picture, TV screenshots and pictures with burnt-in captions included (the k9 exception to
+  "clean pictures"); a name as the source or the press gives it. No mocking words; add our own angle and meaning,
   never copy their opinions. The source is a 26–34-minute horizontal video: one case per video, only its main thread.
 - **k10 (世界の王室):** **rumours may be told**, tabloid ones too (owner, 19/11/2026: "đc dùng tin đồn, sẽ đính chính
   ở caption"; e.g. "Camilla plotted against Kate's parents"): the narration frames each one as told, once, at its key
@@ -190,7 +193,7 @@ not clear from the chat or from the reference channel, ask (in a chat you may).
      nickname, a quote, a rumour the source tells, its cliffhanger (「画面を2回タップ！」) all stay; one that is not
      confirmed is framed as told (「…といいます」, 「…だとか」, 「…と噂されています」, 「週刊誌によると」), never cut for that
      alone. Leave out only what could really harm someone or is known to be false: a crime or a serious accusation
-     against a private person stated as fact, a private person's name or face (k9), mocking words of our own about
+     against a private person stated as fact, mocking words of our own about
      someone's body. A rumour about a royal (k10) stays, framed as told, and is corrected in the caption. Check the facts to frame them right, not to strip the
      story to what a newspaper would print.
    - Length (iron rules 2 and 3): a little over 61 s, about 63–70 s. Estimate about 6.4 written characters a second
@@ -264,7 +267,7 @@ allow `main`.
        licence for `credits.txt`. `"wiki:エリザベス2世"`, `"wiki:日本銀行"`; the name is the title of its Wikipedia
        article, or the item itself (`"wiki:Q9682"`) when a name fits several things; `index.json` says which item
        was found (`"wikidata"`): check it. **Write one `wiki:` search for every person and place of a story, before
-       the `web:` searches** (k9: never for a private person).
+       the `web:` searches**.
      - `geo:<lat>,<lon> <metres>`: Commons photos taken around a point, nearest first (up to 12; 500 m by default).
      - `web:<words>`: a free web image search (Bing, else Yahoo! JAPAN, else DuckDuckGo; Japanese words work; stock
        sites with watermarks are left out); 2–3 per scene, for the moments of the story and for living people, of

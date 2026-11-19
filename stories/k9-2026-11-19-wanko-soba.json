@@ -1,7 +1,7 @@
 {
   "channel": "k9",
   "issue": 4,
-  "stage": "render",
+  "stage": "find",
   "title": "わんこそば店のオープン初日 生配信中のうその通報で消防車5台以上",
   "date": "2026-11-19",
   "searches": [
@@ -21,7 +21,12 @@
     "web:消防指令センター 119番 => an emergency call center with operators and screens",
     "web:救急車 消防車 待機 消防署 => fire engines parked in a Japanese fire station",
     "music:Chopin Prelude Op. 28 No. 4 piano",
-    "music:Satie Gnossienne piano"
+    "music:Satie Gnossienne piano",
+    "web:ぽんちゃん KICK 配信者 => a young Japanese male streamer, portrait",
+    "web:ぺるしあ KICK 配信者 => a Japanese streamer, portrait",
+    "web:ユキッカーズ ぽんちゃん ぺるしあ わんこそば => young Japanese men eating wanko soba with many red bowls",
+    "web:鉢公 わんこそば 消防車 渋谷 => fire engines on a Shibuya street at night",
+    "web:わんこそば 鉢公 渋谷 オープン 客 => customers eating wanko soba at a restaurant in Shibuya"
   ],
   "scenes": [
     {
