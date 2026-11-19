@@ -1,0 +1,117 @@
+{
+  "channel": "k10",
+  "issue": 5,
+  "stage": "find",
+  "title": "王室で最も高いウエディングドレス",
+  "date": "2026-11-19",
+  "searches": [
+    "wiki:Wedding dress of Catherine Middleton",
+    "wiki:Wedding of Prince William and Catherine Middleton",
+    "wiki:キャサリン (ウェールズ公妃)",
+    "wiki:Wedding dress of Lady Diana Spencer",
+    "wiki:Wedding of Prince Charles and Lady Diana Spencer",
+    "wiki:ダイアナ (プリンセス・オブ・ウェールズ)",
+    "wiki:Wedding dress of Princess Elizabeth",
+    "wiki:Wedding of Princess Elizabeth and Philip Mountbatten",
+    "wiki:エリザベス2世",
+    "wiki:Rationing in the United Kingdom",
+    "wiki:Wedding dress of Meghan Markle",
+    "wiki:Wedding of Prince Harry and Meghan Markle",
+    "wiki:メーガン (サセックス公爵夫人)",
+    "wiki:Carole Middleton",
+    "wiki:ウェストミンスター寺院",
+    "wiki:セント・ポール大聖堂",
+    "web:キャサリン妃 ウエディングドレス 2011 => Catherine Middleton in her lace wedding dress at Westminster Abbey",
+    "web:ウィリアム王子 キャサリン妃 結婚式 バルコニー => Prince William and Catherine on the Buckingham Palace balcony on their wedding day",
+    "web:Kate Middleton wedding dress exhibition Buckingham Palace => a white lace wedding dress displayed on a mannequin",
+    "web:ダイアナ妃 ウエディングドレス 1981 => Princess Diana in her wedding dress with a long train at St Paul's Cathedral",
+    "web:Princess Diana wedding dress pearls detail => close-up of pearls and lace on an ivory silk wedding dress",
+    "web:エリザベス女王 結婚式 1947 => Princess Elizabeth and Prince Philip on their wedding day in 1947",
+    "web:clothing ration book coupons Britain 1940s => a British wartime clothing ration book with coupons",
+    "web:Princess Elizabeth ATS uniform 1945 => young Princess Elizabeth in a wartime army uniform",
+    "web:royal wedding 1947 crowds London street => crowds of people in London streets for the 1947 royal wedding",
+    "web:Queen Elizabeth wedding dress Hartnell exhibition => an ivory satin wedding dress embroidered with pearls on display",
+    "web:メーガン妃 ジバンシィ ウエディングドレス 2018 => Meghan Markle in a simple white wedding dress with a long veil",
+    "web:Meghan Markle Prince Harry wedding St George's Chapel steps => Meghan Markle and Prince Harry on the steps of St George's Chapel",
+    "web:キャロル・ミドルトン マイケル・ミドルトン => Carole and Michael Middleton, the parents of Catherine",
+    "web:Carole Michael Middleton royal wedding 2011 => Carole Middleton and Michael Middleton at the royal wedding in 2011",
+    "web:Kate Middleton father Michael wedding Westminster Abbey arrival => Catherine Middleton arriving at Westminster Abbey with her father",
+    "music:Elgar Salut d'Amour",
+    "music:Chopin Nocturne piano"
+  ],
+  "scenes": [
+    {
+      "label": "キャサリン妃",
+      "era": "2011年",
+      "headline": "王室で最も高い\nウエディングドレス",
+      "lines": [
+        {
+          "text": "王室で最も高いウエディングドレスは、キャサリン妃のもの。払ったのは王室ではなく、彼女の両親だったといいます。",
+          "quote": true
+        },
+        "では、歴代の花嫁たちのドレスは、いくらだったのでしょう。"
+      ]
+    },
+    {
+      "label": "ダイアナ元妃",
+      "era": "1981年",
+      "headline": "1万個の真珠の\nおとぎ話のドレス",
+      "lines": [
+        "まずは1981年、おとぎ話のようだと世界が見とれた、ダイアナ元妃。",
+        "ドレスには約1万個の真珠が散りばめられ、その価値は約11万ドルともいわれます。"
+      ]
+    },
+    {
+      "label": "エリザベス女王",
+      "era": "1947年",
+      "headline": "配給クーポンで\n作ったドレス",
+      "lines": [
+        "けれど、もっと意外なのは、エリザベス女王です。",
+        {
+          "text": "戦後のイギリスでは服も配給制で、王女だった女王も、衣類のクーポンをこつこつ集めて、費用をやりくりしたといいます。",
+          "say": "戦後のイギリスでは服も配給制で、王女だった女王も、衣類のクーポンをこつこつ集めて、ひようをやりくりしたといいます。"
+        }
+      ]
+    },
+    {
+      "label": "エリザベス女王",
+      "era": "1947年",
+      "headline": "国中から届いた\nクーポン",
+      "lines": [
+        "国中の女性たちからもクーポンが届きましたが、規則で使えず、すべて送り返されたそうです。"
+      ]
+    },
+    {
+      "label": "メーガン妃",
+      "era": "2018年",
+      "headline": "メーガン妃の\nジバンシィ",
+      "lines": [
+        "2018年、メーガン妃が選んだジバンシィのドレスは、推定で約26万5千ドルと報じられました。"
+      ]
+    },
+    {
+      "label": "キャサリン妃",
+      "era": "2011年",
+      "headline": "歴代最高額は\n25万ポンド",
+      "lines": [
+        "そして歴代最高額が、キャサリン妃。",
+        "アレキサンダー・マックイーンの特注ドレスは25万ポンド、当時の日本円で3千万円を超えるともいわれます。"
+      ]
+    },
+    {
+      "label": "花嫁の両親",
+      "headline": "支払ったのは\n花嫁の両親",
+      "lines": [
+        "驚くことに、この費用を負担したのは王室ではなく、彼女の両親だったと伝えられています。"
+      ]
+    },
+    {
+      "label": "花嫁のドレス",
+      "headline": "値段の向こうに\nあったもの",
+      "lines": [
+        "国中に支えられた、女王の質素なドレスと、両親が娘に贈った、歴代最高のドレス。",
+        "その値段の向こうには、花嫁を送り出す人たちの思いが、縫い込まれていたのかもしれません。"
+      ]
+    }
+  ]
+}

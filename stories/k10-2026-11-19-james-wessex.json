@@ -1,0 +1,108 @@
+{
+  "channel": "k10",
+  "issue": 6,
+  "stage": "find",
+  "title": "王子の称号を選ばなかった女王最後の孫ジェームズ",
+  "date": "2026-11-19",
+  "searches": [
+    "wiki:James, Earl of Wessex",
+    "wiki:Prince Edward, Duke of Edinburgh",
+    "wiki:Sophie, Duchess of Edinburgh",
+    "wiki:Lady Louise Windsor",
+    "wiki:エリザベス2世",
+    "wiki:Princess Charlotte of Wales",
+    "wiki:キャサリン (ウェールズ公妃)",
+    "wiki:Death and state funeral of Elizabeth II",
+    "wiki:St George's Chapel, Windsor Castle",
+    "wiki:ウィリアム (ウェールズ公)",
+    "web:ジェームズ ウェセックス伯爵 キャサリン妃 イースター 2026 => a tall teenage boy talking with Catherine Princess of Wales at an Easter church service",
+    "web:James Earl of Wessex Easter 2026 Windsor => a tall young man in a dark suit at St George's Chapel Windsor",
+    "web:James Earl of Wessex Princess Charlotte => a teenage boy standing behind Princess Charlotte",
+    "web:Prince William teenager 1990s Eton => young Prince William as a teenager",
+    "web:James Viscount Severn Queen Elizabeth balcony Trooping the Colour => a young boy next to Queen Elizabeth on the Buckingham Palace balcony",
+    "web:Queen Elizabeth with grandson James Viscount Severn => Queen Elizabeth with her young grandson James",
+    "web:grandchildren vigil Queen coffin Westminster Hall 2022 => royal grandchildren standing guard around the Queen's coffin in Westminster Hall",
+    "web:James Earl of Wessex Queen funeral 2022 => a teenage boy in a black suit at Queen Elizabeth's funeral",
+    "web:Sophie Countess of Wessex Queen funeral 2022 tears => Sophie Countess of Wessex in black mourning clothes",
+    "web:Sophie Duchess of Edinburgh Catherine Princess of Wales together => Sophie and Catherine smiling together",
+    "web:James Earl of Wessex taller than Prince Edward => a tall teenage boy walking next to Prince Edward",
+    "web:Prince Edward Sophie Louise James family => Prince Edward and Sophie with their children Louise and James",
+    "web:ジェームズ ウェセックス伯爵 2025 => portrait of James Earl of Wessex as a young man",
+    "music:Schumann Träumerei piano",
+    "music:Satie Gymnopédie piano"
+  ],
+  "scenes": [
+    {
+      "label": "女王最後の孫",
+      "era": "2026年",
+      "headline": "王子の称号を\n選ばなかった孫",
+      "lines": [
+        {
+          "text": "エリザベス女王の最後の孫、ジェームズ。王子になれたのに、その称号を選ばなかった青年です。",
+          "quote": true
+        },
+        "この春、キャサリン妃の隣に立つ姿が、若き日のウィリアム王子にそっくりだと話題になりました。"
+      ]
+    },
+    {
+      "label": "秘密の兵器",
+      "headline": "女王が残した\n秘密の兵器",
+      "lines": [
+        "ネットでは、女王がシャーロット王女に残した、秘密の兵器とまで呼ばれています。"
+      ]
+    },
+    {
+      "label": "8人の孫",
+      "era": "2007年",
+      "headline": "女王の8人の孫の\n末っ子",
+      "lines": [
+        "女王の末の息子エドワード王子と、ソフィー妃の長男で、2007年生まれ。",
+        "女王の8人の孫の、いちばん末っ子です。"
+      ]
+    },
+    {
+      "label": "称号",
+      "headline": "使わなかった\n殿下の称号",
+      "lines": [
+        "本来は殿下と呼ばれる王子ですが、両親は、いずれ自分で働くことになるからと、称号を使わずに育てました。",
+        "18歳になった彼も、姉のルイーズさんと同じ道を選んだと伝えられています。"
+      ]
+    },
+    {
+      "label": "祖母と孫",
+      "headline": "祖母に愛された\n少年時代",
+      "lines": [
+        "幼い頃から祖母に深く愛され、たびたび女王のそばに寄り添ってきた彼には、",
+        "シャーロット王女を守ると女王に約束した、という話まであります。"
+      ]
+    },
+    {
+      "label": "女王との別れ",
+      "era": "2022年",
+      "headline": "14歳の\n祖母との別れ",
+      "lines": [
+        "2022年、女王が亡くなると、14歳のジェームズは、いとこたちと棺のそばに立ちました。",
+        "葬儀では、国王よりも悲しんで見えたという声が上がったほどです。"
+      ]
+    },
+    {
+      "label": "いまのジェームズ",
+      "era": "2026年",
+      "headline": "父より背の高い\n静かな青年",
+      "lines": [
+        {
+          "text": "キャサリン妃の頼もしい味方、ソフィー妃のもとで育った彼は、今や父より背の高い青年に。",
+          "say": "キャサリンひの頼もしい味方、ソフィーひのもとで育った彼は、今や父より背の高い青年に。"
+        },
+        "それでも、静かで謙虚な姿は変わりません。"
+      ]
+    },
+    {
+      "label": "女王が愛した孫",
+      "headline": "女王が愛した\n最後の孫",
+      "lines": [
+        "王子の称号はなくても、女王が最後まで愛した孫は、今も静かに、王室のそばに立っています。"
+      ]
+    }
+  ]
+}

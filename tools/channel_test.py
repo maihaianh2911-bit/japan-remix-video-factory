@@ -10,14 +10,15 @@
   sample story carries all of it;
 - the voice comes from the channel file, not from the code: a stand-in channel with another VOICEVOX speaker is
   voiced (against a stand-in engine) and credited (on the frame, in both layouts) with that speaker;
-- the posting caption must carry the channel's hashtags and be named after its story;
+- the posting caption must carry the channel's hashtags and be named after its story, and may carry a ※ correction note;
 - the lists of each channel's videos on the renders branch (tools/channel_lists.py);
-- iron rule 2 in the machine: a story whose voice is under 60 seconds is refused before its video is made, a trial
+- iron rule 2 in the machine: a story whose voice is under 61 seconds is refused before its video is made, a trial
   ("trial": true) is made all the same (a second of video: needs ffmpeg).
 Usage: python tools/channel_test.py"""
 from io import BytesIO
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -244,6 +245,11 @@ def caption_checks():
     assert captions.problems(good, required) == [], captions.problems(good, required)
     missing = captions.problems(good.replace("#歴史のなぜ ", "#江戸 "), required)
     assert len(missing) == 1 and "#歴史のなぜ" in missing[0], missing
+    # the correction note of a video that tells a rumour (owner, 19/11/2026): lines starting with ※, own block
+    noted = good.replace("\n\n#歴史", "\n\n※この話の一部は噂として伝えられているもので、事実とは確認されていません。\n\n#歴史", 1)
+    assert captions.problems(noted, required) == [], captions.problems(noted, required)
+    bad_note = noted.replace("※この話", "この話")
+    assert captions.problems(bad_note, required), "a fourth block without ※ must be refused"
     with tempfile.TemporaryDirectory(prefix="channel-caption-") as scratch:
         for name, ok in (("k11-2026-11-19-nihonbashi", True), ("mau-k11", True), ("k8-2026-11-19-x", False),
                          ("2026-11-19-nihonbashi", False)):
@@ -284,7 +290,7 @@ def lists():
 
 def length_rules():
     """python -m news on a two-line story, against the stand-in engine (1.6 seconds a line, so that the loudness
-    filter has the 3 seconds it measures): refused under 60 s, with the reason for the issue in $GITHUB_ENV and no
+    filter has the 3 seconds it measures): refused under 61 s, with the reason for the issue in $GITHUB_ENV and no
     video; as a trial it is voiced, made and credited with the channel's voice."""
     from news import __main__ as make
     names = ("GITHUB_ENV", "GITHUB_OUTPUT", "GITHUB_STEP_SUMMARY")
@@ -303,10 +309,11 @@ def length_rules():
             sys.argv = ["news", "--story", str(short), "--out", str(scratch / "out")]
             try:
                 make.main()
-                raise AssertionError("a story under 60 seconds must be refused")
+                raise AssertionError("a story under 61 seconds must be refused")
             except SystemExit as stop:
-                assert "under 60 s (iron rule 2)" in str(stop.code), stop.code
-            assert "WHY=lời đọc chỉ dài 4 giây, dưới 60 giây" in (scratch / "github_env").read_text(encoding="utf-8")
+                assert "under 61 s (iron rule 2)" in str(stop.code), stop.code
+            why = (scratch / "github_env").read_text(encoding="utf-8")
+            assert re.search(r"WHY=lời đọc chỉ dài \d+\.\d giây, dưới 61 giây", why), why
             assert not (scratch / "out" / "video.mp4").exists()
             trial = scratch / "k8-2026-11-19-trial.json"
             trial.write_text(json.dumps({**story, "trial": True}, ensure_ascii=False), encoding="utf-8")
