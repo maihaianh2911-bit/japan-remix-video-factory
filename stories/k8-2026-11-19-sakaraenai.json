@@ -1,7 +1,7 @@
 {
   "channel": "k8",
   "issue": 2,
-  "stage": "find",
+  "stage": "render",
   "title": "業界で誰も逆らえない男性芸能人3人",
   "date": "2026-11-19",
   "searches": [
@@ -56,7 +56,26 @@
           "quote": true
         },
         "一人目は、ビートたけしさん。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "1-2",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "1-1",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "why": "Mở đầu: câu móc in to trên gương mặt Takeshi (ai cũng nhận ra), tiến chậm vào mặt; rồi lùi ra khi giới thiệu người thứ nhất."
     },
     {
       "label": "1人目",
@@ -67,7 +86,30 @@
           "text": "ツービート時代の興行主には、暴力団関係者も多く、修羅場続きだったといいます。",
           "say": "ツービート時代のこうぎょうぬしには、暴力団関係者も多く、修羅場続きだったといいます。"
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "15-7",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in",
+          "tone": "sepia"
+        },
+        {
+          "pick": "16-2",
+          "focus": [
+            0.4,
+            0.5
+          ],
+          "move": "pan-right",
+          "tone": "sepia",
+          "depth": false
+        }
+      ],
+      "cut": "dip",
+      "why": "Lùi về thập niên 1970: ảnh đôi Two Beat thời trẻ, rồi lướt qua trang báo cũ về nhà hát Asakusa (ảnh phẳng, không hiệu ứng sâu)."
     },
     {
       "label": "1人目",
@@ -78,7 +120,27 @@
           "say": "それでも実力だけでのし上がり、映画監督・きたのたけしとしては、ベネチアで、きんじししょう。"
         },
         "今や、芸能界の絶対的な大御所です。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "1-9",
+          "focus": [
+            0.46,
+            0.25
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "6-1",
+          "focus": [
+            0.6,
+            0.6
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "fade",
+      "why": "Takeshi cầm micro giữa các ngôi sao Hollywood (vươn lên bằng thực lực), rồi lùi ra toàn cảnh liên hoan phim Venice đúng lúc nói giải Sư tử vàng."
     },
     {
       "label": "2人目",
@@ -94,7 +156,35 @@
           "text": "「何度殴ってやろうかと思ったか」",
           "quote": true
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "7-2",
+          "focus": [
+            0.5,
+            0.25
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "24-1",
+          "focus": [
+            0.35,
+            0.35
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "21-5",
+          "focus": [
+            0.4,
+            0.3
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "page",
+      "why": "Lật trang sang người thứ hai: Sakai, rồi Fuwa-chan, rồi Sakai chỉ tay đúng lúc câu 'muốn đấm' in to."
     },
     {
       "label": "2人目",
@@ -108,7 +198,32 @@
           "say": "確かに昔、ほしたよ。",
           "quote": true
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "29-4",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "move": "pull-back"
+        },
+        {
+          "pick": "26-6",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "28-1",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "cut": "fade",
+      "why": "Trường quay TV (lời đồn 'biến mất khỏi TV'), rồi Hiromi, rồi Sakai bắt tay Hiromi đúng lúc câu 'ngày xưa đã cho ra rìa'."
     },
     {
       "label": "3人目",
@@ -117,7 +232,27 @@
       "lines": [
         "そして3人目は、全国的な人気を誇る大物歌手。",
         "週刊誌が報じたのは、暴力団幹部の家族の一周忌で、喪服姿のまま熱唱する動画でした。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "31-2",
+          "focus": [
+            0.55,
+            0.5
+          ],
+          "move": "pull-back"
+        },
+        {
+          "pick": "33-1",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "move": "pan-right"
+        }
+      ],
+      "cut": "page",
+      "why": "Lật trang sang người thứ ba, giấu mặt: một ca sĩ nhỏ trên sân khấu tối, rồi lướt qua kệ tuần san."
     },
     {
       "label": "3人目",
@@ -125,7 +260,28 @@
       "lines": [
         "あのイケイケだった頃のダウンタウンですら、強気な発言を控えたといわれる、その人物とは……",
         "画面を2回タップ！"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "35-3",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "38-2",
+          "focus": [
+            0.6,
+            0.45
+          ],
+          "move": "push-in",
+          "depth": false
+        }
+      ],
+      "cut": "fade",
+      "why": "Downtown thời trẻ trên TV, rồi ngón tay chạm màn hình đúng câu '画面を2回タップ！'."
     },
     {
       "label": "3人目",
@@ -136,7 +292,27 @@
           "say": "まつやまちはるさんです。"
         },
         "事務所は、故人をしのぶお付き合いで出席した、と説明しています。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "30-12",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "punch-in"
+        },
+        {
+          "pick": "31-5",
+          "focus": [
+            0.45,
+            0.3
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "hard",
+      "why": "Lộ diện bằng cú cắt gắt và nhảy cận vào mặt Matsuyama Chiharu, rồi ảnh ông ôm đàn khi nói lời công ty quản lý."
     },
     {
       "label": "3人の男",
@@ -144,7 +320,40 @@
       "lines": [
         "誰ひとり逆らえない、3人の男。",
         "その力の正体は、肩書きではなく、半世紀近く、芸能界の表も裏も生き抜いてきた重みなのかもしれません。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "14-4",
+          "focus": [
+            0.5,
+            0.25
+          ],
+          "move": "rise"
+        },
+        {
+          "pick": "21-11",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "30-10",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "dip",
+      "why": "Kết: lần lượt 3 người đàn ông, ảnh cuối lùi ra để khép lại câu chuyện."
     }
-  ]
+  ],
+  "music": {
+    "pick": "39-2",
+    "start": 1.6
+  },
+  "review": "21/21"
 }

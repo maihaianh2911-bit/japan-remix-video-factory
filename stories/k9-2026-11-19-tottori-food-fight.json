@@ -33,7 +33,12 @@
     "web:お金 封筒 一万円札 赤字 => Japanese 10000 yen banknotes on a table",
     "web:芝生 広場 夕暮れ 誰もいない => an empty lawn at dusk",
     "music:Chopin Prelude Op. 28 No. 4 piano",
-    "music:Satie Gnossienne piano"
+    "music:Satie Gnossienne piano",
+    "web:さよと。 YouTuber => a young Japanese man with dark hair and a fringe, portrait photo",
+    "web:さよと。 ローカルフードファイト インタビュー => a young Japanese man with dark hair talking in an online interview",
+    "web:さよと。 YouTube 銀の盾 => a young Japanese man holding a silver YouTube play button award",
+    "web:謝罪文 スマートフォン SNS 投稿 手元 => hands holding a smartphone showing a long text post",
+    "web:ローカルフードファイト 鳥取 会場 写真 出店 => food stall tents with few customers on a lawn"
   ],
   "scenes": [
     {

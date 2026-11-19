@@ -1,7 +1,7 @@
 {
   "channel": "k9",
   "issue": 4,
-  "stage": "find",
+  "stage": "render",
   "title": "わんこそば店のオープン初日 生配信中のうその通報で消防車5台以上",
   "date": "2026-11-19",
   "searches": [
@@ -33,20 +33,61 @@
           "text": "人気わんこそば店のオープン初日、生配信の最中にうその通報が入り、消防車が5台以上駆けつけました。",
           "quote": true
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "5-3",
+          "focus": [
+            0.45,
+            0.5
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "9-10",
+          "focus": [
+            0.55,
+            0.6
+          ],
+          "move": "pan-left"
+        }
+      ],
+      "why": "Câu móc in to: chồng bát wanko soba có thẻ tên quán Hachikō, rồi lia dọc hàng xe của trạm cứu hỏa Shibuya đúng lúc nói 5 xe."
     },
     {
       "label": "渋谷",
+      "era": "2026年11月7日",
       "headline": "わんこそば店\n「鉢公」",
       "lines": [
         {
           "text": "11月7日の夜、東京・渋谷。期間限定の営業で人気を集めた、わんこそば店「鉢公」が、初めての常設店を開いた日のことです。",
           "say": "11月7日の夜、東京、渋谷。期間限定の営業で人気を集めた、わんこそば店、はちこうが、初めての常設店を開いた日のことです。"
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "3-3",
+          "focus": [
+            0.5,
+            0.45
+          ],
+          "move": "reveal"
+        },
+        {
+          "pick": "6-1",
+          "focus": [
+            0.45,
+            0.5
+          ],
+          "move": "rise"
+        }
+      ],
+      "cut": "fade",
+      "why": "Mở ra ngã tư Shibuya ban đêm (nơi xảy ra), rồi đi lên tấm rèm tên quán Hachikō."
     },
     {
       "label": "生配信",
+      "era": "2026年11月7日",
       "headline": "許可を取って\n生配信",
       "lines": [
         {
@@ -54,23 +95,90 @@
           "say": "店の許可を取って、キックの配信者、ぽんちゃんさんとぺるしあさんが、わんこそば対決を生配信していると、"
         },
         "配信を見ていた誰かが、嫌がらせのために店へ何度も電話をかけ、消防や警察にうその通報をしたといいます。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "5-1",
+          "focus": [
+            0.5,
+            0.45
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "13-1",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "push-in",
+          "depth": false
+        }
+      ],
+      "cut": "fade",
+      "why": "Lúc đang thi ăn: tiến vào bát mì đang được rót; lúc kẻ xấu gọi báo giả: tiến vào màn hình bấm 119."
     },
     {
       "label": "店の発表",
+      "era": "2026年11月",
       "headline": "「断じて\n容認いたしません」",
       "lines": [
         "配信はその場で打ち切り。店は後日、配信者に迷惑な行いは一切なかったとし、営業にも、居合わせたお客さんにも影響が出たと発表しました。",
         "そして「嫌がらせを目的とした虚偽通報は、断じて容認いたしません」と、被害届も含めて法的な対応を考えているとしています。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "5-9",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "move": "pan-right"
+        },
+        {
+          "pick": "5-2",
+          "focus": [
+            0.5,
+            0.45
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "hard",
+      "why": "Buổi live bị cắt ngang (cắt thẳng): lia qua quán vắng, rồi tiến vào bát mì của quán khi đọc thông báo."
     },
     {
       "label": "うその119番",
+      "era": "2026年11月",
       "headline": "晴れの初日を\n台なしに",
       "lines": [
         "うその119番は、消防法で罰金の対象にもなる行為です。",
         "配信者を困らせるための嫌がらせが、晴れの初日の店を台なしにしました。そしてあの夜の消防車は、本当に助けを待つ誰かのためのものだったはずです。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "15-7",
+          "focus": [
+            0.5,
+            0.6
+          ],
+          "move": "pan-right"
+        },
+        {
+          "pick": "15-3",
+          "focus": [
+            0.4,
+            0.5
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "dip",
+      "why": "Kết: tối rồi sáng lại, lia qua hàng xe cứu hỏa, rồi lùi ra xe cứu hỏa đang chờ ở trạm (dành cho người thật sự cần)."
     }
-  ]
+  ],
+  "music": {
+    "pick": "17-1"
+  },
+  "review": "10/10"
 }
