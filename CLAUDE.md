@@ -288,10 +288,19 @@ allow `main`.
 2. The push runs the workflow (find stage, ~2 min). Check that the run for your commit succeeded (the session's
    GitHub tools `actions_list` / `actions_get`); then `git fetch --depth 1 origin +refs/heads/renders:refs/remotes/origin/renders`
    and check that `<name>/find/status.json` has your commit before trusting the folder. Look at
-   `<name>/find/sheet_<k>.jpg` yourself. A search with no usable picture has no sheet (0 results in `index.json`);
-   a search that failed has `"error"` in `index.json` and the run is red (`"outcome": "partial"`): run it again
-   (Run workflow → `story` + the name) and only the failed searches are tried again. Wikimedia refuses requests
-   from Claude's cloud session (429), which is why the search runs on GitHub.
+   `<name>/find/sheet_<k>.jpg` yourself. A search with no usable picture has no sheet (0 results in `index.json`).
+   Two things can go wrong with a search, and they are not handled the same (19/11/2026, as in Tin Nhật):
+   - **Its source did not answer** (network, Wikimedia refusing, no web search engine answering): `"error"` in
+     `index.json` and the run is red (`"outcome": "partial"`): run it again (Run workflow → `story` + the name)
+     and only the failed searches are tried again.
+   - **It cannot work as written**: a `wiki:` name that names nothing, a `url:` picture the site refuses (403,
+     404), that is too small (under 400 px), is not a picture, or did not load in two tries. It has `"unusable"`
+     (the reason) in `index.json`, is **never tried again**, and the run stays **green** (the issue comment and
+     the run's summary name it): running the find again changes nothing. Append another search instead: the exact
+     title of the Wikipedia article or the item `Q…`, a `web:` search, another address of the picture.
+   A `url:` picture that another search already found is kept all the same (`"same_as": "<k>-<n>"` names the pick
+   it repeats): use one of the two, never both in a video. Wikimedia refuses requests from Claude's cloud session
+   (429), which is why the search runs on GitHub.
 3. Put the picks in the scenes: `"photo": "<k>-<n>"`, `{"pick": "<k>-<n>", "focus": [x, y]}` (the point kept in the
    frame, 0–1), `{"pick": …, "fit": "contain"}` (the whole picture: portraits, documents), or a list of 1–4 of these
    shown one after the other: two a scene (the edit). The move of each picture and the cut of each scene are yours,

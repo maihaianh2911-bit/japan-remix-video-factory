@@ -130,8 +130,12 @@ Read the issue form (Video gốc, Lời của video gốc, Ghi chú) and the own
    place? If not, append the search again with the exact Wikipedia title or the item. A search with a wish shows its
    score on the sheet (`~0.31`: it shows the thing; near `0.20`: doubtful; `"ranked": false`: the ranking was not
    installed, the wish was ignored); an empty group means nothing showed the wish: append other words. `index.json`
-   has titles, authors and licences (and, for `music:`, the length in `seconds`); a search with `"error"` failed: run
-   the find again with the dispatch command of §4 (only the failed searches are tried again).
+   has titles, authors and licences (and, for `music:`, the length in `seconds`); a search with `"error"` failed
+   because its source did not answer: run the find again with the dispatch command of §4 (only the failed searches
+   are tried again). A search with `"unusable"` cannot work as written (a `wiki:` name that names nothing, a
+   `url:` picture the site refuses or that is too small): the run is green and it is never tried again, so do
+   **not** run the find again for it. Read its reason and append another search if the scene still needs that
+   picture (`CLAUDE.md`, "Story format", step 2).
 2. A scene without two fitting pictures, or no fitting music → append searches (never change or reorder existing
    ones), keep `stage: "find"`, commit `[remix #N] tìm thêm ảnh`, push, remove `remix-busy`. You are called again at
    `remix-pick`.
