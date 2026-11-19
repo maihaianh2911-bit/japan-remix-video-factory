@@ -1,9 +1,13 @@
 {
   "channel": "k11",
   "issue": 7,
-  "stage": "find",
+  "stage": "render",
   "title": "なぜ黒死病はヨーロッパの3人に1人を殺したのか",
   "date": "2026-11-19",
+  "review": "19/19",
+  "music": {
+    "pick": "38-1"
+  },
   "searches": [
     "wiki:黒死病",
     "wiki:The Triumph of Death",
@@ -215,6 +219,14 @@
       ],
       "photo": [
         {
+          "pick": "43-1",
+          "focus": [
+            0.5,
+            0.4
+          ],
+          "move": "pan-right"
+        },
+        {
           "pick": "31-3",
           "focus": [
             0.5,
@@ -224,7 +236,7 @@
         }
       ],
       "cut": "hard",
-      "why": "Cảnh chôn người chết ở Tournai (1349): ai mắc thì gần như không qua khỏi."
+      "why": "Phòng bệnh chật người nằm, lia ngang khi nói bệnh lây từ người sang người; rồi đẩy vào cảnh chôn người chết ở Tournai (1349) khi nói gần như không ai qua khỏi."
     },
     {
       "label": "見えない敵",
@@ -235,17 +247,26 @@
       ],
       "photo": [
         {
+          "pick": "42-5",
+          "focus": [
+            0.55,
+            0.45
+          ],
+          "move": "push-in",
+          "depth": false
+        },
+        {
           "pick": "33-6",
           "focus": [
             0.5,
             0.45
           ],
-          "move": "push-in",
+          "move": "rise",
           "depth": false
         }
       ],
       "cut": "fade",
-      "why": "Quả cầu thơm (pomander) đựng hương liệu để ngửi khi sợ 'không khí xấu'."
+      "why": "Tranh khắc thầy thuốc bên giường người bệnh dịch (không ai biết nguyên nhân), rồi đi lên dọc quả cầu thơm đựng hương liệu khi nói ngửi hương hoa để tự vệ."
     },
     {
       "label": "検疫",
@@ -304,8 +325,5 @@
       "cut": "dip",
       "why": "Nhảy tới năm 2020: tàu Diamond Princess ở cảng Yokohama với xe cứu thương, rồi lùi ra cảnh con tàu lúc chạng vạng để kết, quay về con tàu ở đầu video."
     }
-  ],
-  "music": {
-    "pick": "38-1"
-  }
+  ]
 }
