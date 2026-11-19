@@ -1,0 +1,127 @@
+{
+  "channel": "k11",
+  "issue": 7,
+  "stage": "find",
+  "title": "なぜ黒死病はヨーロッパの3人に1人を殺したのか",
+  "date": "2026-11-19",
+  "searches": [
+    "wiki:黒死病",
+    "wiki:The Triumph of Death",
+    "wiki:Catalan Atlas",
+    "wiki:ペスト菌",
+    "wiki:モンゴル帝国",
+    "wiki:メッシーナ",
+    "wiki:フェオドシヤ",
+    "wiki:トレビュシェット",
+    "wiki:Great Famine of 1315–1317",
+    "wiki:Toggenburg Bible",
+    "wiki:ドゥブロヴニク",
+    "wiki:Lazzaretto Vecchio",
+    "wiki:Diamond Princess (ship)",
+    "wiki:横浜港",
+    "web:黒死病 埋葬 トゥルネー 1349 => a medieval manuscript painting of townspeople carrying coffins to bury plague victims",
+    "web:ブリューゲル 死の勝利 => a sixteenth-century painting of an army of skeletons attacking people",
+    "web:ジェノヴァ 商船 中世 ガレー船 絵画 => a painting of medieval galley ships with oars and sails in a harbour",
+    "web:medieval ship harbour Sicily 14th century painting => a medieval sailing ship arriving at a harbour town",
+    "web:黒死病 患者 腫れ 中世 写本 => a medieval painting of sick people in bed covered with dark sores",
+    "web:シルクロード 隊商 ラクダ => a caravan of camels and merchants crossing a desert",
+    "web:Catalan Atlas caravan Silk Road => a medieval map painting of a merchant caravan with camels and horses",
+    "web:モンゴル帝国 最大版図 地図 => a map of the Mongol Empire across Asia and Europe",
+    "web:ペスト菌 顕微鏡 => a microscope image of rod-shaped plague bacteria",
+    "web:クマネズミ ノミ => a black rat",
+    "web:フェオドシヤ ジェノヴァ要塞 城壁 => the stone walls and towers of the Genoese fortress in Feodosia",
+    "web:medieval trebuchet siege manuscript illumination => a medieval manuscript painting of a trebuchet attacking a city wall",
+    "web:黒死病 拡大 地図 ヨーロッパ 1347 1351 => a map of Europe showing the spread of the Black Death with dates",
+    "web:中世 都市 街並み 写本 群衆 => a medieval painting of a crowded town street with many people",
+    "web:medieval town street miniature 15th century => a medieval painting of a busy town street with shops and people",
+    "web:大飢饉 1315 中世 ヨーロッパ => a medieval painting of hungry peasants during a famine",
+    "web:Toggenburg Bible plague 1411 => a medieval painting of two people in bed covered with plague boils",
+    "web:黒死病 中世 医師 写本 => a medieval manuscript painting of a physician treating a plague patient",
+    "web:pomander medieval plague herbs => a perforated metal ball for holding fragrant herbs",
+    "web:ドゥブロヴニク 旧港 城壁 => the old harbour and stone walls of Dubrovnik by the sea",
+    "web:Lazzaretto Vecchio Venice island => a small island with old buildings in the Venetian lagoon",
+    "web:ダイヤモンド・プリンセス 横浜港 2020 => a large cruise ship docked at Yokohama port",
+    "web:ダイヤモンド・プリンセス 大黒ふ頭 検疫 => a white cruise ship at a pier with ambulances in front",
+    "music:Chopin Prelude E minor piano",
+    "music:Satie Gnossienne piano",
+    "music:Beethoven Moonlight Sonata piano"
+  ],
+  "scenes": [
+    {
+      "label": "歴史のなぜ",
+      "era": "1347年",
+      "headline": "黒死病は\nなぜ広がったのか",
+      "lines": [
+        {
+          "text": "わずか5年でヨーロッパの3人に1人が死んだ黒死病。なぜ広がったのか、答えは豊かさを運ぶ交易の道でした。",
+          "quote": true
+        }
+      ]
+    },
+    {
+      "label": "死の船",
+      "era": "1347年",
+      "headline": "死者を乗せて\n港に着いた船",
+      "lines": [
+        "1347年、シチリア島に着いたジェノヴァの商船では、船乗りのほとんどが死に、残る者も黒く腫れた体で熱にうなされていました。"
+      ]
+    },
+    {
+      "label": "交易路",
+      "era": "13〜14世紀",
+      "headline": "東西を結んだ\nモンゴルの道",
+      "lines": [
+        "病の正体はペスト菌で、隊商の荷にまぎれたネズミとともに、モンゴル帝国が結んだ交易路を、東から西へ運ばれてきました。"
+      ]
+    },
+    {
+      "label": "カッファ",
+      "era": "1346年",
+      "headline": "城壁の中へ\n投げ込まれた遺体",
+      "lines": [
+        "黒海の港町カッファでは、町を囲んだモンゴル系の軍が、病死した兵士の遺体を投石機で城壁の中へ投げ込んだといいます。",
+        "そこから逃げた商人たちの船が、港から港へと病をばらまいたのです。"
+      ]
+    },
+    {
+      "label": "中世の町",
+      "era": "14世紀",
+      "headline": "人がひしめく\n不潔な町",
+      "lines": [
+        "しかも町は人がひしめき、下水もなくネズミだらけで、人々は数十年前の大飢饉で弱りきっていました。"
+      ]
+    },
+    {
+      "label": "肺ペスト",
+      "era": "14世紀",
+      "headline": "咳でうつる\n肺ペスト",
+      "lines": [
+        "さらに肺に入ったペストは、咳やくしゃみで人から人へうつり、かかればほとんど助かりません。"
+      ]
+    },
+    {
+      "label": "見えない敵",
+      "era": "14世紀",
+      "headline": "悪い空気の\nせいだと信じた",
+      "lines": [
+        "正体を知る人はなく、人々は悪い空気のせいだと信じ、花の香りで身を守ろうとしました。"
+      ]
+    },
+    {
+      "label": "検疫",
+      "era": "14〜15世紀",
+      "headline": "船を40日\n沖で待たせる",
+      "lines": [
+        "やがて港では、着いた船を沖で40日待たせるようになり、イタリア語の「40」、クアランタは、英語で検疫を表す言葉になりました。"
+      ]
+    },
+    {
+      "label": "横浜港",
+      "era": "2020年",
+      "headline": "700年後の\n検疫",
+      "lines": [
+        "2020年、横浜港のクルーズ船が受けた検疫も、700年近く前、死を運んだ船から人類が学んだ知恵なのです。"
+      ]
+    }
+  ]
+}
