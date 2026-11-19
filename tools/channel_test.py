@@ -6,7 +6,7 @@
   or with a name of another channel;
 - the defaults a story inherits from its channel, key by key, without changing the channel;
 - the Tin Nhật edit every channel follows ("edit": "tin-nhat"): what a story leaves out of it is warned about
-  (news/custom.py edit_warnings: hook line, music, two pictures a scene, moves, cuts, whys, review…), and every
+  (news/custom.py edit_warnings: hook line, music, two pictures for a scene over 6 s, moves, cuts, whys, review…), and every
   sample story carries all of it;
 - the voice comes from the channel file, not from the code: a stand-in channel with another VOICEVOX speaker is
   voiced (against a stand-in engine) and credited (on the frame, in both layouts) with that speaker;
@@ -131,17 +131,27 @@ def edit_rules():
         change(story)
         return "\n".join(edit_warnings(channels.inherit(story), **options))
     assert warned(lambda story: None) == "", warned(lambda story: None)
+    # owner, 19/11/2026: the ending is free, and a scene under 6 seconds of words may have one picture
+    assert warned(lambda story: story["scenes"][-1]["lines"].append("あなたはどう感じますか？")) == ""
+
+    def short_with_one(story):   # "一行目です。": about a second of words
+        story["scenes"][1]["photo"].pop()
+        story["review"] = "3/3"
+    assert warned(short_with_one) == "", warned(short_with_one)
+
+    def long_with_one(story):   # about 9 seconds of words (60 written characters at 6.4 a second) on one picture
+        story["scenes"][1]["lines"] = ["あ" * 30 + "、", "い" * 30 + "。"]
+        story["scenes"][1]["photo"].pop()
     cases = (
         (lambda story: story.pop("music"), 'no "music" chosen'),
         (lambda story: story.update(searches=["web:x", "web:y"]), 'no "music:" search'),
-        (lambda story: story["scenes"][1]["photo"].pop(), "scene 2: 1 picture; the edit has 2 a scene"),
+        (long_with_one, "scene 2: 1 picture for about 9 s of words; a scene over 6 seconds has 2"),
         (lambda story: story["scenes"][1]["photo"][0].pop("move"), 'scene 2: picture 1 without a "move"'),
         (lambda story: story["scenes"][1].pop("cut"), 'scene 2: no "cut"'),
         (lambda story: story["scenes"][0].pop("why"), 'scene 1: no "why"'),
         (lambda story: story["scenes"][0]["lines"][0].pop("quote"), "the hook: line 1 of scene 1 must be printed big"),
         (lambda story: story["scenes"][0]["lines"][0].update(text="あ" * 60), "the hook: line 1 has 60 characters"),
         (lambda story: story["scenes"][0].pop("photo"), "the hook: scene 1 has no picture"),
-        (lambda story: story["scenes"][-1]["lines"].append("あなたはどう感じますか？"), "the ending is a question"),
         (lambda story: story.update(fx={"depth": False}), "picture effects off: depth"),
         (lambda story: story.update(style="paper"), "\"style\" is 'paper'"),
         (lambda story: story.update(pace={"speed": 0.9}), '"pace" is'),

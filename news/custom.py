@@ -27,6 +27,10 @@ STORY_KEYS = {"stage", "title", "date", "source", "source_url", "searches", "sce
               "music", "pace", "fx", "channel", "trial", "review"}
 REVIEW = re.compile(r"^([0-9]+)/([0-9]+)$")   # "review": "<pictures that passed>/<pictures>" (tools/review_picks.py)
 HOOK_LIMIT = 55   # the hook line is said in about 5 seconds: 45-50 characters at speed 1.2; warned above this
+# Pictures a scene (owner, 19/11/2026: "nếu nội dung quá 6s thì phải tìm 2 ảnh, dưới 6s thì 1 ảnh cũng đc, tự do"):
+# a scene whose words last over TWO_FROM seconds has at least two pictures. Before the voice is made the length
+# is estimated: about SPOKEN written characters a second at speed 1.2, pauses included (CLAUDE.md, "Length").
+TWO_FROM, SPOKEN = 6.0, 6.4
 STYLES = ("news", "paper", "story")
 SCENE_KEYS = {"label", "headline", "lines", "value", "evidence", "photo", "cut", "why", "era"}
 LINE_KEYS = {"text", "say", "quote"}
@@ -350,6 +354,12 @@ def line_text(line):
     return line if isinstance(line, str) else line.get("text", "") if isinstance(line, dict) else ""
 
 
+def spoken_seconds(scene, speed=1.2):
+    """About how long the words of a scene last: its written characters (no punctuation, no spaces) at the pace."""
+    written = sum(len(re.sub(r"[\W_]", "", line_text(line))) for line in scene.get("lines") or [])
+    return written / (SPOKEN * (speed or 1.2) / 1.2)
+
+
 def edit_warnings(data, sample=False):
     """What a story of a channel with the Tin Nhật edit ("edit": "tin-nhat" in channels/<id>.json; owner, 18/11/2026:
     "cho 4 kênh này học cách edit của kênh tin nhật đi, học tốt vào") leaves out of that edit (CLAUDE.md, "The edit"
@@ -374,9 +384,7 @@ def edit_warnings(data, sample=False):
     if (size := len("".join(line_text(first[0]).split()))) > HOOK_LIMIT:
         found.append(f"the hook: line 1 has {size} characters; it is said in about 5 seconds (45-50 characters, "
                      f"{HOOK_LIMIT} at most): the whole story and its meaning in one plain line")
-    last = line_text((scenes[-1].get("lines") or [""])[-1]).strip()
-    if last.endswith(("？", "?")) or "あなたは" in last:
-        found.append("the ending is a question to the viewer: end on a line that comes back to the opening")
+    # the ending is free (owner, 19/11/2026: "tự do, miễn hay"): no form of ending is warned about any more
     if not any(isinstance(search, str) and search.startswith("music:") for search in data.get("searches", [])):
         found.append('no "music:" search: every video has a quiet piece under the voice, e.g. '
                      '"music:Schumann Träumerei piano"')
@@ -391,8 +399,9 @@ def edit_warnings(data, sample=False):
         picks = picks_of(scene)
         if not picks and not scene.get("value"):
             found.append(f"scene {number}: no picture (a text card only for a pure figure, with a \"value\")")
-        elif picks and len(picks) < 2:
-            found.append(f"scene {number}: 1 picture; the edit has 2 a scene (a new picture every 4-5 seconds)")
+        elif len(picks) == 1 and (seconds := spoken_seconds(scene, (data.get("pace") or {}).get("speed"))) > TWO_FROM:
+            found.append(f"scene {number}: 1 picture for about {seconds:.0f} s of words; a scene over "
+                         f"{TWO_FROM:.0f} seconds has 2 (under that, 1 is enough)")
         if without := [str(index) for index, pick in enumerate(picks, 1) if not pick.get("move")]:
             found.append(f"scene {number}: picture {', '.join(without)} without a \"move\" (the effects act on named moves)")
         if number > 1 and not scene.get("cut"):

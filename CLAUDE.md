@@ -9,8 +9,8 @@
    estimate the length from the script (use the seconds per line of this channel's earlier videos); after the voice
    step, read the real length of the speech (the machine comment gives it). If the video would be under 61 seconds,
    **write the script longer** (more true facts and detail on the same subject, in the owner's tone, nothing
-   invented) until it passes 61 seconds, tell the owner on the issue what was added, and only then go on. This is
-   the one exception to "never change the owner's script". Never render or deliver a video under 61 seconds. Only
+   invented) until it passes 61 seconds, tell the owner on the issue what was added, and only then go on (a script
+   may be changed for this as for any improvement, see the rule changes of 19/11/2026). Never render or deliver a video under 61 seconds. Only
    exception: a trial or sample video — the owner says so, or the issue title or notes say `thử`, `mẫu`, `test` or
    `demo`.
 3. **Every video is vertical (1080×1920) and short: a little over 61 seconds** (owner, 19/11/2026: "làm video ít
@@ -22,6 +22,30 @@
 
 The machine holds to rule 2 too: `python -m news` refuses a voice under 61 s (the run fails and the issue says why)
 unless the story carries `"trial": true` (a trial or sample, as rule 2 says).
+
+## The owner's rule changes of 19/11/2026 — they win over any older sentence in this file or in `AGENT_REMIX.md`
+The owner read the list of the hard rules and said of six of them "mấy cái này ko hợp lí", then chose what replaces
+each (the same in every repo of the owner's Japanese channels):
+1. **A script the owner sends may be improved** (owner: "Sửa cả kịch bản tao gửi"): Claude may cut, add and rewrite
+   it so that it is better and more gripping, keeping the owner's story and main idea. It is no longer translated
+   sentence by sentence and left as it is. Say in the chat or on the issue what was changed.
+2. **Rumours and unconfirmed details may be told on every channel** (owner: "Dùng tin đồn ở mọi kênh"; k10 since
+   the morning of 19/11): framed as told at the key line (「…と噂されています」, 「…といいます」, 「週刊誌によると」), and the
+   posting caption says so in a ※ note (which part is a rumour, what is known).
+3. **The telling may be dramatised** (owner: "Thêm thắt cho kịch tính"): feelings, a narrator's lead-in, suspense,
+   the order of the telling. The one line that stays: an event or a quote of a real person is never made up and
+   told as a fact.
+4. **The ending is free** (owner: "Tự do, miễn hay"): whatever ends this story best — a line that stays, a last
+   surprising detail, a return to the opening, a question to the viewer, a lead to the next video. No fixed form,
+   and not the same one on every video.
+5. **The voice and the music of a video the owner sends may be used**, as its pictures and footage are (owner:
+   "Được dùng cả nhạc và giọng"). The owner was told the risk: music under copyright is recognised by YouTube
+   (a muted video, lost revenue, a strike), and the more of the source a video carries, the more it counts as
+   reused content. The engine cannot put a sound of the source into a video yet (its music comes from a `music:`
+   search, its voice from VOICEVOX): like moving footage, that needs new code and a trial the owner approves.
+6. **Pictures a scene** (owner: "nếu nội dung quá 6s thì phải tìm 2 ảnh, dưới 6s thì 1 ảnh cũng đc, tự do"): a
+   scene whose words last over 6 seconds has at least two pictures; under 6 seconds one is enough; more is free.
+   `python -m news.custom` warns of a scene over 6 seconds (estimated from its characters) with one picture.
 
 The owner is Vietnamese and not technical: answer in short, simple Vietnamese, no jargon. They write "tao" (I) and
 "mày" (you); answer the same way, "tao" for yourself and "mày" for them. Their standing decisions are in
@@ -58,9 +82,10 @@ channel file (and of the frame code when the look is new), never of each story.
 
 ### The rules and risks of each channel (`docs/KENH-NHAT.md`, told to the owner)
 - **All four** retell another channel's video: YouTube penalises reused content, so rewrite in our own words, add
-  value (a clear meaning, our own angle), and never reuse their voice or their music. **The pictures and the
-  footage of the video the owner sends may be used** (owner, 19/11/2026: "nếu repo nào đc dựng bằng cách remix video
-  hoặc tao có gửi video, có thể sử dụng hình ảnh/video trong video tao gửi"; before that: only a few): clean ones (a
+  value (a clear meaning, our own angle). **The pictures and the footage of the video the owner sends may be
+  used, and its voice and music too** (owner, 19/11/2026: "nếu repo nào đc dựng bằng cách remix video hoặc tao có gửi
+  video, có thể sử dụng hình ảnh/video trong video tao gửi", then "Được dùng cả nhạc và giọng"; before that: a few
+  pictures only, never the voice or the music): clean ones (a
   frame with the source's caption, logo or watermark over the picture is cropped clean or left; k9 is the exception,
   below: a person's picture may be a TV screenshot with its caption), credited `元動画`.
   The more of the source's pictures a video shows, the higher the reused-content risk (told to the owner again on
@@ -74,7 +99,7 @@ channel file (and of the frame code when the look is new), never of each story.
   people (cosmetic surgery, baldness, scandals): in Japan that is a defamation risk even when true, and YouTube has a
   harassment policy. The second reference, 芸能バナシのツボ, keeps to positive or neutral topics (Kyoto University,
   fluent French, a medical licence…): the safer source.
-- **k9 (炎上):** only what the press reported. **Faces of everyone in the story may be shown, private people too**
+- **k9 (炎上):** what the press reported, and rumours framed as told (19/11/2026). **Faces of everyone in the story may be shown, private people too**
   (owner, 19/11/2026, after two videos without a single face: "b" = show people as the source video does, "phần chọn
   ảnh k phải nghĩ, cứ chọn, tù tội đâu tao chịu": the owner takes the legal risk); every scene with a person in it
   gets that person's picture, TV screenshots and pictures with burnt-in captions included (the k9 exception to
@@ -104,13 +129,15 @@ the Tin Nhật channel (`japan-news-video-factory`) does now, with every one of 
 - **Music under the voice** in every video: a `music:` search and a quiet recording picked from it (a free licence on
   Wikimedia Commons, about 17 dB under the voice, credited on screen and in credits.txt).
 - **Read fast like the source** (16/11/2026: "đọc nhanh như video gốc"): speed 1.2, short pauses (inherited).
-- **Two pictures a scene** (14/11/2026: a new picture every 4–5 seconds) and **every scene its own fitting picture**
+- **Two pictures for a scene over 6 seconds, one is enough under that** (19/11/2026: "nếu nội dung quá 6s thì phải
+  tìm 2 ảnh, dưới 6s thì 1 ảnh cũng đc, tự do"; before: two a scene) and **every scene its own fitting picture**
   (12/11/2026: "a video with only a few pictures is not acceptable"); a text card only for a pure figure.
 - **Every picture a `move`, every scene a `cut` and a `why`**, chosen by the meaning of its lines from the catalogue
   (14/11/2026; table "Bảng cách edit" in `AGENT_REMIX.md`).
 - **The hook** (next section): line 1 printed big on the first picture while it is spoken.
-- **One flowing narration**, shown to the owner as one continuous text (18/11/2026), with a meaning, an ending that
-  comes back to the opening, nothing invented (the script rules, "When the owner sends a source video").
+- **One flowing narration**, shown to the owner as one continuous text (18/11/2026), with a meaning; the ending is
+  free, and nothing about a real person is made up and told as a fact (the script rules, "When the owner sends a
+  source video", and the rule changes of 19/11/2026).
 - **The picture review before the render** (18/11/2026: "đọc lại hình ảnh đã chọn xem đã phù hợp với nội dung cần thể
   hiện chưa, chưa thì chọn lại, duyệt lại, khi nào ổn mới lấy"), recorded in the story as `"review": "<n>/<n>"`.
 - **Delivery:** only the finished video, with its posting caption (16/11/2026: every video comes with its caption;
@@ -118,8 +145,8 @@ the Tin Nhật channel (`japan-news-video-factory`) does now, with every one of 
 
 The machine knows this list: `python -m news.custom stories/<name>.json` (and the preview, and the workflow's check
 of a pushed story) prints a warning for each part a story leaves out — the frame, the effects, the pace, the hook
-line, an ending asking the viewer, the `music:` search; and from stage `render` the music pick, a scene with fewer
-than two pictures or none, a picture without `move`, a scene without `cut` or `why`, the review. Push a story for its
+line, the `music:` search; and from stage `render` the music pick, a scene without a picture or with one picture for
+more than 6 seconds of words, a picture without `move`, a scene without `cut` or `why`, the review. Push a story for its
 render only when it prints none; a trial may leave something out on purpose, and the closing comment then says what
 and why.
 
@@ -148,7 +175,8 @@ The owner's hook rules, common to every new channel (mirrored from `docs/KENH-NH
    says. The picture review checks it first (`AGENT_REMIX.md` §2 step 5).
 
 The owner took two older rules out of the hook (18/11/2026): the video's meaning with its ending coming back to the
-opening, and never inventing. Both stay in the script rules below; they are just not hook rules.
+opening, and never inventing. On 19/11/2026 the owner changed both in the script rules too: the ending is free, and
+only made-up events or quotes of real people told as facts stay forbidden (the rule changes above).
 
 ## When you were started by GitHub (a Claude task, nobody in the chat)
 The prompt may be as short as "Làm việc đang chờ trong repo này" ("do the work waiting in this repo"), and GitHub
@@ -187,8 +215,10 @@ not clear from the chat or from the reference channel, ask (in a chat you may).
      then its Vietnamese meaning in one piece), never cut into numbered scenes or bullet points (owner, 18/11/2026:
      "Kịch bản phải liền mạch, nói bao nhiêu lần rồi, đừng bao giờ chia đoạn ra như thế"). The scenes exist only for
      the pictures.
-   - **The ending comes back to the opening**, never a question to the viewer (no 「あなたはどう感じますか？」).
-   - **Never invent.** The same story and facts in the same order, our own sentences, more gripping (owner,
+   - **The ending is free** (owner, 19/11/2026: "Tự do, miễn hay"; before: back to the opening, never a question):
+     the line that ends this story best, not the same form on every video.
+   - **Never make up an event or a quote of a real person and tell it as a fact**; the telling itself may be
+     dramatised and a rumour told as one (19/11/2026). The same story and facts, our own sentences, more gripping (owner,
      16/11/2026: "chỉnh sửa nhẹ kịch bản, giữ khung nội dung nhưng làm cho hay hơn, cuốn hơn, có thể thêm bớt"); keep
      the people's quotes as they are; cut repetition; add a few true, well-known details of the same subject (dates,
      ages, what became of a person). A story the sources do not confirm is framed **once**
@@ -336,7 +366,7 @@ allow `main`.
    (429), which is why the search runs on GitHub.
 3. Put the picks in the scenes: `"photo": "<k>-<n>"`, `{"pick": "<k>-<n>", "focus": [x, y]}` (the point kept in the
    frame, 0–1), `{"pick": …, "fit": "contain"}` (the whole picture: portraits, documents), or a list of 1–4 of these
-   shown one after the other: two a scene (the edit). The move of each picture and the cut of each scene are yours,
+   shown one after the other: two for a scene over 6 seconds of words, one is enough under that (the edit). The move of each picture and the cut of each scene are yours,
    by the meaning of the lines: `"move"` in a picture entry, `"cut"` and `"why"` (one short Vietnamese sentence) in
    the scene, from the table "Bảng cách edit" in `AGENT_REMIX.md`. Pick the music. Preview before rendering:
    `python -m news --story stories/<name>.json --pictures <find folder> --stills <out>` and look at `sheet.jpg`

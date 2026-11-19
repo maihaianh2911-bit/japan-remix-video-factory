@@ -9,7 +9,7 @@ A channel file holds
     hashtags          the hashtags every posting caption of the channel carries (captions/<story>.txt)
     edit              "tin-nhat": the channel edits as the Tin Nhật channel of japan-news-video-factory does (owner,
                       18/11/2026: "cho 4 kênh này học cách edit của kênh tin nhật"): the story frame, the four picture
-                      effects, music, the hook line printed big, two pictures a scene, a move for every picture, a cut
+                      effects, music, the hook line printed big, two pictures for a scene over 6 seconds, a move for every picture, a cut
                       and a why for every scene, the picture review. python -m news.custom warns about what a story
                       leaves out of it (custom.edit_warnings).
     defaults          what a story of the channel inherits for the keys it leaves out: style, kicker, pace, fx. A dict

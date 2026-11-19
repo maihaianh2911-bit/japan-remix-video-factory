@@ -62,7 +62,7 @@ gh api "repos/$R/issues?state=open&labels=remix&per_page=50" --jq '[.[] | select
 ## Owner's standing decisions
 - Real pictures only, never AI pictures. You look at every picture yourself.
 - **The edit is the Tin Nhật edit** (owner, 18/11/2026: "cho 4 kênh này học cách edit của kênh tin nhật đi, học tốt
-  vào"): the story frame, the four effects, music, the hook, two pictures a scene, a move for every picture, a cut and
+  vào"): the story frame, the four effects, music, the hook, two pictures for a scene over 6 seconds, a move for every picture, a cut and
   a why for every scene, the picture review, only finished videos with their caption (`CLAUDE.md`, "The edit", with
   the owner's dates). `python -m news.custom stories/<name>.json` warns about every part a story leaves out: render
   only when it warns about nothing (a trial may leave something out on purpose: say what and why on the issue). No
@@ -77,8 +77,9 @@ gh api "repos/$R/issues?state=open&labels=remix&per_page=50" --jq '[.[] | select
   18/11/2026: a script that keeps only what the press printed "sẽ chán hơn rất nhiều"); leave out only what the
   channel's rules forbid (k11 accepted history,
   no crime or serious accusation against a private person stated as fact) or what is known to be false, and say so
-  on the issue. Never invent. k10 may tell rumours, tabloid ones too (owner, 19/11/2026): framed as told, once, and
-  corrected in the caption's ※ note.
+  on the issue. Never make up an event or a quote of a real person and tell it as a fact; the telling may be
+  dramatised (owner, 19/11/2026). Every channel may tell rumours, tabloid ones too (owner, 19/11/2026: k10 first, then
+  "Dùng tin đồn ở mọi kênh"): framed as told, once, and corrected in the caption's ※ note.
 - Pictures may come from anywhere on the web (owner, 14/11/2026, risk accepted): `web:` searches next to Commons
   ones. Skip pictures with a watermark, a logo or text burnt in, or a small blurred copy.
 - Every scene gets its own fitting picture (owner, 12/11/2026): 2–3 searches per scene from the start, search again
@@ -122,7 +123,7 @@ Read the issue form (Video gốc, Lời của video gốc, Ghi chú) and the own
    pauses included, punctuation not counted) and aim for about 63–70 s; under 61 s add true details of the same
    story, longer cut to the main thread and its most gripping details.
 4. Check: `pip install -q -r requirements.txt` if needed, then `python -m news.custom stories/<name>.json`: no
-   problem, and no edit warning about the script (the hook, the ending, the `music:` search).
+   problem, and no edit warning about the script (the hook, the `music:` search).
 5. Comment (🤖, short, Vietnamese): the script **as one continuous text** (the Japanese in one piece, then its
    Vietnamese meaning in one piece, never scene by scene), its meaning in one sentence, what was added or left out of
    the source and why (a rule of the channel, too thin, repetition), and its estimated length.
@@ -241,7 +242,7 @@ finished video file and its caption file there too, and nothing else (no preview
 
 ## 4. `remix-fix` and `remix-failed`
 - `remix-fix`: the request = owner comments after your last `🤖` comment. Wording → `lines` (the script rules still
-  hold: one flowing narration, the hook, nothing invented); pictures → picks or new searches (then `stage: "find"`),
+  hold: one flowing narration, the hook, nothing about a real person made up and told as a fact); pictures → picks or new searches (then `stage: "find"`),
   and the review again; the posting caption → `captions/<name>.txt` alone (no new render); an edit ("cảnh 5 đổi sang
   kiểu …", "chậm lại", "đừng giật") → `move`/`cut` of that scene from the table (the stage stays `render`). Push,
   one-line 🤖 comment, remove `remix-fix`.

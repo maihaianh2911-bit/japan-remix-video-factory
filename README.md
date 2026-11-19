@@ -51,6 +51,17 @@ Video thử (ví dụ bản 20 giây để duyệt giao diện): ghi "thử" ho�
   khóa thì phiếu chờ: mở một chat với Claude và nhờ làm tiếp. Không có lượt chạy mỗi giờ: nếu Claude lỡ một lần gọi
   (ví dụ hết hạn mức), vào **Actions → Gọi Claude ngay → Run workflow**.
 
+## Ghi chú 19/11/2026: mày đổi 6 luật
+
+Mày đọc danh sách luật cứng và thấy mấy luật "ko hợp lí", rồi chọn lại như sau (áp dụng cho mọi kênh tiếng Nhật):
+
+1. **Kịch bản mày gửi:** Claude được cắt, thêm, viết lại cho hay và cuốn hơn, giữ ý chính của mày (trước: dịch sát, không sửa).
+2. **Tin đồn:** kênh nào cũng được kể tin đồn và chi tiết chưa xác nhận, có câu kiểu "nghe nói" trong lời đọc và ghi chú đính chính (※) ở caption.
+3. **Thêm thắt cho kịch tính:** được thêm cảm xúc, lời dẫn, cách kể. Điều duy nhất còn cấm: dựng ra sự kiện hay câu nói của người thật rồi kể như thật.
+4. **Câu kết:** tự do, miễn hay (trước: phải quay về câu mở đầu, không được hỏi người xem).
+5. **Giọng và nhạc của video mày gửi:** được dùng. Rủi ro đã nói: nhạc có bản quyền dễ bị YouTube nhận ra (tắt tiếng, mất tiền quảng cáo, gậy), và dùng càng nhiều của video gốc thì càng dễ bị coi là "nội dung dùng lại". Máy dựng hiện chưa chèn được tiếng của video gốc: phải làm thêm và có bản thử cho mày duyệt.
+6. **Số ảnh mỗi cảnh:** cảnh dài hơn 6 giây thì phải có 2 ảnh, dưới 6 giây thì 1 ảnh cũng được (trước: cảnh nào cũng 2 ảnh).
+
 ## Ghi chú 19/11/2026: tìm ảnh rộng hơn (như kênh Tin Nhật)
 
 - **Tìm web rộng hơn** (`web:`): mỗi lần tìm máy xem khoảng 55 ảnh (trước là 20), giữ 20 ảnh (trước là 12); ảnh nào
