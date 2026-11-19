@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         **Cách dùng:** dán link video gốc (hoặc kéo thả file video vào ô dưới), thêm lời của video nếu có, rồi bấm **Create**. Không cần làm gì thêm: Claude đọc video gốc, viết lại bằng lời của mình bằng tiếng Nhật (giữ đúng sự thật, không bịa), máy tìm ảnh, Claude chọn ảnh hợp từng cảnh, máy tạo giọng và dựng video, Claude kiểm tra lại từng cảnh. Link video và caption sẽ hiện ở bình luận cuối.
-        Kênh 10 làm hoàng gia thế giới, nhất là hoàng gia Anh và hoàng tộc Trung Quốc ngày xưa (nhà Thanh…). Không dùng tin đồn báo lá cải; chuyện chưa chắc thì nói rõ là báo chí đưa tin. Không làm lại chuyện đã làm ở kênh 7 (mặt tối lịch sử).
+        Kênh 10 làm hoàng gia thế giới, nhất là hoàng gia Anh và hoàng tộc Trung Quốc ngày xưa (nhà Thanh…). Được kể tin đồn (cả tin báo lá cải): trong video nói rõ là tin đồn, caption có dòng ※ đính chính. Không làm lại chuyện đã làm ở kênh 7 (mặt tối lịch sử).
         Muốn sửa gì thì viết bình luận (ví dụ "cảnh 3 đổi ảnh khác").
   - type: textarea
     id: source

@@ -72,8 +72,11 @@ channel file (and of the frame code when the look is new), never of each story.
 - **k9 (炎上):** only what the press reported. **Never name or show private people** (only public figures; no face of
   a private person, no name, no blurred-but-recognisable picture); no mocking words; add our own angle and meaning,
   never copy their opinions. The source is a 26–34-minute horizontal video: one case per video, only its main thread.
-- **k10 (世界の王室):** no tabloid rumours (e.g. "Camilla plotted against Kate's parents"); what is not certain is said
-  to be reported (「…と報じられています」), once. British royal photos are mostly press photos (copyright risk, as Tin
+- **k10 (世界の王室):** **rumours may be told**, tabloid ones too (owner, 19/11/2026: "đc dùng tin đồn, sẽ đính chính
+  ở caption"; e.g. "Camilla plotted against Kate's parents"): the narration frames each one as told, once, at its key
+  line (「…と噂されています」, 「…と報じられています」, 「週刊誌によると」), never as a fact; and **the posting caption corrects
+  it** with a ※ note (section "Posting caption"): which part is a rumour, and what is known (denied by the palace,
+  proven false, never confirmed). British royal photos are mostly press photos (copyright risk, as Tin
   Nhật's, accepted by the owner); Qing pictures are mostly out of copyright. The Chinese side is the old dynasties
   (Cixi, Wanrong, Puyi…), never a story channel 7 tells.
 - **k11 (歴史のなぜ):** one "why" question per video and its main answer, taken from the long source; big, well-known
@@ -187,8 +190,8 @@ not clear from the chat or from the reference channel, ask (in a chat you may).
      nickname, a quote, a rumour the source tells, its cliffhanger (「画面を2回タップ！」) all stay; one that is not
      confirmed is framed as told (「…といいます」, 「…だとか」, 「…と噂されています」, 「週刊誌によると」), never cut for that
      alone. Leave out only what could really harm someone or is known to be false: a crime or a serious accusation
-     against a private person stated as fact, a private person's name or face (k9), a tabloid rumour about a living
-     royal (k10), mocking words of our own about someone's body. Check the facts to frame them right, not to strip the
+     against a private person stated as fact, a private person's name or face (k9), mocking words of our own about
+     someone's body. A rumour about a royal (k10) stays, framed as told, and is corrected in the caption. Check the facts to frame them right, not to strip the
      story to what a newspaper would print.
    - Length (iron rules 2 and 3): a little over 61 s, about 63–70 s. Estimate about 6.4 written characters a second
      at the channels' speed 1.2, pauses included (the k8 video of 18/11/2026: 607 characters, 94.7 s; punctuation
@@ -319,7 +322,11 @@ blank line, one line of 5–8 hashtags **that include every hashtag of the chann
 `channels/<id>.json`: k8 `#芸能人 #芸能 #shorts`, k9 `#炎上 #SNS #shorts`, k10 `#世界の王室 #王室 #shorts`, k11
 `#歴史 #歴史のなぜ #shorts`), a blank line, and the credit line
 `画像出典: <元動画 when source-video pictures are used>、<main sites> ほか（写真・音楽の全出典は credits.txt）`. Only
-facts of the script. `python -m news.captions captions/<name>.txt` checks it (`python -m news.custom` too). The
+facts of the script. **A video that tells a rumour gets a correction note** (owner, 19/11/2026, k10: "đc dùng tin
+đồn, sẽ đính chính ở caption"; every k10 video with a rumour, and any other channel's): 1–3 lines starting with ※,
+its own block between the sentences and the hashtags, saying which part is a rumour and what is known, e.g.
+`※カミラ夫人がケイト妃の両親に対して画策したという話は、一部で噂として伝えられているもので、事実とは確認されていません。`
+(and 「王室は否定しています」 when the palace denied it). `python -m news.captions captions/<name>.txt` checks it (`python -m news.custom` too). The
 render publishes it as `renders/<name>/caption.txt`; a push that changes only the caption publishes only the
 caption (no new render). Write it before the closing comment and link it there.
 
