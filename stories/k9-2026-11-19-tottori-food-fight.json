@@ -1,0 +1,142 @@
+{
+  "channel": "k9",
+  "stage": "find",
+  "title": "「5万人来る」はずのグルメフェスに来たのは数百人 主催者は「一番下を知れた」",
+  "date": "2026-11-19",
+  "searches": [
+    "wiki:鳥取県立美術館",
+    "wiki:倉吉市",
+    "wiki:大御堂廃寺跡",
+    "wiki:松本梨香",
+    "wiki:サトシ (アニメポケットモンスター)",
+    "web:ローカルフードファイト 鳥取 会場 => an almost empty outdoor food festival on a lawn with a few tents",
+    "web:ローカルフードファイトin鳥取 => a food festival venue with tents and food stalls",
+    "web:ローカルフードファイト 鳥取 ポスター => a Japanese food festival poster",
+    "web:鳥取県立美術館 芝生広場 => a wide lawn in front of a modern museum building",
+    "web:鳥取県立美術館 外観 => a modern museum building in Japan",
+    "web:倉吉 白壁土蔵群 => old white-walled storehouses along a canal in a Japanese town",
+    "web:さよと。 YouTuber => a young Japanese man with a fringe, YouTuber portrait",
+    "web:さよと。 ローカルフードファイト 実行委員長 => a young Japanese man speaking in an interview",
+    "web:グルメフェス 屋台 テント 芝生 日本 => food stall tents at an outdoor food festival in Japan",
+    "web:グルメイベント 閑散 空席 テント => empty tables and chairs at an outdoor food event",
+    "web:キッチンカー グルメフェス 日本 => food trucks lined up at a Japanese festival",
+    "web:焼き鳥 仕込み 大量 鶏肉 => a big batch of raw chicken skewers being prepared",
+    "web:食品ロス 大量 廃棄 食材 => a large amount of leftover food being thrown away",
+    "web:屋台 電源 発電機 延長コード => a power generator and extension cables at an outdoor stall",
+    "web:松本梨香 ライブ => a Japanese woman singer performing on stage with a microphone",
+    "web:松本梨香 声優 => portrait of a Japanese woman voice actress",
+    "web:松本梨香 ポケモン サトシ => a Japanese voice actress with a Pikachu",
+    "web:マイク 屋外 イベント 歌手 芝生 => a singer with a microphone at an outdoor event on grass",
+    "web:スマホ ショート動画 再生回数 => a smartphone showing a short video app with view counts",
+    "web:謝罪文 SNS スマホ 画面 => a person reading a long apology post on a smartphone",
+    "web:お金 封筒 一万円札 赤字 => Japanese 10000 yen banknotes on a table",
+    "web:芝生 広場 夕暮れ 誰もいない => an empty lawn at dusk",
+    "music:Chopin Prelude Op. 28 No. 4 piano",
+    "music:Satie Gnossienne piano"
+  ],
+  "scenes": [
+    {
+      "label": "ネット炎上",
+      "era": "2026年11月",
+      "headline": "5万人のはずが\n数百人",
+      "lines": [
+        {
+          "text": "「5万人来る」と言われたグルメフェスに来たのは数百人。主催者は「一番下を知れた」と語りました。",
+          "quote": true
+        }
+      ]
+    },
+    {
+      "label": "鳥取県倉吉市",
+      "era": "2026年11月7日",
+      "headline": "全国のご当地グルメが\n東西で対決",
+      "lines": [
+        {
+          "text": "舞台は11月7日と8日、鳥取県倉吉市の美術館前の芝生広場で開かれた「ローカルフードファイトin鳥取」。",
+          "say": "舞台は11月7日と8日、鳥取県倉吉市の美術館前の芝生広場で開かれた、ローカルフードファイト・イン・とっとり。"
+        },
+        "全国のご当地グルメが東と西に分かれて、売り上げを競うお祭りです。"
+      ]
+    },
+    {
+      "label": "5万人の約束",
+      "headline": "「10万人以上\n来るかも」",
+      "lines": [
+        {
+          "text": "実行委員長の一人は、YouTuberのさよとさん。",
+          "say": "実行委員長の一人は、ユーチューバーのさよとさん。"
+        },
+        "主催者側は出店者に、5万人を見込んでいると説明し、「10万人以上来るかもしれないと覚悟しておいてください」とまで伝えていたといいます。"
+      ]
+    },
+    {
+      "label": "出店料",
+      "headline": "VIP枠は\n「100万回再生保証」",
+      "lines": [
+        "その言葉を信じて全国から店が集まり、出店料はふつうの枠で5万円。",
+        "10万円のVIP枠には、宣伝のショート動画で「100万回再生を保証」する、とうたわれていたといいます。"
+      ]
+    },
+    {
+      "label": "当日",
+      "headline": "会場は\nがらがら",
+      "lines": [
+        "ところが当日、芝生の広場はがらがらでした。",
+        "来場者は数百人から千人ほどと伝えられ、「500人くらいだった」と話す出店者もいます。"
+      ]
+    },
+    {
+      "label": "出店者の損害",
+      "headline": "40万円近い\n赤字も",
+      "lines": [
+        "テントや電源、水道の設備も、十分には整っていなかったと報じられています。",
+        "200キロの鶏肉を仕込んで売れたのは数キロ、40万円近い赤字を出した店もあったといいます。"
+      ]
+    },
+    {
+      "label": "ゲスト",
+      "headline": "ステージのない\n会場で",
+      "lines": [
+        "この日ゲストに招かれていたのは、「ポケモン」のサトシの声で知られる声優、松本梨香さん。",
+        "ステージもない地面の上で、マイクの音が途切れても、松本さんはトラブルを笑いに変えて歌いきったといいます。"
+      ]
+    },
+    {
+      "label": "もう一人の主催者",
+      "headline": "「逃げたのでは」\nという声も",
+      "lines": [
+        "では、主催者はどうしたのか。もう一人の主催者は、イベントのあとSNSが見られなくなり、「逃げたのでは」という声まで上がりました。",
+        "そのあとの謝罪文では設営業者の責任にも触れ、病院から止められたとして、発信をやめたと報じられています。"
+      ]
+    },
+    {
+      "label": "実行委員長",
+      "headline": "「一番下を\n知れたので」",
+      "lines": [
+        "さよとさんはSNSで謝罪し、11月末までに説明すると約束しました。",
+        "けれどテレビの取材には、5万人は「奇跡が起きたら」の数字だったと話し、こう続けたのです。",
+        {
+          "text": "「伝説って言っちゃうとあれなんですけど、いい経験として、一番下を知れたので」",
+          "quote": true
+        }
+      ]
+    },
+    {
+      "label": "VIP枠の動画",
+      "headline": "「最低ラインは\n超えている」",
+      "lines": [
+        "VIP枠の宣伝動画は、「そもそも事前ショートというのを、僕が知らなかった」。",
+        "出した動画は65本ほどで、再生は1000回から2万回。それでも「少ないとは思うが、最低ラインは超えている認識」だと答えました。"
+      ]
+    },
+    {
+      "label": "一番下",
+      "headline": "一番下に\n立たされたのは",
+      "lines": [
+        "5万人という数字を信じて食材を仕込み、遠くから店を運んできた人たち。",
+        "ステージがなくても、だれのせいにもせずに歌いきった人。",
+        "「一番下を知れた」。その一番下に立たされていたのは、主催者の言葉を信じた人たちだったのかもしれません。"
+      ]
+    }
+  ]
+}
