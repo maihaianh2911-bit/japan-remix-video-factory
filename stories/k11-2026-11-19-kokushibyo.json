@@ -44,7 +44,13 @@
     "web:ダイヤモンド・プリンセス 大黒ふ頭 検疫 => a white cruise ship at a pier with ambulances in front",
     "music:Chopin Prelude E minor piano",
     "music:Satie Gnossienne piano",
-    "music:Beethoven Moonlight Sonata piano"
+    "music:Beethoven Moonlight Sonata piano",
+    "web:中世 医師 病人 写本 => a medieval illumination of a doctor at the bedside of a sick patient",
+    "web:medieval doctors plague miniature 14th century => medieval physicians in long robes examining a plague patient",
+    "web:黒死病 看病 中世 絵画 => a medieval painting of people caring for a dying plague victim in bed",
+    "Nuremberg Chronicle city view => a medieval woodcut of a walled city crowded with houses and towers",
+    "web:中世 都市 路地 不衛生 汚物 => a painting of a dirty narrow medieval street crowded with people",
+    "web:Great Famine 1315 medieval manuscript starving => a medieval manuscript painting of starving people"
   ],
   "scenes": [
     {
