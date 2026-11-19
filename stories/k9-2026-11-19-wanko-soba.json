@@ -1,0 +1,75 @@
+{
+  "channel": "k9",
+  "stage": "find",
+  "title": "わんこそば店のオープン初日 生配信中のうその通報で消防車5台以上",
+  "date": "2026-11-19",
+  "searches": [
+    "wiki:渋谷",
+    "wiki:わんこそば",
+    "wiki:渋谷スクランブル交差点",
+    "wiki:消防車",
+    "web:わんこそば 鉢公 渋谷 => a wanko soba restaurant interior with stacked red bowls",
+    "web:わんこそば 鉢公 店舗 外観 => a Japanese soba restaurant entrance with a navy noren curtain",
+    "web:わんこそば お椀 積み上げ => many small red lacquer soba bowls stacked high",
+    "web:わんこそば 食べる 給仕 => a server pouring soba into a small bowl",
+    "web:渋谷 消防車 夜 => red fire engines on a street in Shibuya at night",
+    "web:消防車 出動 夜 東京 => fire engines with red lights at night in Tokyo",
+    "web:渋谷 夜景 交差点 => Shibuya crossing at night with neon signs",
+    "web:ライブ配信 スマホ 撮影 飲食店 => a smartphone on a stand live streaming in a restaurant",
+    "web:電話 119番 通報 => a hand dialing a phone to call emergency services",
+    "web:消防指令センター 119番 => an emergency call center with operators and screens",
+    "web:救急車 消防車 待機 消防署 => fire engines parked in a Japanese fire station",
+    "music:Chopin Prelude Op. 28 No. 4 piano",
+    "music:Satie Gnossienne piano"
+  ],
+  "scenes": [
+    {
+      "label": "ネット炎上",
+      "era": "2026年11月7日",
+      "headline": "オープン初日に\n消防車5台以上",
+      "lines": [
+        {
+          "text": "人気わんこそば店のオープン初日、生配信の最中にうその通報が入り、消防車が5台以上駆けつけました。",
+          "quote": true
+        }
+      ]
+    },
+    {
+      "label": "渋谷",
+      "headline": "わんこそば店\n「鉢公」",
+      "lines": [
+        {
+          "text": "11月7日の夜、東京・渋谷。期間限定の営業で人気を集めた、わんこそば店「鉢公」が、初めての常設店を開いた日のことです。",
+          "say": "11月7日の夜、東京、渋谷。期間限定の営業で人気を集めた、わんこそば店、はちこうが、初めての常設店を開いた日のことです。"
+        }
+      ]
+    },
+    {
+      "label": "生配信",
+      "headline": "許可を取って\n生配信",
+      "lines": [
+        {
+          "text": "店の許可を取って、KICKの配信者、ぽんちゃんさんとぺるしあさんが、わんこそば対決を生配信していると、",
+          "say": "店の許可を取って、キックの配信者、ぽんちゃんさんとぺるしあさんが、わんこそば対決を生配信していると、"
+        },
+        "配信を見ていた誰かが、嫌がらせのために店へ何度も電話をかけ、消防や警察にうその通報をしたといいます。"
+      ]
+    },
+    {
+      "label": "店の発表",
+      "headline": "「断じて\n容認いたしません」",
+      "lines": [
+        "配信はその場で打ち切り。店は後日、配信者に迷惑な行いは一切なかったとし、営業にも、居合わせたお客さんにも影響が出たと発表しました。",
+        "そして「嫌がらせを目的とした虚偽通報は、断じて容認いたしません」と、被害届も含めて法的な対応を考えているとしています。"
+      ]
+    },
+    {
+      "label": "うその119番",
+      "headline": "晴れの初日を\n台なしに",
+      "lines": [
+        "うその119番は、消防法で罰金の対象にもなる行為です。",
+        "配信者を困らせるための嫌がらせが、晴れの初日の店を台なしにしました。そしてあの夜の消防車は、本当に助けを待つ誰かのためのものだったはずです。"
+      ]
+    }
+  ]
+}
