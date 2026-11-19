@@ -1,9 +1,13 @@
 {
   "channel": "k10",
   "issue": 6,
-  "stage": "find",
+  "stage": "render",
   "title": "王子の称号を選ばなかった女王最後の孫ジェームズ",
   "date": "2026-11-19",
+  "review": "16/16",
+  "music": {
+    "pick": "24-1"
+  },
   "searches": [
     "wiki:James, Earl of Wessex",
     "wiki:Prince Edward, Duke of Edinburgh",
@@ -40,7 +44,6 @@
   "scenes": [
     {
       "label": "女王最後の孫",
-      "era": "2026年",
       "headline": "王子の称号を\n選ばなかった孫",
       "lines": [
         {
@@ -48,14 +51,53 @@
           "quote": true
         },
         "この春、キャサリン妃の隣に立つ姿が、若き日のウィリアム王子にそっくりだと話題になりました。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "5-23",
+          "focus": [
+            0.5,
+            0.2
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "11-2",
+          "focus": [
+            0.6,
+            0.3
+          ],
+          "move": "push-in"
+        }
+      ],
+      "why": "Mở đầu: Nữ hoàng Elizabeth (ai cũng nhận ra) khi đọc câu móc, rồi đẩy vào James đứng cạnh Kate lễ Phục sinh 2026."
     },
     {
       "label": "秘密の兵器",
       "headline": "女王が残した\n秘密の兵器",
       "lines": [
         "ネットでは、女王がシャーロット王女に残した、秘密の兵器とまで呼ばれています。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "31-5",
+          "focus": [
+            0.55,
+            0.25
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "23-2",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "rise"
+        }
+      ],
+      "cut": "fade",
+      "why": "Công chúa Charlotte, rồi lia dọc dáng cao của James khi nói biệt danh 'vũ khí bí mật Nữ hoàng để lại cho Charlotte'."
     },
     {
       "label": "8人の孫",
@@ -64,7 +106,24 @@
       "lines": [
         "女王の末の息子エドワード王子と、ソフィー妃の長男で、2007年生まれ。",
         "女王の8人の孫の、いちばん末っ子です。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "16-7",
+          "fit": "contain",
+          "move": "push-in"
+        },
+        {
+          "pick": "30-2",
+          "focus": [
+            0.35,
+            0.4
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "page",
+      "why": "Chương mới (cậu là ai): lật trang, hiện nguyên ảnh bố mẹ bế em bé năm 2007 và đẩy nhẹ vào, rồi đẩy vào Edward bế James lúc nhỏ."
     },
     {
       "label": "称号",
@@ -72,7 +131,27 @@
       "lines": [
         "本来は殿下と呼ばれる王子ですが、両親は、いずれ自分で働くことになるからと、称号を使わずに育てました。",
         "18歳になった彼も、姉のルイーズさんと同じ道を選んだと伝えられています。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "22-1",
+          "focus": [
+            0.4,
+            0.4
+          ],
+          "move": "pull-back"
+        },
+        {
+          "pick": "22-3",
+          "focus": [
+            0.6,
+            0.3
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "fade",
+      "why": "Cả gia đình bốn người (lùi ra) khi nói bố mẹ không dùng tước hiệu, rồi đẩy vào James đứng giữa bố và chị Louise khi nói cậu chọn giống chị."
     },
     {
       "label": "祖母と孫",
@@ -80,7 +159,27 @@
       "lines": [
         "幼い頃から祖母に深く愛され、たびたび女王のそばに寄り添ってきた彼には、",
         "シャーロット王女を守ると女王に約束した、という話まであります。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "16-1",
+          "focus": [
+            0.6,
+            0.5
+          ],
+          "move": "pull-back"
+        },
+        {
+          "pick": "31-3",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "fade",
+      "why": "Nữ hoàng và cậu bé James trên ban công (lùi ra cho thấy cả hai) khi nói bà thương cậu, rồi đẩy vào Charlotte khi nói lời hứa bảo vệ."
     },
     {
       "label": "女王との別れ",
@@ -89,7 +188,27 @@
       "lines": [
         "2022年、女王が亡くなると、14歳のジェームズは、いとこたちと棺のそばに立ちました。",
         "葬儀では、国王よりも悲しんで見えたという声が上がったほどです。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "17-1",
+          "focus": [
+            0.5,
+            0.4
+          ],
+          "move": "pull-back"
+        },
+        {
+          "pick": "18-1",
+          "focus": [
+            0.6,
+            0.35
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "dip",
+      "why": "Nữ hoàng mất: tối rồi sáng lại, lùi ra trên linh cữu có các cháu đứng canh, rồi đẩy vào James cúi đầu ở lễ tang."
     },
     {
       "label": "いまのジェームズ",
@@ -101,14 +220,54 @@
           "say": "キャサリンひの頼もしい味方、ソフィーひのもとで育った彼は、今や父より背の高い青年に。"
         },
         "それでも、静かで謙虚な姿は変わりません。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "20-1",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "21-1",
+          "focus": [
+            0.6,
+            0.3
+          ],
+          "move": "rise"
+        }
+      ],
+      "cut": "fade",
+      "why": "Sophie và Kate cười bên nhau khi nói Sophie là chỗ dựa của Kate, rồi lia dọc James cao hơn bố khi đi cạnh Edward."
     },
     {
       "label": "女王が愛した孫",
       "headline": "女王が愛した\n最後の孫",
       "lines": [
         "王子の称号はなくても、女王が最後まで愛した孫は、今も静かに、王室のそばに立っています。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "1-1",
+          "focus": [
+            0.45,
+            0.35
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "12-2",
+          "focus": [
+            0.6,
+            0.35
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "dip",
+      "why": "Kết: tối rồi sáng lại, James chàng trai trầm lặng, rồi lùi ra trên James ở lễ Phục sinh 2026, câu kết quay về câu mở đầu."
     }
   ]
 }
