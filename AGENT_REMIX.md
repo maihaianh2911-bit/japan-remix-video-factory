@@ -92,7 +92,11 @@ gh api "repos/$R/issues?state=open&labels=remix&per_page=50" --jq '[.[] | select
   2. `geo:<lat>,<lon> <metres>` for a place whose photos carry other names; the coordinates of a `wiki:` item are in
      `index.json`.
   3. `web:<Japanese words>` for the moments of the story and for living people, of whom Commons has little: 2–3 per
-     scene.
+     scene. Each now brings up to 20 pictures from about 55 candidates (19/11/2026). When a result comes from an
+     article with more pictures of the same event, append `page:<that article's address>` (the `page` of the result
+     in `index.json`). For old Japan and old China as Japan's archives hold them (prints, paintings, old
+     photographs, objects) add `jps:<Japanese words>`: Japan Search, free licences only. And the video the owner
+     sent is a picture source too: `python tools/video_frames.py <video> <story>` (`CLAUDE.md`, "Story format").
   4. A wish ` => <English description>` on a search that would bring many wrong pictures: the machine keeps only the
      pictures that show it, best first (`"web:溥儀 皇帝 若い頃 => a young Chinese emperor in imperial robes"`).
   5. **One `music:` search at least** (`"music:Schumann Träumerei piano"`, `"music:Chopin Nocturne piano"`,

@@ -51,6 +51,20 @@ Video thử (ví dụ bản 20 giây để duyệt giao diện): ghi "thử" ho�
   khóa thì phiếu chờ: mở một chat với Claude và nhờ làm tiếp. Không có lượt chạy mỗi giờ: nếu Claude lỡ một lần gọi
   (ví dụ hết hạn mức), vào **Actions → Gọi Claude ngay → Run workflow**.
 
+## Ghi chú 19/11/2026: tìm ảnh rộng hơn (như kênh Tin Nhật)
+
+- **Tìm web rộng hơn** (`web:`): mỗi lần tìm máy xem khoảng 55 ảnh (trước là 20), giữ 20 ảnh (trước là 12); ảnh nào
+  trang gốc không cho tải thì lấy bản sao cùng cỡ mà Yahoo! JAPAN đang giữ.
+- **Lấy ảnh trong một bài báo** (`page:` + link bài): các ảnh lớn của đúng bài đó, tối đa 20 ảnh.
+- **Kho lưu trữ Nhật** (`jps:`): Japan Search (thư viện quốc hội, thư viện và kho lưu trữ các thành phố…), chỉ ảnh
+  được phép dùng; nên tìm theo sự việc, địa danh, đồ vật chứ không theo tên người. Nguồn này khiêm tốn (thử 6 lần
+  tìm: 2 lần được 12 ảnh, 2 lần được 1–2 ảnh, 2 lần không được ảnh nào); ảnh của các bảo tàng quốc gia (ColBase)
+  hiện chưa tải được.
+- **Hình từ video mày gửi**: `tools/video_frames.py` bày mỗi cảnh của video thành một ô để Claude chọn, rồi cất hình
+  đã chọn vào repo (ghi nguồn 元動画). Đoạn video chuyển động thì mày cũng cho dùng, nhưng khung hình hiện chỉ hiện ảnh
+  tĩnh: muốn chèn đoạn video phải làm thêm và có bản thử cho mày duyệt.
+- **Bớt báo đỏ giả**: nguồn ảnh không bao giờ lấy được chỉ còn là một dòng ghi chú, máy không báo lỗi và không thử lại.
+
 ## Chưa làm
 
 - Giao diện và giọng riêng cho từng kênh (tiêu đề cố định, huy hiệu xếp hạng cho kênh 8, màu riêng, giọng khác): làm

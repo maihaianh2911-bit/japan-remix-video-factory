@@ -58,8 +58,12 @@ channel file (and of the frame code when the look is new), never of each story.
 
 ### The rules and risks of each channel (`docs/KENH-NHAT.md`, told to the owner)
 - **All four** retell another channel's video: YouTube penalises reused content, so rewrite in our own words, add
-  value (a clear meaning, our own angle), and never reuse their voice, their music or whole stretches of their
-  pictures; a picture cut out of the source video only when clean (no burnt-in caption), credited `元動画`, a few.
+  value (a clear meaning, our own angle), and never reuse their voice or their music. **The pictures and the
+  footage of the video the owner sends may be used** (owner, 19/11/2026: "nếu repo nào đc dựng bằng cách remix video
+  hoặc tao có gửi video, có thể sử dụng hình ảnh/video trong video tao gửi"; before that: only a few): clean ones (a
+  frame with the source's caption, logo or watermark over the picture is cropped clean or left), credited `元動画`.
+  The more of the source's pictures a video shows, the higher the reused-content risk (told to the owner again on
+  19/11): our own words, our own order and pictures of our own search beside them stay the rule.
   Never two channels on the same story: k10's Chinese side and k11 border on channel 7 (the dark side of history,
   `japan-dark-history-video-factory`), k11 on channel 12 (a historical person's life, `japan-figures-video-factory`);
   k10 is never the Japanese imperial family (channels 1–2, `japan-news-video-factory`).
@@ -266,15 +270,41 @@ allow `main`.
        was found (`"wikidata"`): check it. **Write one `wiki:` search for every person and place of a story, before
        the `web:` searches** (k9: never for a private person).
      - `geo:<lat>,<lon> <metres>`: Commons photos taken around a point, nearest first (up to 12; 500 m by default).
-     - `web:<words>`: a free web image search (Bing, else Yahoo! JAPAN, else DuckDuckGo; Japanese words work; stock
+     - `web:<words>`: a free web image search (Yahoo! JAPAN, else Bing, else DuckDuckGo; Japanese words work; stock
        sites with watermarks are left out); 2–3 per scene, for the moments of the story and for living people, of
        whom Commons has little. Their licence is unknown and the site is credited (owner, 14/11/2026: pictures may
-       come from anywhere on the web; the copyright risk was told and accepted).
+       come from anywhere on the web; the copyright risk was told and accepted). **Wider since 19/11/2026** (owner:
+       "có cách nào để tìm hình ảnh mở rộng ra ko"): three result pages of Yahoo! JAPAN (about 55 candidates, 20
+       before) and **20 pictures kept** (12 before; with a wish, the best 20 of 45); a picture its own site will
+       not give is taken from the search engine's own full-size copy, still credited to its site.
+     - `page:<address of one article>` (19/11/2026): **the pictures that article shows** (up to 20): the page's own
+       picture first, then the pictures in the order of the page, each in its largest version, without the page's
+       header, footer, menus, side columns and furniture. For a press article or a photo page found by a `web:`
+       search (the `page` of a result in `index.json`) that has more pictures of the same event. Credited to the
+       site, licence unknown, as `web:`; a page the site refuses is `"unusable"`. k9: the rule on private people
+       holds for every picture of the page.
+     - `jps:<Japanese words>` (19/11/2026): **Japan Search** (jpsearch.go.jp), the shared catalogue of Japan's
+       archives, libraries and museums (the National Diet Library, city libraries and archives, university
+       collections, the cultural-heritage sites): old prints, paintings, photographs, objects, the records
+       catalogued as pictures first. Only records whose rights allow use (public domain, CC0, CC BY, CC BY-SA), up
+       to 12, credited to the holding site with the licence. For k11 and the old side of k10 (`"jps:紫禁城"`,
+       `"jps:関東大震災"`). **Search a thing, a place or an event, not a person**: a name brings mostly books about
+       that person, whose cover scans are left out. **A modest source**: tried on GitHub (19/11/2026), of six
+       searches two brought 12 pictures (`関東大震災`, `土偶`), two brought 1–2 (`富士山 浮世絵`, `紫禁城`) and two
+       names of people none; the pictures of ColBase (the national museums) and of the Tokyo museums cannot be
+       loaded at present (404 and 403), so those records are passed over. Use it beside `wiki:` and `web:`, not
+       instead. A wish ` => …` works on `page:` and `jps:` as on `web:`.
      - `music:<words>`: at least one in every story (the edit).
      - Commons words without a prefix (English works best; `incategory:"…"`), `url:<picture> [<page>]` (one
        picture), `file:stories/media/<story>/<name>.jpg` (a picture kept in the repository, credited 元動画: a clean
        moment cut out of the source video, without its blurred background or burnt-in caption; prefer a web copy of
-       the same picture when it is larger).
+       the same picture when it is larger). **The video the owner sent is a picture source like the searches**
+       (owner, 19/11/2026): `python tools/video_frames.py <video> <story>` lays out one frame of every shot on a
+       numbered sheet (look at it), `… --keep 3,7 [--crop x,y,w,h]` saves the chosen ones as
+       `stories/media/<story>/v-<m>m<ss>s.jpg` and prints the `file:` searches to append (`--crop`, fractions of
+       the frame, cuts off a burnt-in caption or takes an inset picture out of its blurred background). Moving
+       footage (a clip inside a scene) is allowed by the owner too, but the frames of this engine show still
+       pictures only: a clip needs new frame code and a trial the owner approves first; until then take stills.
      - A wish: ` => <what the picture must show, in English>` at the end of a `wiki:`, `geo:`, Commons or `web:`
        search (`"web:エリザベス女王 戴冠式 1953 => a young queen crowned in Westminster Abbey"`): the machine looks
        at more pictures than it keeps, scores each against the wish (CLIP) and keeps the best, best first; pictures
