@@ -10,7 +10,7 @@
   sample story carries all of it;
 - the voice comes from the channel file, not from the code: a stand-in channel with another VOICEVOX speaker is
   voiced (against a stand-in engine) and credited (on the frame, in both layouts) with that speaker;
-- the posting caption must carry the channel's hashtags and be named after its story;
+- the posting caption must carry the channel's hashtags and be named after its story, and may carry a ※ correction note;
 - the lists of each channel's videos on the renders branch (tools/channel_lists.py);
 - iron rule 2 in the machine: a story whose voice is under 60 seconds is refused before its video is made, a trial
   ("trial": true) is made all the same (a second of video: needs ffmpeg).
@@ -244,6 +244,11 @@ def caption_checks():
     assert captions.problems(good, required) == [], captions.problems(good, required)
     missing = captions.problems(good.replace("#歴史のなぜ ", "#江戸 "), required)
     assert len(missing) == 1 and "#歴史のなぜ" in missing[0], missing
+    # the correction note of a video that tells a rumour (owner, 19/11/2026): lines starting with ※, own block
+    noted = good.replace("\n\n#歴史", "\n\n※この話の一部は噂として伝えられているもので、事実とは確認されていません。\n\n#歴史", 1)
+    assert captions.problems(noted, required) == [], captions.problems(noted, required)
+    bad_note = noted.replace("※この話", "この話")
+    assert captions.problems(bad_note, required), "a fourth block without ※ must be refused"
     with tempfile.TemporaryDirectory(prefix="channel-caption-") as scratch:
         for name, ok in (("k11-2026-11-19-nihonbashi", True), ("mau-k11", True), ("k8-2026-11-19-x", False),
                          ("2026-11-19-nihonbashi", False)):

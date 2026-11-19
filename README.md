@@ -17,7 +17,7 @@ có chiều sâu, chữ hiện theo giọng đọc, nhạc nền nhẹ, mỗi c�
 | 11 | 📜 Kênh 11 · Lịch sử “vì sao…?” | một câu hỏi "vì sao" của lịch sử và câu trả lời | ヒューマン伝 |
 
 Mỗi kênh có luật riêng để tránh bị kiện và bị YouTube phạt: chỉ kể chuyện báo chí đã đưa tin, không chế giễu ai;
-kênh 9 không nêu tên, không lộ mặt người thường; kênh 10 không dùng tin đồn báo lá cải; kênh 11 chỉ theo sử đã được
+kênh 9 không nêu tên, không lộ mặt người thường; kênh 10 được kể tin đồn (cả tin báo lá cải), nói rõ là tin đồn và đính chính ở caption; kênh 11 chỉ theo sử đã được
 công nhận, đề tài nhạy cảm kể trung lập. Claude theo các luật này khi viết lại.
 
 ## Làm một video

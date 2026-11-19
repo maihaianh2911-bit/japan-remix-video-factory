@@ -74,9 +74,10 @@ gh api "repos/$R/issues?state=open&labels=remix&per_page=50" --jq '[.[] | select
   story and facts in the same order, our own sentences, the script rules of `CLAUDE.md` ("When the owner sends a
   source video", step 2). Keep the source's colourful details, framing the unconfirmed ones as told (owner,
   18/11/2026: a script that keeps only what the press printed "sẽ chán hơn rất nhiều"); leave out only what the
-  channel's rules forbid (k9 no private people, k10 no tabloid rumours about living royals, k11 accepted history,
+  channel's rules forbid (k9 no private people, k11 accepted history,
   no crime or serious accusation against a private person stated as fact) or what is known to be false, and say so
-  on the issue. Never invent.
+  on the issue. Never invent. k10 may tell rumours, tabloid ones too (owner, 19/11/2026): framed as told, once, and
+  corrected in the caption's ※ note.
 - Pictures may come from anywhere on the web (owner, 14/11/2026, risk accepted): `web:` searches next to Commons
   ones. Skip pictures with a watermark, a logo or text burnt in, or a small blurred copy.
 - Every scene gets its own fitting picture (owner, 12/11/2026): 2–3 searches per scene from the start, search again
@@ -155,13 +156,13 @@ Read the issue form (Video gốc, Lời của video gốc, Ghi chú) and the own
    - the main person is whole and seen: face not cut by the crop, not under the headline or the hook;
    - it is clean and sharp enough: no burnt-in news captions, logos or watermarks, not a small picture blown up;
    - it is not a near-duplicate of another pick (the same moment from another site);
-   - the channel's rules hold: k9 no private person's face; k11 no Nazi symbol in the first frame; k10 no picture
-     from a tabloid rumour.
+   - the channel's rules hold: k9 no private person's face; k11 no Nazi symbol in the first frame.
    Any row that fails: pick another picture (or append searches, step 2), preview, run the review again. When every
    row passes, write `"review": "<n>/<n>"` in the story (the number of pictures); the closing comment says
    "Đã duyệt ảnh: N/N ảnh khớp lời đọc".
 6. Write the posting caption `captions/<name>.txt` (format: `CLAUDE.md`, "Posting caption": the channel's hashtags
-   are required; only facts of the script) and check it with `python -m news.captions captions/<name>.txt`; it is
+   are required; only facts of the script; a video that tells a rumour, above all k10, adds the ※ correction note
+   of each rumour) and check it with `python -m news.captions captions/<name>.txt`; it is
    published with the video.
 7. `python -m news.custom stories/<name>.json`: no problem and **no edit warning**. Set `stage: "render"`, commit
    `[remix #N] chọn ảnh`, push, remove `remix-busy`. (Voice and video ~3–6 min; you are called at `remix-check`.)
