@@ -167,7 +167,12 @@ Read the issue form (Video gốc, Lời của video gốc, Ghi chú) and the own
    - the main person is whole and seen: face not cut by the crop, not under the headline or the hook;
    - it is clean and sharp enough: no burnt-in news captions, logos or watermarks, not a small picture blown up
      (k9: TV screenshots and captioned pictures are fine, owner 19/11/2026);
-   - it is not a near-duplicate of another pick (the same moment from another site);
+   - it passes **the picture rules of the edit** (`CLAUDE.md`, owner 19/11/2026): the first picture is the best of
+     the video (rules 1–5), the whole face stays in the frame during the whole move and no text lies over it (6–7),
+     the person spoken of is the clearest of a group and not a very small face (8–9). The preview's `warning:` lines
+     about faces and the first picture are settled first (the `"focus"` it gives, another move, `"fit": "contain"`,
+     another picture); what it cannot see (2, 3, 8, 9) you check here. A picture may be used again in the video:
+     "no near-duplicate" is not a rule, the owner turned it down on 19/11/2026;
    - the channel's rules hold: k9 shows the people of the story, private people too (owner, 19/11/2026); k11 no Nazi symbol in the first frame.
    Any row that fails: pick another picture (or append searches, step 2), preview, run the review again. When every
    row passes, write `"review": "<n>/<n>"` in the story (the number of pictures); the closing comment says

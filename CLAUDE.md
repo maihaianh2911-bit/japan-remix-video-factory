@@ -47,6 +47,43 @@ each (the same in every repo of the owner's Japanese channels):
    scene whose words last over 6 seconds has at least two pictures; under 6 seconds one is enough; more is free.
    `python -m news.custom` warns of a scene over 6 seconds (estimated from its characters) with one picture.
 
+## The picture rules of the edit (owner, 19/11/2026: "hook 5s đầu phải là ảnh đẹp, rồi ảnh k bị mất mặt") — approved one by one
+Each rule is a question a look at the picture answers with yes or no. A picture that fails one is not used as it
+is: frame it again, pick another, or search again.
+
+**The first picture (the hook, about the first 5 seconds)**
+1. It is the best picture of the whole video: sharp, bright, not blurred, not grainy.
+2. It shows the face of the main person clearly, or a place or a thing the Japanese audience recognises at once.
+3. It matches the hook line: the right person, the story being told.
+4. It is a photograph: not a newspaper page, a document, a collage with text or a picture with a logo.
+5. The face is in the upper half of the frame, clear of the hook line printed on the foot of the picture.
+
+**Faces (every scene)**
+6. The whole face, forehead to chin, stays inside the frame for as long as the picture is shown, while it zooms or
+   pans too.
+7. The text on the picture (the headline of the scene, a quote, the captions) does not lie over a face.
+8. In a picture of several people, the one being spoken of is the clearest; if not, frame that person or change
+   the picture.
+9. A scene about one person does not use a picture in which that person's face is very small.
+
+**Every picture**
+10. When no picture passes, search again (`web:`, `page:`, the owner's video); if there is still none, tell the
+    owner which scene lacks one. A poor picture is never taken just to be done.
+
+The owner turned down two more that were proposed, so they are **not** rules: "a picture is used only once in a
+video, and two near-identical pictures are not put side by side", and "the last picture must be a fine one too".
+A picture may be used again where it fits. k9 keeps its own exception to rule 4 for the pictures of people (a TV
+screenshot with its caption may show a person), not for the first picture's sharpness.
+
+**What the machine watches** (the preview `python -m news --story … --stills …` prints a `warning:` for each; settle
+every one before the render): the first picture under 900 px on one side, or shown whole / marked flat (rules 1 and
+4); a face cut by the frame or leaving it during the move, with the `"focus"` that keeps it when there is one
+(rule 6); a face under the headline or the hook line, or in the lower half of the first picture (rules 5 and 7).
+The faces are found by `news/faces.py` (YuNet of OpenCV Zoo, the model is `news/face_yunet.onnx`); it needs
+`pip install opencv-python-headless numpy`, and without it the preview says `note: faces not checked`: then look
+at every face yourself. The machine does not see rules 2, 3, 8 and 9: those are for your eyes, at the review.
+(`bash tools/check.sh` prints such warnings for the sample stories too: their pictures are small stand-ins.)
+
 The owner is Vietnamese and not technical: answer in short, simple Vietnamese, no jargon. They write "tao" (I) and
 "mày" (you); answer the same way, "tao" for yourself and "mày" for them. Their standing decisions are in
 `maihaianh2911-bit/japan-video-factory` → `docs/HANDOVER.md`, and the plan of their 14 Japanese channels with the
@@ -172,7 +209,8 @@ The owner's hook rules, common to every new channel (mirrored from `docs/KENH-NH
    it in a trial.
 5. **The hook picture is one the Japanese audience recognises at once, and it matches the hook line** (18/11/2026):
    the best-known face of the person the hook names, or a famous place or thing, sharp, and right for what the line
-   says. The picture review checks it first (`AGENT_REMIX.md` §2 step 5).
+   says. The picture review checks it first (`AGENT_REMIX.md` §2 step 5). On 19/11/2026 the owner made this
+   concrete: rules 1–5 of "The picture rules of the edit" above.
 
 The owner took two older rules out of the hook (18/11/2026): the video's meaning with its ending coming back to the
 opening, and never inventing. On 19/11/2026 the owner changed both in the script rules too: the ending is free, and
@@ -362,7 +400,7 @@ allow `main`.
      the run's summary name it): running the find again changes nothing. Append another search instead: the exact
      title of the Wikipedia article or the item `Q…`, a `web:` search, another address of the picture.
    A `url:` picture that another search already found is kept all the same (`"same_as": "<k>-<n>"` names the pick
-   it repeats): use one of the two, never both in a video. Wikimedia refuses requests from Claude's cloud session
+   it repeats): they are the same picture. Wikimedia refuses requests from Claude's cloud session
    (429), which is why the search runs on GitHub.
 3. Put the picks in the scenes: `"photo": "<k>-<n>"`, `{"pick": "<k>-<n>", "focus": [x, y]}` (the point kept in the
    frame, 0–1), `{"pick": …, "fit": "contain"}` (the whole picture: portraits, documents), or a list of 1–4 of these
