@@ -1,7 +1,7 @@
 {
   "channel": "k9",
   "issue": 3,
-  "stage": "find",
+  "stage": "render",
   "title": "「5万人来る」はずのグルメフェスに来たのは数百人 主催者は「一番下を知れた」",
   "date": "2026-11-19",
   "searches": [
@@ -50,37 +50,123 @@
           "text": "「5万人来る」と言われたグルメフェスに来たのは数百人。主催者は「一番下を知れた」と語りました。",
           "quote": true
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "6-3",
+          "focus": [
+            0.55,
+            0.55
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "7-3",
+          "fit": "contain",
+          "move": "pull-back",
+          "depth": false
+        }
+      ],
+      "why": "Câu móc in to trên ảnh thật của hội chợ vắng người, rồi lùi ra từ hình quảng bá của sự kiện."
     },
     {
       "label": "5万人の約束",
+      "era": "2026年11月",
       "headline": "「10万人以上\n来るかも」",
       "lines": [
         {
           "text": "11月7日と8日、鳥取県倉吉市で開かれた「ローカルフードファイトin鳥取」。",
           "say": "11月7日と8日、鳥取県倉吉市で開かれた、ローカルフードファイト・イン・とっとり。"
         },
+        "全国のご当地グルメが東と西に分かれて売り上げを競う、入場無料のお祭りです。",
         "主催者側は出店者に、「10万人以上来るかもしれないと覚悟しておいてください」とまで伝えていたといいます。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "8-6",
+          "fit": "contain",
+          "move": "push-in",
+          "depth": false
+        },
+        {
+          "pick": "9-6",
+          "focus": [
+            0.5,
+            0.7
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "fade",
+      "why": "Poster sự kiện để nguyên (Đông – Tây, ngày 7–8/11), tiến vào chậm; rồi lùi ra bãi cỏ rộng trước bảo tàng, nơi lẽ ra có 10 vạn người."
     },
     {
       "label": "当日",
+      "era": "2026年11月",
       "headline": "会場は\nがらがら",
       "lines": [
         "ところが会場はがらがら。テントや電源、水道の設備も整っていなかったと報じられています。",
         "200キロの鶏肉を仕込んで売れたのは数キロ、40万円近い赤字を出した店もあったといいます。",
         "10万円のVIP枠には「100万回再生保証」の宣伝動画までうたわれていたといいますが、その再生は1000回から2万回でした。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "19-1",
+          "focus": [
+            0.4,
+            0.4
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "17-1",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "move": "pan-left"
+        },
+        {
+          "pick": "24-2",
+          "fit": "contain",
+          "move": "hold",
+          "depth": false
+        }
+      ],
+      "cut": "hard",
+      "why": "Cắt thẳng vào thực tế: thiếu điện, 200 ký gà chuẩn bị, rồi màn hình lượt xem video ngắn chỉ hơn 1.000."
     },
     {
       "label": "もう一人の主催者",
+      "era": "2026年11月",
       "headline": "「逃げたのでは」\nという声も",
       "lines": [
         "もう一人の主催者は、謝罪文で設営業者の責任にも触れ、病院から止められたとして発信をやめたと報じられています。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "19-5",
+          "focus": [
+            0.5,
+            0.6
+          ],
+          "move": "pan-right"
+        },
+        {
+          "pick": "33-1",
+          "focus": [
+            0.4,
+            0.6
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "fade",
+      "why": "Người tổ chức thứ hai (không lộ mặt, người thường): lia qua bãi dựng rạp, rồi tiến vào chiếc điện thoại khi nói chuyện thư xin lỗi."
     },
     {
       "label": "実行委員長",
+      "era": "2026年11月",
       "headline": "「一番下を\n知れたので」",
       "lines": [
         {
@@ -91,14 +177,59 @@
           "text": "「いい経験として、一番下を知れたので」",
           "quote": true
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "12-5",
+          "focus": [
+            0.55,
+            0.3
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "3-4",
+          "focus": [
+            0.5,
+            0.6
+          ],
+          "move": "pan-left"
+        }
+      ],
+      "cut": "page",
+      "why": "Lật trang sang trưởng ban Sayoto: tiến vào mặt anh, rồi câu nói in to trên bãi cỏ trống."
     },
     {
       "label": "一番下",
+      "era": "2026年11月",
       "headline": "一番下に\n立たされたのは",
       "lines": [
         "「一番下を知れた」。その一番下に立たされたのは、主催者の言葉を信じて店を出した人たちでした。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "14-1",
+          "focus": [
+            0.45,
+            0.65
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "1-1",
+          "focus": [
+            0.5,
+            0.6
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "dip",
+      "why": "Kết: tối rồi sáng lại, tiến vào gian hàng với bàn ghế trống của người bán, rồi lùi ra bảo tàng và bãi cỏ."
     }
-  ]
+  ],
+  "music": {
+    "pick": "28-4"
+  },
+  "review": "13/13"
 }
