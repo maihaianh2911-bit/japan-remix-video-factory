@@ -32,6 +32,8 @@ for story in stories/*.json; do python -m news.custom "$story"; done
 for caption in captions/*.txt; do python -m news.captions "$caption"; done
 step "picture search (made-up answers)"
 python tools/find_test.py
+step "pictures out of the owner's video (made-up video)"
+python tools/frames_test.py
 step "channel layer"
 python tools/channel_test.py
 step "stills of the sample stories"

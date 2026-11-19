@@ -92,7 +92,11 @@ gh api "repos/$R/issues?state=open&labels=remix&per_page=50" --jq '[.[] | select
   2. `geo:<lat>,<lon> <metres>` for a place whose photos carry other names; the coordinates of a `wiki:` item are in
      `index.json`.
   3. `web:<Japanese words>` for the moments of the story and for living people, of whom Commons has little: 2–3 per
-     scene.
+     scene. Each now brings up to 20 pictures from about 55 candidates (19/11/2026). When a result comes from an
+     article with more pictures of the same event, append `page:<that article's address>` (the `page` of the result
+     in `index.json`). For old Japan and old China as Japan's archives hold them (prints, paintings, old
+     photographs, objects) add `jps:<Japanese words>`: Japan Search, free licences only. And the video the owner
+     sent is a picture source too: `python tools/video_frames.py <video> <story>` (`CLAUDE.md`, "Story format").
   4. A wish ` => <English description>` on a search that would bring many wrong pictures: the machine keeps only the
      pictures that show it, best first (`"web:溥儀 皇帝 若い頃 => a young Chinese emperor in imperial robes"`).
   5. **One `music:` search at least** (`"music:Schumann Träumerei piano"`, `"music:Chopin Nocturne piano"`,
@@ -130,8 +134,12 @@ Read the issue form (Video gốc, Lời của video gốc, Ghi chú) and the own
    place? If not, append the search again with the exact Wikipedia title or the item. A search with a wish shows its
    score on the sheet (`~0.31`: it shows the thing; near `0.20`: doubtful; `"ranked": false`: the ranking was not
    installed, the wish was ignored); an empty group means nothing showed the wish: append other words. `index.json`
-   has titles, authors and licences (and, for `music:`, the length in `seconds`); a search with `"error"` failed: run
-   the find again with the dispatch command of §4 (only the failed searches are tried again).
+   has titles, authors and licences (and, for `music:`, the length in `seconds`); a search with `"error"` failed
+   because its source did not answer: run the find again with the dispatch command of §4 (only the failed searches
+   are tried again). A search with `"unusable"` cannot work as written (a `wiki:` name that names nothing, a
+   `url:` picture the site refuses or that is too small): the run is green and it is never tried again, so do
+   **not** run the find again for it. Read its reason and append another search if the scene still needs that
+   picture (`CLAUDE.md`, "Story format", step 2).
 2. A scene without two fitting pictures, or no fitting music → append searches (never change or reorder existing
    ones), keep `stage: "find"`, commit `[remix #N] tìm thêm ảnh`, push, remove `remix-busy`. You are called again at
    `remix-pick`.
