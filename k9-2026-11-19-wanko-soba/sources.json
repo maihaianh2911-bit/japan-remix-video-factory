@@ -1,0 +1,218 @@
+{
+  "channel": "k9",
+  "trial": false,
+  "duration_seconds": 65.44,
+  "release": {
+    "url": "",
+    "published": "2026-11-19",
+    "publisher": "",
+    "title": "わんこそば店のオープン初日 生配信中のうその通報で消防車5台以上"
+  },
+  "photos": [
+    {
+      "page": "https://www.shibukei.com/photoflash/23114/",
+      "title": "テーブルに重ねられたわんと裏に杯数を記した手形＝渋谷に ...",
+      "creator": "shibukei.com",
+      "license": "",
+      "license_url": "",
+      "edits": "Cropped and animated for the vertical frame"
+    },
+    {
+      "page": "https://www.tfd.metro.tokyo.lg.jp/fs/sibuya/page_00001.html",
+      "title": "消防署紹介 | 東京消防庁",
+      "creator": "tfd.metro.tokyo.lg.jp",
+      "license": "",
+      "license_url": "",
+      "edits": "Cropped and animated for the vertical frame"
+    },
+    {
+      "page": "https://commons.wikimedia.org/wiki/File:1_shibuya_crossing_2012.jpg",
+      "title": "1 shibuya crossing 2012.jpg",
+      "creator": "chensiyuan",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "edits": "Cropped and animated for the vertical frame"
+    },
+    {
+      "page": "https://tabelog.com/tokyo/A1303/A130301/13324317/dtlphotolst/smp2/",
+      "title": "写真 : わんこそば 鉢公 - 渋谷/そば | 食べログ",
+      "creator": "tabelog.com",
+      "license": "",
+      "license_url": "",
+      "edits": "Cropped and animated for the vertical frame"
+    },
+    {
+      "page": "https://wankosoba.org/",
+      "title": "わんこそば 鉢公 -hachiko- | WANKO SOBA HACHIKO 渋谷",
+      "creator": "wankosoba.org",
+      "license": "",
+      "license_url": "",
+      "edits": "Cropped and animated for the vertical frame"
+    },
+    {
+      "page": "https://kumin.news/itabashi/articles/587767",
+      "title": "119番通報が非常に多くなっています！】 携帯電話からの「無言 ...",
+      "creator": "kumin.news",
+      "license": "",
+      "license_url": "",
+      "edits": "Cropped and animated for the vertical frame"
+    },
+    {
+      "page": "https://r.gnavi.co.jp/fp1ky79n0000/",
+      "title": "わんこそば鉢公（渋谷/和食） - 楽天ぐるなび",
+      "creator": "r.gnavi.co.jp",
+      "license": "",
+      "license_url": "",
+      "edits": "Cropped and animated for the vertical frame"
+    },
+    {
+      "page": "https://r.gnavi.co.jp/fp1ky79n0000/",
+      "title": "わんこそば鉢公（渋谷/和食） - 楽天ぐるなび",
+      "creator": "r.gnavi.co.jp",
+      "license": "",
+      "license_url": "",
+      "edits": "Cropped and animated for the vertical frame"
+    },
+    {
+      "page": "https://www.joqr.co.jp/qr/article/109567/",
+      "title": "消防車ってどうやって作ってるの？』＜WEBオリジナル記事 ...",
+      "creator": "joqr.co.jp",
+      "license": "",
+      "license_url": "",
+      "edits": "Cropped and animated for the vertical frame"
+    },
+    {
+      "page": "https://kurukura.jp/article/27251-20231114-50/",
+      "title": "なぜ救急車は消防署に待機しているのか？ 救急車を呼んだら消防 ...",
+      "creator": "kurukura.jp",
+      "license": "",
+      "license_url": "",
+      "edits": "Cropped and animated for the vertical frame"
+    }
+  ],
+  "voice_credit": "VOICEVOX:青山龍星",
+  "voice": {
+    "speaker": "青山龍星",
+    "style": "ノーマル"
+  },
+  "music": {
+    "title": "Satie - Gnossienne 1.ogg",
+    "page": "https://commons.wikimedia.org/wiki/File:Satie_-_Gnossienne_1.ogg",
+    "creator": "Composer: Erik Satie Performer: La Pianista",
+    "license": "Public domain"
+  },
+  "scenes": [
+    {
+      "label": "ネット炎上",
+      "headline": "オープン初日に\n消防車5台以上",
+      "lines": [
+        "人気わんこそば店のオープン初日、生配信の最中にうその通報が入り、消防車が5台以上駆けつけました。"
+      ],
+      "visual": "photo",
+      "value": "",
+      "evidence": "",
+      "say": [],
+      "cut": "",
+      "why": "Câu móc in to: chồng bát wanko soba có thẻ tên quán Hachikō, rồi lia dọc hàng xe của trạm cứu hỏa Shibuya đúng lúc nói 5 xe.",
+      "era": "2026年11月7日",
+      "quotes": [
+        0
+      ],
+      "image_url": "https://www.shibukei.com/photoflash/23114/",
+      "image_urls": [
+        "https://www.shibukei.com/photoflash/23114/",
+        "https://www.tfd.metro.tokyo.lg.jp/fs/sibuya/page_00001.html"
+      ]
+    },
+    {
+      "label": "渋谷",
+      "headline": "わんこそば店\n「鉢公」",
+      "lines": [
+        "11月7日の夜、東京・渋谷。期間限定の営業で人気を集めた、わんこそば店「鉢公」が、初めての常設店を開いた日のことです。",
+        "わんこそばは岩手の名物で、小さなお椀に、そばを次々と入れてもらいながら食べる料理です。"
+      ],
+      "visual": "photo",
+      "value": "",
+      "evidence": "",
+      "say": [
+        "11月7日の夜、東京、渋谷。期間限定の営業で人気を集めた、わんこそば店、はちこうが、初めての常設店を開いた日のことです。",
+        "わんこそばは岩手の名物で、小さなお椀に、そばを次々と入れてもらいながら食べる料理です。"
+      ],
+      "cut": "fade",
+      "why": "Mở ra ngã tư Shibuya ban đêm (nơi xảy ra), rồi đi lên tấm rèm tên quán Hachikō.",
+      "era": "2026年11月7日",
+      "quotes": [],
+      "image_url": "https://commons.wikimedia.org/wiki/File:1_shibuya_crossing_2012.jpg",
+      "image_urls": [
+        "https://commons.wikimedia.org/wiki/File:1_shibuya_crossing_2012.jpg",
+        "https://tabelog.com/tokyo/A1303/A130301/13324317/dtlphotolst/smp2/"
+      ]
+    },
+    {
+      "label": "生配信",
+      "headline": "許可を取って\n生配信",
+      "lines": [
+        "店の許可を取って、KICKの配信者、ぽんちゃんさんとぺるしあさんが、わんこそば対決を生配信していると、",
+        "配信を見ていた誰かが、嫌がらせのために店へ何度も電話をかけ、消防や警察にうその通報をしたといいます。"
+      ],
+      "visual": "photo",
+      "value": "",
+      "evidence": "",
+      "say": [
+        "店の許可を取って、キックの配信者、ぽんちゃんさんとぺるしあさんが、わんこそば対決を生配信していると、",
+        "配信を見ていた誰かが、嫌がらせのために店へ何度も電話をかけ、消防や警察にうその通報をしたといいます。"
+      ],
+      "cut": "fade",
+      "why": "Lúc đang thi ăn: tiến vào bát mì đang được rót; lúc kẻ xấu gọi báo giả: tiến vào màn hình bấm 119.",
+      "era": "2026年11月7日",
+      "quotes": [],
+      "image_url": "https://wankosoba.org/",
+      "image_urls": [
+        "https://wankosoba.org/",
+        "https://kumin.news/itabashi/articles/587767"
+      ]
+    },
+    {
+      "label": "店の発表",
+      "headline": "「断じて\n容認いたしません」",
+      "lines": [
+        "配信はその場で打ち切り。店は後日、配信者に迷惑な行いは一切なかったとし、営業にも、居合わせたお客さんにも影響が出たと発表しました。",
+        "そして「嫌がらせを目的とした虚偽通報は、断じて容認いたしません」と、被害届も含めて法的な対応を考えているとしています。"
+      ],
+      "visual": "photo",
+      "value": "",
+      "evidence": "",
+      "say": [],
+      "cut": "hard",
+      "why": "Buổi live bị cắt ngang (cắt thẳng): lia qua quán vắng, rồi tiến vào bát mì của quán khi đọc thông báo.",
+      "era": "2026年11月",
+      "quotes": [],
+      "image_url": "https://r.gnavi.co.jp/fp1ky79n0000/",
+      "image_urls": [
+        "https://r.gnavi.co.jp/fp1ky79n0000/",
+        "https://r.gnavi.co.jp/fp1ky79n0000/"
+      ]
+    },
+    {
+      "label": "うその119番",
+      "headline": "晴れの初日を\n台なしに",
+      "lines": [
+        "うその119番は、消防法で罰金の対象にもなる、れっきとした犯罪です。",
+        "配信者を困らせるための嫌がらせが、晴れの初日の店を台なしにしました。そしてあの夜の消防車は、本当に助けを待つ誰かのためのものだったはずです。"
+      ],
+      "visual": "photo",
+      "value": "",
+      "evidence": "",
+      "say": [],
+      "cut": "dip",
+      "why": "Kết: tối rồi sáng lại, lia qua hàng xe cứu hỏa, rồi lùi ra xe cứu hỏa đang chờ ở trạm (dành cho người thật sự cần).",
+      "era": "2026年11月",
+      "quotes": [],
+      "image_url": "https://www.joqr.co.jp/qr/article/109567/",
+      "image_urls": [
+        "https://www.joqr.co.jp/qr/article/109567/",
+        "https://kurukura.jp/article/27251-20231114-50/"
+      ]
+    }
+  ]
+}
