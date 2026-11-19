@@ -62,7 +62,27 @@
           "text": "わずか5年でヨーロッパの3人に1人が死んだ黒死病。なぜ広がったのか、答えは豊かさを運ぶ交易の道でした。",
           "quote": true
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "2-19",
+          "focus": [
+            0.5,
+            0.25
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "21-4",
+          "focus": [
+            0.45,
+            0.45
+          ],
+          "move": "pan-left",
+          "depth": false
+        }
+      ],
+      "why": "Mở đầu: chi tiết tranh 'Chiến thắng của Thần Chết' (Bruegel), đoàn xương người cầm khiên quan tài, bức tranh nổi tiếng nhất về dịch hạch, đẩy chậm vào khi đọc câu móc; rồi đoàn buôn lạc đà trên bản đồ Catalan 1375 lia sang trái (từ đông sang tây) khi nói 'con đường buôn bán'."
     },
     {
       "label": "死の船",
@@ -70,7 +90,27 @@
       "headline": "死者を乗せて\n港に着いた船",
       "lines": [
         "1347年、シチリア島に着いたジェノヴァの商船では、船乗りのほとんどが死に、残る者も黒く腫れた体で熱にうなされていました。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "18-3",
+          "focus": [
+            0.42,
+            0.5
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "10-2",
+          "focus": [
+            0.35,
+            0.45
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "page",
+      "why": "Chương mới, lật trang: tàu buôn Genova cập cảng, rồi đẩy vào những người nằm trên giường đầy nhọt đen khi nói thủy thủ sưng đen, mê man vì sốt."
     },
     {
       "label": "交易路",
@@ -78,7 +118,29 @@
       "headline": "東西を結んだ\nモンゴルの道",
       "lines": [
         "病の正体はペスト菌で、隊商の荷にまぎれたネズミとともに、モンゴル帝国が結んだ交易路を、東から西へ運ばれてきました。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "4-1",
+          "focus": [
+            0.42,
+            0.38
+          ],
+          "move": "close-up",
+          "depth": false
+        },
+        {
+          "pick": "22-13",
+          "focus": [
+            0.75,
+            0.45
+          ],
+          "move": "pan-left",
+          "depth": false
+        }
+      ],
+      "cut": "fade",
+      "why": "Lại gần vi khuẩn dịch hạch dưới kính hiển vi khi nói 'thủ phạm là vi khuẩn', rồi lia bản đồ đế quốc Mông Cổ từ đông sang tây theo đường bệnh đi."
     },
     {
       "label": "カッファ",
@@ -87,7 +149,34 @@
       "lines": [
         "黒海の港町カッファでは、町を囲んだモンゴル系の軍が、病死した兵士の遺体を投石機で城壁の中へ投げ込んだといいます。",
         "そこから逃げた商人たちの船が、港から港へと病をばらまいたのです。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "7-2",
+          "focus": [
+            0.62,
+            0.45
+          ],
+          "move": "reveal"
+        },
+        {
+          "pick": "8-6",
+          "focus": [
+            0.35,
+            0.45
+          ],
+          "move": "punch-in",
+          "depth": false
+        },
+        {
+          "pick": "27-16",
+          "move": "push-in",
+          "fit": "contain",
+          "depth": false
+        }
+      ],
+      "cut": "dip",
+      "why": "Nơi mới: mở ra từ cận cảnh tháp thành Genova ở Caffa (Feodosia); giật vào cảnh máy bắn đá ném xác (chi tiết gây sốc); rồi bản đồ đường lây từ Caffa qua Messina đi khắp các cảng."
     },
     {
       "label": "中世の町",
@@ -95,7 +184,27 @@
       "headline": "人がひしめく\n不潔な町",
       "lines": [
         "しかも町は人がひしめき、下水もなくネズミだらけで、人々は数十年前の大飢饉で弱りきっていました。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "28-1",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "move": "pan-right"
+        },
+        {
+          "pick": "30-1",
+          "focus": [
+            0.35,
+            0.55
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "fade",
+      "why": "Phố chợ thời Trung cổ chen chúc người, lia ngang; rồi đẩy vào những người đói lả khi nói nạn đói lớn."
     },
     {
       "label": "肺ペスト",
@@ -103,7 +212,19 @@
       "headline": "咳でうつる\n肺ペスト",
       "lines": [
         "さらに肺に入ったペストは、咳やくしゃみで人から人へうつり、かかればほとんど助かりません。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "31-3",
+          "focus": [
+            0.5,
+            0.45
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "hard",
+      "why": "Cảnh chôn người chết ở Tournai (1349): ai mắc thì gần như không qua khỏi."
     },
     {
       "label": "見えない敵",
@@ -111,7 +232,20 @@
       "headline": "悪い空気の\nせいだと信じた",
       "lines": [
         "正体を知る人はなく、人々は悪い空気のせいだと信じ、花の香りで身を守ろうとしました。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "33-6",
+          "focus": [
+            0.5,
+            0.45
+          ],
+          "move": "push-in",
+          "depth": false
+        }
+      ],
+      "cut": "fade",
+      "why": "Quả cầu thơm (pomander) đựng hương liệu để ngửi khi sợ 'không khí xấu'."
     },
     {
       "label": "検疫",
@@ -119,7 +253,28 @@
       "headline": "船を40日\n沖で待たせる",
       "lines": [
         "やがて港では、着いた船を沖で40日待たせるようになり、イタリア語の「40」、クアランタは、英語で検疫を表す言葉になりました。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "12-20",
+          "focus": [
+            0.4,
+            0.55
+          ],
+          "move": "pan-right",
+          "depth": false
+        },
+        {
+          "pick": "12-18",
+          "focus": [
+            0.55,
+            0.5
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "page",
+      "why": "Chương mới, lật trang: tranh khắc thuyền chở người bệnh tới trạm cách ly Venezia; rồi lùi ra cho thấy cả đảo Lazzaretto Vecchio, trạm kiểm dịch đầu tiên."
     },
     {
       "label": "横浜港",
@@ -127,7 +282,30 @@
       "headline": "700年後の\n検疫",
       "lines": [
         "2020年、横浜港のクルーズ船が受けた検疫も、700年近く前、死を運んだ船から人類が学んだ知恵なのです。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "37-1",
+          "focus": [
+            0.5,
+            0.6
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "36-1",
+          "focus": [
+            0.6,
+            0.45
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "dip",
+      "why": "Nhảy tới năm 2020: tàu Diamond Princess ở cảng Yokohama với xe cứu thương, rồi lùi ra cảnh con tàu lúc chạng vạng để kết, quay về con tàu ở đầu video."
     }
-  ]
+  ],
+  "music": {
+    "pick": "38-1"
+  }
 }
