@@ -1,7 +1,7 @@
 {
   "channel": "k9",
   "issue": 4,
-  "stage": "find",
+  "stage": "render",
   "title": "わんこそば店のオープン初日 生配信中のうその通報で消防車5台以上",
   "date": "2026-11-19",
   "searches": [
@@ -41,12 +41,13 @@
       ],
       "photo": [
         {
-          "pick": "5-3",
+          "pick": "20-2",
           "focus": [
-            0.45,
-            0.5
+            0.3,
+            0.45
           ],
-          "move": "push-in"
+          "move": "push-in",
+          "depth": false
         },
         {
           "pick": "9-10",
@@ -57,7 +58,7 @@
           "move": "pan-left"
         }
       ],
-      "why": "Câu móc in to: chồng bát wanko soba có thẻ tên quán Hachikō, rồi lia dọc hàng xe của trạm cứu hỏa Shibuya đúng lúc nói 5 xe."
+      "why": "Câu móc in to trên ảnh thật buổi livestream ở quán (ぺるしあ đang ăn giữa chồng bát), rồi lia dọc hàng xe cứu hỏa Shibuya đúng lúc nói 5 xe."
     },
     {
       "label": "渋谷",
@@ -80,16 +81,24 @@
           "move": "reveal"
         },
         {
-          "pick": "6-1",
+          "pick": "6-3",
+          "focus": [
+            0.4,
+            0.5
+          ],
+          "move": "rise"
+        },
+        {
+          "pick": "22-1",
           "focus": [
             0.45,
             0.5
           ],
-          "move": "rise"
+          "move": "push-in"
         }
       ],
       "cut": "fade",
-      "why": "Mở ra ngã tư Shibuya ban đêm (nơi xảy ra), rồi đi lên tấm rèm tên quán Hachikō."
+      "why": "Ngã tư Shibuya đêm, đi lên tấm rèm tên quán Hachikō, rồi nhân viên bưng khay bát wanko soba khi giải thích món ăn."
     },
     {
       "label": "生配信",
@@ -104,12 +113,13 @@
       ],
       "photo": [
         {
-          "pick": "5-1",
+          "pick": "20-1",
           "focus": [
-            0.5,
-            0.45
+            0.6,
+            0.4
           ],
-          "move": "push-in"
+          "move": "push-in",
+          "depth": false
         },
         {
           "pick": "13-1",
@@ -122,7 +132,7 @@
         }
       ],
       "cut": "fade",
-      "why": "Lúc đang thi ăn: tiến vào bát mì đang được rót; lúc kẻ xấu gọi báo giả: tiến vào màn hình bấm 119."
+      "why": "Tiến vào ぽんちゃん đang ăn (ぺるしあ phía sau) trong buổi live; rồi màn hình bấm 119 khi kẻ xấu gọi báo giả."
     },
     {
       "label": "店の発表",
@@ -134,24 +144,25 @@
       ],
       "photo": [
         {
-          "pick": "5-9",
+          "pick": "20-6",
           "focus": [
-            0.5,
-            0.5
+            0.6,
+            0.4
           ],
-          "move": "pan-right"
+          "move": "push-in",
+          "depth": false
         },
         {
-          "pick": "5-2",
+          "pick": "22-2",
           "focus": [
-            0.5,
-            0.45
+            0.6,
+            0.4
           ],
-          "move": "push-in"
+          "move": "pan-left"
         }
       ],
       "cut": "hard",
-      "why": "Buổi live bị cắt ngang (cắt thẳng): lia qua quán vắng, rồi tiến vào bát mì của quán khi đọc thông báo."
+      "why": "Buổi live bị cắt ngang (cắt thẳng): tiến vào ぽんちゃん ôm đầu; rồi lia qua nhân viên quán phục vụ khách khi đọc thông báo của quán."
     },
     {
       "label": "うその119番",
@@ -171,6 +182,14 @@
           "move": "pan-right"
         },
         {
+          "pick": "5-4",
+          "focus": [
+            0.5,
+            0.4
+          ],
+          "move": "push-in"
+        },
+        {
           "pick": "15-3",
           "focus": [
             0.4,
@@ -180,11 +199,11 @@
         }
       ],
       "cut": "dip",
-      "why": "Kết: tối rồi sáng lại, lia qua hàng xe cứu hỏa, rồi lùi ra xe cứu hỏa đang chờ ở trạm (dành cho người thật sự cần)."
+      "why": "Kết: hàng xe cứu hỏa, nhân viên quán tươi cười ngày khai trương bị phá, rồi lùi ra xe cứu hỏa đang chờ người thật sự cần."
     }
   ],
   "music": {
     "pick": "17-1"
   },
-  "review": "10/10"
+  "review": "12/12"
 }
