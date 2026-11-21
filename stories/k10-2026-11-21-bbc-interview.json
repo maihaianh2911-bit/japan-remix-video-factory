@@ -1,0 +1,100 @@
+{
+  "channel": "k10",
+  "issue": 9,
+  "stage": "find",
+  "title": "ダイアナ妃BBCインタビューの罠",
+  "date": "2026-11-21",
+  "searches": [
+    "wiki:ダイアナ (プリンセス・オブ・ウェールズ)",
+    "wiki:Martin Bashir",
+    "wiki:Charles Spencer, 9th Earl Spencer",
+    "wiki:チャールズ3世",
+    "wiki:エリザベス2世",
+    "wiki:William, Prince of Wales",
+    "wiki:Death of Diana, Princess of Wales",
+    "wiki:Pont de l'Alma",
+    "wiki:Broadcasting House",
+    "web:ダイアナ妃 BBC インタビュー 1995 パノラマ => Princess Diana in the 1995 BBC Panorama television interview",
+    "web:Princess Diana Panorama interview 1995 Martin Bashir => Princess Diana being interviewed by Martin Bashir",
+    "web:Princess Diana Panorama three of us in this marriage => close-up of Princess Diana speaking in a television interview",
+    "web:Martin Bashir 1995 => portrait of journalist Martin Bashir",
+    "web:Earl Spencer Charles Spencer 1995 => Charles Spencer, the brother of Princess Diana",
+    "web:Bashir fake bank statements Panorama => forged bank statement documents",
+    "web:Princess Diana 1995 alone sad => Princess Diana looking sad and alone",
+    "web:Lord Dyson report BBC 2021 => Lord Dyson report on the BBC Panorama interview",
+    "web:Prince William statement BBC Panorama 2021 => Prince William making a statement to the camera",
+    "web:Queen Elizabeth 1995 => Queen Elizabeth in 1995",
+    "web:Charles and Diana 1992 apart => Prince Charles and Princess Diana looking unhappy",
+    "web:Pont de l'Alma tunnel Paris 1997 => the Pont de l'Alma tunnel in Paris",
+    "web:Kensington Palace flowers 1997 Diana => sea of flowers at Kensington Palace gates in 1997",
+    "web:BBC Broadcasting House London => BBC headquarters building in London",
+    "music:Chopin Prelude e minor piano",
+    "music:Satie Gymnopédie piano"
+  ],
+  "scenes": [
+    {
+      "label": "伝説のインタビュー",
+      "era": "1995年",
+      "headline": "王室を揺るがせた\n伝説のインタビュー",
+      "lines": [
+        {
+          "text": "ダイアナ妃がテレビで「この結婚には3人いました」と告白し、英国王室を揺るがせた伝説のインタビュー。",
+          "quote": true
+        },
+        "けれど、26年後に明かされたその裏側には、あまりにも卑劣な罠が隠されていました。"
+      ]
+    },
+    {
+      "label": "BBC",
+      "era": "1995年",
+      "headline": "2300万人が\n見た告白",
+      "lines": [
+        "1995年、BBCの番組に出演したダイアナ妃は、チャールズ皇太子の不倫や王室での孤独を赤裸々に語り、約2300万人を釘付けにしました。",
+        "世界中が「王室への勇気ある告発」だと信じていたのです。"
+      ]
+    },
+    {
+      "label": "卑劣な罠",
+      "era": "2021年",
+      "headline": "偽造された\n銀行明細",
+      "lines": [
+        "しかし2021年、衝撃の事実が発覚します。",
+        "担当記者が偽造した銀行明細を弟に見せ、「側近が情報を売っている」とダイアナ妃を極度の疑心暗鬼へ追い込み、出演を引き出していたのです。"
+      ]
+    },
+    {
+      "label": "離婚",
+      "era": "1995年12月",
+      "headline": "女王の\n離婚勧告",
+      "lines": [
+        "この放送が引き金となり、エリザベス女王は離婚を勧告。"
+      ]
+    },
+    {
+      "label": "パリ",
+      "era": "1997年",
+      "headline": "パリの\nトンネルで",
+      "lines": [
+        "王室の後ろ盾を失ったダイアナ妃は、わずか2年後、パリのトンネルで帰らぬ人となりました。",
+        "36歳でした。"
+      ]
+    },
+    {
+      "label": "息子の怒り",
+      "era": "2021年",
+      "headline": "ウィリアム王子の\n怒りの声明",
+      "lines": [
+        "真相が明らかになった2021年、BBCは正式に謝罪し、息子のウィリアム王子は、番組が母の恐怖と孤独をあおったと、怒りの声明を出しました。",
+        "BBCは、このインタビューを二度と放送しないと決めています。"
+      ]
+    },
+    {
+      "label": "卑劣な嘘",
+      "headline": "スクープの裏の\n卑劣な嘘",
+      "lines": [
+        "世紀のスクープの裏にあった卑劣な嘘。",
+        "それがなければ、彼女の運命はまったく違っていたのかもしれません。"
+      ]
+    }
+  ]
+}
