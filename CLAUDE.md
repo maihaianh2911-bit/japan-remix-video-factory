@@ -29,6 +29,12 @@ each (the same in every repo of the owner's Japanese channels):
 1. **A script the owner sends may be improved** (owner: "Sửa cả kịch bản tao gửi"): Claude may cut, add and rewrite
    it so that it is better and more gripping, keeping the owner's story and main idea. It is no longer translated
    sentence by sentence and left as it is. Say in the chat or on the issue what was changed.
+   **Narrowed on 21/11/2026 for a script the owner writes and sends as text** (owner, after a Diana script was
+   tightened: "ko sửa gì cả, nếu thêm thì thêm ở đoạn gần cuối cho đủ 61s thôi, k sửa nhiều", then "nếu sai tên
+   hoặc sai chữ thì cũng đc sửa nhé"): keep it word for word, its hook line too (the hook-length warning is then
+   left as it is and the closing comment says why); fix only a wrong name, a wrong fact or a wrong character; if it
+   would be under 61 s, add a true line or two near the end, no more. A source video the owner sends is still
+   retold in our own words, as before.
 2. **Rumours and unconfirmed details may be told on every channel** (owner: "Dùng tin đồn ở mọi kênh"; k10 since
    the morning of 19/11): framed as told at the key line (「…と噂されています」, 「…といいます」, 「週刊誌によると」), and the
    posting caption says so in a ※ note (which part is a rumour, what is known).
