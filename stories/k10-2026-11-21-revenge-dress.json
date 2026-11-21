@@ -1,0 +1,107 @@
+{
+  "channel": "k10",
+  "issue": 8,
+  "stage": "find",
+  "title": "ダイアナ妃のリベンジドレス",
+  "date": "2026-11-21",
+  "searches": [
+    "wiki:ダイアナ (プリンセス・オブ・ウェールズ)",
+    "wiki:Revenge dress",
+    "wiki:チャールズ3世",
+    "wiki:Serpentine Galleries",
+    "wiki:Christina Stambolian",
+    "wiki:Valentino Garavani",
+    "web:ダイアナ妃 リベンジドレス => Princess Diana in a black off-the-shoulder cocktail dress smiling",
+    "web:Princess Diana revenge dress 1994 Serpentine Gallery => Princess Diana in a black off-the-shoulder dress at a party",
+    "web:Princess Diana revenge dress stepping out of car => Princess Diana stepping out of a car in a black dress",
+    "web:Princess Diana revenge dress photographers 1994 => Princess Diana in a black dress walking past photographers",
+    "web:Princess Diana sapphire pearl choker revenge dress close up => close-up of Princess Diana smiling with a pearl and sapphire choker",
+    "web:Prince Charles Jonathan Dimbleby interview 1994 => Prince Charles speaking in a television interview",
+    "web:チャールズ皇太子 1994 => Prince Charles in 1994",
+    "web:Charles and Diana 1992 Korea => Prince Charles and Princess Diana looking unhappy apart",
+    "web:Serpentine Gallery Kensington Gardens => the Serpentine Gallery building in a park",
+    "web:royal women black mourning funeral Queen => British royal women in black mourning clothes",
+    "web:Princess Diana 1993 royal engagement pastel suit hat => Princess Diana in a formal pastel suit and hat",
+    "web:Princess Diana revenge dress newspaper front pages => newspaper front pages with Princess Diana in a black dress",
+    "web:Christina Stambolian Diana black dress => the black off-the-shoulder dress of Princess Diana",
+    "web:Valentino Princess Diana => Princess Diana with the designer Valentino",
+    "web:ダイアナ妃 1994 笑顔 => Princess Diana smiling in 1994",
+    "music:Debussy Clair de lune piano",
+    "music:Satie Gnossienne piano"
+  ],
+  "scenes": [
+    {
+      "label": "リベンジドレス",
+      "era": "1994年",
+      "headline": "王室のタブーを破った\n黒いドレス",
+      "lines": [
+        {
+          "text": "夫の不倫告白が放送されたその夜、ダイアナ妃は、王室のタブーを破る黒いドレスで現れました。",
+          "quote": true
+        },
+        "けれど、あの一着に込められていたのは、単なる反抗ではありませんでした。"
+      ]
+    },
+    {
+      "label": "不倫告白",
+      "era": "1994年6月",
+      "headline": "夫がテレビで\n認めた不倫",
+      "lines": [
+        "1994年6月、チャールズ皇太子は、テレビのインタビュー番組で不倫を認めました。"
+      ]
+    },
+    {
+      "label": "その夜",
+      "era": "1994年6月",
+      "headline": "その夜の\nパーティー",
+      "lines": [
+        "その番組が放送された夜、ダイアナ妃は、ロンドンのサーペンタイン・ギャラリーで開かれるパーティーに出席する予定でした。"
+      ]
+    },
+    {
+      "label": "王室のタブー",
+      "headline": "黒は\n喪服の色",
+      "lines": [
+        {
+          "text": "英国王室では、黒は本来喪服の色であり、肩や胸元を大きく見せる衣装はタブーとされています。",
+          "say": "英国王室では、黒は本来もふくの色であり、肩やむなもとを大きく見せる衣装はタブーとされています。"
+        }
+      ]
+    },
+    {
+      "label": "あの一着",
+      "headline": "眠らせていた\n大胆すぎる一着",
+      "lines": [
+        "当初はヴァレンティノのドレスを着るはずが、ブランドが先に発表してしまい、取りやめたといいます。",
+        "代わりに選んだのは、3年前に買いながら、「大胆すぎる」とクローゼットに眠らせていた一着でした。"
+      ]
+    },
+    {
+      "label": "その瞬間",
+      "era": "1994年6月",
+      "headline": "一斉に光った\nフラッシュ",
+      "lines": [
+        "車から降り立った瞬間、無数のフラッシュが一斉に光ります。",
+        "そこにあったのは、裏切られて泣き崩れる妻ではなく、真珠とサファイアのチョーカーを着け、堂々と微笑む一人の美しい女性の姿でした。"
+      ]
+    },
+    {
+      "label": "翌朝",
+      "era": "1994年6月",
+      "headline": "新聞の一面を\n飾った写真",
+      "lines": [
+        {
+          "text": "翌朝の新聞一面を飾ったのは、チャールズ皇太子の告白ではなく、まぶしいほど輝くダイアナ妃の写真ばかり。",
+          "say": "翌朝の新聞いちめんを飾ったのは、チャールズ皇太子の告白ではなく、まぶしいほど輝くダイアナ妃の写真ばかり。"
+        }
+      ]
+    },
+    {
+      "label": "リベンジドレス",
+      "headline": "言葉なき\n反撃",
+      "lines": [
+        "のちに「リベンジドレス」と呼ばれたあの一着は、一言も言葉を発することなく、王室への最もエレガントな反撃となったのかもしれません。"
+      ]
+    }
+  ]
+}
