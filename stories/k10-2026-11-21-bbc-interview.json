@@ -1,9 +1,13 @@
 {
   "channel": "k10",
   "issue": 9,
-  "stage": "find",
+  "stage": "render",
   "title": "ダイアナ妃BBCインタビューの罠",
   "date": "2026-11-21",
+  "review": "15/15",
+  "music": {
+    "pick": "24-1"
+  },
   "searches": [
     "wiki:ダイアナ (プリンセス・オブ・ウェールズ)",
     "wiki:Martin Bashir",
@@ -42,7 +46,23 @@
           "quote": true
         },
         "けれど、26年後に明かされたその裏側には、あまりにも卑劣な罠が隠されていました。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "11-5",
+          "focus": [
+            0.45,
+            0.2
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "11-2",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "why": "Mở đầu: Diana ngồi trả lời phỏng vấn BBC (ảnh lớn, rõ mặt) khi đọc câu móc; rồi hiện cả cảnh Diana đối diện phóng viên khi nói 'cái bẫy hèn hạ'."
     },
     {
       "label": "BBC",
@@ -51,7 +71,28 @@
       "lines": [
         "1995年、BBCの番組に出演したダイアナ妃は、チャールズ皇太子の不倫や王室での孤独を赤裸々に語り、約2300万人を釘付けにしました。",
         "世界中が「王室への勇気ある告発」だと信じていたのです。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "11-1",
+          "focus": [
+            0.3,
+            0.35
+          ],
+          "move": "pull-back"
+        },
+        {
+          "pick": "12-12",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "move": "push-in",
+          "depth": false
+        }
+      ],
+      "cut": "page",
+      "why": "Năm 1995: lùi ra trên cả trường quay phỏng vấn; rồi các trang báo hôm sau khi nói cả thế giới tin đó là lời tố cáo dũng cảm."
     },
     {
       "label": "卑劣な罠",
@@ -60,7 +101,36 @@
       "lines": [
         "しかし2021年、衝撃の事実が発覚します。",
         "担当記者が偽造した銀行明細を弟に見せ、「側近が情報を売っている」とダイアナ妃を極度の疑心暗鬼へ追い込み、出演を引き出していたのです。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "15-2",
+          "focus": [
+            0.5,
+            0.45
+          ],
+          "move": "hold",
+          "depth": false
+        },
+        {
+          "pick": "14-18",
+          "focus": [
+            0.5,
+            0.2
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "16-8",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "hard",
+      "why": "Sự thật năm 2021: cắt thẳng; để yên tờ sao kê ngân hàng giả, rồi em trai Diana, rồi gương mặt Diana đầy nghi ngại."
     },
     {
       "label": "離婚",
@@ -68,7 +138,24 @@
       "headline": "女王の\n離婚勧告",
       "lines": [
         "この放送が引き金となり、エリザベス女王は離婚を勧告。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "19-2",
+          "focus": [
+            0.5,
+            0.25
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "20-2",
+          "fit": "contain",
+          "move": "pull-back"
+        }
+      ],
+      "cut": "fade",
+      "why": "Nữ hoàng khuyên ly hôn: Nữ hoàng, rồi lùi ra trên Charles và Diana ngồi cách xa nhau."
     },
     {
       "label": "パリ",
@@ -77,7 +164,27 @@
       "lines": [
         "王室の後ろ盾を失ったダイアナ妃は、わずか2年後、パリのトンネルで帰らぬ人となりました。",
         "36歳でした。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "21-1",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "move": "pull-back"
+        },
+        {
+          "pick": "22-3",
+          "focus": [
+            0.5,
+            0.4
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "dip",
+      "why": "Diana mất: tối rồi sáng lại, đường hầm Paris, rồi biển hoa trước cung điện Kensington khi nói 36 tuổi."
     },
     {
       "label": "息子の怒り",
@@ -86,7 +193,27 @@
       "lines": [
         "真相が明らかになった2021年、BBCは正式に謝罪し、息子のウィリアム王子は、番組が母の恐怖と孤独をあおったと、怒りの声明を出しました。",
         "BBCは、このインタビューを二度と放送しないと決めています。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "18-16",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "23-9",
+          "focus": [
+            0.5,
+            0.4
+          ],
+          "move": "rise"
+        }
+      ],
+      "cut": "fade",
+      "why": "Năm 2021: đẩy vào Hoàng tử William khi đọc tuyên bố giận dữ; rồi lia dọc trụ sở BBC khi nói BBC không bao giờ phát lại."
     },
     {
       "label": "卑劣な嘘",
@@ -94,7 +221,24 @@
       "lines": [
         "世紀のスクープの裏にあった卑劣な嘘。",
         "それがなければ、彼女の運命はまったく違っていたのかもしれません。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "11-8",
+          "fit": "contain",
+          "move": "push-in"
+        },
+        {
+          "pick": "10-16",
+          "focus": [
+            0.36,
+            0.78
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "dip",
+      "why": "Kết: tối rồi sáng lại, gương mặt trầm tư của Diana trong buổi phỏng vấn (hiện cả ảnh), rồi lùi ra trên nụ cười của bà khi nói số phận có lẽ đã khác."
     }
   ]
 }
