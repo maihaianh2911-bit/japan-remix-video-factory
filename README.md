@@ -1,6 +1,6 @@
 # Japan Remix Video Factory
 
-Máy làm video dọc tiếng Nhật (1080 × 1920, dài 80–160 giây) cho 4 kênh. Cả 4 kênh làm cùng một cách: mày gửi video
+Máy làm video dọc tiếng Nhật (1080 × 1920, dài ít nhất 61 giây) cho 4 kênh. Cả 4 kênh làm cùng một cách: mày gửi video
 của kênh khác, Claude kể lại câu chuyện đó bằng lời của mình bằng tiếng Nhật (giữ đúng sự thật, không bịa, không chép
 nguyên văn), tìm ảnh thật, máy đọc bằng giọng VOICEVOX và dựng video, Claude kiểm tra lại từng cảnh.
 

@@ -19,9 +19,9 @@ from .render import encode, stills, use_fx, use_style, write_subtitles
 from .story import voice_credit
 from .voice import narration
 
-# Iron rules 2 and 3 (CLAUDE.md): never a video under 60 seconds; every video 80 to 160 seconds. A trial or sample
-# video ("trial": true in the story) is the exception.
-MINIMUM, SHORTEST, LONGEST = 60.0, 80.0, 160.0
+# Iron rule 2 (CLAUDE.md; owner, 19/11/2026: "chỉ còn luật tối thiểu 61s"): never a video under 61 seconds, no upper
+# limit. A trial or sample video ("trial": true in the story) is the exception.
+MINIMUM = 61.0
 
 
 def summary(message, ready=None):
@@ -80,13 +80,9 @@ def main():
                                         scene_pause=release.scene_pause, voice=release.voice)
         duration = intervals[-1][1]
         if duration < MINIMUM and not release.trial:
-            refuse(f"lời đọc chỉ dài {duration:.0f} giây, dưới 60 giây (luật thép số 2): cần viết kịch bản dài hơn "
+            refuse(f"lời đọc chỉ dài {duration:.0f} giây, dưới 61 giây (luật thép số 2): cần viết kịch bản dài hơn "
                    "rồi dựng lại", f"the narration is {duration:.1f} s, under {MINIMUM:.0f} s (iron rule 2): write "
                    'the story longer (a trial or sample video carries "trial": true)')
-        if not SHORTEST <= duration <= LONGEST and not release.trial:
-            print(f"::warning::the narration is {duration:.1f} s, outside {SHORTEST:.0f}-{LONGEST:.0f} s (iron rule 3)")
-            summary(f"⚠️ Lời đọc dài {duration:.0f} giây, ngoài khoảng 80–160 giây (luật thép số 3): sửa kịch bản "
-                    "rồi dựng lại trước khi giao.")
         with wave.open(str(wav)) as voice:
             if voice.getnframes() == 0:
                 raise RuntimeError("No voice audio produced")
