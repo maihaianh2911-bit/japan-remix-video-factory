@@ -1,9 +1,13 @@
 {
   "channel": "k10",
   "issue": 8,
-  "stage": "find",
+  "stage": "render",
   "title": "ダイアナ妃のリベンジドレス",
   "date": "2026-11-21",
+  "review": "14/14",
+  "music": {
+    "pick": "23-1"
+  },
   "searches": [
     "wiki:ダイアナ (プリンセス・オブ・ウェールズ)",
     "wiki:Revenge dress",
@@ -40,7 +44,26 @@
           "quote": true
         },
         "けれど、あの一着に込められていたのは、単なる反抗ではありませんでした。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "8-2",
+          "focus": [
+            0.45,
+            0.25
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "7-1",
+          "focus": [
+            0.5,
+            0.25
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "why": "Mở đầu: Diana trong chiếc váy đen, mặt sáng rõ, khi đọc câu móc; rồi lùi ra cho thấy cả chiếc váy khi nói 'あの一着'."
     },
     {
       "label": "告白番組",
@@ -48,7 +71,27 @@
       "headline": "衝撃の\n告白番組",
       "lines": [
         "1994年6月、チャールズ皇太子の衝撃的な告白番組が放送された夜、ダイアナ妃はロンドンのパーティーに出席する予定でした。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "12-10",
+          "focus": [
+            0.76,
+            0.28
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "2-4",
+          "focus": [
+            0.6,
+            0.5
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "page",
+      "why": "Chương mới: Charles trong buổi phỏng vấn truyền hình 1994, rồi lùi ra trên phòng tranh Serpentine, nơi bữa tiệc tối hôm đó."
     },
     {
       "label": "王室のタブー",
@@ -58,14 +101,51 @@
           "text": "英国王室では、黒は本来喪服の色であり、肩や胸元を大きく見せる衣装はタブーとされています。",
           "say": "英国王室では、黒は本来もふくの色であり、肩やむなもとを大きく見せる衣装はタブーとされています。"
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "16-1",
+          "fit": "contain",
+          "move": "push-in"
+        },
+        {
+          "pick": "19-5",
+          "focus": [
+            0.45,
+            0.12
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "fade",
+      "why": "Màu đen là màu tang: các nữ hoàng mặc đồ tang năm 1952 (hiện cả ảnh); rồi Diana trong chiếc váy hở vai khi nói 'hở vai, hở ngực là cấm kỵ'."
     },
     {
       "label": "あの一着",
       "headline": "眠らせていた\n大胆すぎる一着",
       "lines": [
         "それでも彼女は、3年前に買って「大胆すぎる」とクローゼットに眠らせていた一着を、あえてその夜に選んだのです。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "19-10",
+          "focus": [
+            0.5,
+            0.45
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "8-5",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "fade",
+      "why": "Chiếc váy cất trong tủ 3 năm (váy trưng bày), rồi Diana mặc nó đêm ấy."
     },
     {
       "label": "その瞬間",
@@ -74,7 +154,24 @@
       "lines": [
         "車から降り立った瞬間、無数のフラッシュが一斉に光ります。",
         "そこにあったのは、裏切られて泣き崩れる妻ではなく、堂々と微笑む一人の美しい女性の姿でした。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "8-9",
+          "focus": [
+            0.45,
+            0.3
+          ],
+          "move": "punch-in"
+        },
+        {
+          "pick": "8-6",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "cut": "hard",
+      "why": "Khoảnh khắc bước xuống xe (xe ở góc ảnh), đèn flash: cắt thẳng và giật gần; rồi đẩy vào gương mặt mỉm cười tự tin."
     },
     {
       "label": "翌朝",
@@ -86,14 +183,56 @@
           "say": "翌朝の新聞いちめんを飾ったのは、チャールズ皇太子の告白ではなく、まぶしいほど輝くダイアナ妃の写真ばかり。"
         },
         "ドレスを手がけたのは、ギリシャ出身のデザイナー、クリスティーナ・スタンボリアンでした。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "18-3",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "move": "hold",
+          "fit": "contain",
+          "depth": false
+        },
+        {
+          "pick": "8-20",
+          "focus": [
+            0.45,
+            0.45
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "dip",
+      "why": "Sáng hôm sau: để yên trang báo 'Charles blusters as Diana dazzles' cho người xem đọc; rồi chiếc váy của Christina Stambolian."
     },
     {
       "label": "リベンジドレス",
       "headline": "言葉なき\n反撃",
       "lines": [
         "のちに「リベンジドレス」と呼ばれたあの一着は、一言も言葉を発することなく、王室への最もエレガントな反撃となったのかもしれません。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "18-17",
+          "focus": [
+            0.45,
+            0.25
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "8-12",
+          "focus": [
+            0.65,
+            0.3
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "fade",
+      "why": "Kết: Diana sải bước mỉm cười, rồi lùi ra trên cảnh bà bắt tay chủ tiệc trong chiếc 'váy trả thù'."
     }
   ]
 }
