@@ -1,9 +1,13 @@
 {
   "channel": "k10",
   "issue": 13,
-  "stage": "find",
+  "stage": "render",
   "title": "母の指輪でプロポーズ ウィリアム王子とキャサリン妃",
   "date": "2026-11-24",
+  "review": "14/14",
+  "music": {
+    "pick": "21-1"
+  },
   "searches": [
     "wiki:William, Prince of Wales",
     "wiki:Catherine, Princess of Wales",
@@ -38,7 +42,23 @@
           "text": "ウィリアム王子は、亡き母ダイアナ妃の婚約指輪で、大学で出会った女性にプロポーズしました。",
           "quote": true
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "16-7",
+          "focus": [
+            0.55,
+            0.25
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "15-5",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "why": "Mở đầu: William và Kate ngày đính hôn 2010, Kate đeo nhẫn (rõ mặt) khi đọc câu móc; rồi Diana với chính chiếc nhẫn ấy."
     },
     {
       "label": "出会い",
@@ -46,7 +66,24 @@
       "headline": "大学の\n同級生",
       "lines": [
         "2001年、スコットランドのセント・アンドルーズ大学で、二人は同じ学生寮に暮らす同級生として出会います。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "9-14",
+          "focus": [
+            0.59,
+            0
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "9-2",
+          "fit": "contain",
+          "move": "pull-back"
+        }
+      ],
+      "cut": "dip",
+      "why": "Lùi về thời đại học: William ở St Andrews, rồi hai người trẻ cười bên nhau."
     },
     {
       "label": "ファッションショー",
@@ -55,7 +92,24 @@
       "lines": [
         "翌年、チャリティーのファッションショーで、透けるドレスを着て歩くケイトを見た王子は、友人に「ケイトってすごく素敵だ」とささやいたといいます。",
         "やがて二人は、友人たちと一軒家で共同生活を始め、恋人になりました。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "10-3",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "12-1",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "cut": "fade",
+      "why": "Buổi trình diễn thời trang: Kate trên sàn diễn; rồi hai người cười bên nhau khi thành người yêu."
     },
     {
       "label": "別れと復縁",
@@ -63,7 +117,16 @@
       "headline": "一度の\n別れ",
       "lines": [
         "卒業後の2007年、一度は別れを経験しますが、数か月後に復縁。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "12-5",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "cut": "hard",
+      "why": "Chia tay năm 2007: cắt thẳng, hiện cả ảnh William và Kate đi cách xa nhau."
     },
     {
       "label": "プロポーズ",
@@ -72,7 +135,25 @@
       "lines": [
         "そして2010年10月、ケニア旅行の途中で、王子は母の指輪を差し出しました。",
         "婚約会見で王子は、「3週間、リュックの中に入れて持ち歩いていました」と明かし、こう続けています。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "13-6",
+          "focus": [
+            0.5,
+            0.55
+          ],
+          "move": "close-up",
+          "depth": false
+        },
+        {
+          "pick": "16-3",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "cut": "page",
+      "why": "Lời cầu hôn: cận chiếc nhẫn sapphire trên tay Kate, rồi hai người cười trong buổi ra mắt đính hôn."
     },
     {
       "label": "母への思い",
@@ -81,7 +162,24 @@
       "lines": [
         "「母がこの日を、そして僕たちがこれから一生を共にするという喜びを、見逃さないようにするための、僕なりの方法です」。",
         "ダイアナ妃が亡くなったとき、王子はまだ15歳でした。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "17-2",
+          "focus": [
+            0.6,
+            0.35
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "17-16",
+          "fit": "contain",
+          "move": "pull-back"
+        }
+      ],
+      "cut": "dip",
+      "why": "Người mẹ: tối rồi sáng lại, Diana ôm cậu bé William, rồi ba mẹ con khi nói William mới 15 tuổi lúc mẹ mất."
     },
     {
       "label": "結婚",
@@ -91,7 +189,29 @@
         "2011年4月29日、二人はウェストミンスター寺院で結婚。",
         "いまもその指輪は、キャサリン妃の左手で輝き続けています。",
         "母が見られなかった息子の未来を、指輪がそっと見守り続けているのかもしれません。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "18-1",
+          "focus": [
+            0.4,
+            0.3
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "19-1",
+          "fit": "contain",
+          "move": "push-in"
+        },
+        {
+          "pick": "13-1",
+          "fit": "contain",
+          "move": "pull-back"
+        }
+      ],
+      "cut": "page",
+      "why": "Đám cưới 2011: cô dâu chú rể trên xe ngựa, nụ hôn trên ban công, rồi Kate hôm nay với chiếc nhẫn của Diana."
     }
   ]
 }
