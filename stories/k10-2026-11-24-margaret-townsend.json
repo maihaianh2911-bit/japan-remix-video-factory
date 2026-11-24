@@ -1,9 +1,13 @@
 {
   "channel": "k10",
   "issue": 12,
-  "stage": "find",
+  "stage": "render",
   "title": "恋を諦めた王女 マーガレット王女とタウンゼント大佐",
   "date": "2026-11-24",
+  "review": "15/15",
+  "music": {
+    "pick": "20-2"
+  },
   "searches": [
     "wiki:Princess Margaret, Countess of Snowdon",
     "wiki:Peter Townsend (RAF officer)",
@@ -37,7 +41,26 @@
           "text": "エリザベス女王の妹マーガレット王女は、愛する人との結婚を、自ら諦めると国民に発表しました。",
           "quote": true
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "8-4",
+          "focus": [
+            0.45,
+            0.18
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "19-1",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        }
+      ],
+      "why": "Mở đầu: chân dung Công chúa Margaret (rõ mặt, sắc nét) khi đọc câu móc; rồi hai chị em Margaret và Elizabeth."
     },
     {
       "label": "空軍の英雄",
@@ -46,7 +69,27 @@
       "lines": [
         "相手は、父ジョージ6世に仕えた空軍の英雄、ピーター・タウンゼント大佐。",
         "16歳年上で、離婚歴のある男性でした。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "10-2",
+          "focus": [
+            0.5,
+            0.15
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "14-1",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "page",
+      "why": "Người mới (Townsend): đẩy vào người sĩ quan không quân trong quân phục, rồi đẩy vào gương mặt ông."
     },
     {
       "label": "戴冠式",
@@ -55,7 +98,34 @@
       "lines": [
         "1953年、姉の戴冠式の日、王女が大佐の制服についた糸くずをそっと払う姿が、記者たちの目に留まります。",
         "二人の恋は、たちまち世界中の新聞をにぎわせました。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "12-1",
+          "focus": [
+            0.5,
+            0.25
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "9-1",
+          "fit": "contain",
+          "move": "push-in"
+        },
+        {
+          "pick": "13-7",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "move": "hold",
+          "fit": "contain",
+          "depth": false
+        }
+      ],
+      "cut": "dip",
+      "why": "Lễ đăng quang 1953: Margaret trong lễ phục, rồi hai người đứng cạnh nhau, rồi để yên trang báo hỏi 'có nên cho cưới không'."
     },
     {
       "label": "許されない恋",
@@ -64,7 +134,24 @@
       "lines": [
         "けれど当時、イギリス国教会は離婚した人の再婚を認めておらず、25歳になるまでの王女の結婚には、女王の同意も必要でした。",
         "大佐はベルギーへ転勤となり、二人は2年もの間、離れて暮らすことになります。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "19-9",
+          "fit": "contain",
+          "move": "push-in"
+        },
+        {
+          "pick": "14-7",
+          "focus": [
+            0.55,
+            0.35
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "fade",
+      "why": "Luật lệ ngăn cản: hai chị em Nữ hoàng và Margaret khi nói cần Nữ hoàng đồng ý; rồi Townsend một mình ở nơi xa khi bị điều sang Bỉ."
     },
     {
       "label": "声明",
@@ -73,7 +160,29 @@
       "lines": [
         "そして1955年10月、25歳になった王女は声明を出しました。",
         "「キリスト教の結婚は解消できないという教会の教えを心に留め、英連邦への責任を自覚し、私はこれらをほかの何よりも優先すると決めました」。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "15-3",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "13-2",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "move": "hold",
+          "fit": "contain",
+          "depth": false
+        }
+      ],
+      "cut": "hard",
+      "why": "Tuyên bố năm 1955: cắt thẳng vào gương mặt Margaret, rồi để yên trang báo 'tôi đặt bổn phận lên trên hết'."
     },
     {
       "label": "その後",
@@ -81,7 +190,19 @@
       "headline": "その後の\n王女",
       "lines": [
         "その後、王女は写真家と結婚しますが、18年後に離婚。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "17-1",
+          "focus": [
+            0.66,
+            0
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "dip",
+      "why": "Về sau: tối rồi sáng lại, Margaret và chồng nhiếp ảnh gia vẫy chào ngày cưới năm 1960."
     },
     {
       "label": "変わった王室",
@@ -91,7 +212,26 @@
         "そして半世紀後の2005年、甥のチャールズ皇太子は、離婚歴のあるカミラ夫人と結婚しました。",
         "王室のルールは、時代とともに変わっていったのです。",
         "王女が諦めた恋は、ほんの少しだけ、早すぎたのかもしれません。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "18-4",
+          "fit": "contain",
+          "move": "push-in"
+        },
+        {
+          "pick": "18-12",
+          "fit": "contain",
+          "move": "pull-back"
+        },
+        {
+          "pick": "8-6",
+          "fit": "contain",
+          "move": "pull-back"
+        }
+      ],
+      "cut": "page",
+      "why": "Nửa thế kỷ sau: Charles cưới Camilla năm 2005, Nữ hoàng vui vẻ dự lễ; kết bằng Margaret trẻ, khi nói mối tình đến sớm hơn một chút."
     }
   ]
 }
