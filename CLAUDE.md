@@ -23,6 +23,11 @@
 The machine holds to rule 2 too: `python -m news` refuses a voice under 61 s (the run fails and the issue says why)
 unless the story carries `"trial": true` (a trial or sample, as rule 2 says).
 
+**"Viết kịch bản" means the script only** (owner, 24/11/2026, after Claude opened issues and started the picture
+search on "viết tiếp 2 kịch bản": "tìm ảnh làm … gì? viết kịch bản cơ mà"): when the owner asks for scripts, write
+them in the chat (Japanese, then the Vietnamese meaning) and stop there. No issue, no story file, no picture search,
+no video until the owner says to make the video ("làm đi", "làm video").
+
 ## The owner's rule changes of 19/11/2026 — they win over any older sentence in this file or in `AGENT_REMIX.md`
 The owner read the list of the hard rules and said of six of them "mấy cái này ko hợp lí", then chose what replaces
 each (the same in every repo of the owner's Japanese channels):
