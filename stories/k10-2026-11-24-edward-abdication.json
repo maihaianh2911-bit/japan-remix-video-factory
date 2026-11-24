@@ -1,0 +1,99 @@
+{
+  "channel": "k10",
+  "issue": 11,
+  "stage": "find",
+  "title": "王冠を捨てた恋 エドワード8世とウォリス・シンプソン",
+  "date": "2026-11-24",
+  "searches": [
+    "wiki:Edward VIII",
+    "wiki:Wallis Simpson",
+    "wiki:Abdication of Edward VIII",
+    "wiki:George VI",
+    "wiki:Fort Belvedere",
+    "wiki:Château de Candé",
+    "wiki:Royal Burial Ground, Frogmore",
+    "wiki:エリザベス2世",
+    "web:King Edward VIII 1936 portrait => portrait of King Edward VIII in 1936",
+    "web:Prince of Wales Edward 1930s popular crowds => the popular Prince of Wales Edward greeting crowds in the 1930s",
+    "web:Wallis Simpson 1936 portrait => portrait of Wallis Simpson in 1936",
+    "web:Edward VIII Wallis Simpson 1936 Nahlin holiday => King Edward VIII and Wallis Simpson on holiday in 1936",
+    "web:Stanley Baldwin 1936 => Prime Minister Stanley Baldwin in 1936",
+    "web:abdication 1936 newspaper headlines King => British newspaper front pages about the abdication in 1936",
+    "web:Edward VIII abdication radio broadcast 1936 microphone => Edward VIII speaking into a radio microphone in 1936",
+    "web:Instrument of Abdication 1936 document => the signed abdication document of 1936",
+    "web:Duke and Duchess of Windsor wedding 1937 Cecil Beaton => the Duke and Duchess of Windsor on their wedding day in 1937",
+    "web:Duke and Duchess of Windsor Paris 1950s => the Duke and Duchess of Windsor in Paris",
+    "web:Princess Elizabeth 1936 age 10 => young Princess Elizabeth around 1936",
+    "web:George VI coronation 1937 balcony Princess Elizabeth => King George VI family on the balcony at the coronation in 1937",
+    "web:Duke Duchess of Windsor grave Frogmore => the graves of the Duke and Duchess of Windsor",
+    "music:Chopin Nocturne op 9 no 2 piano",
+    "music:Satie Gymnopedie 1 piano"
+  ],
+  "scenes": [
+    {
+      "label": "王冠を捨てた恋",
+      "era": "1936年",
+      "headline": "王冠を捨てた\n国王",
+      "lines": [
+        {
+          "text": "愛する女性と結婚するため、イギリス国王は、即位からわずか1年足らずで王冠を捨てました。",
+          "quote": true
+        }
+      ]
+    },
+    {
+      "label": "新国王",
+      "era": "1936年1月",
+      "headline": "国民に愛された\n新国王",
+      "lines": [
+        "1936年1月、国民に人気の高かったエドワード8世が、41歳で即位します。"
+      ]
+    },
+    {
+      "label": "ウォリス",
+      "headline": "国王が愛した\nアメリカ人女性",
+      "lines": [
+        "けれど彼が愛していたのは、アメリカ人女性のウォリス・シンプソン。",
+        "一度離婚し、当時は2度目の夫とまだ結婚していた女性でした。"
+      ]
+    },
+    {
+      "label": "反対",
+      "headline": "政府も教会も\n反対",
+      "lines": [
+        "国王はイギリス国教会の長で、離婚した女性との結婚は認められず、政府も、教会も、王室も反対しました。",
+        "イギリスの新聞は長い間この恋を報じませんでしたが、12月、ついに国中が知ることになります。"
+      ]
+    },
+    {
+      "label": "退位",
+      "era": "1936年12月",
+      "headline": "愛か\n王冠か",
+      "lines": [
+        "王冠を取るか、愛する人を取るか、選択を迫られた国王は、退位を決意します。",
+        "ラジオで国民に語りかけた言葉は、今も語り継がれています。「愛する女性の助けと支えなしには、国王としての重い責任を果たすことはできない」。",
+        "在位わずか326日での退位でした。"
+      ]
+    },
+    {
+      "label": "ウィンザー公爵夫妻",
+      "era": "1937年",
+      "headline": "国を出た\n二人",
+      "lines": [
+        "翌年、フランスで結婚した二人は、ウィンザー公爵夫妻として、その後の人生のほとんどを国外で過ごし、今はウィンザーの王室墓地に並んで眠っています。"
+      ]
+    },
+    {
+      "label": "エリザベス王女",
+      "era": "1936年",
+      "headline": "変わった\n10歳の運命",
+      "lines": [
+        "そして、弟が国王ジョージ6世となったことで、その娘、10歳のエリザベス王女の運命も大きく変わりました。",
+        {
+          "text": "70年在位したエリザベス女王の時代は、伯父のひとつの恋から始まっていたのです。",
+          "say": "ななじゅうねん在位したエリザベス女王の時代は、おじのひとつの恋から始まっていたのです。"
+        }
+      ]
+    }
+  ]
+}

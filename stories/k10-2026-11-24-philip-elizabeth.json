@@ -1,0 +1,100 @@
+{
+  "channel": "k10",
+  "issue": 10,
+  "stage": "find",
+  "title": "13歳の恋と73年 エリザベス女王とフィリップ殿下",
+  "date": "2026-11-24",
+  "searches": [
+    "wiki:エリザベス2世",
+    "wiki:Prince Philip, Duke of Edinburgh",
+    "wiki:Britannia Royal Naval College",
+    "wiki:Wedding of Princess Elizabeth and Philip Mountbatten",
+    "wiki:Death and funeral of Prince Philip, Duke of Edinburgh",
+    "wiki:St George's Chapel, Windsor Castle",
+    "wiki:King George VI Memorial Chapel",
+    "web:Princess Elizabeth Prince Philip 1939 Dartmouth => young Princess Elizabeth and a young naval cadet in 1939",
+    "web:young Prince Philip naval cadet 1939 => a handsome young naval cadet in uniform",
+    "web:Princess Elizabeth 1939 age 13 => a young girl princess in 1939",
+    "web:Princess Elizabeth Philip engagement 1947 => Princess Elizabeth and Philip at their engagement in 1947",
+    "web:Princess Elizabeth Philip wedding 1947 Westminster Abbey => a royal wedding couple in 1947",
+    "web:Prince Philip naval officer Malta 1950 => Prince Philip in naval uniform around 1950",
+    "web:Queen Elizabeth Prince Philip walking behind => Prince Philip walking a few steps behind Queen Elizabeth",
+    "web:Prince Philip coronation 1953 kneeling homage => Prince Philip kneeling before the Queen at the coronation",
+    "web:Queen Elizabeth golden wedding 1997 Philip => Queen Elizabeth and Prince Philip at their golden wedding in 1997",
+    "web:Queen Elizabeth Prince Philip 70th anniversary portrait 2017 => elderly Queen Elizabeth and Prince Philip portrait together",
+    "web:Queen sits alone Prince Philip funeral 2021 => Queen Elizabeth sitting alone in black in a chapel",
+    "web:Prince Philip funeral 2021 Land Rover coffin => the coffin of Prince Philip on a Land Rover",
+    "web:Queen Elizabeth Prince Philip 73rd anniversary 2020 photo => elderly Queen Elizabeth and Prince Philip smiling together in 2020",
+    "web:King George VI Memorial Chapel ledger stone Elizabeth Philip => the grave stone of Queen Elizabeth and Prince Philip",
+    "music:Elgar Nimrod",
+    "music:Debussy Reverie piano"
+  ],
+  "scenes": [
+    {
+      "label": "女王と夫",
+      "era": "2021年",
+      "headline": "73年連れ添った\n二人の別れ",
+      "lines": [
+        {
+          "text": "13歳で恋した人と73年連れ添ったエリザベス女王は、その人の葬儀で、たった一人で座っていました。",
+          "quote": true
+        }
+      ]
+    },
+    {
+      "label": "13歳の恋",
+      "era": "1939年",
+      "headline": "13歳の\nひと目ぼれ",
+      "lines": [
+        "1939年、海軍学校を訪れた13歳の王女は、案内役を務めた18歳の士官候補生、フィリップ王子にひと目で心を奪われたといいます。"
+      ]
+    },
+    {
+      "label": "結婚",
+      "era": "1947年",
+      "headline": "手紙を重ねて\n結婚へ",
+      "lines": [
+        "戦争の間も二人は手紙を交わし続け、父の国王が慎重な姿勢を見せても王女の思いは変わらず、1947年、ウェストミンスター寺院で結婚します。"
+      ]
+    },
+    {
+      "label": "女王の夫",
+      "era": "1952年",
+      "headline": "夫が\n手放したもの",
+      "lines": [
+        "けれど、5年後に妻が女王になると、フィリップは愛していた海軍の仕事を離れ、子どもたちに自分の名字を継がせることもできませんでした。",
+        {
+          "text": "それからおよそ70年、公の場ではいつも、女王の2歩後ろを歩き続けたのです。",
+          "say": "それからおよそななじゅうねん、公の場ではいつも、女王のにほうしろを歩き続けたのです。"
+        }
+      ]
+    },
+    {
+      "label": "金婚式",
+      "era": "1997年",
+      "headline": "「私の力であり\n支えでした」",
+      "lines": [
+        "金婚式のスピーチで、女王はこう語っています。「夫はこの長い年月、ずっと私の力であり、支えでした」。"
+      ]
+    },
+    {
+      "label": "別れ",
+      "era": "2021年4月",
+      "headline": "ひとりで座った\n葬儀",
+      "lines": [
+        "2021年4月、フィリップ殿下は99歳で亡くなりました。",
+        "コロナ禍の葬儀に参列できたのは、わずか30人。",
+        "黒い服の女王は、感染対策のため家族とも離れて、礼拝堂の席にひとり座っていました。"
+      ]
+    },
+    {
+      "label": "同じ場所に",
+      "era": "2022年",
+      "headline": "同じ場所に\n眠る二人",
+      "lines": [
+        "その1年5か月後、女王もこの世を去り、二人はいま、ウィンザー城の礼拝堂で同じ場所に眠っています。",
+        "13歳の少女が選んだ恋は、73年という時間をかけて、最後の日まで続いていたのです。"
+      ]
+    }
+  ]
+}
