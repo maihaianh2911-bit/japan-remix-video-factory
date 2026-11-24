@@ -1,9 +1,13 @@
 {
   "channel": "k10",
   "issue": 10,
-  "stage": "find",
+  "stage": "render",
   "title": "13歳の恋と73年 エリザベス女王とフィリップ殿下",
   "date": "2026-11-24",
+  "review": "15/15",
+  "music": {
+    "pick": "22-1"
+  },
   "searches": [
     "wiki:エリザベス2世",
     "wiki:Prince Philip, Duke of Edinburgh",
@@ -39,7 +43,26 @@
           "text": "13歳で恋した人と73年連れ添ったエリザベス女王は、その人の葬儀で、たった一人で座っていました。",
           "quote": true
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "17-15",
+          "focus": [
+            0.52,
+            0.18
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "18-1",
+          "focus": [
+            0.4,
+            0.35
+          ],
+          "move": "push-in"
+        }
+      ],
+      "why": "Mở đầu: ảnh cưới năm 1947, hai người nhìn nhau cười (ảnh lớn, sắc nét, mặt ở nửa trên), đẩy chậm vào hai gương mặt khi nói 73 năm; rồi Nữ hoàng ngồi một mình ở lễ tang."
     },
     {
       "label": "13歳の恋",
@@ -47,7 +70,27 @@
       "headline": "13歳の\nひと目ぼれ",
       "lines": [
         "1939年、海軍学校を訪れた13歳の王女は、案内役を務めた18歳の士官候補生、フィリップ王子にひと目で心を奪われたといいます。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "10-3",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "9-1",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "dip",
+      "why": "Lùi về năm 1939: công chúa 13 tuổi, rồi chàng học viên hải quân Philip."
     },
     {
       "label": "結婚",
@@ -55,7 +98,27 @@
       "headline": "手紙を重ねて\n結婚へ",
       "lines": [
         "戦争の間も二人は手紙を交わし続け、父の国王が慎重な姿勢を見せても王女の思いは変わらず、1947年、ウェストミンスター寺院で結婚します。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "8-4",
+          "focus": [
+            0.55,
+            0.3
+          ],
+          "move": "pull-back"
+        },
+        {
+          "pick": "12-4",
+          "focus": [
+            0.45,
+            0.3
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "fade",
+      "why": "Hai người trẻ sánh bước khi nói những lá thư; rồi đẩy vào cô dâu chú rể ngày cưới 1947."
     },
     {
       "label": "女王の夫",
@@ -67,7 +130,27 @@
           "text": "それからおよそ70年、公の場ではいつも、女王の2歩後ろを歩き続けたのです。",
           "say": "それからおよそななじゅうねん、公の場ではいつも、女王のにほうしろを歩き続けたのです。"
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "9-5",
+          "focus": [
+            0.5,
+            0.2
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "14-5",
+          "focus": [
+            0.45,
+            0.35
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "page",
+      "why": "Chương mới (Nữ hoàng lên ngôi): Philip trong quân phục; rồi Philip bước sau vợ xuống cầu thang máy bay, đúng 'hai bước phía sau'."
     },
     {
       "label": "金婚式",
@@ -75,7 +158,27 @@
       "headline": "「私の力であり\n支えでした」",
       "lines": [
         "金婚式のスピーチで、女王はこう語っています。「夫はこの長い年月、ずっと私の力であり、支えでした」。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "16-5",
+          "focus": [
+            0.4,
+            0.25
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "16-2",
+          "focus": [
+            0.5,
+            0
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "fade",
+      "why": "Năm 1997, kỷ niệm 50 năm ngày cưới: Nữ hoàng và Philip ở Westminster, rồi đêm tiệc kỷ niệm khi đọc lời Nữ hoàng."
     },
     {
       "label": "別れ",
@@ -85,7 +188,35 @@
         "2021年4月、フィリップ殿下は99歳で亡くなりました。",
         "コロナ禍の葬儀に参列できたのは、わずか30人。",
         "黒い服の女王は、感染対策のため家族とも離れて、礼拝堂の席にひとり座っていました。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "19-1",
+          "focus": [
+            0.45,
+            0.5
+          ],
+          "move": "pull-back"
+        },
+        {
+          "pick": "18-6",
+          "focus": [
+            0.3,
+            0.5
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "18-13",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "dip",
+      "why": "Philip mất: tối rồi sáng lại; đoàn tang với chiếc Land Rover, rồi Nữ hoàng ngồi một mình giữa nhà nguyện."
     },
     {
       "label": "同じ場所に",
@@ -94,7 +225,28 @@
       "lines": [
         "その1年5か月後、女王もこの世を去り、二人はいま、ウィンザー城の礼拝堂で同じ場所に眠っています。",
         "13歳の少女が選んだ恋は、73年という時間をかけて、最後の日まで続いていたのです。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "21-3",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "move": "pull-back",
+          "depth": false
+        },
+        {
+          "pick": "20-7",
+          "focus": [
+            0.5,
+            0.25
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "dip",
+      "why": "Kết: phiến đá khắc tên Elizabeth II và Philip, rồi lùi ra trên hai người già cười với nhau."
     }
   ]
 }

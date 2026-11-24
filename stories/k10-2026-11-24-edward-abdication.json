@@ -1,9 +1,13 @@
 {
   "channel": "k10",
   "issue": 11,
-  "stage": "find",
+  "stage": "render",
   "title": "王冠を捨てた恋 エドワード8世とウォリス・シンプソン",
   "date": "2026-11-24",
+  "review": "16/16",
+  "music": {
+    "pick": "22-1"
+  },
   "searches": [
     "wiki:Edward VIII",
     "wiki:Wallis Simpson",
@@ -39,7 +43,26 @@
           "text": "愛する女性と結婚するため、イギリス国王は、即位からわずか1年足らずで王冠を捨てました。",
           "quote": true
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "18-5",
+          "focus": [
+            0.45,
+            0.25
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "9-4",
+          "focus": [
+            0.5,
+            0.2
+          ],
+          "move": "push-in"
+        }
+      ],
+      "why": "Mở đầu: Edward và Wallis cười với nhau (ảnh lớn, rõ mặt) khi đọc câu móc; rồi chân dung vua Edward VIII."
     },
     {
       "label": "新国王",
@@ -47,23 +70,82 @@
       "headline": "国民に愛された\n新国王",
       "lines": [
         "1936年1月、国民に人気の高かったエドワード8世が、41歳で即位します。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "9-5",
+          "focus": [
+            0.5,
+            0.25
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "10-5",
+          "focus": [
+            0.3,
+            0.4
+          ],
+          "move": "pan-right"
+        }
+      ],
+      "cut": "fade",
+      "why": "Vị vua mới được yêu mến: chân dung Edward, rồi lia theo ông giữa đám đông."
     },
     {
       "label": "ウォリス",
+      "era": "1936年",
       "headline": "国王が愛した\nアメリカ人女性",
       "lines": [
         "けれど彼が愛していたのは、アメリカ人女性のウォリス・シンプソン。",
         "一度離婚し、当時は2度目の夫とまだ結婚していた女性でした。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "11-1",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "12-9",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "cut": "page",
+      "why": "Người mới (Wallis): chân dung Wallis Simpson, rồi lia từ bà sang Edward khi hai người nhìn nhau."
     },
     {
       "label": "反対",
+      "era": "1936年",
       "headline": "政府も教会も\n反対",
       "lines": [
         "国王はイギリス国教会の長で、離婚した女性との結婚は認められず、政府も、教会も、王室も反対しました。",
         "イギリスの新聞は長い間この恋を報じませんでしたが、12月、ついに国中が知ることになります。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "14-17",
+          "focus": [
+            0.5,
+            0.4
+          ],
+          "move": "hold",
+          "fit": "contain",
+          "depth": false
+        },
+        {
+          "pick": "14-9",
+          "fit": "contain",
+          "move": "hold",
+          "depth": false
+        }
+      ],
+      "cut": "fade",
+      "why": "Chính phủ và giáo hội phản đối: để yên trang báo về khủng hoảng; rồi lia qua chồng báo khi cả nước biết chuyện."
     },
     {
       "label": "退位",
@@ -73,7 +155,35 @@
         "王冠を取るか、愛する人を取るか、選択を迫られた国王は、退位を決意します。",
         "ラジオで国民に語りかけた言葉は、今も語り継がれています。「愛する女性の助けと支えなしには、国王としての重い責任を果たすことはできない」。",
         "在位わずか326日での退位でした。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "15-1",
+          "focus": [
+            0.68,
+            0.3
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "16-1",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "move": "hold",
+          "fit": "contain",
+          "depth": false
+        },
+        {
+          "pick": "14-1",
+          "fit": "contain",
+          "move": "hold",
+          "depth": false
+        }
+      ],
+      "cut": "hard",
+      "why": "Thoái vị: cắt thẳng; Edward trước micro đọc lời từ biệt, rồi văn bản thoái vị có chữ ký, rồi trang báo 'ABDICATION'."
     },
     {
       "label": "ウィンザー公爵夫妻",
@@ -81,7 +191,27 @@
       "headline": "国を出た\n二人",
       "lines": [
         "翌年、フランスで結婚した二人は、ウィンザー公爵夫妻として、その後の人生のほとんどを国外で過ごし、今はウィンザーの王室墓地に並んで眠っています。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "17-1",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "21-3",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "dip",
+      "why": "Năm sau: tối rồi sáng lại, ảnh cưới năm 1937 ở Pháp, rồi lùi ra trên hai ngôi mộ nằm cạnh nhau ở Windsor."
     },
     {
       "label": "エリザベス王女",
@@ -93,7 +223,35 @@
           "text": "70年在位したエリザベス女王の時代は、伯父のひとつの恋から始まっていたのです。",
           "say": "ななじゅうねん在位したエリザベス女王の時代は、おじのひとつの恋から始まっていたのです。"
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "19-1",
+          "focus": [
+            0.5,
+            0.25
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "20-11",
+          "focus": [
+            0.4,
+            0.4
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "8-14",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "page",
+      "why": "Chương mới (Elizabeth): công chúa 10 tuổi, rồi lễ đăng quang của cha năm 1937, rồi lùi ra trên Elizabeth trẻ khi nói thời đại 70 năm."
     }
   ]
 }
