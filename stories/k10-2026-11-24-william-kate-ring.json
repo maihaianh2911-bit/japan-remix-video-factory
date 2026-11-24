@@ -1,0 +1,97 @@
+{
+  "channel": "k10",
+  "issue": 13,
+  "stage": "find",
+  "title": "母の指輪でプロポーズ ウィリアム王子とキャサリン妃",
+  "date": "2026-11-24",
+  "searches": [
+    "wiki:William, Prince of Wales",
+    "wiki:Catherine, Princess of Wales",
+    "wiki:ダイアナ (プリンセス・オブ・ウェールズ)",
+    "wiki:University of St Andrews",
+    "wiki:St Salvator's Hall",
+    "wiki:Engagement ring of Diana, Princess of Wales",
+    "wiki:Wedding of Prince William and Catherine Middleton",
+    "wiki:ウェストミンスター寺院",
+    "web:Prince William Kate Middleton St Andrews university students => Prince William and Kate Middleton as university students",
+    "web:Kate Middleton charity fashion show 2002 St Andrews => Kate Middleton walking a catwalk in 2002",
+    "web:Prince William Kate Middleton graduation 2005 => Prince William and Kate Middleton at graduation in 2005",
+    "web:Prince William Kate Middleton 2007 => Prince William and Kate Middleton in 2007",
+    "web:Prince William Kate Middleton engagement 2010 sapphire ring => Kate Middleton showing her sapphire engagement ring",
+    "web:Kate Middleton engagement ring close up => close-up of a blue sapphire engagement ring with diamonds on a hand",
+    "web:Princess Diana engagement ring 1981 => Lady Diana Spencer showing her sapphire engagement ring in 1981",
+    "web:Prince William Kate engagement interview 2010 ITV => Prince William and Kate Middleton in an engagement interview",
+    "web:Princess Diana young Prince William => Princess Diana with young Prince William",
+    "web:Prince William Kate wedding 2011 Westminster Abbey => Prince William and Kate on their wedding day in 2011",
+    "web:Prince William Kate wedding balcony kiss 2011 => Prince William and Catherine kissing on the Buckingham Palace balcony",
+    "web:Princess of Wales Catherine sapphire ring 2024 => Catherine Princess of Wales smiling with her sapphire ring",
+    "music:Schumann Träumerei piano",
+    "music:Satie Gymnopédie piano"
+  ],
+  "scenes": [
+    {
+      "label": "母の指輪",
+      "era": "2010年",
+      "headline": "母の指輪で\nプロポーズ",
+      "lines": [
+        {
+          "text": "ウィリアム王子は、亡き母ダイアナ妃の婚約指輪で、大学で出会った女性にプロポーズしました。",
+          "quote": true
+        }
+      ]
+    },
+    {
+      "label": "出会い",
+      "era": "2001年",
+      "headline": "大学の\n同級生",
+      "lines": [
+        "2001年、スコットランドのセント・アンドルーズ大学で、二人は同じ学生寮に暮らす同級生として出会います。"
+      ]
+    },
+    {
+      "label": "ファッションショー",
+      "era": "2002年",
+      "headline": "「ケイトって\nすごく素敵だ」",
+      "lines": [
+        "翌年、チャリティーのファッションショーで、透けるドレスを着て歩くケイトを見た王子は、友人に「ケイトってすごく素敵だ」とささやいたといいます。",
+        "やがて二人は、友人たちと一軒家で共同生活を始め、恋人になりました。"
+      ]
+    },
+    {
+      "label": "別れと復縁",
+      "era": "2007年",
+      "headline": "一度の\n別れ",
+      "lines": [
+        "卒業後の2007年、一度は別れを経験しますが、数か月後に復縁。"
+      ]
+    },
+    {
+      "label": "プロポーズ",
+      "era": "2010年",
+      "headline": "ケニアで\n差し出した指輪",
+      "lines": [
+        "そして2010年10月、ケニア旅行の途中で、王子は母の指輪を差し出しました。",
+        "婚約会見で王子は、「3週間、リュックの中に入れて持ち歩いていました」と明かし、こう続けています。"
+      ]
+    },
+    {
+      "label": "母への思い",
+      "headline": "母が見逃さない\nように",
+      "era": "1997年",
+      "lines": [
+        "「母がこの日を、そして僕たちがこれから一生を共にするという喜びを、見逃さないようにするための、僕なりの方法です」。",
+        "ダイアナ妃が亡くなったとき、王子はまだ15歳でした。"
+      ]
+    },
+    {
+      "label": "結婚",
+      "era": "2011年",
+      "headline": "ウェストミンスター\n寺院で結婚",
+      "lines": [
+        "2011年4月29日、二人はウェストミンスター寺院で結婚。",
+        "いまもその指輪は、キャサリン妃の左手で輝き続けています。",
+        "母が見られなかった息子の未来を、指輪がそっと見守り続けているのかもしれません。"
+      ]
+    }
+  ]
+}

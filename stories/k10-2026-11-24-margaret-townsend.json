@@ -1,0 +1,97 @@
+{
+  "channel": "k10",
+  "issue": 12,
+  "stage": "find",
+  "title": "恋を諦めた王女 マーガレット王女とタウンゼント大佐",
+  "date": "2026-11-24",
+  "searches": [
+    "wiki:Princess Margaret, Countess of Snowdon",
+    "wiki:Peter Townsend (RAF officer)",
+    "wiki:George VI",
+    "wiki:エリザベス2世",
+    "wiki:Coronation of Elizabeth II",
+    "wiki:Antony Armstrong-Jones, 1st Earl of Snowdon",
+    "wiki:Wedding of Charles, Prince of Wales, and Camilla Parker Bowles",
+    "web:Princess Margaret 1953 portrait => portrait of young Princess Margaret in the 1950s",
+    "web:Princess Margaret Peter Townsend together => Princess Margaret with Group Captain Peter Townsend",
+    "web:Group Captain Peter Townsend RAF uniform => Peter Townsend in Royal Air Force uniform",
+    "web:Peter Townsend equerry King George VI => Peter Townsend with King George VI",
+    "web:Princess Margaret coronation 1953 Westminster Abbey => Princess Margaret at the coronation in 1953",
+    "web:Princess Margaret Townsend newspaper 1955 front page => 1955 newspaper front page about Princess Margaret and Townsend",
+    "web:Peter Townsend Brussels 1955 => Peter Townsend in Brussels in 1955",
+    "web:Princess Margaret statement 1955 not marry Townsend => Princess Margaret in 1955 looking serious",
+    "web:Princess Margaret 25th birthday 1955 Balmoral => Princess Margaret in 1955",
+    "web:Princess Margaret Antony Armstrong-Jones wedding 1960 => Princess Margaret on her wedding day in 1960",
+    "web:Charles Camilla wedding 2005 Windsor => Prince Charles and Camilla on their wedding day in 2005",
+    "web:Queen Elizabeth Princess Margaret sisters together => Queen Elizabeth and Princess Margaret together",
+    "music:Debussy Clair de lune piano",
+    "music:Chopin Nocturne C sharp minor piano"
+  ],
+  "scenes": [
+    {
+      "label": "女王の妹",
+      "era": "1955年",
+      "headline": "結婚を諦めた\n女王の妹",
+      "lines": [
+        {
+          "text": "エリザベス女王の妹マーガレット王女は、愛する人との結婚を、自ら諦めると国民に発表しました。",
+          "quote": true
+        }
+      ]
+    },
+    {
+      "label": "空軍の英雄",
+      "era": "1950年代",
+      "headline": "16歳年上の\n空軍の英雄",
+      "lines": [
+        "相手は、父ジョージ6世に仕えた空軍の英雄、ピーター・タウンゼント大佐。",
+        "16歳年上で、離婚歴のある男性でした。"
+      ]
+    },
+    {
+      "label": "戴冠式",
+      "era": "1953年",
+      "headline": "戴冠式の日の\nひとつのしぐさ",
+      "lines": [
+        "1953年、姉の戴冠式の日、王女が大佐の制服についた糸くずをそっと払う姿が、記者たちの目に留まります。",
+        "二人の恋は、たちまち世界中の新聞をにぎわせました。"
+      ]
+    },
+    {
+      "label": "許されない恋",
+      "era": "1953年",
+      "headline": "許されなかった\n結婚",
+      "lines": [
+        "けれど当時、イギリス国教会は離婚した人の再婚を認めておらず、25歳になるまでの王女の結婚には、女王の同意も必要でした。",
+        "大佐はベルギーへ転勤となり、二人は2年もの間、離れて暮らすことになります。"
+      ]
+    },
+    {
+      "label": "声明",
+      "era": "1955年10月",
+      "headline": "王女が選んだ\n答え",
+      "lines": [
+        "そして1955年10月、25歳になった王女は声明を出しました。",
+        "「キリスト教の結婚は解消できないという教会の教えを心に留め、英連邦への責任を自覚し、私はこれらをほかの何よりも優先すると決めました」。"
+      ]
+    },
+    {
+      "label": "その後",
+      "era": "1960年",
+      "headline": "その後の\n王女",
+      "lines": [
+        "その後、王女は写真家と結婚しますが、18年後に離婚。"
+      ]
+    },
+    {
+      "label": "変わった王室",
+      "era": "2005年",
+      "headline": "半世紀後の\n王室",
+      "lines": [
+        "そして半世紀後の2005年、甥のチャールズ皇太子は、離婚歴のあるカミラ夫人と結婚しました。",
+        "王室のルールは、時代とともに変わっていったのです。",
+        "王女が諦めた恋は、ほんの少しだけ、早すぎたのかもしれません。"
+      ]
+    }
+  ]
+}
