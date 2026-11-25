@@ -180,7 +180,7 @@ the Tin Nhật channel (`japan-news-video-factory`) does now, with every one of 
   Wikimedia Commons, about 17 dB under the voice, credited on screen and in credits.txt). **k10 has its own music**
   (owner, 25/11/2026, after a trial: "dùng sáo trúc này", a bamboo-flute recording the owner sent, kept as
   `music/k10-sao-truc.mp3`): the channel's `defaults` give it, `{"file": "music/k10-sao-truc.mp3", "title": "竹笛",
-  "volume": 1.2}`, so a k10 story needs no `music:` search and no `"music"`; a story's own `"music"` replaces it whole.
+  "volume": 0.84}` (1.2 at first, then 30 % quieter: owner, 25/11/2026, "giảm nhạc nền đi 30%"), so a k10 story needs no `music:` search and no `"music"`; a story's own `"music"` replaces it whole.
   Its source and licence are not known (the owner's file): YouTube may recognise it if it is under copyright, a risk
   the owner took for the music of their own videos on 19/11/2026.
 - **Read fast like the source** (16/11/2026: "đọc nhanh như video gốc"): speed 1.2, short pauses (inherited).

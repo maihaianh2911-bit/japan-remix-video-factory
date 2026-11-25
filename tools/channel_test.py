@@ -264,7 +264,7 @@ def voice_of_channel():
         path.write_text(json.dumps(story, ensure_ascii=False), encoding="utf-8")
         release, beats, photos = load_story(path)
         assert release.music and release.music.path.endswith("music/k10-sao-truc.mp3"), release.music
-        assert release.music.title == "竹笛" and release.music.volume == 1.2, release.music
+        assert release.music.title == "竹笛" and release.music.volume == 0.84, release.music
         assert release.voice == ("冥鳴ひまり", "ノーマル"), release.voice
         merged = channels.inherit(dict(story, music={"pick": "3-1"}))
         assert merged["music"] == {"pick": "3-1"}, merged["music"]   # a story's own music replaces it whole
