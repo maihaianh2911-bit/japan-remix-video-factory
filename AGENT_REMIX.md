@@ -80,6 +80,8 @@ gh api "repos/$R/issues?state=open&labels=remix&per_page=50" --jq '[.[] | select
   on the issue. Never make up an event or a quote of a real person and tell it as a fact; the telling may be
   dramatised (owner, 19/11/2026). Every channel may tell rumours, tabloid ones too (owner, 19/11/2026: k10 first, then
   "Dùng tin đồn ở mọi kênh"): framed as told, once, and corrected in the caption's ※ note.
+  **k10 from 26/11/2026**: the five points of "What got views" in `CLAUDE.md` (a love or family story of a famous
+  royal, one life arc, a contrast hook, the couple's best photograph first, an ending back to the opening).
 - Pictures may come from anywhere on the web (owner, 14/11/2026, risk accepted): `web:` searches next to Commons
   ones. Skip pictures with a watermark, a logo or text burnt in, or a small blurred copy.
 - Every scene gets its own fitting picture (owner, 12/11/2026): 2–3 searches per scene from the start, search again
