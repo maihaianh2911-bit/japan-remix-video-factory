@@ -164,6 +164,15 @@ channel file (and of the frame code when the look is new), never of each story.
   proven false, never confirmed). British royal photos are mostly press photos (copyright risk, as Tin
   Nhật's, accepted by the owner); Qing pictures are mostly out of copyright. The Chinese side is the old dynasties
   (Cixi, Wanrong, Puyi…), never a story channel 7 tells.
+  **What got views** (owner, 25/11/2026: of the first nine k10 videos only one had views, `k10-2026-11-24-philip-elizabeth`,
+  464 likes, 55 saves, 12 comments in 17 hours on TikTok): a lifelong love story of the royal best known in Japan
+  (Elizabeth II and Philip), told on one arc from first meeting to death and the shared grave; a hook of 48
+  characters with two numbers that make the contrast (13 years old, 73 years together) and one poignant image (alone
+  at his funeral); the first picture the 1947 wedding portrait, the two looking at each other and smiling, faces
+  large in the upper half; a real quote of the Queen; an ending that comes back to the opening; music that moves
+  (Elgar's Nimrod; 青山龍星 then). The videos about prices, scandals, a trap, a little-known grandson or a king the
+  Japanese audience does not know (Edward VIII, a love story too) had none. The same lesson as `masako-rikon` on Tin
+  Nhật: a couple's love, with a famous face, an emotional moment in the first line. Prefer such stories for k10.
 - **k11 (歴史のなぜ):** one "why" question per video and its main answer, taken from the long source; big, well-known
   events (not small customs). Sensitive topics (Hitler, the persecution of the Jews, wars) are told as a neutral
   explanation, never praising, **no Nazi symbol in the first frame**; accepted history only, a hypothesis said to be
