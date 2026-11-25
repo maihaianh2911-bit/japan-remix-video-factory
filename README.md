@@ -97,7 +97,7 @@ Mày đọc danh sách luật cứng và thấy mấy luật "ko hợp lí", r�
 
 - Giao diện và giọng riêng cho từng kênh (tiêu đề cố định, huy hiệu xếp hạng cho kênh 8, màu riêng, giọng khác): làm
   sau, khi mày duyệt video thử 20 giây của từng kênh. Hiện cả 4 kênh dùng chung cách edit của Tin Nhật; giọng
-  青山龍星, riêng kênh 10 giọng nữ 冥鳴ひまり (mày chọn sau bản thử ngày 25/11).
+  青山龍星, riêng kênh 10 giọng nữ もち子さん (cùng giọng mày chốt cho video Hoàng gia Nhật, 25/11) và nhạc sáo trúc mày gửi.
 
 Chi tiết cho Claude: `CLAUDE.md` (luật, cách viết, cách edit, câu mở đầu), `AGENT_REMIX.md` (việc ở từng bước).
 Máy dựng là máy của kênh Tin Nhật (`japan-news-video-factory`).

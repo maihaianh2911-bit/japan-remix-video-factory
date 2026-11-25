@@ -265,7 +265,7 @@ def voice_of_channel():
         release, beats, photos = load_story(path)
         assert release.music and release.music.path.endswith("music/k10-sao-truc.mp3"), release.music
         assert release.music.title == "竹笛" and release.music.volume == 0.84, release.music
-        assert release.voice == ("冥鳴ひまり", "ノーマル"), release.voice
+        assert release.voice == ("もち子さん", "ノーマル"), release.voice
         merged = channels.inherit(dict(story, music={"pick": "3-1"}))
         assert merged["music"] == {"pick": "3-1"}, merged["music"]   # a story's own music replaces it whole
         assert not [w for w in edit_warnings(channels.inherit(story)) if 'no "music' in w]

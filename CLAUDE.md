@@ -1,8 +1,10 @@
 # japan-remix-video-factory — notes for Claude
 
 ## Iron rules (owner, 16/11/2026) — they come before everything else in this file
-1. **The video is in the channel's language: Japanese (tiếng Nhật).** The voice is the channel's Japanese VOICEVOX voice (`voice` in `channels/<id>.json`: 青山龍星 for k8, k9 and k11; **冥鳴ひまり for k10** since 25/11/2026, the owner
-   choosing a female voice after a trial: "Giọng nữ nào cg ổn"), and the script lines, subtitles and
+1. **The video is in the channel's language: Japanese (tiếng Nhật).** The voice is the channel's Japanese VOICEVOX voice (`voice` in `channels/<id>.json`: 青山龍星 for k8, k9 and k11; **もち子さん for k10** since 25/11/2026: the owner
+   first chose a female voice after a trial, 冥鳴ひまり ("Giọng nữ nào cg ổn"), then the same day the voice chosen for
+   the imperial-family videos of `japan-news-video-factory`, もち子さん: "tao vừa chốt voice ở chat hoàng gia nhật, m
+   có lấy voice nữ đó luôn đc ko"), and the script lines, subtitles and
    on-screen text are in Japanese (tiếng Nhật). A script that arrives in another language is translated faithfully into Japanese (tiếng Nhật)
    first. Never a voice or text of another language: check the language of `lines` and the voice before the voice
    step, and again on the finished video. A video in the wrong language is not delivered: fix it and render again.
@@ -126,8 +128,8 @@ stories inherit (the same for all four: `style` `story`, a `kicker` of its own �
 歴史のなぜ —, `pace` speed 1.2 with pauses of 0.1 and 0.2 s, and the four picture effects `fx`). **Looks and voices
 of their own come later**: each channel may get additions on top of the Tin Nhật edit (a persistent title, rank
 badges for k8, its colours, another voice) only after the owner approves a 20-second trial of it (owner, 18/11/2026).
-Until then do not add any: all four share the Tin Nhật edit, and 青山龍星 except k10 (冥鳴ひまり, owner 25/11/2026, after
-the trial of a female voice; No.7 読み聞かせ was liked too but reads about 40 % slower, so videos grow longer). A new look or voice is a change of the
+Until then do not add any: all four share the Tin Nhật edit, and 青山龍星 except k10 (もち子さん, owner 25/11/2026, the voice chosen
+for the imperial-family videos of `japan-news-video-factory` from a sampler of 13 voices; 冥鳴ひまり before it that day). A new look or voice is a change of the
 channel file (and of the frame code when the look is new), never of each story.
 
 ### The rules and risks of each channel (`docs/KENH-NHAT.md`, told to the owner)
@@ -179,7 +181,8 @@ the Tin Nhật channel (`japan-news-video-factory`) does now, with every one of 
 - **Music under the voice** in every video: a `music:` search and a quiet recording picked from it (a free licence on
   Wikimedia Commons, about 17 dB under the voice, credited on screen and in credits.txt). **k10 has its own music**
   (owner, 25/11/2026, after a trial: "dùng sáo trúc này", a bamboo-flute recording the owner sent, kept as
-  `music/k10-sao-truc.mp3`): the channel's `defaults` give it, `{"file": "music/k10-sao-truc.mp3", "title": "竹笛",
+  `music/k10-sao-truc.mp3`: the 58.7-second piece joined three times with 4-second cross-fades, 168 s, as in
+  `japan-news-video-factory`, so that it never jumps where it would loop): the channel's `defaults` give it, `{"file": "music/k10-sao-truc.mp3", "title": "竹笛",
   "volume": 0.84}` (1.2 at first, then 30 % quieter: owner, 25/11/2026, "giảm nhạc nền đi 30%"), so a k10 story needs no `music:` search and no `"music"`; a story's own `"music"` replaces it whole.
   Its source and licence are not known (the owner's file): YouTube may recognise it if it is under copyright, a risk
   the owner took for the music of their own videos on 19/11/2026.
