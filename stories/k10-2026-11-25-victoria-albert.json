@@ -1,9 +1,10 @@
 {
   "channel": "k10",
   "issue": 14,
-  "stage": "find",
+  "stage": "render",
   "title": "40年の喪服とウエディングベール ヴィクトリア女王とアルバート公",
   "date": "2026-11-25",
+  "review": "21/21",
   "searches": [
     "wiki:Queen Victoria",
     "wiki:Albert, Prince Consort",
@@ -43,7 +44,26 @@
           "say": "40年間、黒い服で夫のもにふくし、最期は結婚式のベールをかぶって旅立ったヴィクトリア女王は、本当に夫を深く愛していました。",
           "quote": true
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "14-6",
+          "focus": [
+            0.55,
+            0.2
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "1-1",
+          "focus": [
+            0.5,
+            0.25
+          ],
+          "move": "push-in"
+        }
+      ],
+      "why": "Mở đầu: ảnh chụp năm 1854, Victoria trong váy cưới và khăn voan nhìn Albert; rồi Victoria lúc già, đầu phủ khăn voan trắng."
     },
     {
       "label": "初恋",
@@ -51,7 +71,27 @@
       "headline": "18歳の女王の\n恋",
       "lines": [
         "18歳で即位した若き女王は、ドイツから訪ねてきたいとこのアルバート公に恋をします。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "11-1",
+          "focus": [
+            0.5,
+            0.2
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "2-11",
+          "focus": [
+            0.5,
+            0.25
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "dip",
+      "why": "Lùi về năm 1837: nữ hoàng 18 tuổi, rồi chàng Albert trẻ."
     },
     {
       "label": "プロポーズ",
@@ -59,7 +99,28 @@
       "headline": "女王からの\nプロポーズ",
       "lines": [
         "女王から求婚するのが決まりだったため、1839年、彼女は彼にプロポーズしました。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "14-10",
+          "focus": [
+            0.5,
+            0.25
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "14-2",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "pull-back",
+          "depth": false
+        }
+      ],
+      "cut": "fade",
+      "why": "Lời cầu hôn: bức tranh hai người trẻ trao nhau, rồi lùi ra trên bức khắc Albert đứng bên Victoria."
     },
     {
       "label": "白いドレス",
@@ -67,7 +128,27 @@
       "headline": "世界を変えた\n白いドレス",
       "lines": [
         "その結婚式で女王が着た白いドレスがきっかけとなり、世界中の花嫁が白いドレスを着るようになりました。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "15-3",
+          "focus": [
+            0.5,
+            0.45
+          ],
+          "move": "pan-right"
+        },
+        {
+          "pick": "15-19",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "rise"
+        }
+      ],
+      "cut": "page",
+      "why": "Đám cưới 1840: lia ngang lễ cưới tới cô dâu áo trắng, rồi lia dọc chiếc váy cưới thật đang trưng bày."
     },
     {
       "label": "夫婦",
@@ -78,7 +159,24 @@
           "text": "それから21年、アルバートはいつも妻のそばにいて、女王が最も信頼する人として、共に国を背負いました。",
           "say": "それから21年、アルバートはいつも妻のそばにいて、女王が最も信頼する人として、共に国をせおいました。"
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "14-3",
+          "fit": "contain",
+          "move": "push-in"
+        },
+        {
+          "pick": "2-9",
+          "focus": [
+            0.6,
+            0.35
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "fade",
+      "why": "21 năm bên nhau: Albert đọc sách, Victoria tựa vào vai chồng; rồi lùi ra trên cả gia đình."
     },
     {
       "label": "別れ",
@@ -86,7 +184,29 @@
       "headline": "42歳の\n突然の別れ",
       "lines": [
         "ところが1861年の冬、アルバートは病に倒れ、42歳の若さで亡くなります。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "2-17",
+          "focus": [
+            0.5,
+            0.25
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "19-5",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "move": "hold",
+          "fit": "contain",
+          "depth": false
+        }
+      ],
+      "cut": "dip",
+      "why": "Albert mất: tối rồi sáng lại, gương mặt Albert, rồi để yên bức tranh giây phút cuối bên giường bệnh."
     },
     {
       "label": "喪服",
@@ -97,7 +217,24 @@
           "text": "「私の幸せな人生は、終わりました」。女王は手紙にそう書き、その日から、いつも喪服を着て過ごしました。",
           "say": "「私の幸せな人生は、終わりました」。女王は手紙にそう書き、その日から、いつももふくを着て過ごしました。"
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "20-3",
+          "focus": [
+            0.5,
+            0.2
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "21-2",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "cut": "fade",
+      "why": "Đồ tang: Victoria áo đen, rồi hiện cả ảnh bà mặc tang ngồi dưới chân dung Albert."
     },
     {
       "label": "夫の部屋",
@@ -106,7 +243,37 @@
       "lines": [
         "女王はきっと、夫がいなくなったことを信じたくなかったのでしょう。",
         "夫の部屋をそのまま残し、毎朝、着替えと、ひげをそるためのお湯を用意させました。まるで、いつか夫が帰ってくるかのように。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "21-1",
+          "focus": [
+            0.55,
+            0.3
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "19-6",
+          "focus": [
+            0.5,
+            0.6
+          ],
+          "move": "push-in",
+          "depth": false
+        },
+        {
+          "pick": "19-8",
+          "focus": [
+            0.3,
+            0.4
+          ],
+          "move": "push-in",
+          "depth": false
+        }
+      ],
+      "cut": "fade",
+      "why": "Căn phòng chờ chồng: Victoria bên tượng Albert, rồi căn phòng xanh giữ nguyên như cũ, rồi đẩy vào bức tượng giữa phòng."
     },
     {
       "label": "夫の隣へ",
@@ -114,14 +281,55 @@
       "headline": "白い服で\n夫の隣へ",
       "lines": [
         "1901年、女王は81歳で亡くなり、白い服を着せられ、あの日のウエディングベールをかけて、アルバートの隣で眠りにつきました。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "24-5",
+          "focus": [
+            0.6,
+            0.4
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "25-4",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "dip",
+      "why": "Năm 1901: tối rồi sáng lại, linh cữu của Nữ hoàng; rồi lùi ra trên ngôi mộ hai người nằm cạnh nhau ở lăng Frogmore."
     },
     {
       "label": "花嫁",
+      "era": "1861〜1901年",
       "headline": "花嫁に\n戻る日まで",
       "lines": [
         "40年近い黒い服の日々は、もう一度花嫁の姿で夫に会うための、長い長い待ち時間だったのかもしれません。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "15-4",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "14-6",
+          "focus": [
+            0.55,
+            0.3
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "dip",
+      "why": "Kết: Victoria cô dâu trong khăn voan, rồi lùi ra trên ảnh cưới năm xưa, quay về hình mở đầu."
     }
   ]
 }
