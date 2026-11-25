@@ -11,6 +11,7 @@
     "style": "story",
     "kicker": "世界の王室",
     "pace": {"speed": 1.2, "line_pause": 0.1, "scene_pause": 0.2},
-    "fx": {"motion": true, "depth": true, "text": true, "face": true}
+    "fx": {"motion": true, "depth": true, "text": true, "face": true},
+    "music": {"file": "music/k10-sao-truc.mp3", "title": "竹笛", "volume": 1.2}
   }
 }

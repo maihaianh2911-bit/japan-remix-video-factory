@@ -27,7 +27,7 @@ import wave
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from news import captions, channels, render, voice   # noqa: E402
-from news.custom import StoryError, load_story, read, validate   # noqa: E402
+from news.custom import StoryError, edit_warnings, load_story, read, validate   # noqa: E402
 from news.story import voice_credit   # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent
@@ -257,6 +257,22 @@ def voice_of_channel():
         real = dict(STORY, voice={"speaker": "冥鳴ひまり", "style": "ノーマル"})
         assert any('"voice" is only for a trial' in p for p in validate(real, path.stem)), \
             validate(real, path.stem)
+    # k10's own music (owner, 25/11/2026: "dùng sáo trúc này"): a recording kept in music/, inherited whole
+    with tempfile.TemporaryDirectory(prefix="channel-music-") as scratch:
+        path = Path(scratch) / "k10-2026-11-25-music.json"
+        story = dict(STORY, channel="k10")
+        path.write_text(json.dumps(story, ensure_ascii=False), encoding="utf-8")
+        release, beats, photos = load_story(path)
+        assert release.music and release.music.path.endswith("music/k10-sao-truc.mp3"), release.music
+        assert release.music.title == "竹笛" and release.music.volume == 1.2, release.music
+        assert release.voice == ("冥鳴ひまり", "ノーマル"), release.voice
+        merged = channels.inherit(dict(story, music={"pick": "3-1"}))
+        assert merged["music"] == {"pick": "3-1"}, merged["music"]   # a story's own music replaces it whole
+        assert not [w for w in edit_warnings(channels.inherit(story)) if 'no "music' in w]
+        bad = dict(story, music={"file": "music/none.mp3", "title": "x"})
+        assert any("not in the repository" in p for p in validate(bad, path.stem)), validate(bad, path.stem)
+        both = dict(story, music={"file": "music/k10-sao-truc.mp3", "title": "x", "pick": "1-1"})
+        assert any("not both" in p for p in validate(both, path.stem)), validate(both, path.stem)
 
 
 def caption_checks():

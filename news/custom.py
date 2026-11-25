@@ -39,14 +39,17 @@ LINE_KEYS = {"text", "say", "quote"}
 PHOTO_KEYS = {"pick", "focus", "fit", "move", "tone", "depth"}
 FX_KEYS = {"motion", "depth", "text", "face"}
 TONES = ("sepia", "mono", "color")
-MUSIC_KEYS = {"pick", "volume", "start"}
+MUSIC_KEYS = {"pick", "volume", "start", "file", "title", "creator", "license", "page"}
+ROOT = Path(__file__).resolve().parent.parent   # the repository: "music": {"file": "music/<name>.mp3"} is read from it
+AUDIO = (".mp3", ".ogg", ".oga", ".opus", ".wav", ".flac", ".m4a")
 PACE_KEYS = {"speed", "line_pause", "scene_pause"}
 PACE_LIMITS = {"speed": (0.7, 1.3), "line_pause": (0.0, 2.0), "scene_pause": (0.0, 3.0)}
 
 
 @dataclass(frozen=True)
 class Music:
-    """A quiet piece under the voice: a file of the find folder (search "music:…") and its credit."""
+    """A quiet piece under the voice and its credit: a file of the find folder (search "music:…", "pick"), or a
+    recording kept in the repository ("file": "music/<name>.mp3", e.g. the channel's own music in its defaults)."""
     path: str
     title: str
     page: str
@@ -176,6 +179,23 @@ def check_photo(photo, where, searches):
     return problems
 
 
+def music_file_problems(music):
+    """A recording kept in the repository: "file" under music/, an audio file that exists, a "title" to credit, no
+    "pick" (the owner's music for a channel, 25/11/2026: "dùng sáo trúc này")."""
+    found, file = [], music.get("file")
+    if "pick" in music:
+        found.append('"music": give either "pick" (a "music:…" search) or "file" (a recording in music/), not both')
+    if not (isinstance(file, str) and file.startswith("music/") and ".." not in file
+            and file.lower().endswith(AUDIO)):
+        found.append(f'"music": "file" must be a recording in the music/ folder ({", ".join(AUDIO)}), got {file!r}')
+    elif not (ROOT / file).is_file():
+        found.append(f'"music": the file {file} is not in the repository')
+    found += text_problem(music.get("title"), '"music": "title"')
+    for key in ("creator", "license", "page"):
+        found += text_problem(music.get(key), f'"music": "{key}"', required=False)
+    return found
+
+
 def validate(data, name=None):
     """Return the list of problems of a story (empty when it is usable). The story is checked with its channel's
     defaults in the keys it leaves out (channels.inherit), as it will be made."""
@@ -237,7 +257,9 @@ def validate(data, name=None):
         else:
             problems += unknown(music, MUSIC_KEYS, "music")
             match = PICK.match(music.get("pick", "")) if isinstance(music.get("pick"), str) else None
-            if not match:
+            if "file" in music:
+                problems += music_file_problems(music)
+            elif not match:
                 problems.append(f'"music": "pick" must look like "25-1", got {music.get("pick")!r}')
             elif int(match[1]) > len(searches) or not searches[int(match[1]) - 1].startswith("music:"):
                 problems.append(f'"music": pick {music["pick"]} must come from a "music:…" search')
@@ -335,7 +357,7 @@ def found_pictures(data, pictures):
             elif n > len(group["results"]):
                 problems.append(f"scene {number}: picture {pick} is not among the {len(group['results'])} "
                                 f"pictures found by search {k}")
-    if isinstance(data.get("music"), dict):
+    if isinstance(data.get("music"), dict) and "pick" in data["music"]:
         k, n = map(int, PICK.match(data["music"]["pick"]).groups())
         group = groups.get(k)
         if group is None or not group["results"] or n > len(group["results"]):
@@ -396,7 +418,9 @@ def edit_warnings(data, sample=False):
         found.append(f"the hook: line 1 has {size} characters; it is said in about 5 seconds (45-50 characters, "
                      f"{HOOK_LIMIT} at most): the whole story and its meaning in one plain line")
     # the ending is free (owner, 19/11/2026: "tự do, miễn hay"): no form of ending is warned about any more
-    if not any(isinstance(search, str) and search.startswith("music:") for search in data.get("searches", [])):
+    own_music = isinstance(data.get("music"), dict) and "file" in data["music"]   # the channel's own recording
+    if not own_music and not any(isinstance(search, str) and search.startswith("music:")
+                                 for search in data.get("searches", [])):
         found.append('no "music:" search: every video has a quiet piece under the voice, e.g. '
                      '"music:Schumann Träumerei piano"')
     if data.get("stage", "find") != "render":
@@ -461,7 +485,11 @@ def load_story(path, pictures=None):
     data = read(path)
     found = found_pictures(data, pictures)
     music = None
-    if data.get("music"):
+    if isinstance(data.get("music"), dict) and "file" in data["music"]:
+        own = data["music"]
+        music = Music(str(ROOT / own["file"]), own["title"], own.get("page", ""), own.get("creator", ""),
+                      own.get("license", ""), float(own.get("volume", 1.0)), float(own.get("start", 0.0)))
+    elif data.get("music"):
         if found is None:
             raise StoryError("the story has music, but no find folder with index.json was given (--pictures)")
         entry = found[data["music"]["pick"]]

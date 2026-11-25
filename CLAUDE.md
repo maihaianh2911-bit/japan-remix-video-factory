@@ -177,7 +177,12 @@ the Tin Nhật channel (`japan-news-video-factory`) does now, with every one of 
   in with the voice and a caption that darkens as it is read, the display typeface; a **flat picture** (a document, a
   newspaper page, a collage, a chart, a screenshot, a banknote) gets `"depth": false`, or it bends.
 - **Music under the voice** in every video: a `music:` search and a quiet recording picked from it (a free licence on
-  Wikimedia Commons, about 17 dB under the voice, credited on screen and in credits.txt).
+  Wikimedia Commons, about 17 dB under the voice, credited on screen and in credits.txt). **k10 has its own music**
+  (owner, 25/11/2026, after a trial: "dùng sáo trúc này", a bamboo-flute recording the owner sent, kept as
+  `music/k10-sao-truc.mp3`): the channel's `defaults` give it, `{"file": "music/k10-sao-truc.mp3", "title": "竹笛",
+  "volume": 1.2}`, so a k10 story needs no `music:` search and no `"music"`; a story's own `"music"` replaces it whole.
+  Its source and licence are not known (the owner's file): YouTube may recognise it if it is under copyright, a risk
+  the owner took for the music of their own videos on 19/11/2026.
 - **Read fast like the source** (16/11/2026: "đọc nhanh như video gốc"): speed 1.2, short pauses (inherited).
 - **Two pictures for a scene over 6 seconds, one is enough under that** (19/11/2026: "nếu nội dung quá 6s thì phải
   tìm 2 ảnh, dưới 6s thì 1 ảnh cũng đc, tự do"; before: two a scene) and **every scene its own fitting picture**

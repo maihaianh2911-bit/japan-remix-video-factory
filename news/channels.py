@@ -12,8 +12,9 @@ A channel file holds
                       effects, music, the hook line printed big, two pictures for a scene over 6 seconds, a move for every picture, a cut
                       and a why for every scene, the picture review. python -m news.custom warns about what a story
                       leaves out of it (custom.edit_warnings).
-    defaults          what a story of the channel inherits for the keys it leaves out: style, kicker, pace, fx. A dict
-                      ("pace", "fx") is inherited key by key; a key the story sets to null inherits nothing.
+    defaults          what a story of the channel inherits for the keys it leaves out: style, kicker, pace, fx, and
+                      music (a recording kept in music/, {"file": …, "title": …}: k10's bamboo flute, 25/11/2026).
+                      A dict ("pace", "fx") is inherited key by key, "music" whole; a key set to null inherits nothing.
 Only the Python standard library is used here: the caption check runs without the requirements.
 
 python -m news.channels                          checks every channel file (and the stories its defaults make)
@@ -31,7 +32,7 @@ import sys
 FOLDER = Path(__file__).resolve().parent.parent / "channels"
 ID = re.compile(r"^k[1-9][0-9]*$")
 KEYS = {"id", "number", "name_ja", "name_vi", "tag", "voice", "hashtags", "edit", "defaults"}
-DEFAULT_KEYS = {"style", "kicker", "pace", "fx"}
+DEFAULT_KEYS = {"style", "kicker", "pace", "fx", "music"}
 EDITS = ("tin-nhat",)   # the edits a channel may follow (CLAUDE.md, "The edit")
 STORY_NAME = re.compile(r"^(k[1-9][0-9]*)-([0-9]{4}-[0-9]{2}-[0-9]{2})-[A-Za-z0-9._-]+$")
 SAMPLE_NAME = re.compile(r"^mau-(k[1-9][0-9]*)(?:-[A-Za-z0-9._-]+)?$")
@@ -96,7 +97,8 @@ def of_title(title):
 
 def inherit(story):
     """The story with its channel's defaults in the keys it leaves out. A dict ("pace", "fx") is inherited key by
-    key, so that a story may change one of them ("fx": {"depth": false}); a key set to null inherits nothing."""
+    key, so that a story may change one of them ("fx": {"depth": false}); a key set to null inherits nothing. The
+    channel's "music" (a recording in music/) is taken whole, and a story's own "music" replaces it whole."""
     channel = get(story.get("channel")) if isinstance(story, dict) else None
     if not channel or not isinstance(channel.get("defaults"), dict):
         return story
@@ -104,7 +106,7 @@ def inherit(story):
     for key, value in channel["defaults"].items():
         if key not in merged:
             merged[key] = copy.deepcopy(value)
-        elif isinstance(value, dict) and isinstance(merged[key], dict):
+        elif isinstance(value, dict) and isinstance(merged[key], dict) and key != "music":   # music: whole
             merged[key] = {**copy.deepcopy(value), **merged[key]}
     return merged
 
