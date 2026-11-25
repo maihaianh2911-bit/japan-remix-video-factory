@@ -1,7 +1,8 @@
 # japan-remix-video-factory — notes for Claude
 
 ## Iron rules (owner, 16/11/2026) — they come before everything else in this file
-1. **The video is in the channel's language: Japanese (tiếng Nhật).** The voice is the channel's Japanese VOICEVOX voice (`voice` in `channels/<id>.json`: 青山龍星 for all four channels until the owner chooses others), and the script lines, subtitles and
+1. **The video is in the channel's language: Japanese (tiếng Nhật).** The voice is the channel's Japanese VOICEVOX voice (`voice` in `channels/<id>.json`: 青山龍星 for k8, k9 and k11; **冥鳴ひまり for k10** since 25/11/2026, the owner
+   choosing a female voice after a trial: "Giọng nữ nào cg ổn"), and the script lines, subtitles and
    on-screen text are in Japanese (tiếng Nhật). A script that arrives in another language is translated faithfully into Japanese (tiếng Nhật)
    first. Never a voice or text of another language: check the language of `lines` and the voice before the voice
    step, and again on the finished video. A video in the wrong language is not delivered: fix it and render again.
@@ -125,7 +126,8 @@ stories inherit (the same for all four: `style` `story`, a `kicker` of its own �
 歴史のなぜ —, `pace` speed 1.2 with pauses of 0.1 and 0.2 s, and the four picture effects `fx`). **Looks and voices
 of their own come later**: each channel may get additions on top of the Tin Nhật edit (a persistent title, rank
 badges for k8, its colours, another voice) only after the owner approves a 20-second trial of it (owner, 18/11/2026).
-Until then do not add any: all four share the Tin Nhật edit and 青山龍星. A new look or voice is a change of the
+Until then do not add any: all four share the Tin Nhật edit, and 青山龍星 except k10 (冥鳴ひまり, owner 25/11/2026, after
+the trial of a female voice; No.7 読み聞かせ was liked too but reads about 40 % slower, so videos grow longer). A new look or voice is a change of the
 channel file (and of the frame code when the look is new), never of each story.
 
 ### The rules and risks of each channel (`docs/KENH-NHAT.md`, told to the owner)

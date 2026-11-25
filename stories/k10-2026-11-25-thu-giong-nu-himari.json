@@ -1,6 +1,6 @@
 {
   "channel": "k10",
-  "stage": "render",
+  "stage": "find",
   "trial": true,
   "voice": {
     "speaker": "冥鳴ひまり",
@@ -32,7 +32,15 @@
     "music:shakuhachi",
     "music:Japanese bamboo flute",
     "music:shinobue flute",
-    "music:koto Japanese music"
+    "music:koto Japanese music",
+    "music:Do you Shakuhachi Antti Luode",
+    "music:Kevin MacLeod Ishikari Lore",
+    "music:Kevin MacLeod Japanese",
+    "music:Kevin MacLeod Eastern",
+    "music:dizi Chinese bamboo flute",
+    "music:Chinese traditional music flute guzheng",
+    "music:flute solo calm",
+    "music:harp calm"
   ],
   "scenes": [
     {
