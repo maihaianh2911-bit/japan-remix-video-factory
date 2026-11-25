@@ -172,7 +172,21 @@ channel file (and of the frame code when the look is new), never of each story.
   large in the upper half; a real quote of the Queen; an ending that comes back to the opening; music that moves
   (Elgar's Nimrod; 青山龍星 then). The videos about prices, scandals, a trap, a little-known grandson or a king the
   Japanese audience does not know (Edward VIII, a love story too) had none. The same lesson as `masako-rikon` on Tin
-  Nhật: a couple's love, with a famous face, an emotional moment in the first line. Prefer such stories for k10.
+  Nhật: a couple's love, with a famous face, an emotional moment in the first line. **From 26/11/2026 every k10
+  video follows it** (owner, 25/11/2026: "Oke từ ngày mai hãy cải thiện"):
+  1. The topic: a love or family story (a couple, a parent and a child) of a royal the Japanese audience knows at once
+     (Elizabeth II, Diana, William and Kate, Grace Kelly, Victoria and Albert…); not prices, scandals or a person
+     nobody knows. When the owner sends a source on another topic, find its love or family side and lead with it.
+  2. One arc of a life: a first meeting or a beginning, a sacrifice or a test, the emotional moment, what became of
+     them; a real quote of one of them when there is one.
+  3. The hook: about 45–50 characters, the famous name, two numbers or two moments that make the contrast, and one
+     poignant image (「13歳で恋した人と73年連れ添ったエリザベス女王は、その人の葬儀で、たった一人で座っていました。」).
+  4. The first picture: the couple (or the parent and child) together, looking at each other or smiling, faces large
+     in the upper half, sharp; their best-known photograph.
+  5. The ending comes back to the opening (the ending is free on the other channels; for k10 this is what worked).
+  When suggesting scripts, offer topics of this kind. The voice and the music stay the channel's (もち子さん and the
+  flute, chosen after the hit video was made with 青山龍星 and Nimrod): if the next three or four k10 love stories get
+  no views, say so to the owner and offer a trial with the male voice again.
 - **k11 (歴史のなぜ):** one "why" question per video and its main answer, taken from the long source; big, well-known
   events (not small customs). Sensitive topics (Hitler, the persecution of the Jews, wars) are told as a neutral
   explanation, never praising, **no Nazi symbol in the first frame**; accepted history only, a hypothesis said to be
