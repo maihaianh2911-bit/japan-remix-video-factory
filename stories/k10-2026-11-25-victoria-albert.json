@@ -1,0 +1,127 @@
+{
+  "channel": "k10",
+  "issue": 14,
+  "stage": "find",
+  "title": "40年の喪服とウエディングベール ヴィクトリア女王とアルバート公",
+  "date": "2026-11-25",
+  "searches": [
+    "wiki:Queen Victoria",
+    "wiki:Albert, Prince Consort",
+    "wiki:Wedding of Queen Victoria and Prince Albert",
+    "wiki:Coronation of Queen Victoria",
+    "wiki:Death and state funeral of Queen Victoria",
+    "wiki:Royal Mausoleum, Frogmore",
+    "wiki:Windsor Castle",
+    "wiki:Osborne House",
+    "web:Queen Victoria Prince Albert 1854 photograph => Queen Victoria and Prince Albert standing together in an early photograph",
+    "web:ヴィクトリア女王 アルバート公 => Queen Victoria and Prince Albert together",
+    "web:Queen Victoria young portrait 1838 => portrait of the young Queen Victoria",
+    "web:Queen Victoria coronation 1838 painting => young Queen Victoria crowned at her coronation",
+    "web:Prince Albert young portrait 1840 Winterhalter => portrait of the young Prince Albert",
+    "web:Queen Victoria Prince Albert engagement 1839 => young Queen Victoria and Prince Albert in 1839",
+    "web:Queen Victoria wedding 1840 painting white dress => Queen Victoria in a white wedding dress marrying Prince Albert",
+    "web:Queen Victoria wedding dress display Kensington Palace => Queen Victoria's white wedding dress on display",
+    "web:Winterhalter royal family 1846 Victoria Albert children => painting of Queen Victoria and Prince Albert with their children",
+    "web:Queen Victoria Prince Albert together painting Winterhalter => painting of Queen Victoria and Prince Albert side by side",
+    "web:Prince Albert deathbed 1861 Windsor => Prince Albert on his deathbed in 1861",
+    "web:Queen Victoria widow black mourning dress 1860s => Queen Victoria in a black mourning dress",
+    "web:Queen Victoria widow mourning portrait Albert bust => Queen Victoria in black beside a bust of Prince Albert",
+    "web:Blue Room Windsor Castle Prince Albert died => the room at Windsor Castle where Prince Albert died",
+    "web:Queen Victoria 1897 Diamond Jubilee portrait => elderly Queen Victoria in black with a white veil",
+    "web:Queen Victoria funeral 1901 procession => Queen Victoria's funeral procession in 1901",
+    "web:Royal Mausoleum Frogmore Victoria Albert tomb effigies => marble effigies of Queen Victoria and Prince Albert on their tomb",
+    "web:Queen Victoria wedding veil Honiton lace => Queen Victoria's white lace wedding veil"
+  ],
+  "scenes": [
+    {
+      "label": "ヴィクトリア女王",
+      "era": "1901年",
+      "headline": "40年の喪服と\nウエディングベール",
+      "lines": [
+        {
+          "text": "40年間、黒い服で夫の喪に服し、最期は結婚式のベールをかぶって旅立ったヴィクトリア女王は、本当に夫を深く愛していました。",
+          "say": "40年間、黒い服で夫のもにふくし、最期は結婚式のベールをかぶって旅立ったヴィクトリア女王は、本当に夫を深く愛していました。",
+          "quote": true
+        }
+      ]
+    },
+    {
+      "label": "初恋",
+      "era": "1837年",
+      "headline": "18歳の女王の\n恋",
+      "lines": [
+        "18歳で即位した若き女王は、ドイツから訪ねてきたいとこのアルバート公に恋をします。"
+      ]
+    },
+    {
+      "label": "プロポーズ",
+      "era": "1839年",
+      "headline": "女王からの\nプロポーズ",
+      "lines": [
+        "女王から求婚するのが決まりだったため、1839年、彼女は彼にプロポーズしました。"
+      ]
+    },
+    {
+      "label": "白いドレス",
+      "era": "1840年",
+      "headline": "世界を変えた\n白いドレス",
+      "lines": [
+        "その結婚式で女王が着た白いドレスがきっかけとなり、世界中の花嫁が白いドレスを着るようになりました。"
+      ]
+    },
+    {
+      "label": "夫婦",
+      "era": "1840年代",
+      "headline": "女王の\n一番の支え",
+      "lines": [
+        {
+          "text": "それから21年、アルバートはいつも妻のそばにいて、女王が最も信頼する人として、共に国を背負いました。",
+          "say": "それから21年、アルバートはいつも妻のそばにいて、女王が最も信頼する人として、共に国をせおいました。"
+        }
+      ]
+    },
+    {
+      "label": "別れ",
+      "era": "1861年",
+      "headline": "42歳の\n突然の別れ",
+      "lines": [
+        "ところが1861年の冬、アルバートは病に倒れ、42歳の若さで亡くなります。"
+      ]
+    },
+    {
+      "label": "喪服",
+      "era": "1861年",
+      "headline": "「私の幸せな人生は\n終わりました」",
+      "lines": [
+        {
+          "text": "「私の幸せな人生は、終わりました」。女王は手紙にそう書き、その日から、いつも喪服を着て過ごしました。",
+          "say": "「私の幸せな人生は、終わりました」。女王は手紙にそう書き、その日から、いつももふくを着て過ごしました。"
+        }
+      ]
+    },
+    {
+      "label": "夫の部屋",
+      "era": "1861年",
+      "headline": "夫の帰りを\n待つ部屋",
+      "lines": [
+        "女王はきっと、夫がいなくなったことを信じたくなかったのでしょう。",
+        "夫の部屋をそのまま残し、毎朝、着替えと、ひげをそるためのお湯を用意させました。まるで、いつか夫が帰ってくるかのように。"
+      ]
+    },
+    {
+      "label": "夫の隣へ",
+      "era": "1901年",
+      "headline": "白い服で\n夫の隣へ",
+      "lines": [
+        "1901年、女王は81歳で亡くなり、白い服を着せられ、あの日のウエディングベールをかけて、アルバートの隣で眠りにつきました。"
+      ]
+    },
+    {
+      "label": "花嫁",
+      "headline": "花嫁に\n戻る日まで",
+      "lines": [
+        "40年近い黒い服の日々は、もう一度花嫁の姿で夫に会うための、長い長い待ち時間だったのかもしれません。"
+      ]
+    }
+  ]
+}
