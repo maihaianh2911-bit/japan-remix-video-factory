@@ -246,6 +246,17 @@ def voice_of_channel():
             channels.channels.cache_clear()
             render.use_style("news")
     assert channels.get("k8")["voice"]["speaker"] == "青山龍星"
+    # a trial may try another voice (owner, 25/11/2026), a real video may not
+    with tempfile.TemporaryDirectory(prefix="channel-trial-voice-") as scratch:
+        path = Path(scratch) / "k8-2026-11-25-voice.json"
+        tried = dict(STORY, trial=True, voice={"speaker": "冥鳴ひまり", "style": "ノーマル"})
+        path.write_text(json.dumps(tried, ensure_ascii=False), encoding="utf-8")
+        release, beats, photos = load_story(path)
+        assert release.voice == ("冥鳴ひまり", "ノーマル") and voice_credit(release) == "VOICEVOX:冥鳴ひまり", release
+        assert not [p for p in validate(tried, path.stem) if '"voice"' in p], validate(tried, path.stem)
+        real = dict(STORY, voice={"speaker": "冥鳴ひまり", "style": "ノーマル"})
+        assert any('"voice" is only for a trial' in p for p in validate(real, path.stem)), \
+            validate(real, path.stem)
 
 
 def caption_checks():

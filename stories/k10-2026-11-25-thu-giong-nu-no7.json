@@ -1,0 +1,235 @@
+{
+  "channel": "k10",
+  "stage": "find",
+  "trial": true,
+  "voice": {
+    "speaker": "No.7",
+    "style": "読み聞かせ"
+  },
+  "title": "【試し】恋を諦めた王女 マーガレット王女とタウンゼント大佐（No.7・尺八）",
+  "date": "2026-11-25",
+  "searches": [
+    "url:https://assets.vogue.com/photos/611bd07b0f269150843b9b5e/master/w_1280%2Cc_limit/51952384 https://www.vogue.com/slideshow/stunning-vintage-photographs-of-princess-margaret",
+    "url:https://assets.vogue.com/photos/61942596efb29c6cda4d31c0/1:1/w_3575,h_3575,c_limit/576755719 https://www.vogue.com/slideshow/queen-elizabeth-and-princess-margaret-a-look-back-at-the-royal-sisterhood-in-39-photos",
+    "url:https://hips.hearstapps.com/hmg-prod/images/group-captain-peter-townsend-in-brussels-at-the-funeral-of-news-photo-1666718695.jpg https://www.townandcountrymag.com/society/tradition/g41767707/peter-townsend-princess-margaret-photos/",
+    "url:https://shop.memorylane.co.uk/p/767/group-captain-peter-townsend-outside-flat-brussels-21388756.jpg.webp https://shop.memorylane.co.uk/mirror/0100to0199-00100/group-captain-peter-townsend-outside-flat-brussels-21388756.html",
+    "url:https://www.thecourtjeweller.com/wp-content/uploads/2022/08/2022-0808-margaret05.jpg https://www.thecourtjeweller.com/2022/08/princess-margarets-cartier-coronation-tiara.html",
+    "url:http://toc.h-cdn.co/assets/16/40/1024x735/gallery-1475855109-margaret-peter.jpg https://www.townandcountrymag.com/society/tradition/news/a8139/princess-margaret-peter-townsend-love-affair/",
+    "url:https://substackcdn.com/image/fetch/$s_!kBeM!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F498bbac1-c407-40c1-b727-280f954f83f5_636x694.jpeg https://tiffanyjenkins.substack.com/p/princess-margarets-not-so-private",
+    "url:https://assets.vogue.com/photos/6192e4b8941f2b679f12beeb/master/w_1024%2Cc_limit/541063029 https://www.vogue.com/slideshow/queen-elizabeth-and-princess-margaret-a-look-back-at-the-royal-sisterhood-in-39-photos",
+    "url:https://s.yimg.com/lo/mysterio/api/2fd82caa753c54e3500e0eb9a1508da22cd455129c30533df3482b759d2d280a/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Ftown_country_721%2F64a0b97bae410170f3aa60b3ebe595a4 https://www.yahoo.com/lifestyle/heartbreaking-royal-romance-princess-margaret-164150609.html",
+    "url:https://images.hellomagazine.com/horizon/square/56458f2184d8-princess-margaret-t.jpg https://www.hellomagazine.com/royalty/20220821148462/princess-margaret-peter-townsend-everything-to-know/",
+    "url:https://i.dailymail.co.uk/1s/2024/10/17/14/75558883-13966541-How_the_Daily_Mail_reported_Princess_Margaret_s_announcement_tha-a-13_1729170529855.jpg https://www.dailymail.com/news/royals/article-13966541/Peter-Townsend-Princess-Margaret-royal-fans-married-rogue.html",
+    "url:https://people.com/thmb/6kzqaKzKBiuhSj9nHzuwyuf13cw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(999x0:1001x2)/lord-snowden-053fe41e15cc4460be13af1ae6bfd169.jpg https://people.com/princess-margaret-antony-armstrong-jones-wedding-11728212",
+    "url:https://hips.hearstapps.com/hmg-prod/images/camilla-and-charles-marriage-at-windsor-castle-on-april-9-2005-in-berkshire-england-photo-by-tim-grahamgetty-images.jpg?crop=0.6806666666666666xw:1xh;center,top&resize=1200:* https://www.biography.com/royalty/prince-charles-camilla-parker-bowles-relationship-history",
+    "url:https://www.cheatsheet.com/wp-content/uploads/2023/12/Queen-Elizabeth-II-who-gave-a-speech-at-King-Charles-and-Queen-Camillas-2005-wedding-reception-stands-behind-the-bride-and-groom.jpg https://www.cheatsheet.com/news/queen-elizabeths-surprising-olive-branch-charles-camilla-wedding-day.html/",
+    "url:https://people.com/thmb/eWiikOP7LWP8PSeSQjdnUQmJw9I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(735x0:737x2)/princess-margaret-15-527b6ee646c24b028a5b4c1766b7225e.jpg https://people.com/royals/princess-margaret-england-best-photos/",
+    "music:shakuhachi",
+    "music:Japanese bamboo flute",
+    "music:shinobue flute",
+    "music:koto Japanese music"
+  ],
+  "scenes": [
+    {
+      "label": "女王の妹",
+      "era": "1955年",
+      "headline": "結婚を諦めた\n女王の妹",
+      "lines": [
+        {
+          "text": "エリザベス女王の妹マーガレット王女は、愛する人との結婚を、自ら諦めると国民に発表しました。",
+          "quote": true
+        }
+      ],
+      "photo": [
+        {
+          "pick": "1-1",
+          "focus": [
+            0.45,
+            0.18
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "2-1",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        }
+      ],
+      "why": "Mở đầu: chân dung Công chúa Margaret (rõ mặt, sắc nét) khi đọc câu móc; rồi hai chị em Margaret và Elizabeth."
+    },
+    {
+      "label": "空軍の英雄",
+      "era": "1950年代",
+      "headline": "16歳年上の\n空軍の英雄",
+      "lines": [
+        "相手は、父ジョージ6世に仕えた空軍の英雄、ピーター・タウンゼント大佐。",
+        "16歳年上で、離婚歴のある男性でした。"
+      ],
+      "photo": [
+        {
+          "pick": "3-1",
+          "focus": [
+            0.5,
+            0.15
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "4-1",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "page",
+      "why": "Người mới (Townsend): đẩy vào người sĩ quan không quân trong quân phục, rồi đẩy vào gương mặt ông."
+    },
+    {
+      "label": "戴冠式",
+      "era": "1953年",
+      "headline": "戴冠式の日の\nひとつのしぐさ",
+      "lines": [
+        "1953年、姉の戴冠式の日、王女が大佐の制服についた糸くずをそっと払う姿が、記者たちの目に留まります。",
+        "二人の恋は、たちまち世界中の新聞をにぎわせました。"
+      ],
+      "photo": [
+        {
+          "pick": "5-1",
+          "focus": [
+            0.5,
+            0.25
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "6-1",
+          "fit": "contain",
+          "move": "push-in"
+        },
+        {
+          "pick": "7-1",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "move": "hold",
+          "fit": "contain",
+          "depth": false
+        }
+      ],
+      "cut": "dip",
+      "why": "Lễ đăng quang 1953: Margaret trong lễ phục, rồi hai người đứng cạnh nhau, rồi để yên trang báo hỏi 'có nên cho cưới không'."
+    },
+    {
+      "label": "許されない恋",
+      "era": "1953年",
+      "headline": "許されなかった\n結婚",
+      "lines": [
+        "けれど当時、イギリス国教会は離婚した人の再婚を認めておらず、25歳になるまでの王女の結婚には、女王の同意も必要でした。",
+        "大佐はベルギーへ転勤となり、二人は2年もの間、離れて暮らすことになります。"
+      ],
+      "photo": [
+        {
+          "pick": "8-1",
+          "fit": "contain",
+          "move": "push-in"
+        },
+        {
+          "pick": "9-1",
+          "focus": [
+            0.55,
+            0.35
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "fade",
+      "why": "Luật lệ ngăn cản: hai chị em Nữ hoàng và Margaret khi nói cần Nữ hoàng đồng ý; rồi Townsend một mình ở nơi xa khi bị điều sang Bỉ."
+    },
+    {
+      "label": "声明",
+      "era": "1955年10月",
+      "headline": "王女が選んだ\n答え",
+      "lines": [
+        "そして1955年10月、25歳になった王女は声明を出しました。",
+        "「キリスト教の結婚は解消できないという教会の教えを心に留め、英連邦への責任を自覚し、私はこれらをほかの何よりも優先すると決めました」。"
+      ],
+      "photo": [
+        {
+          "pick": "10-1",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "11-1",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "move": "hold",
+          "fit": "contain",
+          "depth": false
+        }
+      ],
+      "cut": "hard",
+      "why": "Tuyên bố năm 1955: cắt thẳng vào gương mặt Margaret, rồi để yên trang báo 'tôi đặt bổn phận lên trên hết'."
+    },
+    {
+      "label": "その後",
+      "era": "1960年",
+      "headline": "その後の\n王女",
+      "lines": [
+        "その後、王女は写真家と結婚しますが、18年後に離婚。"
+      ],
+      "photo": [
+        {
+          "pick": "12-1",
+          "focus": [
+            0.66,
+            0
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "dip",
+      "why": "Về sau: tối rồi sáng lại, Margaret và chồng nhiếp ảnh gia vẫy chào ngày cưới năm 1960."
+    },
+    {
+      "label": "変わった王室",
+      "era": "2005年",
+      "headline": "半世紀後の\n王室",
+      "lines": [
+        "そして半世紀後の2005年、甥のチャールズ皇太子は、離婚歴のあるカミラ夫人と結婚しました。",
+        "王室のルールは、時代とともに変わっていったのです。",
+        "王女が諦めた恋は、ほんの少しだけ、早すぎたのかもしれません。"
+      ],
+      "photo": [
+        {
+          "pick": "13-1",
+          "fit": "contain",
+          "move": "push-in"
+        },
+        {
+          "pick": "14-1",
+          "fit": "contain",
+          "move": "pull-back"
+        },
+        {
+          "pick": "15-1",
+          "fit": "contain",
+          "move": "pull-back"
+        }
+      ],
+      "cut": "page",
+      "why": "Nửa thế kỷ sau: Charles cưới Camilla năm 2005, Nữ hoàng vui vẻ dự lễ; kết bằng Margaret trẻ, khi nói mối tình đến sớm hơn một chút."
+    }
+  ]
+}

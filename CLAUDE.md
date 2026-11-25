@@ -316,7 +316,9 @@ allow `main`.
    - **Inherited from the channel** (`defaults` of `channels/<id>.json`) when the story leaves them out: `style`,
      `kicker`, `pace`, `fx`. A story may set any of them (the edit warnings then say what departs from the Tin Nhật
      edit); a dict is merged key by key (`"fx": {"depth": false}` keeps the three other effects); `null` inherits
-     nothing. The voice is always the channel's: a story has no voice key. `"trial": true` marks a trial or sample
+     nothing. The voice is always the channel's; only a trial (`"trial": true`) may set `"voice": {"speaker": …,
+     "style": …}` to try another VOICEVOX voice before the owner chooses it for the channel (owner, 25/11/2026: "thử
+     thay voice thành voice nữ"), and the channel file changes only once the owner approves it. `"trial": true` marks a trial or sample
      video (iron rule 2's exception: the machine renders it even under 61 s). `"review": "<n>/<n>"` records the
      picture review (step 3).
    - `scenes`: one idea each. `label` (short tag), `headline` (≤ 2 lines, `\n` between; longer ones get a smaller

@@ -4,6 +4,8 @@ python -m news.custom stories/<name>.json [<find folder>]   checks a story (and 
 
 Every story names its channel ("channel": "k8", news/channels.py): its file name starts with it, it inherits the
 channel's defaults (style, kicker, pace, fx) for the keys it leaves out, and it is voiced with the channel's voice.
+Only a trial ("trial": true) may set "voice": {"speaker": …, "style": …} to try another VOICEVOX voice before the
+owner chooses it for the channel (owner, 25/11/2026: "thử thay voice thành voice nữ"); a real video never does.
 """
 from dataclasses import dataclass
 from datetime import date
@@ -24,7 +26,7 @@ from .story import Beat
 from .visuals import Photo
 
 STORY_KEYS = {"stage", "title", "date", "source", "source_url", "searches", "scenes", "issue", "style", "kicker",
-              "music", "pace", "fx", "channel", "trial", "review"}
+              "music", "pace", "fx", "channel", "trial", "review", "voice"}
 REVIEW = re.compile(r"^([0-9]+)/([0-9]+)$")   # "review": "<pictures that passed>/<pictures>" (tools/review_picks.py)
 HOOK_LIMIT = 55   # the hook line is said in about 5 seconds: 45-50 characters at speed 1.2; warned above this
 # Pictures a scene (owner, 19/11/2026: "nếu nội dung quá 6s thì phải tìm 2 ảnh, dưới 6s thì 1 ảnh cũng đc, tự do"):
@@ -194,6 +196,15 @@ def validate(data, name=None):
     if "trial" in data and not isinstance(data["trial"], bool):
         problems.append(f'"trial" must be true or false (true: a trial or sample video, the length rules do not '
                         f'stop its render), got {data["trial"]!r}')
+    if "voice" in data:
+        trial_voice = data["voice"]
+        if data.get("trial") is not True:
+            problems.append('"voice" is only for a trial ("trial": true): a video of the channel is voiced with the '
+                            "channel's voice (channels/<id>.json), changed there once the owner approves a trial")
+        elif (not isinstance(trial_voice, dict) or set(trial_voice) != {"speaker", "style"}
+              or not all(isinstance(value, str) and value.strip() for value in trial_voice.values())):
+            problems.append(f'"voice" must be {{"speaker": "<VOICEVOX speaker>", "style": "<style>"}}, '
+                            f'got {trial_voice!r}')
     if "review" in data and not (isinstance(data["review"], str) and REVIEW.match(data["review"])):
         problems.append(f'"review" must be "<pictures that passed>/<pictures>", e.g. "23/23" (the picture review, '
                         f'tools/review_picks.py), got {data["review"]!r}')
@@ -439,6 +450,13 @@ def toned(image, tone):
     return ImageOps.colorize(grey, black="#1d130a", mid="#8c6c47", white="#f6e8cb")
 
 
+def voice_of(data, channel):
+    """(speaker, style): the channel's voice, or the one a trial story tries (\"voice\" with \"trial\": true)."""
+    voice = data.get("voice") if data.get("trial") is True and isinstance(data.get("voice"), dict) else None
+    voice = voice or channel["voice"]
+    return voice["speaker"], voice["style"]
+
+
 def load_story(path, pictures=None):
     data = read(path)
     found = found_pictures(data, pictures)
@@ -456,8 +474,7 @@ def load_story(path, pictures=None):
                       data.get("source", ""), (), data.get("style", "news"), data.get("kicker", ""), music,
                       float(pace.get("speed", 0.96)), float(pace.get("line_pause", 0.0)),
                       float(pace.get("scene_pause", 0.0)), data.get("fx"),
-                      (channel["voice"]["speaker"], channel["voice"]["style"]), channel["id"],
-                      bool(data.get("trial")))
+                      voice_of(data, channel), channel["id"], bool(data.get("trial")))
     report_without_picture(data)
     beats, photos = [], {}
     for index, scene in enumerate(data["scenes"]):
