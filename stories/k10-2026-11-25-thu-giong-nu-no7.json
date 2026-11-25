@@ -1,6 +1,6 @@
 {
   "channel": "k10",
-  "stage": "find",
+  "stage": "render",
   "trial": true,
   "voice": {
     "speaker": "No.7",
@@ -8,6 +8,11 @@
   },
   "title": "【試し】恋を諦めた王女 マーガレット王女とタウンゼント大佐（No.7・尺八）",
   "date": "2026-11-25",
+  "review": "15/15",
+  "music": {
+    "pick": "16-3",
+    "volume": 1.4
+  },
   "searches": [
     "url:https://assets.vogue.com/photos/611bd07b0f269150843b9b5e/master/w_1280%2Cc_limit/51952384 https://www.vogue.com/slideshow/stunning-vintage-photographs-of-princess-margaret",
     "url:https://assets.vogue.com/photos/61942596efb29c6cda4d31c0/1:1/w_3575,h_3575,c_limit/576755719 https://www.vogue.com/slideshow/queen-elizabeth-and-princess-margaret-a-look-back-at-the-royal-sisterhood-in-39-photos",
