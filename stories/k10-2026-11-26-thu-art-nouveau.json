@@ -1,6 +1,6 @@
 {
   "channel": "k10",
-  "stage": "render",
+  "stage": "find",
   "trial": true,
   "title": "【試し】アール・ヌーヴォー 日本の浮世絵に恋をした様式（新しい見た目の試し・約20秒）",
   "date": "2026-11-26",
@@ -31,7 +31,8 @@
     "web:サミュエル・ビング アール・ヌーヴォーの店 1895",
     "music:Gymnopédie Satie piano",
     "music:Debussy Arabesque piano",
-    "music:Debussy Clair de lune piano"
+    "music:Debussy Clair de lune piano",
+    "url:https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Katsushika_Hokusai_-_The_Great_Wave_off_the_Coast_of_Kanagawa_LCCN2008660568.jpg/3840px-Katsushika_Hokusai_-_The_Great_Wave_off_the_Coast_of_Kanagawa_LCCN2008660568.jpg https://commons.wikimedia.org/wiki/File:Katsushika_Hokusai_-_The_Great_Wave_off_the_Coast_of_Kanagawa_LCCN2008660568.jpg"
   ],
   "scenes": [
     {
@@ -48,13 +49,14 @@
         {
           "pick": "2-1",
           "focus": [
-            0.5,
+            0.15,
             0.4
           ],
           "move": "push-in",
           "depth": false,
           "name": "黄道十二宮",
-          "note": "ミュシャ・1896年"
+          "note": "ミュシャ・1896年",
+          "side": "left"
         },
         {
           "pick": "7-4",
@@ -90,7 +92,6 @@
         }
       ],
       "value": "ART NOUVEAU",
-      "evidence": "フランス語で「新しい芸術」",
       "photo": [
         {
           "pick": "17-1",
