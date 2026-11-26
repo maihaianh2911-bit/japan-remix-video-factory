@@ -1,0 +1,112 @@
+{
+  "channel": "k10",
+  "issue": 16,
+  "stage": "find",
+  "title": "妻への誓い フィリップ殿下とエリザベス女王の戴冠式",
+  "date": "2026-11-26",
+  "pace": {
+    "speed": 1.05
+  },
+  "searches": [
+    "wiki:Coronation of Elizabeth II",
+    "wiki:Prince Philip, Duke of Edinburgh",
+    "wiki:Elizabeth II",
+    "wiki:HMS Magpie (U82)",
+    "wiki:Death and funeral of Prince Philip, Duke of Edinburgh",
+    "web:Prince Philip kneels homage coronation 1953 => Prince Philip kneeling before Queen Elizabeth at her coronation",
+    "web:フィリップ殿下 戴冠式 ひざまずく => Prince Philip kneeling before the crowned Queen in 1953",
+    "web:Prince Philip kisses Queen cheek coronation 1953 => Prince Philip kissing the Queen's cheek at the coronation",
+    "web:Queen Elizabeth coronation 1953 Philip portrait => Queen Elizabeth in her coronation robes with Prince Philip",
+    "web:Prince Philip HMS Magpie commander 1950 => young Prince Philip as commander of a navy ship",
+    "web:Prince Philip young naval officer 1951 ship => young Prince Philip in naval uniform on a ship",
+    "web:Prince Philip children Charles Anne 1950s => Prince Philip with his young children",
+    "web:Prince Philip 1957 portrait => Prince Philip in the 1950s",
+    "web:Queen Elizabeth Philip 1960 family Prince Andrew baby => the Queen and Prince Philip with their children in 1960",
+    "web:Prince Philip final solo engagement 2017 Royal Marines rain => Prince Philip at his last public engagement in 2017",
+    "web:Prince Philip walking behind Queen => Prince Philip walking a step behind the Queen",
+    "web:Queen Philip golden wedding anniversary 1997 => the Queen and Prince Philip at their golden wedding anniversary in 1997",
+    "web:Queen Elizabeth Prince Philip old age smiling together => the elderly Queen and Prince Philip smiling together",
+    "web:Queen Elizabeth funeral Prince Philip 2021 alone => the Queen sitting alone at Prince Philip's funeral",
+    "web:Prince Philip funeral 2021 Windsor => Prince Philip's funeral at Windsor in 2021",
+    "web:Queen Elizabeth Prince Philip coronation balcony 1953 => the Queen and Prince Philip on the balcony after the coronation"
+  ],
+  "scenes": [
+    {
+      "label": "フィリップ殿下",
+      "era": "1953年",
+      "headline": "妻への\n誓い",
+      "lines": [
+        {
+          "text": "エリザベス女王の戴冠式で、フィリップ殿下は妻の前にひざまずき、「身も心も、あなたの臣下となります」と誓いました。",
+          "quote": true
+        }
+      ]
+    },
+    {
+      "label": "口づけ",
+      "era": "1953年",
+      "headline": "誓いのあとの\n口づけ",
+      "lines": [
+        "誓いのあと、殿下は立ち上がり、女王の頬にそっと口づけをしました。"
+      ]
+    },
+    {
+      "label": "海軍",
+      "era": "1952年",
+      "headline": "閉ざされた\n海軍の道",
+      "lines": [
+        "将来を期待されていた殿下の海軍の道は、閉ざされました。"
+      ]
+    },
+    {
+      "label": "名字",
+      "era": "1952年",
+      "headline": "継がせられない\n名字",
+      "lines": [
+        "子どもたちに自分の名字を継がせることも許されず、「僕はただのアメーバだ」と嘆いたといいます。"
+      ]
+    },
+    {
+      "label": "女王の答え",
+      "era": "1957年",
+      "headline": "妻が贈った\n王子の称号",
+      "lines": [
+        "女王は、そんな夫に応えました。",
+        "1957年には夫にイギリスの王子の称号を与え、1960年には子孫の名に夫の名マウントバッテンを加えたのです。"
+      ]
+    },
+    {
+      "label": "公務",
+      "era": "2017年",
+      "headline": "2万2千回の\n公務",
+      "lines": [
+        "殿下はひとりで2万2千回以上の公務をこなし、96歳でようやく引退しました。"
+      ]
+    },
+    {
+      "label": "結婚50年",
+      "era": "1997年",
+      "headline": "私の力であり\n支え",
+      "lines": [
+        "結婚50年の日、女王は「彼は褒められるのが苦手な人ですが、この長い年月、私の力であり、支えでした」と語りました。"
+      ]
+    },
+    {
+      "label": "別れ",
+      "era": "2021年",
+      "headline": "人生に\n大きな穴",
+      "lines": [
+        "2021年、殿下は99歳で亡くなりました。",
+        "女王は「人生に大きな穴が空いた」と語りました。"
+      ]
+    },
+    {
+      "label": "68年",
+      "era": "1953〜2021年",
+      "headline": "68年後",
+      "lines": [
+        "それは、戴冠式で妻の前にひざまずいた日から、68年後のことでした。"
+      ]
+    }
+  ]
+}
