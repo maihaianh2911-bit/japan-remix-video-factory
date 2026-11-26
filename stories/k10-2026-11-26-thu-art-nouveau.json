@@ -1,6 +1,6 @@
 {
   "channel": "k10",
-  "stage": "find",
+  "stage": "render",
   "trial": true,
   "title": "【試し】アール・ヌーヴォー 日本の浮世絵に恋をした様式（新しい見た目の試し・約20秒）",
   "date": "2026-11-26",
@@ -49,14 +49,13 @@
         {
           "pick": "2-1",
           "focus": [
-            0.15,
+            0.5,
             0.4
           ],
           "move": "push-in",
           "depth": false,
           "name": "黄道十二宮",
-          "note": "ミュシャ・1896年",
-          "side": "left"
+          "note": "ミュシャ・1896年"
         },
         {
           "pick": "7-4",
@@ -124,10 +123,10 @@
       "why": "Đường cong như dây leo: cầu thang nhà Tassel, hiện cả ảnh vì ảnh gốc nhỏ, phóng to sẽ mờ."
     },
     {
-      "label": "浮世絵",
-      "headline": "浮世絵から学んだ\n輪郭と構図",
+      "label": "輪郭",
+      "headline": "くっきりした輪郭と\n大胆な構図",
       "lines": [
-        "くっきりした輪郭と大胆な構図は、海を渡った浮世絵から学んだものでした。"
+        "くっきりした輪郭と、大胆な構図。"
       ],
       "photo": [
         {
@@ -139,18 +138,35 @@
           "move": "push-in",
           "depth": false,
           "name": "果物",
-          "note": "ミュシャ・1897年"
-        },
-        {
-          "pick": "12-11",
-          "fit": "contain",
-          "move": "push-in",
-          "name": "神奈川沖浪裏",
-          "note": "葛飾北斎・1831年ごろ"
+          "note": "ミュシャ・1897年",
+          "side": "left"
         }
       ],
       "cut": "page",
-      "why": "Nét viền và bố cục: một tranh Mucha, rồi tới nguồn gốc của nó là tranh sóng của Hokusai (hiện cả tranh)."
+      "why": "Nét viền và bố cục: một tranh Mucha tràn màn hình, tiến chậm vào gương mặt; chữ chạy bên trái vì bên phải là giỏ quả."
+    },
+    {
+      "label": "浮世絵",
+      "headline": "海を渡った浮世絵",
+      "lines": [
+        "それは、海を渡った浮世絵から学んだものでした。"
+      ],
+      "photo": [
+        {
+          "pick": "27-1",
+          "focus": [
+            0.47,
+            0.5
+          ],
+          "move": "pan-left",
+          "depth": false,
+          "name": "神奈川沖浪裏",
+          "note": "葛飾北斎・1831年ごろ",
+          "side": "right"
+        }
+      ],
+      "cut": "fade",
+      "why": "Nguồn gốc: tranh sóng của Hokusai tràn màn hình, lia từ núi Phú Sĩ sang ngọn sóng; chữ chạy bên phải, trên phần trời."
     },
     {
       "label": "名付け親",

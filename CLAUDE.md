@@ -219,33 +219,50 @@ asked "Đây là dạng nội dung gì? Dựng cho nhật đc ko? Có làm nhi�
   real film still or a real person (the source videos print "Đại gia Gatsby 2013" and "Guts – Kentaro Miura" on AI
   pictures: never here); what exists (a painting, a building) is shown by its real picture; when posting, a
   realistic AI picture needs the platform's "AI content" label. k10 stays real pictures only.
-- **The `gallery` frame** (`"style": "gallery"`, `news/render.py`), made for the trial:
-  - the picture fills the whole frame, with a dark shade on its foot and its top. A horizontal picture is better
-    shown whole (`"fit": "contain"`: the pictures found are at most 1920 px wide, so one blown up to fill the height
-    looks soft): it then stands in the upper part, with a thin gold line around it;
-  - a picture entry may carry `"name"` and `"note"` (what it shows; who made it, when, where): its small dark card
-    above the captions. Pictures without a name share a card made of the scene's headline and evidence. (The other
-    frames accept the two keys and do not draw them.);
-  - a scene with a `"value"` prints the big title: the value (the name of the style, in capitals), a gold rule, the
-    headline in gold and the evidence small, over its picture, which is dimmed. Choose a picture without a face
-    there (rule 7: the title lies on the middle of the picture);
-  - the captions lie on the foot of the picture, larger than on a page (60 px), all there from the start: pale, gold
-    while the voice reads them, light once read; the hook line (a quote) is printed big there, and the card of the
-    picture stands above it;
-  - `kicker` is the name of the video, small at the top left from scene 2 on (not under a big title); `era` stands
-    at the top right; the credits are small at the bottom (the picture's at the left, music and voice at the right);
-  - the machine's face check counts the foot of the frame (the last third, more under the hook line) as covered by
-    text; a painting as the first picture is not warned about as a flat picture.
+- **The `gallery` frame** (`"style": "gallery"`, `news/render.py`), made for the trial. **Its second form, after
+  the owner saw the first** (26/11/2026: "cái màn đen và chữ che mất nhiều tranh quá, k nên để màn đen nữa, còn chữ
+  thì cho chạy dọc ở 1 bên (tùy theo ảnh, chọn bên nào ít chi tiết để chữ chạy)"; the first form had the text across
+  the foot of the picture on a dark shade, a boxed card for the name and a dimmed picture under the big title):
+  - **nothing dark is laid on the picture**: no shade, no box, no dimming. The text is light with a dark outline;
+  - **all the text is written vertically** (as Japanese is: top to bottom, 、。「」ー turned or placed as vertical
+    writing asks, digits upright) **in a narrow strip on one side of the frame**: at the edge the label of the
+    picture (its `"name"`, and under it, smaller and in gold, its `"note"`: who made it, when, where), beside it
+    the caption, one column at a time (58 px; pale, gold while the voice reads it, light once read). The hook line
+    (a quote) runs the same way, larger (70 px), its first column there from frame 0: it is not printed as a block
+    over the picture any more;
+  - **the side** is the one with less to see: a picture's `"side": "left"` or `"right"`; without it the machine
+    takes the calmer side of the scene's pictures (fewer lines and textures in the strip, no face there), one side
+    for the whole scene so that the text does not jump while a sentence is read; a picture with its own `"side"`
+    decides for the pictures of its scene that have none. Look at every still and set `"side"` where the machine's
+    choice covers what matters; when two pictures of one sentence need different sides, give each its own scene
+    and sentence. On the right the strip stands 150 px in from the edge (the apps' buttons are there), so it
+    covers more of the picture: the left wins a near tie;
+  - a scene with a `"value"` prints the big title at the edge of the strip: its headline as one tall column (the
+    name of the style in Japanese), and beside it the value lying on its side when it is in Latin letters
+    ("ART NOUVEAU"). Its `"evidence"` is not drawn;
+  - **a picture shown whole** (`"fit": "contain"`: a document, a poster whose words must be read, a picture too
+    small to fill the frame sharply) stands on a light blurred copy of itself, never a dark bed, with a thin gold
+    line, and leaves the strip free: the text stands beside it, not on it. A horizontal work fills the frame
+    better: take a larger copy (a `url:` search of the 3840 px Commons thumbnail; the search keeps 2400 px) and
+    pan across it;
+  - `kicker` is the name of the video, small above the strip from scene 2 on (not with a big title); `era` stands
+    at the other top corner; the credits are small at the bottom (the picture's at the left, music and voice at
+    the right);
+  - the machine warns of a face standing in the strip when the story gives the `"side"`; a painting as the first
+    picture is not warned about as a flat picture.
   Not made: the drawn diagrams and maps of the source (the outline of a tower, colour swatches, a map with routes),
   moving footage, a new channel file. Each needs new code and the owner's word.
-- **The trial video:** `stories/k10-2026-11-26-thu-art-nouveau.json` (about 25 s, `"trial": true`; under k10 only
+- **The trial video:** `stories/k10-2026-11-26-thu-art-nouveau.json` (about 26 s, `"trial": true`; under k10 only
   because a story needs a channel, so it has k10's voice もち子さん and loudness, its own music, Debussy's Clair de
   lune from a `music:` search, and the one edit warning that its style is not `story`). Real pictures only, nine of
-  them, all from Wikimedia Commons. Its find folder was made by the workflow run from the session's branch (Run
-  workflow with that branch as the ref: the workflow reads the story and the code of the branch it is run from).
-- **State on 26/11/2026:** the trial was sent to the owner in the chat and the look is **not approved yet**. The
-  frame and the trial story were made on the branch of that chat session; they come to `main` when the owner
-  approves the look. Until then: no channel for it and no other video in this frame, and k10 keeps the `story` frame.
+  them, all from Wikimedia Commons. Its find folder and its video were made by the workflow run from the session's
+  branch (Run workflow with that branch as the ref: the workflow reads the story and the code of the branch it is
+  run from).
+- **State on 26/11/2026:** the first form was sent to the owner in the chat and turned down for its dark shade and
+  its text over the picture; the second form (vertical text on one side) was sent the same day and is **not
+  approved yet**. The frame and the trial story were made on the branch of that chat session; they come to `main`
+  when the owner approves the look. Until then: no channel for it and no other video in this frame, and k10 keeps
+  the `story` frame.
 
 ## The edit: the channel edits as Tin Nhật does
 Owner, 18/11/2026: "cho 4 kênh này học cách edit của kênh tin nhật đi, học tốt vào" — the channels of this repo (k10 alone since 26/11/2026) edit exactly as
