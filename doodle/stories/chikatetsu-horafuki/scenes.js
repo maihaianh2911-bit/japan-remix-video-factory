@@ -19,7 +19,9 @@ window.SCENES = function (T) {
     rc.rectangle(-8, -206, L + 16, 24, O(key + 'roof', { fill: o.roof || '#8a4a2c', strokeWidth: 4 }));
     for (let wx = 26; wx < L - 70; wx += 76) rc.rectangle(wx, -164, 52, 58, O(key + 'w' + wx, { fill: '#dff1fa', strokeWidth: 3, roughness: 0.4 }));
     rc.line(0, -86, L, -86, O(key + 'belt', { strokeWidth: 3 }));
-    rc.rectangle(L - 52, -164, 34, 120, O(key + 'door', { fill: body, strokeWidth: 3 }));
+    const dx = o.doorAt == null ? L - 52 : o.doorAt, dw = o.doorW || 34;
+    rc.rectangle(dx, -164, dw, 126, O(key + 'door', { fill: o.open ? '#2a2a2e' : body, strokeWidth: 3 }));
+    if (!o.open && dw > 50) rc.line(dx + dw / 2, -164, dx + dw / 2, -38, O(key + 'doorm', { strokeWidth: 3 }));
     rc.circle(L - 4, -62, 22, O(key + 'lamp', { fill: '#fff3b0', strokeWidth: 3 }));
     ctx.restore();
   };
@@ -71,85 +73,238 @@ window.SCENES = function (T) {
     ctx.restore();
   };
 
-  // 0  みんなに笑われた「ほら吹き」が、東京のど真ん中に、日本で最初の地下鉄をつくりました。 — the hook, big, from the first frame
+  // ---------- lines 0–4, drawn the second way (26/11/2026): one big picture for every part of a sentence ----------
+  // shots(t, [[start, draw(v)], …]): the picture of the moment; each new one comes in with a small push
+  const shots = (t, list) => {
+    let cur = list[0]; for (const s of list) if (t >= s[0]) cur = s;
+    const k = 1 + 0.05 * (1 - easeOut(clamp((t - cur[0]) / 0.22)));
+    ctx.save(); ctx.translate(540, 1100); ctx.scale(k, k); ctx.translate(-540, -1100);
+    cur[1](Math.max(0, t - cur[0])); ctx.restore();
+  };
+  const skyline = (key, y, list) => list.forEach(([x, w, h, c, cols], i) => building(key + i, x, y, w, h, c, cols));
+  const tunnel = (key, y1, y2, earth = '#b98a5a') => {   // a big tunnel: lamps on its roof, a rail on its floor
+    rc.rectangle(-20, y1, W + 40, y2 - y1, O(key + 'tn', { fill: '#34323a' }));
+    for (let x = 90; x < W; x += 220) { rc.line(x, y1, x, y1 + 26, O(key + 'lw' + x, { strokeWidth: 4, stroke: '#8d8a84' })); rc.circle(x, y1 + 44, 34, O(key + 'lp' + x, { fill: '#fff3b0', strokeWidth: 3 })); }
+    for (let x = -20; x < W; x += 180) rc.arc(x + 90, y2 - 20, 180, (y2 - y1) * 1.5, Math.PI, Math.PI * 2, false, O(key + 'ar' + x, { stroke: '#4a4750', strokeWidth: 4 }));
+    D.rail(key + 'rail', y2 - 16);
+  };
+  const beam = (x, y, len) => { ctx.save(); const g = ctx.createLinearGradient(x, y, x + len, y); g.addColorStop(0, 'rgba(255,240,150,0.75)'); g.addColorStop(1, 'rgba(255,240,150,0)'); ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(x, y - 14); ctx.lineTo(x + len, y - 130); ctx.lineTo(x + len, y + 130); ctx.lineTo(x, y + 14); ctx.closePath(); ctx.fill(); ctx.restore(); };
+  const pointer = (key, x1, y1, x2, y2, color) => { const d = Math.hypot(x2 - x1, y2 - y1), ux = (x2 - x1) / d, uy = (y2 - y1) / d; rc.line(x1, y1, x2, y2, O(key + 'a', { strokeWidth: 30 })); rc.line(x1, y1, x2, y2, O(key + 'a', { strokeWidth: 20, stroke: color })); rc.line(x2, y2, x2 + ux * 52, y2 + uy * 52, O(key + 'f', { strokeWidth: 18 })); rc.line(x2, y2, x2 + ux * 50, y2 + uy * 50, O(key + 'f', { strokeWidth: 10, stroke: '#f3c891' })); rc.circle(x2, y2, 44, O(key + 'h', { fill: '#f3c891', strokeWidth: 4 })); };
+
+  // 0  みんなに笑われた「ほら吹き」が、東京のど真ん中に、日本で最初の地下鉄をつくりました。
   scene(0, (t, u) => {
-    D.bg('sky');
-    building('b0a', 40, 1100, 230, 300, '#d9d0bd', 2); building('b0b', 300, 1100, 200, 400, '#cfc7b6', 2); building('b0c', 800, 1100, 250, 340, '#d6ccb8', 3);
-    cut('cut0', 1100, 1230, 1470);
-    car('car0', lerp(-260, 250, easeOut(prog(u, 0, 2.2))) + u * 12, 1456, 1.2);
-    haya('h0', 640, 1100, { scale: 1.55, mood: 'ok', arm: -1.0, arm2: 1.1, bob: Math.sin(u * 4) * 1.5 });
-    [[150, '#3a4a3a', '#d9a521'], [960, '#4a3636', '#3d74c4']].forEach(([x, suit, tie], i) => D.person('lg0' + i, x, 1100, { scale: 0.95, suit, tie, mood: 'laugh', flip: i === 1, arm: -0.6 + Math.sin(u * 8 + i) * 0.2, bob: Math.sin(u * 7 + i * 2) * 3 }));
-    haha(t, 0.1, [[190, 760, -0.15], [900, 780, 0.15]], u);
+    shots(t, [
+      [-1, v => {   // everybody laughs at him
+        D.bg('paper'); D.ground(1540);
+        haya('h0', 540, 1540, { scale: 2.5, mood: 'stern', arm: 1.1, arm2: 1.1 });
+        pointer('pt0a', 235, 1350, 330, 1265, '#3a4a3a'); pointer('pt0b', 845, 1350, 750, 1265, '#4a3636');
+        D.face('lf0a', 170, 1130 + Math.sin(u * 14) * 7, 0.62, { mood: 'laugh', suit: '#3a4a3a', tie: '#d9a521', tears: true, hair: '#4a3b2e' });
+        D.face('lf0b', 910, 1130 + Math.sin(u * 14 + 2) * 7, 0.62, { mood: 'laugh', suit: '#4a3636', tie: '#3d74c4', tears: true, hat: true, flip: true });
+        haha(t, 0.05, [[200, 800, -0.16], [880, 790, 0.14], [540, 1640, 0.03]], u);
+        const a = T.at(0, 'ほら吹き');
+        D.label('tag0', 'ほら吹き', 540, 700, 84, t, a, a + 0.3, { font: MARK, bold: true, fill: '#fff6cf', color: RED, rot: -0.05 });
+        if (t > a + 0.2) { ctx.save(); ctx.strokeStyle = RED; ctx.fillStyle = RED; ctx.lineWidth = 10; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(540, 790); ctx.lineTo(540, 850); ctx.stroke(); ctx.beginPath(); ctx.moveTo(540, 890); ctx.lineTo(512, 846); ctx.lineTo(568, 846); ctx.closePath(); ctx.fill(); ctx.restore(); }
+      }],
+      [T.at(0, '東京') - 0.08, v => {   // the very middle of Tokyo
+        D.bg('sky');
+        skyline('sk0', 1230, [[-30, 190, 330, '#d9d0bd', 2], [170, 170, 470, '#cfc7b6', 2], [350, 150, 280, '#d6ccb8', 2], [600, 150, 300, '#d9d0bd', 2], [760, 170, 500, '#cfc7b6', 2], [940, 170, 360, '#d6ccb8', 2]]);
+        rc.rectangle(-20, 1230, W + 40, 420, O('rd0', { fill: '#b8b2a6' })); D.bg('paper', 1650);
+        const ring = easeOut(prog(v, 0.3, 0.5));
+        [[430, '#cf2e23'], [320, '#fbf7ee'], [210, '#cf2e23'], [100, '#fbf7ee']].forEach(([r, c], i) => rc.ellipse(540, 1440, r * 2 * ring, r * 0.62 * ring, O('rg0' + i, { fill: c, strokeWidth: 4 })));
+        const drop = easeOut(prog(v, 0, 0.35));
+        D.mappin('pin0', 540, lerp(500, 1440, drop), 3.3);
+        D.label('tk0', '東京', 540, 760, 110, t, T.at(0, '東京'), T.at(0, '東京') + 0.2, { font: MARK, bold: true });
+        D.label('mn0', 'ど真ん中', 850, 1150, 62, t, T.at(0, 'ど真ん中'), T.to(0, 'ど真ん中'), { font: MARK, fill: '#fff6cf', rot: 0.05 });
+      }],
+      [T.at(0, '日本で') - 0.08, v => {   // under it: the first subway
+        D.bg('sky');
+        skyline('sk0c', 880, [[40, 150, 170, '#d9d0bd', 2], [230, 130, 230, '#cfc7b6', 2], [470, 150, 150, '#d6ccb8', 2], [700, 130, 210, '#d9d0bd', 2], [880, 150, 180, '#cfc7b6', 2]]);
+        rc.rectangle(-20, 880, W + 40, H, O('ea0', { fill: '#b98a5a' }));
+        tunnel('tn0', 990, 1520);
+        const x = lerp(-1500, -250, easeOut(prog(v, 0, 0.9))) + v * 14;
+        beam(x + 520 * 2.1, 1504 - 62 * 2.1, 520);
+        car('car0', x, 1504, 2.1);
+        const a = T.at(0, '最初');
+        D.at(830, 800, pin(t, a, 0.35), () => {   // a medal: the first in Japan
+          rc.polygon([[-70, 60], [-110, 210], [-50, 170], [-10, 220], [0, 80]], O('md0r1', { fill: '#cf2e23', strokeWidth: 4 })); rc.polygon([[70, 60], [110, 210], [50, 170], [10, 220], [0, 80]], O('md0r2', { fill: '#cf2e23', strokeWidth: 4 }));
+          rc.circle(0, 0, 250, O('md0', { fill: '#f6c543' })); rc.circle(0, 0, 200, O('md0i', { stroke: '#b8860b', strokeWidth: 4 }));
+          D.text('日本初', 0, 4, 66, { font: MARK, color: '#7a4a12' });
+        });
+        if (t > a) D.burst('md0b', 830, 800, 150 + Math.sin(u * 8) * 8, 14, '#e2742b', 7);
+      }],
+    ]);
     D.label('hk1', 'みんなに笑われた「{ほら吹き}」が', W / 2, 345, 60, t, 0, null, { still: true, font: MARK, bold: true });
     D.label('hk2', '日本で最初の{地下鉄}をつくった', W / 2, 490, 68, t, 0, null, { still: true, font: MARK, bold: true });
-    D.label('hk3', '東京のど真ん中に', 560, 640, 46, t, T.at(0, '東京'), T.to(0, 'ど真ん中に'));
   });
 
   // 1  けれど13年後、彼はその地下鉄から追い出されます。
-  scene(T.s(1) - 0.1, (t, u) => {
-    D.bg('paper'); D.ground(1500);
-    entrance('en1', 260, 1500, 1.25, '地下鉄', 370);
+  scene(T.s(1) - 0.08, (t, u) => {
     const a = T.at(1, '追い出され');
-    const p = easeOut(prog(t, a, 0.7));
-    const x = lerp(300, 790, p), y = 1500 - Math.sin(p * Math.PI) * 300;
-    if (t > a && p < 1) { D.burst('kick', 330, 1330, 90 + p * 60, 10, '#e2742b', 9); for (let i = 0; i < 4; i++) rc.line(x - 150 - i * 40, y - 220 + i * 46, x - 250 - i * 40, y - 220 + i * 46, O('sp' + i, { strokeWidth: 6 })); }
-    ctx.save(); ctx.translate(x, y - 210); ctx.rotate(p < 1 ? p * Math.PI * 2 : 0.0); ctx.translate(-x, -(y - 210));   // he turns once in the air, round his middle
-    haya('h1', x, y, { scale: 1.6, hair: '#8d8a84', mood: t > a ? 'wow' : 'flat', arm: t > a ? -1.2 : 1.1, arm2: t > a ? -1.2 : 1.1, bag: t <= a });
-    ctx.restore();
-    if (p >= 1) D.sweat(840, 1090, u, 1.6);
-    D.calendar('cal1', 880, 800, pin(t, T.at(1, '13年後')) * 0.6, '13年後');
+    shots(t, [
+      [-1, v => {   // the years fly: 1927 → 1940
+        D.bg('wall');
+        const q = easeInOut(prog(t, T.s(1), T.to(1, '13年後') - T.s(1)));
+        const year = Math.round(lerp(1927, 1940, q));
+        for (let i = 0; i < 7; i++) { const f = clamp(q * 1.3 - i * 0.12); if (f > 0 && f < 1) D.at(lerp(600, 1150, f), lerp(900, 620 - i * 30, f), 0.6, () => rc.rectangle(-150, -110, 300, 220, O('fly' + i, { fill: '#fbf7ee' })), f * 2.4); }
+        D.calendar('cal1', 520, 1120, 2.05, String(year), q >= 1 ? '13年後' : '');
+      }],
+      [T.at(1, '彼は') - 0.08, v => {   // pushed out of his own train, which leaves without him
+        D.bg('wall');
+        rc.rectangle(-20, 640, W + 40, 50, O('ceil', { fill: '#8b9aa5' }));
+        for (const x of [120, 960]) rc.rectangle(x - 20, 690, 40, 740, O('pil' + x, { fill: '#a9b4bb', strokeWidth: 4 }));
+        rc.circle(540, 800, 130, O('clk', { fill: '#fbf7ee' })); rc.line(540, 690, 540, 736, O('clkw', { strokeWidth: 6 })); rc.line(540, 800, 540, 756, O('clkh', { strokeWidth: 6 })); rc.line(540, 800, 574, 812, O('clkm', { strokeWidth: 6 }));
+        const leave = Math.pow(prog(t, a + 0.75, 1.4), 2) * 1500;
+        D.rail('rail1', 1440);
+        car('car1', 300 + leave, 1440, 1.9, { open: t < a + 0.6, doorAt: 190, doorW: 78 });
+        rc.rectangle(-20, 1430, W + 40, 220, O('pf1', { fill: '#cfc8ba' })); rc.rectangle(-20, 1434, W + 40, 16, O('pf1e', { fill: '#fbf7ee', strokeWidth: 3 })); D.bg('paper', 1650);
+        const p = easeOut(prog(t, a, 0.55));
+        const x = lerp(735, 300, p), y = 1540 - Math.sin(p * Math.PI) * 190;
+        if (t > a - 0.12 && t < a + 0.45) {   // the arm that pushes
+          const ext = Math.sin(prog(t, a - 0.12, 0.57) * Math.PI) * 150;
+          rc.line(770, 1250, 770 - ext, 1250, O('push', { strokeWidth: 46, stroke: '#2a2a2e' })); rc.circle(770 - ext, 1250, 66, O('fist', { fill: '#2a2a2e' }));
+        }
+        ctx.save(); ctx.translate(x, y - 200); ctx.rotate(p > 0 && p < 1 ? -p * Math.PI * 2 : 0); ctx.translate(-x, -(y - 200));
+        haya('h1', x, y, { scale: 1.75, hair: '#8d8a84', mood: t > a ? (p < 1 ? 'wow' : 'sad') : 'flat', arm: p > 0 && p < 1 ? -1.2 : 1.2, arm2: p > 0 && p < 1 ? -1.2 : 1.2 });
+        ctx.restore();
+        if (t > a) { const b = easeOut(prog(t, a, 0.7)); D.at(lerp(735, 560, b), 1540 - Math.sin(b * Math.PI) * 120, 1, () => { rc.rectangle(-44, -66, 88, 66, O('bag1', { fill: '#7a5230', strokeWidth: 4 })); rc.arc(0, -64, 44, 40, Math.PI, 2 * Math.PI, false, O('bag1h', { strokeWidth: 4 })); }, b * 2.2 - 2.2 + 0.3); }
+        if (p >= 1) D.sweat(360, 1130, u, 1.7);
+      }],
+    ]);
     rows(t, [
       ['a1', 'けれど{13年後}…', 370, 60, T.s(1), T.to(1, '13年後')],
       ['a2', 'その地下鉄から{追い出された}', 495, 62, T.at(1, '彼は'), T.e(1), { font: MARK, bold: true }],
     ]);
   });
 
-  // 2  男の名前は、早川徳次といいます。
-  scene(T.s(2) - 0.1, (t, u) => {
-    D.bg('paper'); D.ground(1520);
-    haya('h2', 540, 1520, { scale: 2.4, mood: 'ok', arm: 1.1, arm2: 1.1, bob: Math.sin(u * 3) * 1.5 });
-    const a = T.at(2, '早川徳次');
-    D.label('n2', '早川徳次', 540, 760, 100, t, a, T.to(2, '早川徳次'), { font: MARK, bold: true, fill: '#fff6cf' });
-    if (t > a) D.fade(prog(t, a, 0.3), () => D.text('はやかわ　のりつぐ', 540, 650, 44, { outline: 10 }));
-    D.label('n3', '「地下鉄の父」', 860, 925, 54, t, a + 0.9, a + 1.2, { rot: 0.06, fill: '#1f4d3a', color: '#f3e9c6', stroke: INK });
+  // 2  男の名前は、早川徳次といいます。 — who he is, on a card
+  scene(T.s(2) - 0.08, (t, u) => {
+    D.bg('paper');
+    const a = T.at(2, '早川徳次'), k = pin(t, T.s(2), 0.35);
+    D.at(540, 1090, k, () => {
+      ctx.fillStyle = 'rgba(60,45,20,0.24)'; ctx.fillRect(-440, -410, 900, 840);
+      rc.rectangle(-450, -420, 900, 840, O('card2', { fill: '#fbf8ef', strokeWidth: 6 }));
+      rc.rectangle(-410, -380, 380, 470, O('ph2', { fill: '#cfe0e6' }));
+      ctx.save(); ctx.beginPath(); ctx.rect(-406, -376, 372, 462); ctx.clip();
+      D.face('f2', -220, -150, 0.86, { hair: '#2b2622', glasses: true, mustache: true, suit: '#6a4f35', tie: '#2e6b4f', mood: 'ok' });
+      ctx.restore();
+      rc.rectangle(-410, -380, 380, 470, O('ph2f', { strokeWidth: 6 }));
+      if (t > a) {
+        const n = Math.ceil(4 * clamp((t - a) / (T.to(2, '早川徳次') - a)));
+        D.text('はやかわ　のりつぐ', 200, -330, 38, { color: '#5a5347' });
+        D.text('早川徳次'.slice(0, n), 20, -240, 104, { font: MARK, align: 'left' });
+        rc.line(10, -170, 410, -170, O('ul2', { strokeWidth: 5, stroke: RED }));
+      }
+      const b = a + 0.75;
+      if (t > b) D.fade(prog(t, b, 0.25), () => { D.text('1881年', 20, -90, 54, { align: 'left' }); D.text('山梨県生まれ', 20, -20, 54, { align: 'left' }); });
+      // the yellow car along the foot of the card
+      D.rail('r2', 360, -410, 410); car('c2', lerp(-420, -180, easeOut(prog(t, b, 0.8))), 362, 0.95);
+    });
+    D.label('n3', '「地下鉄の父」', 760, 1190, 58, t, a + 1.0, a + 1.25, { rot: -0.05, fill: '#1f4d3a', color: '#f3e9c6', font: MARK });
     rows(t, [['n1', '男の名前は…', 400, 60, T.s(2), T.to(2, '名前は')]]);
   });
 
   // 3  1914年、ロンドンで地下鉄を見た早川は、東京にもつくろうと決めました。
-  scene(T.s(3) - 0.1, (t, u) => {
-    D.bg('sky');
+  scene(T.s(3) - 0.08, (t, u) => {
+    const idea = T.at(3, '東京にも');
+    shots(t, [
+      [-1, v => {   // London
+        D.bg('sky');
+        D.cloud('c3a', 260 + v * 16, 760, 300); D.cloud('c3b', 470 + v * 10, 900, 180);
+        // the clock tower
+        rc.rectangle(690, 800, 230, 640, O('bb', { fill: '#c9b58a' })); rc.rectangle(670, 760, 270, 50, O('bbc', { fill: '#b39c6c', strokeWidth: 4 })); rc.polygon([[690, 760], [920, 760], [805, 610]], O('bbtop', { fill: '#8a7a5a' }));
+        rc.circle(805, 930, 180, O('bbface', { fill: '#fbf7ee' })); rc.line(805, 930, 805, 868, O('bbh1', { strokeWidth: 7 })); rc.line(805, 930, 848, 948, O('bbh2', { strokeWidth: 7 }));
+        for (let i = 0; i < 5; i++) rc.line(722 + i * 42, 1060, 722 + i * 42, 1420, O('bbl' + i, { strokeWidth: 3.5, stroke: '#8a7a5a' }));
+        skyline('sk3', 1440, [[-20, 190, 330, '#d6ccb8', 2], [190, 170, 250, '#cfc7b6', 2], [940, 160, 300, '#d9d0bd', 2]]);
+        rc.rectangle(-20, 1440, W + 40, 210, O('rd3', { fill: '#b8b2a6' })); D.bg('paper', 1650);
+        // a red bus with two floors
+        D.at(lerp(1200, 110, easeOut(prog(v, 0, 1.3))), 1560, 1, () => {
+          rc.rectangle(0, -400, 560, 370, O('bus', { fill: '#c8402f' }));
+          for (let i = 0; i < 5; i++) { rc.rectangle(24 + i * 104, -376, 80, 96, O('bw1' + i, { fill: '#dff1fa', strokeWidth: 3.5 })); if (i < 4) rc.rectangle(128 + i * 104, -216, 80, 96, O('bw2' + i, { fill: '#dff1fa', strokeWidth: 3.5 })); }
+          rc.rectangle(24, -216, 80, 186, O('bdr', { fill: '#8f2a1f', strokeWidth: 3.5 })); rc.line(0, -246, 560, -246, O('bln', { strokeWidth: 4 }));
+          rc.circle(130, -24, 86, O('bwh1', { fill: '#3b3b3d' })); rc.circle(430, -24, 86, O('bwh2', { fill: '#3b3b3d' })); rc.circle(130, -24, 30, O('bh1', { fill: '#d9d4c8', strokeWidth: 3 })); rc.circle(430, -24, 30, O('bh2', { fill: '#d9d4c8', strokeWidth: 3 }));
+        });
+      }],
+      [T.at(3, '地下鉄') - 0.08, v => {   // under London: the train he saw
+        D.bg('sky');
+        skyline('sk3b', 860, [[60, 150, 150, '#d6ccb8', 2], [250, 130, 110, '#cfc7b6', 2], [870, 150, 170, '#d9d0bd', 2]]);
+        rc.rectangle(560, 640, 80, 220, O('bbs', { fill: '#c9b58a', strokeWidth: 4 })); rc.polygon([[554, 640], [646, 640], [600, 580]], O('bbst', { fill: '#8a7a5a', strokeWidth: 4 })); rc.circle(600, 690, 56, O('bbsf', { fill: '#fbf7ee', strokeWidth: 3.5 }));
+        rc.rectangle(-20, 860, W + 40, H, O('ea3', { fill: '#a9865e' }));
+        tunnel('tn3', 980, 1530);
+        car('tube', lerp(-1300, 330, easeOut(prog(v, 0, 1.0))) + v * 10, 1514, 1.75, { body: '#c8402f', roof: '#5a2a22' });
+        rc.rectangle(-20, 1400, 400, 150, O('pf3', { fill: '#cfc8ba' })); rc.rectangle(-20, 1400, 400, 16, O('pf3e', { fill: '#fbf7ee', strokeWidth: 3 }));
+        haya('h3b', 190, 1400, { scale: 1.8, mood: 'wow', arm: -1.0, arm2: -1.0, look: 7 });
+        D.burst('sp3', 190, 1010, 120 + Math.sin(u * 9) * 10, 12, '#f6c543', 8);
+      }],
+      [idea - 0.08, v => {   // the same, under Tokyo: his idea
+        D.bg('paper'); D.ground(1560);
+        haya('h3c', 250, 1560, { scale: 2.0, mood: 'ok', arm: -1.25, arm2: 1.1, look: 6, bob: Math.sin(u * 5) * 2 });
+        for (const [bx, by, r] of [[400, 1090, 30], [450, 1030, 44]]) rc.circle(bx, by, r * 2 * pin(t, idea, 0.3), O('tb' + bx, { fill: '#fbfbf8' }));
+        D.at(660, 830, pin(t, idea + 0.1, 0.4), () => {
+          rc.path('M -330 60 C -420 60, -420 -110, -300 -120 C -310 -250, -110 -290, -40 -200 C 30 -300, 250 -280, 270 -150 C 400 -150, 420 40, 300 70 C 320 190, 120 240, 40 170 C -40 250, -260 220, -260 130 C -300 130, -330 100, -330 60 Z', O('cloud3', { fill: '#fbfbf8', strokeWidth: 6 }));
+          ctx.save(); ctx.beginPath(); ctx.rect(-270, -190, 540, 330); ctx.clip();
+          rc.rectangle(-270, -40, 540, 200, O('ie', { fill: '#b98a5a', strokeWidth: 3.5 })); rc.rectangle(-270, 10, 540, 110, O('it', { fill: '#34323a', strokeWidth: 3.5 }));
+          skyline('isk', -40, [[-230, 80, 110, '#d9d0bd', 1], [-120, 70, 150, '#cfc7b6', 1], [130, 90, 120, '#d6ccb8', 1]]);
+          rc.rectangle(-20, -150, 120, 60, O('isg', { fill: '#fbf7ee', strokeWidth: 3.5 })); D.text('東京', 40, -118, 44, { font: MARK }); rc.line(40, -90, 40, -40, O('isp', { strokeWidth: 5 }));
+          car('icar', lerp(-420, -150, easeOut(prog(t, idea + 0.3, 0.9))), 112, 0.5);
+          ctx.restore();
+        });
+        D.bulb('bulb3', 250, 880, easeBack(prog(t, idea + 0.2, 0.35)) * 0.8, 0.5 + 0.5 * Math.sin(u * 10));
+      }],
+    ]);
     D.tag('tg3', '1914年・ロンドン', t, T.s(3));
-    D.cloud('c3', 300 + u * 10, 720, 240);
-    // the clock tower of London
-    rc.rectangle(790, 700, 130, 480, O('bb', { fill: '#c9b58a' })); rc.polygon([[780, 700], [930, 700], [855, 590]], O('bbtop', { fill: '#8a7a5a' }));
-    rc.circle(855, 790, 96, O('bbface', { fill: '#fbf7ee' })); rc.line(855, 790, 855, 756, O('bbh1', { strokeWidth: 5 })); rc.line(855, 790, 880, 800, O('bbh2', { strokeWidth: 5 }));
-    for (let i = 0; i < 4; i++) rc.line(812 + i * 28, 880, 812 + i * 28, 1160, O('bbl' + i, { strokeWidth: 3, stroke: '#8a7a5a' }));
-    building('b3', 950, 1180, 150, 260, '#cfc7b6', 2);
-    cut('cut3', 1180, 1300, 1530, '#a9865e');
-    car('tube', ((u * 230) % 1900) - 640, 1516, 1.15, { body: '#c8402f', roof: '#5a2a22', len: 560 });
-    const a = T.at(3, '東京にも');
-    haya('h3', 300, 1180, { scale: 1.55, mood: 'wow', arm: t > a ? -1.2 : 0.9, arm2: 1.1, look: 5 });
-    if (t > a) D.bulb('bulb3', 480, 800, easeBack(prog(t, a, 0.35)) * 0.8, 0.5 + 0.5 * Math.sin(u * 10));
     rows(t, [
       ['c1', 'ロンドンで{地下鉄}を見た早川は', 370, 58, T.at(3, 'ロンドン'), T.to(3, '早川は')],
-      ['c2', '東京にも、つくろう！', 495, 66, a, T.e(3), { font: MARK }],
+      ['c2', '東京にも、つくろう！', 495, 66, idea, T.e(3), { font: MARK }],
     ]);
   });
 
   // 4  けれど周りは、東京の地面はやわらかすぎると笑います。
-  scene(T.s(4) - 0.1, (t, u) => {
-    D.bg('wall');
-    // the ground wobbles like jelly, a house leans in it
-    const wave = y => { let d = `M -20 ${y}`; for (let x = -20; x <= W + 60; x += 60) d += ` Q ${x + 30} ${y + Math.sin(u * 4 + x * 0.02) * 38} ${x + 60} ${y}`; return d + ` L ${W + 40} ${H + 20} L -20 ${H + 20} Z`; };
-    ctx.save(); ctx.translate(560, 1190); ctx.rotate(-0.14 + Math.sin(u * 2) * 0.03); building('b4', -90, 20, 180, 250, '#d6ccb8', 2); ctx.restore();
-    rc.path(wave(1180), O('mud1', { fill: '#b98a5a' })); rc.path(wave(1330), O('mud2', { fill: '#a8794b', strokeWidth: 3.5 })); rc.path(wave(1480), O('mud3', { fill: '#96683d', strokeWidth: 3.5 }));
-    rc.line(560, 1180, 560, 1060, O('post4', { strokeWidth: 7 })); rc.rectangle(470, 1000, 180, 70, O('sign4', { fill: '#fbf7ee' })); D.text('東京', 560, 1036, 50, { font: MARK });
-    haya('h4', 190, 1180, { scale: 1.45, mood: 'stern', arm: 1.1, arm2: 1.1 });
-    [[820, '#3a4a3a', '#d9a521'], [960, '#4a3636', '#3d74c4']].forEach(([x, suit, tie], i) => D.person('lg4' + i, x, 1180, { scale: 1.2, suit, tie, mood: 'laugh', flip: true, arm: -0.7 + Math.sin(u * 8 + i) * 0.2, bob: Math.sin(u * 7 + i * 2) * 3 }));
-    haha(t, T.at(4, '笑い'), [[850, 720, 0.1], [300, 760, -0.12]], u);
+  scene(T.s(4) - 0.08, (t, u) => {
+    const soft = T.at(4, '東京'), laugh = T.at(4, '笑い');
+    const plan = (x, y, k, rot) => D.at(x, y, k, () => {   // his plan on blue paper
+      rc.rectangle(-400, -230, 800, 460, O('plan', { fill: '#2f5fa8', strokeWidth: 6 }));
+      const w = { stroke: '#eaf2fb', strokeWidth: 5 };
+      rc.line(-360, -40, 360, -40, O('pl1', w)); for (const [bx, bw, bh] of [[-320, 110, 120], [-170, 90, 170], [120, 120, 100], [270, 80, 140]]) rc.rectangle(bx, -40 - bh, bw, bh, O('plb' + bx, w));
+      rc.rectangle(-360, 30, 720, 120, O('pl2', Object.assign({ strokeLineDash: [18, 14] }, w))); rc.rectangle(-150, 60, 260, 70, O('pl3', w)); rc.circle(-90, 142, 26, O('pl4', w)); rc.circle(50, 142, 26, O('pl5', w));
+      D.text('地下鉄　計画図', 0, 192, 46, { font: MARK, color: '#eaf2fb' });
+    }, rot);
+    const three = mood => [[190, 930, '#3a4a3a', '#d9a521', true], [540, 880, '#2f3f5a', '#c0392b', false], [890, 930, '#4b3f2a', '#2e8b57', true]].forEach(([x, y, suit, tie, hat], i) =>
+      D.face('sk4' + i, x, y + (mood === 'laugh' ? Math.sin(u * 14 + i * 2) * 8 : 0), 0.56, { mood, suit, tie, hat: hat ? true : null, hair: hat ? null : '#4a3b2e', tears: mood === 'laugh', flip: i === 2 }));
+    shots(t, [
+      [-1, v => {   // the people around him look at the plan
+        D.bg('wall');
+        three('doubt');
+        plan(540, 1330, 1, -0.02);
+        for (const [qx, qy] of [[330, 720], [700, 680]]) D.at(qx, qy, pin(t, T.s(4) + 0.3), () => D.text('？', 0, 0, 110, { font: MARK, color: '#e2742b', outline: 14 }));
+      }],
+      [soft - 0.08, v => {   // "the ground of Tokyo is as soft as tofu"
+        D.bg('paper');
+        rc.ellipse(540, 1500, 900, 150, O('plate', { fill: '#dfe9ee' }));
+        const sway = Math.sin(v * 9) * 34 * (0.5 + 0.5 * Math.sin(v * 2.2)), sag = easeOut(prog(t, T.at(4, 'やわらか'), 0.8));
+        rc.path(`M 250 1480 L 830 1480 L ${830 + sway} 1010 Q ${540 + sway} ${980 + sag * 30} ${250 + sway} 1010 Z`, O('tofu', { fill: '#fbfaf2', strokeWidth: 6 }));
+        // the tunnel in it sinks
+        rc.ellipse(540 + sway * 0.4, 1340 + sag * 40, 330, 150 - sag * 90, O('hole', { fill: '#34323a' }));
+        car('tcar', 430 + sway * 0.4, 1392 + sag * 40, 0.42 - sag * 0.1);
+        D.text('東京の地面', 540 + sway * 0.7, 1130, 72, { font: MARK });
+        for (const [gx, gy] of [[430, 1000], [520, 990], [610, 1002]]) rc.ellipse(gx + sway, gy, 44, 20, O('negi' + gx, { fill: '#7fb86a', strokeWidth: 3 }));
+        const poke = Math.abs(Math.sin(v * 5)) * 46;
+        rc.line(900, 780 + poke, 790, 990 + poke, O('spn', { strokeWidth: 16, stroke: '#8a6a45' })); rc.ellipse(775, 1020 + poke, 90, 120, O('spb', { fill: '#b9b3a6' }));
+        D.sweat(210, 1240, v, 2.0);
+        D.cross('x4', 540, 1330, 130, t, T.at(4, 'すぎる'));
+      }],
+      [laugh - 0.08, v => {   // and they laugh
+        D.bg('wall');
+        three('laugh');
+        haha(t, laugh, [[330, 700, -0.12], [760, 680, 0.12], [540, 1180, 0]], u);
+        const f = easeOut(prog(t, laugh, 0.7));   // the plan, crumpled, flies into the bin
+        rc.polygon([[760, 1360], [960, 1360], [930, 1600], [790, 1600]], O('bin', { fill: '#8d8a84' })); for (let i = 1; i < 4; i++) rc.line(760 + i * 50, 1368, 778 + i * 38, 1592, O('binl' + i, { strokeWidth: 3 }));
+        D.at(lerp(300, 860, f), lerp(1380, 1340, f) - Math.sin(f * Math.PI) * 260, 1, () => { rc.polygon([[-60, -20], [-20, -64], [40, -50], [66, 0], [30, 56], [-36, 50]], O('ball', { fill: '#2f5fa8' })); rc.line(-30, -10, 20, 20, O('bl1', { stroke: '#eaf2fb', strokeWidth: 3 })); rc.line(-10, -40, 30, -10, O('bl2', { stroke: '#eaf2fb', strokeWidth: 3 })); }, f * 5);
+        haya('h4c', 230, 1620, { scale: 1.6, mood: 'stern', arm: 1.2, arm2: 1.2 });
+      }],
+    ]);
     rows(t, [
       ['d1', 'けれど周りは…', 370, 58, T.s(4), T.to(4, '周りは')],
-      ['d2', '「東京の地面は{やわらかすぎる}」', 495, 54, T.at(4, '東京'), T.to(4, 'やわらかすぎる')],
+      ['d2', '「東京の地面は{やわらかすぎる}」と笑った', 495, 48, soft, T.e(4)],
     ]);
   });
 

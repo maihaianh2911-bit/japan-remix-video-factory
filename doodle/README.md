@@ -27,6 +27,21 @@ on `main`, and no workflow runs it.
 - The iron rules of the repo hold: Japanese, not under 61 s, vertical; the script is shown in the chat first (Japanese
   in one piece, then the Vietnamese meaning) and the video is made only when the owner says so.
 
+## What the owner said about the pictures (26/11/2026)
+After the two first videos: "hình ảnh video rất sơ sài, k thể hiện đc nội dung". The fault was in the way of drawing,
+not in the look: a man beside a label and a stamp shows a noun, not what the sentence says. The second way (tried
+on the first 20 seconds of `chikatetsu-horafuki`, lines 0–4 of its `scenes.js`; the owner has not judged it yet):
+- **One big picture for every part of a sentence**, changed every 2–3 seconds (the model video: about 2.5 s a
+  picture; the first way: 4 s and nothing moving inside). `shots(t, [[start, draw], …])` in that `scenes.js` holds the
+  pictures of one line; the labels of the line stay across them.
+- **The picture must say the idea with the labels off**: a pin dropped on a target for "the very middle of Tokyo", a
+  medal 日本初 on the train, the years flying on a calendar, the man pushed out of his own train which leaves without
+  him, his idea as the same tunnel under Tokyo in a thought cloud, the soft ground as a block of tofu in which the
+  tunnel sinks, the plan crumpled into a bin while three faces laugh.
+- **One thing at a time, large, in the middle** (a face close up with `D.face`, a train 400 px high), no small
+  figures scattered over an empty frame; the best image of the story (here the beans) gets the whole frame.
+- A real person is still a simple figure: no likeness.
+
 ## Making a video
 A story is a folder `doodle/stories/<name>/` with `story.json` (the lines, the voice, the pace, the small sounds, the
 music), `scenes.js` (what is drawn while each line is spoken) and `caption.txt` (the posting caption). From the root

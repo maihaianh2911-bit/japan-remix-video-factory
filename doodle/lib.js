@@ -192,7 +192,8 @@
         ctx.lineWidth = 4.5; ctx.beginPath(); ctx.arc(-16 + ex, -216, 8, Math.PI * 1.1, Math.PI * 1.9); ctx.stroke();
         ctx.beginPath(); ctx.arc(16 + ex, -216, 8, Math.PI * 1.1, Math.PI * 1.9); ctx.stroke();
       } else {
-        ctx.beginPath(); ctx.arc(-15 + ex, -218, 4.6, 0, 7); ctx.arc(17 + ex, -218, 4.6, 0, 7); ctx.fill();
+        if (D.blink(key)) { ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(-21 + ex, -217); ctx.lineTo(-9 + ex, -217); ctx.moveTo(11 + ex, -217); ctx.lineTo(23 + ex, -217); ctx.stroke(); }
+        else { ctx.beginPath(); ctx.arc(-15 + ex, -218, 4.6, 0, 7); ctx.arc(17 + ex, -218, 4.6, 0, 7); ctx.fill(); }
       }
       if (o.old || o.glasses) {
         ctx.lineWidth = 3.5;
@@ -220,6 +221,47 @@
       rc.path('M -50 -238 C -48 -290, 48 -290, 50 -238 Z', O(key + 'helm', { fill: '#f2c230', strokeWidth: 4.5 }));
       rc.line(-58, -238, 58, -238, O(key + 'brim', { strokeWidth: 6 }));
     }
+    ctx.restore();
+  };
+  D.t = 0;
+  D.blink = key => ((D.t * 1000 + hash(key) % 2900) % 2900) < 120;
+  // A face close up, with its shoulders: (x, y) the middle of the head, s its size (1: a head 300 px wide).
+  // o: suit, tie, hair, old, glasses, mustache, hat, mood (ok laugh flat stern sad wow doubt), flip, tears, noBody
+  D.face = (key, x, y, s, o = {}) => {
+    const skin = '#f3c891', m = o.mood || 'ok';
+    ctx.save(); ctx.translate(x, y); ctx.scale(s * (o.flip ? -1 : 1), s); if (o.rot) ctx.rotate(o.rot);
+    if (!o.noBody) {
+      rc.path('M -230 360 C -230 220, -130 180, -62 158 L 62 158 C 130 180, 230 220, 230 360 Z', O(key + 'sh', { fill: o.suit || '#27304a' }));
+      rc.polygon([[-46, 152], [46, 152], [0, 236]], O(key + 'col', { fill: '#ffffff', strokeWidth: 4 }));
+      rc.polygon([[-17, 166], [17, 166], [24, 270], [0, 300], [-24, 270]], O(key + 'tie', { fill: o.tie || '#c0392b', strokeWidth: 4 }));
+    }
+    rc.ellipse(-150, 12, 46, 74, O(key + 'e1', { fill: skin })); rc.ellipse(150, 12, 46, 74, O(key + 'e2', { fill: skin }));
+    rc.circle(0, 0, 300, O(key + 'head', { fill: skin }));
+    if (o.hair) rc.path('M -148 -26 C -176 -200, 176 -200, 148 -26 C 100 -112, -100 -112, -148 -26 Z', O(key + 'hair', { fill: o.hair, strokeWidth: 4.5 }));
+    if (o.old) { rc.path('M -148 0 C -190 -70, -140 -140, -80 -128 C -112 -96, -132 -52, -148 0 Z', O(key + 'h1', { fill: '#d9d9d6', strokeWidth: 4 })); rc.path('M 148 0 C 190 -70, 140 -140, 80 -128 C 112 -96, 132 -52, 148 0 Z', O(key + 'h2', { fill: '#d9d9d6', strokeWidth: 4 })); }
+    ctx.strokeStyle = INK; ctx.fillStyle = INK; ctx.lineCap = 'round'; ctx.lineWidth = 7;
+    const blink = D.blink(key);
+    if (m === 'laugh') { for (const ex of [-54, 54]) { ctx.beginPath(); ctx.arc(ex, -6, 24, Math.PI * 1.12, Math.PI * 1.88); ctx.stroke(); } }
+    else if (blink) { ctx.beginPath(); ctx.moveTo(-72, -12); ctx.lineTo(-36, -12); ctx.moveTo(36, -12); ctx.lineTo(72, -12); ctx.stroke(); }
+    else { const r = m === 'wow' ? 17 : 12; ctx.beginPath(); ctx.arc(-54 + (o.look || 0), -12, r, 0, 7); ctx.arc(54 + (o.look || 0), -12, r, 0, 7); ctx.fill(); }
+    if (o.glasses || o.old) { ctx.lineWidth = 6; for (const ex of [-54, 54]) { ctx.beginPath(); ctx.arc(ex, -12, 46, 0, 7); ctx.stroke(); } ctx.beginPath(); ctx.moveTo(-8, -14); ctx.lineTo(8, -14); ctx.stroke(); }
+    ctx.lineWidth = 7; ctx.beginPath();   // the brows
+    if (m === 'stern') { ctx.moveTo(-92, -86); ctx.lineTo(-30, -66); ctx.moveTo(92, -86); ctx.lineTo(30, -66); }
+    else if (m === 'sad') { ctx.moveTo(-92, -62); ctx.lineTo(-30, -82); ctx.moveTo(92, -62); ctx.lineTo(30, -82); }
+    else if (m === 'doubt') { ctx.moveTo(-92, -70); ctx.lineTo(-30, -70); ctx.moveTo(30, -96); ctx.lineTo(92, -84); }
+    else if (m === 'wow') { ctx.moveTo(-88, -92); ctx.quadraticCurveTo(-56, -106, -26, -92); ctx.moveTo(26, -92); ctx.quadraticCurveTo(56, -106, 88, -92); }
+    ctx.stroke();
+    if (o.mustache) { ctx.beginPath(); ctx.moveTo(-58, 58); ctx.quadraticCurveTo(-28, 22, 0, 46); ctx.quadraticCurveTo(28, 22, 58, 58); ctx.quadraticCurveTo(26, 52, 0, 60); ctx.quadraticCurveTo(-26, 52, -58, 58); ctx.fill(); }
+    const my = o.mustache ? 26 : 0;
+    ctx.lineWidth = 7; ctx.beginPath();
+    if (m === 'laugh') { ctx.moveTo(-62, 44 + my); ctx.quadraticCurveTo(0, 150 + my, 62, 44 + my); ctx.closePath(); ctx.fillStyle = '#7a2a22'; ctx.fill(); ctx.stroke(); ctx.beginPath(); ctx.fillStyle = '#e8837a'; ctx.ellipse(0, 92 + my, 26, 14, 0, 0, 7); ctx.fill(); }
+    else if (m === 'wow') { ctx.ellipse(0, 76 + my, 22, 30, 0, 0, 7); ctx.fillStyle = '#7a2a22'; ctx.fill(); ctx.stroke(); }
+    else if (m === 'sad') { ctx.arc(0, 106 + my, 40, Math.PI * 1.15, Math.PI * 1.85); ctx.stroke(); }
+    else if (m === 'stern' || m === 'flat') { ctx.moveTo(-36, 76 + my); ctx.lineTo(38, 72 + my); ctx.stroke(); }
+    else if (m === 'doubt') { ctx.moveTo(-34, 80 + my); ctx.quadraticCurveTo(4, 66 + my, 40, 84 + my); ctx.stroke(); }
+    else { ctx.arc(0, 44 + my, 46, Math.PI * 0.15, Math.PI * 0.85); ctx.stroke(); }
+    if (o.tears) for (const ex of [-104, 104]) { ctx.fillStyle = '#7ec3ea'; ctx.lineWidth = 3.5; ctx.beginPath(); ctx.moveTo(ex, -4); ctx.quadraticCurveTo(ex + 16, 26, ex, 34); ctx.quadraticCurveTo(ex - 16, 26, ex, -4); ctx.fill(); ctx.stroke(); }
+    if (o.hat) { rc.path('M -132 -110 C -132 -290, 132 -290, 132 -110 Z', O(key + 'hat', { fill: o.hat === true ? '#3a3632' : o.hat })); rc.line(-196, -110, 196, -110, O(key + 'hatb', { strokeWidth: 16 })); }
     ctx.restore();
   };
   D.sweat = (x, y, t, k = 1.9) => {

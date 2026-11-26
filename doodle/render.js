@@ -1,6 +1,7 @@
 // The frames of a drawn video, from the page (page.html) in the pre-installed Chromium.
 //   node doodle/render.js <story folder> stills [t1,t2,…]   a sheet of still frames (out/stills/sheet.jpg)
-//   node doodle/render.js <story folder> video               out/picture.mp4 (no sound; doodle/sound.py adds it)
+//   node doodle/render.js <story folder> video [seconds]     out/picture.mp4 (no sound; doodle/sound.py adds it);
+//                                                            with seconds: only the start of the video, for a trial
 // Needs <story>/out/timing.json (python -m doodle.voice <story>).
 const { chromium } = require('playwright');
 const { spawn, execFileSync } = require('child_process');
@@ -47,7 +48,8 @@ const path = require('path');
     }
     console.log(`${files.length} stills in ${dir}`);
   } else {
-    const fps = 30, n = Math.round(total * fps);
+    const until = process.argv[4] ? Math.min(total, Number(process.argv[4])) : total;   // a part only: … video 20
+    const fps = 30, n = Math.round(until * fps);
     const ff = spawn('ffmpeg', ['-v', 'error', '-y', '-f', 'image2pipe', '-framerate', String(fps), '-i', '-',
       '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '17', '-preset', 'medium', '-movflags', '+faststart', path.join(out, 'picture.mp4')], { stdio: ['pipe', 'inherit', 'inherit'] });
     for (let i = 0; i < n; i++) {
