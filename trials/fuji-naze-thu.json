@@ -1,0 +1,24 @@
+{
+ "stage": "find",
+ "trial": true,
+ "note": "Bản thử 20s, bố cục mới: câu hỏi cố định ở trên, ảnh trong khung ở giữa, phụ đề dưới ảnh. Kịch bản: なぜ富士山は夏しか登れない？",
+ "layout": "frame",
+ "header": ["なぜ富士山は", "*夏*しか登れない？"],
+ "voice": ["もち子さん", "ノーマル"],
+ "speed": 1.2,
+ "tail": 0.6,
+ "music": {"file": "music/k10-sao-truc.mp3", "title": "竹笛", "volume": 0.25},
+ "searches": [
+  "mount fuji",
+  "mount fuji summer",
+  "富士山",
+  "mount fuji snow",
+  "photo:Mount Fuji climbers",
+  "photo:Mount Fuji summit",
+  "photo:Mount Fuji Yoshida trail",
+  "photo:Mount Fuji snow winter",
+  "photo:Mount Fuji crater",
+  "photo:Mount Fuji sunrise goraiko"
+ ],
+ "scenes": []
+}
