@@ -1,0 +1,164 @@
+# Thử tạm (chỉ chạy trên nhánh làm việc của phiên chat, không đụng main): từ mạng của GitHub, máy có tự tìm được
+# đoạn video ngắn miễn phí và video mẫu trên TikTok / YouTube không. Xoá sau khi có kết quả.
+name: probe-clips
+on:
+  push:
+    branches: [ccr-d5640a04-6s686r]
+    paths: ['.github/workflows/probe-clips.yml']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - run: pip install -q yt-dlp
+      - name: write probe
+        run: |
+          cat > probe.py <<'EOF'
+          import json, re, subprocess, sys, urllib.error, urllib.parse, urllib.request
+
+          UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/126.0 Safari/537.36")
+
+
+          def get(url, timeout=25, head=False, size=None):
+              request = urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Language": "ja,en;q=0.8"},
+                                               method="HEAD" if head else "GET")
+              try:
+                  with urllib.request.urlopen(request, timeout=timeout) as answer:
+                      body = b"" if head else answer.read(size) if size else answer.read()
+                      return answer.status, body.decode("utf-8", "replace"), dict(answer.headers)
+              except urllib.error.HTTPError as error:
+                  return error.code, error.read()[:300].decode("utf-8", "replace"), {}
+              except Exception as error:
+                  return 0, repr(error)[:160], {}
+
+
+          def notice(title, value):
+              value = str(value).replace("%", "%25").replace("\r", " ").replace("\n", "%0A")
+              print(f"::notice title={title}::{value[:3500]}")
+
+
+          def stock():
+              words = ["egg", "boiled egg", "tofu", "octopus", "mushroom", "miso soup", "noodles", "sugar"]
+              rows = []
+              for word in words:
+                  status, body, _ = get("https://mixkit.co/free-stock-video/" + word.replace(" ", "-") + "/")
+                  clips = sorted(set(re.findall(r"https://assets\.mixkit\.co/[^\"'\s\\]+?\.mp4", body)))
+                  ids = sorted(set(re.findall(r"/free-stock-video/[a-z0-9-]+-(\d+)/", body)))
+                  rows.append(f"{word}: http {status}, {len(ids)} trang video, {len(clips)} file mp4"
+                              + (f", vd {clips[0]}" if clips else ""))
+                  if word == "egg":
+                      first = clips[:1]
+                      for clip in first:
+                          for name in (clip, re.sub(r"-(preview|small|360)\.mp4$", "-720.mp4", clip),
+                                       re.sub(r"-(preview|small|360)\.mp4$", "-1080.mp4", clip)):
+                              code, _, headers = get(name, head=True)
+                              rows.append(f"  tải {name}: http {code}, {headers.get('Content-Length')} byte")
+              notice("mixkit", "\n".join(rows))
+              rows = []
+              for name, url, pattern in (
+                      ("pexels trang", "https://www.pexels.com/search/videos/boiled%20egg/", r"videos\.pexels\.com/[^\"'\s\\]+?\.mp4"),
+                      ("pexels api (không mã)", "https://api.pexels.com/videos/search?query=boiled+egg&per_page=3", r"\.mp4"),
+                      ("pixabay trang", "https://pixabay.com/videos/search/boiled%20egg/", r"cdn\.pixabay\.com/video/[^\"'\s\\]+?\.mp4"),
+                      ("pixabay api (không mã)", "https://pixabay.com/api/videos/?q=boiled+egg", r"\.mp4"),
+                      ("coverr", "https://coverr.co/s?q=egg", r"[^\"'\s\\]+?\.mp4"),
+                      ("videvo", "https://www.videvo.net/search/?q=boiled+egg", r"[^\"'\s\\]+?\.mp4"),
+                      ("archive.org", "https://archive.org/advancedsearch.php?q=" + urllib.parse.quote("boiled egg AND mediatype:movies")
+                       + "&fl[]=identifier&fl[]=title&rows=5&output=json", r"identifier"),
+                      ("yahoo video", "https://search.yahoo.co.jp/video/search?p=" + urllib.parse.quote("ゆで卵 作り方"), r"youtube\.com/watch|tiktok\.com"),
+                      ("bing video", "https://www.bing.com/videos/search?q=" + urllib.parse.quote("糖尿病 予防 食べ物 tiktok"), r"tiktok\.com/@[^\"'\s\\&]+/video/\d+")):
+                  status, body, _ = get(url)
+                  found = sorted(set(re.findall(pattern, body)))
+                  rows.append(f"{name}: http {status}, {len(body)} ký tự, khớp {len(found)}"
+                              + (f", vd {found[0][:140]}" if found else f", đầu trang: {body[:120]!r}" if status != 200 else ""))
+              notice("kho-khac", "\n".join(rows))
+
+
+          def commons():
+              rows = []
+              for words in ("boiled egg", "tofu", "octopus", "nameko", "tokoroten", "miso soup", "sugar pouring",
+                            "Buckingham Palace", "Elizabeth II", "royal wedding"):
+                  url = ("https://commons.wikimedia.org/w/api.php?action=query&format=json&generator=search&gsrnamespace=6"
+                         "&gsrlimit=30&gsrsearch=" + urllib.parse.quote("filetype:video " + words)
+                         + "&prop=imageinfo&iiprop=size%7Cmime%7Curl")
+                  status, body, _ = get(url)
+                  try:
+                      pages = list(json.loads(body).get("query", {}).get("pages", {}).values())
+                  except Exception:
+                      pages = []
+                  good = []
+                  for page in pages:
+                      info = (page.get("imageinfo") or [{}])[0]
+                      if info.get("width", 0) >= 720 and info.get("duration", 0) >= 3:
+                          good.append(f"{page.get('title', '')[5:60]} ({info.get('width')}x{info.get('height')}, "
+                                      f"{round(info.get('duration', 0))}s)")
+                  rows.append(f"{words}: http {status}, {len(pages)} video, {len(good)} đủ nét; " + " | ".join(good[:3]))
+              notice("commons", "\n".join(rows))
+
+
+          def ytdlp(*args, timeout=120):
+              try:
+                  done = subprocess.run([sys.executable, "-m", "yt_dlp", "--no-warnings", "-J", *args],
+                                        capture_output=True, text=True, timeout=timeout)
+              except subprocess.TimeoutExpired:
+                  return None, "hết giờ"
+              try:
+                  return json.loads(done.stdout), done.stderr.strip()[-300:]
+              except Exception:
+                  return None, (done.stderr.strip() or done.stdout.strip())[-400:]
+
+
+          def listing(title, url, limit=15):
+              data, error = ytdlp("--flat-playlist", "--playlist-end", str(limit), url)
+              if not data:
+                  notice(title, f"KHÔNG ĐƯỢC: {error}")
+                  return []
+              entries = [entry for entry in data.get("entries") or [] if entry]
+              rows = [f"{len(entries)} video"]
+              for entry in sorted(entries, key=lambda item: -(item.get("view_count") or 0))[:8]:
+                  rows.append(f"{entry.get('view_count')} lượt xem, {entry.get('duration')}s, "
+                              f"{(entry.get('channel') or entry.get('uploader') or '')[:20]}: "
+                              f"{(entry.get('title') or entry.get('description') or '')[:60]} {entry.get('url') or entry.get('webpage_url') or entry.get('id')}")
+              notice(title, "\n".join(rows))
+              return entries
+
+
+          def one(title, url):
+              data, error = ytdlp("--skip-download", url)
+              if not data:
+                  notice(title, f"KHÔNG ĐƯỢC: {error}")
+                  return
+              formats = [f for f in data.get("formats") or [] if f.get("vcodec") not in (None, "none")]
+              best = max((f.get("height") or 0 for f in formats), default=0)
+              notice(title, f"ĐƯỢC: {data.get('view_count')} lượt xem, {data.get('like_count')} thích, {data.get('duration')}s, "
+                            f"{len(formats)} bản video, cao nhất {best}p, phụ đề: {sorted((data.get('subtitles') or {}).keys())[:5]} "
+                            f"tự động: {'ja' in (data.get('automatic_captions') or {})} | {(data.get('title') or '')[:70]}")
+
+
+          def sources():
+              tiktok = listing("tiktok-kenh", "https://www.tiktok.com/@happy_kenko")
+              if tiktok:
+                  first = tiktok[0]
+                  one("tiktok-1-video", first.get("url") or first.get("webpage_url")
+                      or f"https://www.tiktok.com/@happy_kenko/video/{first.get('id')}")
+              listing("tiktok-tag", "https://www.tiktok.com/tag/" + urllib.parse.quote("糖尿病予防"))
+              found = listing("youtube-tim", "ytsearch15:糖尿病 予防 食べ物 5選 #shorts")
+              listing("youtube-kenh-shorts", "https://www.youtube.com/@ImperialEcho-v1c/shorts", limit=40)
+              if found:
+                  first = found[0]
+                  one("youtube-1-video", first.get("url") or f"https://www.youtube.com/watch?v={first.get('id')}")
+
+
+          {"stock": stock, "commons": commons, "sources": sources}[sys.argv[1]]()
+          EOF
+      - name: stock
+        run: python3 probe.py stock
+        continue-on-error: true
+      - name: commons
+        run: python3 probe.py commons
+        continue-on-error: true
+      - name: sources
+        run: python3 probe.py sources
+        continue-on-error: true
