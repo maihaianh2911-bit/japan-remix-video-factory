@@ -6,9 +6,12 @@ dùng tới nó.
 
 **Chủ kênh đã chốt cho kênh bản đồ (26/11/2026, sau khi xem hai bản thử):** *"Bản đồ, k cần hastag riêng đâu"* (kênh
 là kênh bản đồ; không cần tên kênh hay hashtag riêng), *"mình sẽ chỉ làm 2d thôi nhỉ, 3d hơi mất công"* (chỉ làm
-hình 2D; bỏ các hình nhỏ nổi 3D của video gốc). Chủ kênh hỏi Claude nên làm dạng nội dung gì; Claude đề nghị lấy
-"ranh giới" làm trục (trong một tỉnh có hai vùng, đường ranh tỉnh kỳ lạ, ranh giới thói quen và tiếng nói trên cả
-nước) và tránh chuyện "nếu thắng chiến tranh" và lãnh thổ tranh chấp: **chủ kênh chưa trả lời, chưa phải quyết định**.
+hình 2D; bỏ các hình nhỏ nổi 3D của video gốc). Về nội dung, Claude đề nghị lấy "ranh giới" làm trục (kể các sự thật về vùng và đường ranh); chủ kênh trả lời:
+*"Tao lại nghĩ nên gắn cho nó 1 câu chuyện"*. Vậy **mỗi video của kênh bản đồ là một câu chuyện** (có người, có
+biến cố, có ý nghĩa, như các bài học kịch bản trong `docs/KENH-NHAT.md`), bản đồ là nơi câu chuyện diễn ra: đường
+đi, khoảng cách, ranh giới hiện lên theo lời kể. Không làm video chỉ liệt kê sự thật về bản đồ. Claude đề nghị vài
+chuyện đầu (伊能忠敬, 桶狭間, 淡路島, ジョン万次郎): chủ kênh chưa chọn. Tránh chuyện "nếu thắng chiến tranh" và lãnh thổ
+tranh chấp (đề nghị của Claude, chủ kênh chưa nói gì).
 Chưa chốt: repo của kênh, giọng đọc, nhân vật.
 
 1. **Kiểu khung (`layout` mặc định, `stage/index.html`)**: theo video TikTok của @otona_study (「大人の教養」): tiêu
