@@ -308,15 +308,41 @@ window.SCENES = function (T) {
     ]);
   });
 
-  // 5  お金を集めるには、証拠が必要でした。
-  scene(T.s(5) - 0.1, (t, u) => {
-    D.bg('paper'); D.ground(1520);
-    haya('h5', 230, 1520, { scale: 1.7, mood: 'ok', arm: -0.3, arm2: 1.1 });
-    D.sheet('plan5', 420, 1150, 200, 150, null, { rot: -0.1 }); D.text('計画', 420, 1150, 50, { font: MARK, color: '#3d74c4', rot: -0.1 });
-    D.moneybag('mb5', 850, 1270, 1.5);
-    [[750, '#2f3f5a', '#c0392b'], [950, '#4b3f2a', '#2e8b57']].forEach(([x, suit, tie], i) => D.person('inv' + i, x, 1520, { scale: 1.5, suit, tie, mood: 'flat', hat: true, flip: true, arm: 1.3, arm2: 1.3 }));
+  // ---------- lines 5–15, drawn the second way ----------
+  const confetti = (key, u, n, y0, h) => { const r = (i, m) => ((D.hash(key + i) % 1000) / 1000 * m); for (let i = 0; i < n; i++) { const x = r(i, 1080), y = y0 + ((r(i + 99, h) + u * (110 + r(i + 7, 90))) % h); ctx.save(); ctx.translate(x, y); ctx.rotate(u * 3 + i); ctx.fillStyle = ['#d6453a', '#f6c543', '#3d74c4', '#2e8b57'][i % 4]; ctx.fillRect(-11, -6, 22, 12); ctx.restore(); } };
+  const cake = (x, y, k, u) => D.at(x, y, k, () => {
+    rc.rectangle(-190, -160, 380, 160, O('ck1', { fill: '#f6e3c2' })); rc.path('M -190 -160 Q -150 -96 -110 -160 Q -70 -96 -30 -160 Q 10 -96 50 -160 Q 90 -96 130 -160 Q 160 -110 190 -160 L 190 -192 L -190 -192 Z', O('ck2', { fill: '#fbfbf8', strokeWidth: 4 }));
+    rc.rectangle(-120, -300, 240, 108, O('ck3', { fill: '#f6e3c2' })); rc.path('M -120 -300 Q -80 -256 -40 -300 Q 0 -256 40 -300 Q 80 -256 120 -300 L 120 -322 L -120 -322 Z', O('ck4', { fill: '#fbfbf8', strokeWidth: 4 }));
+    for (const cx of [-66, 0, 66]) { rc.rectangle(cx - 8, -388, 16, 66, O('cd' + cx, { fill: '#d6453a', strokeWidth: 3 })); ctx.fillStyle = '#f6a623'; ctx.strokeStyle = INK; ctx.lineWidth = 3; ctx.beginPath(); ctx.ellipse(cx, -408 + Math.sin(u * 12 + cx) * 2, 10, 17, 0, 0, 7); ctx.fill(); ctx.stroke(); }
+    D.text('100', 0, -92, 104, { font: MARK, color: RED });
+  });
+  const yearFlip = (key, t, a, b, from, to, cx, cy, s, small) => {   // a calendar whose year runs from one to the other
+    const q = easeInOut(prog(t, a, b - a));
+    for (let i = 0; i < 7; i++) { const f = clamp(q * 1.3 - i * 0.12); if (f > 0 && f < 1) D.at(lerp(cx + 80, cx + 640, f), lerp(cy - 220, cy - 500 - i * 30, f), 0.6, () => rc.rectangle(-150, -110, 300, 220, O(key + 'fly' + i, { fill: '#fbf7ee' })), f * 2.4); }
+    D.calendar(key, cx, cy, s, String(Math.round(lerp(from, to, q))), q >= 1 ? small : '');
+  };
+
+  // 5  お金を集めるには、証拠が必要でした。 — the money is in a safe; the key to it is proof
+  scene(T.s(5) - 0.08, (t, u) => {
     const a = T.at(5, '証拠');
-    D.stamp('proof', '証拠は？', 600, 780, 110, -0.08, t, a, { fill: 'rgba(251,247,238,0.92)' });
+    D.bg('wall'); D.ground(1560, '#bdb4a3');
+    rc.rectangle(330, 800, 520, 720, O('safe', { fill: '#6f7378' })); rc.rectangle(366, 836, 448, 648, O('safed', { fill: '#868d94', strokeWidth: 5 }));
+    rc.rectangle(350, 1520, 60, 40, O('sl1', { fill: '#4b4f54' })); rc.rectangle(770, 1520, 60, 40, O('sl2', { fill: '#4b4f54' }));
+    rc.circle(590, 1080, 190, O('dial', { fill: '#d9d4c8' })); for (let i = 0; i < 12; i++) { const g = i * Math.PI / 6 + u * 0.6; rc.line(590 + Math.cos(g) * 66, 1080 + Math.sin(g) * 66, 590 + Math.cos(g) * 86, 1080 + Math.sin(g) * 86, O('dt' + i, { strokeWidth: 4 })); }
+    rc.circle(590, 1080, 60, O('dialc', { fill: '#4b4f54' }));
+    rc.rectangle(560, 1260, 60, 110, O('khole', { fill: '#2a2a2e', strokeWidth: 4 })); rc.circle(590, 1262, 70, O('khole2', { fill: '#2a2a2e', strokeWidth: 4 }));
+    D.label('mn5', 'お金', 590, 760, 74, t, T.s(5) + 0.15, T.s(5) + 0.4, { font: MARK, fill: '#fff6cf' });
+    haya('h5', 150, 1560, { scale: 1.75, mood: t > a ? 'sad' : 'ok', arm: -0.4 + Math.sin(u * 10) * 0.2, arm2: 1.1, look: 6 });
+    if (t > a - 0.08) {   // the key that is missing
+      const k = pin(t, a - 0.08, 0.35);
+      D.at(900, 1010 + Math.sin(u * 3) * 10, k, () => {
+        ctx.save(); ctx.strokeStyle = RED; ctx.lineWidth = 9; ctx.setLineDash([22, 16]); ctx.lineCap = 'round'; ctx.fillStyle = 'rgba(255,246,207,0.9)';
+        ctx.beginPath(); ctx.arc(0, -150, 86, 0, 7); ctx.fill(); ctx.stroke(); ctx.beginPath(); ctx.rect(-22, -70, 44, 300); ctx.fill(); ctx.stroke(); ctx.beginPath(); ctx.rect(22, 130, 70, 36); ctx.rect(22, 190, 50, 36); ctx.fill(); ctx.stroke(); ctx.restore();
+        D.text('？', 0, -146, 96, { font: MARK, color: RED });
+      }, 0.25);
+      D.stamp('proof', '証拠', 880, 1380, 104, -0.08, t, a + 0.15, { fill: 'rgba(251,247,238,0.94)' });
+      D.burst('kb', 590, 1300, 110 + Math.sin(u * 9) * 8, 10, '#e2742b', 7);
+    }
     rows(t, [
       ['e1', 'お金を集めるには', 370, 60, T.s(5), T.to(5, '集めるには')],
       ['e2', '{証拠}が必要だった', 495, 62, a, T.e(5)],
@@ -324,16 +350,31 @@ window.SCENES = function (T) {
   });
 
   // 6  しかも東京には、人の流れを調べた資料がありません。
-  scene(T.s(6) - 0.1, (t, u) => {
-    D.bg('wall'); D.ground(1520, '#bdb4a3');
-    // an empty cabinet
-    rc.rectangle(560, 760, 400, 760, O('cab', { fill: '#9a6b3d' }));
-    for (let i = 0; i < 4; i++) { rc.rectangle(590, 790 + i * 180, 340, 150, O('dr' + i, { fill: i === 1 ? '#3d3b40' : '#b07f4c', strokeWidth: 4 })); if (i !== 1) rc.circle(760, 865 + i * 180, 24, O('kn' + i, { fill: '#e2b23a', strokeWidth: 3 })); }
-    rc.path('M 590 970 Q 660 1010 700 1120 M 590 1040 Q 640 1040 700 1120 M 640 970 Q 660 1040 700 1120 M 610 1000 Q 650 990 672 1060', O('web', { strokeWidth: 2.5, stroke: '#d9d4c8' }));
-    D.label('f3', '人の流れの資料', 760, 700, 46, t, T.at(6, '人の流れ'), T.to(6, '資料'), { font: MARK });
-    haya('h6', 260, 1520, { scale: 1.7, mood: 'sad', arm: -1.3, arm2: 1.1, look: 6 });
-    D.qcards(300, 1000, u, 1.2);
-    D.stamp('none', 'なし', 760, 1070, 130, -0.12, t, T.at(6, 'ありません'), { fill: 'rgba(251,247,238,0.92)' });
+  scene(T.s(6) - 0.08, (t, u) => {
+    const none = T.at(6, 'ありません');
+    shots(t, [
+      [-1, v => {   // the city office of Tokyo
+        D.bg('sky'); D.cloud('c6', 240 + v * 14, 760, 260);
+        rc.rectangle(120, 900, 840, 600, O('off', { fill: '#ddd6c6' })); rc.polygon([[90, 900], [990, 900], [540, 700]], O('offr', { fill: '#b9b3a6' }));
+        for (let i = 0; i < 6; i++) rc.rectangle(180 + i * 128, 960, 60, 440, O('ofc' + i, { fill: '#efe9da', strokeWidth: 4 }));
+        rc.rectangle(470, 1200, 140, 300, O('ofd', { fill: '#6b5a44' })); rc.rectangle(340, 770, 400, 100, O('ofs', { fill: '#1f4d3a' })); D.text('東京市', 540, 822, 70, { font: MARK, color: '#f3e9c6' });
+        rc.rectangle(-20, 1500, W + 40, 150, O('rd6', { fill: '#b8b2a6' })); D.bg('paper', 1650);
+        haya('h6', lerp(-80, 330, easeOut(prog(v, 0, 1.0))), 1600, { scale: 1.5, mood: 'ok', arm: 1.2, arm2: 1.0, step: Math.sin(v * 9) * 0.6, bob: Math.abs(Math.sin(v * 9)) * -4 });
+      }],
+      [T.at(6, '人の流れ') - 0.08, v => {   // the book that should hold the counts: its pages are empty
+        D.bg('wood');
+        ctx.fillStyle = 'rgba(60,45,20,0.25)'; ctx.fillRect(120, 830, 880, 640);
+        rc.rectangle(100, 810, 880, 640, O('bk', { fill: '#7a5230' })); rc.rectangle(130, 836, 410, 588, O('pg1', { fill: '#fbf8ef' })); rc.rectangle(540, 836, 410, 588, O('pg2', { fill: '#fbf8ef' }));
+        D.text('人の流れ', 335, 900, 60, { font: MARK }); D.text('調べ', 745, 900, 60, { font: MARK });
+        for (let r = 0; r < 6; r++) { rc.line(160, 980 + r * 72, 510, 980 + r * 72, O('gl' + r, { strokeWidth: 3, stroke: '#b9c2cb' })); rc.line(570, 980 + r * 72, 920, 980 + r * 72, O('gr' + r, { strokeWidth: 3, stroke: '#b9c2cb' })); }
+        for (const x of [270, 390, 680, 800]) rc.line(x, 950, x, 1380, O('gv' + x, { strokeWidth: 3, stroke: '#b9c2cb' }));
+        if (t < none) {   // a glass looks for a single number
+          const gx = 540 + Math.sin(v * 3.2) * 250, gy = 1160 + Math.cos(v * 2.4) * 110;
+          rc.line(gx + 80, gy + 80, gx + 190, gy + 190, O('mgh', { strokeWidth: 26, stroke: '#5a3d22' })); ctx.fillStyle = 'rgba(207,230,243,0.55)'; ctx.beginPath(); ctx.arc(gx, gy, 112, 0, 7); ctx.fill(); rc.circle(gx, gy, 224, O('mg', { strokeWidth: 12 }));
+        }
+        D.stamp('none', 'なし', 540, 1150, 220, -0.1, t, none, { fill: 'rgba(251,247,238,0.92)' });
+      }],
+    ]);
     rows(t, [
       ['f1', 'しかも東京には', 370, 60, T.s(6), T.to(6, '東京には')],
       ['f2', '人の流れを調べた{資料がない}', 495, 58, T.at(6, '人の流れ'), T.e(6)],
@@ -341,36 +382,54 @@ window.SCENES = function (T) {
   });
 
   // 7  そこで早川は銀座の交差点に立ち、ポケットの豆を一粒ずつ移して、通る人を数えたといいます。
-  scene(T.s(7) - 0.1, (t, u) => {
-    D.bg('sky'); D.bg('paper', 1190);
-    D.tag('tg7', '銀座', t, T.s(7));
-    building('b7a', 40, 1190, 220, 330, '#d9d0bd', 2); building('b7c', 860, 1190, 200, 300, '#cfc7b6', 2);
-    // the corner building with its clock
-    rc.rectangle(560, 830, 260, 360, O('ck', { fill: '#d6ccb8' })); rc.rectangle(640, 700, 100, 130, O('ckt', { fill: '#cfc7b6' })); rc.polygon([[630, 700], [750, 700], [690, 640]], O('ckr', { fill: '#8a7a5a' }));
-    rc.circle(690, 765, 72, O('ckf', { fill: '#fbf7ee' })); rc.line(690, 765, 690, 740, O('ckh', { strokeWidth: 5 })); rc.line(690, 765, 708, 772, O('ckm', { strokeWidth: 5 }));
-    for (let r = 0; r < 3; r++) for (let c = 0; c < 3; c++) rc.rectangle(590 + c * 76, 870 + r * 100, 48, 56, O('ckw' + r + c, { fill: '#cfe6f3', strokeWidth: 3 }));
-    rc.rectangle(-20, 1190, W + 40, 230, O('street', { fill: '#b8b2a6' }));
-    // a tram goes by behind the walkers
-    const tx = ((u * 150) % 1700) - 520;
-    D.at(tx, 1250, 1, () => { rc.line(170, -210, 250, -290, O('pole', { strokeWidth: 4 })); rc.rectangle(0, -210, 420, 180, O('tram', { fill: '#5b8a5a' })); rc.rectangle(0, -120, 420, 90, O('tram2', { fill: '#efe3c0', strokeWidth: 3.5 })); for (let i = 0; i < 5; i++) rc.rectangle(20 + i * 80, -196, 56, 62, O('tw' + i, { fill: '#dff1fa', strokeWidth: 3 })); rc.circle(90, -16, 40, O('twh1', { fill: '#4b4f54', strokeWidth: 3.5 })); rc.circle(330, -16, 40, O('twh2', { fill: '#4b4f54', strokeWidth: 3.5 })); });
-    // the people who pass, and the count
-    const a = T.at(7, '豆'), step = 0.5;
-    const count = t < a ? 0 : Math.floor((t - a) / step) + 1;
-    [['#3a4a3a', 0], ['#7a3b4a', 0.37], ['#2f3f5a', 0.71], ['#4b3f2a', 0.18], ['#3f8f7a', 0.55]].forEach(([suit, ph], i) => {
-      const q = ((u * (0.16 + i * 0.012) + ph) % 1);
-      D.person('wk7' + i, lerp(1180, -120, q), 1330 + (i % 3) * 34, { scale: 0.92, suit, plain: i % 2 === 1, flip: true, arm: 1.2, arm2: 1.0, step: Math.sin(u * 7 + i) * 0.6, bob: Math.abs(Math.sin(u * 7 + i)) * -3, hat: i === 3 });
-    });
-    haya('h7', 150, 1420, { scale: 1.55, mood: 'flat', arm: 1.25, arm2: 1.25, look: 6 });
-    // his two pockets: a bean hops across for every passer-by
-    const k = pin(t, a - 0.2);
-    D.card('pk', 720, 1520, 560, 190, k, 0, () => {
-      for (const [px, id] of [[-160, 'l'], [160, 'r']]) { rc.path(`M ${px - 80} -62 L ${px + 80} -62 L ${px + 70} 66 Q ${px} 86 ${px - 70} 66 Z`, O('pkt' + id, { fill: '#6a4f35' })); rc.line(px - 80, -40, px + 80, -40, O('pks' + id, { strokeWidth: 3, stroke: '#3a2c22' })); }
-      for (let i = 0; i < clamp(7 - count, 0, 6); i++) bean(-205 + (i % 3) * 44, -6 + Math.floor(i / 3) * 34, i % 2 === 0);
-      for (let i = 0; i < clamp(count - 1, 0, 6); i++) bean(115 + (i % 3) * 44, -6 + Math.floor(i / 3) * 34, i % 2 === 0);
-      if (count > 0 && count <= 7) { const f = ((t - a) % step) / step; bean(lerp(-160, 160, f), -70 - Math.sin(f * Math.PI) * 90, count % 2 === 1, 1.15); }
-      D.text('→', 0, 20, 60, { font: MARK, color: RED });
-    });
-    if (count > 0) D.label('cnt', `${Math.min(count, 12)}人…`, 330, 1010, 64, t, a, a + 0.1, { font: MARK, fill: '#fff6cf' });
+  scene(T.s(7) - 0.08, (t, u) => {
+    const a = T.at(7, '豆'), step = 0.36, pass = T.at(7, '通る') - 0.08;
+    shots(t, [
+      [-1, v => {   // he stands at the crossing of Ginza
+        D.bg('sky');
+        skyline('sk7', 1240, [[-20, 200, 360, '#d9d0bd', 2], [210, 170, 280, '#cfc7b6', 2], [900, 200, 330, '#d6ccb8', 2]]);
+        rc.rectangle(520, 860, 300, 380, O('ck', { fill: '#d6ccb8' })); rc.rectangle(610, 710, 120, 150, O('ckt', { fill: '#cfc7b6' })); rc.polygon([[598, 710], [742, 710], [670, 640]], O('ckr', { fill: '#8a7a5a' }));
+        rc.circle(670, 786, 92, O('ckf', { fill: '#fbf7ee' })); rc.line(670, 786, 670, 754, O('ckh', { strokeWidth: 6 })); rc.line(670, 786, 694, 796, O('ckm', { strokeWidth: 6 }));
+        for (let r = 0; r < 3; r++) for (let c = 0; c < 3; c++) rc.rectangle(556 + c * 86, 900 + r * 106, 56, 62, O('ckw' + r + c, { fill: '#cfe6f3', strokeWidth: 3 }));
+        rc.rectangle(-20, 1240, W + 40, 410, O('street', { fill: '#b8b2a6' })); D.bg('paper', 1650);
+        const tx = lerp(1200, -600, prog(v, 0, 3.2));
+        D.at(tx, 1330, 1.25, () => { rc.line(170, -210, 250, -290, O('pole', { strokeWidth: 4 })); rc.rectangle(0, -210, 420, 180, O('tram', { fill: '#5b8a5a' })); rc.rectangle(0, -120, 420, 90, O('tram2', { fill: '#efe3c0', strokeWidth: 3.5 })); for (let i = 0; i < 5; i++) rc.rectangle(20 + i * 80, -196, 56, 62, O('tw' + i, { fill: '#dff1fa', strokeWidth: 3 })); rc.circle(90, -16, 40, O('twh1', { fill: '#4b4f54', strokeWidth: 3.5 })); rc.circle(330, -16, 40, O('twh2', { fill: '#4b4f54', strokeWidth: 3.5 })); });
+        [['#7a3b4a', 0.1, 1460], ['#2f3f5a', 0.55, 1520], ['#3f8f7a', 0.85, 1440]].forEach(([suit, ph, y], i) => { const q = ((v * 0.22 + ph) % 1); D.person('wk7' + i, lerp(1200, 380, q), y, { scale: 1.15, suit, plain: i % 2 === 1, flip: true, arm: 1.2, arm2: 1.0, step: Math.sin(v * 7 + i) * 0.6, bob: Math.abs(Math.sin(v * 7 + i)) * -3, hat: i === 1 }); });
+        haya('h7', 200, 1600, { scale: 2.15, mood: 'flat', arm: 1.3, arm2: 1.3, look: 7 });
+      }],
+      [T.at(7, 'ポケット') - 0.08, v => {   // his two pockets, close up: one bean across for every one who passes
+        D.bg('paper');
+        const suit = '#6a4f35';
+        rc.path('M 90 1760 L 90 840 C 90 740, 300 680, 420 668 L 540 830 L 660 668 C 780 680, 990 740, 990 840 L 990 1760 Z', O('coat', { fill: suit }));
+        rc.polygon([[420, 668], [660, 668], [540, 830]], O('shirt', { fill: '#ffffff', strokeWidth: 4 }));
+        rc.polygon([[516, 720], [564, 720], [574, 900], [540, 950], [506, 900]], O('ctie', { fill: '#2e6b4f', strokeWidth: 4 }));
+        rc.polygon([[420, 668], [540, 830], [476, 1010], [300, 760]], O('lap1', { fill: '#5a4229', strokeWidth: 5 })); rc.polygon([[660, 668], [540, 830], [604, 1010], [780, 760]], O('lap2', { fill: '#5a4229', strokeWidth: 5 }));
+        for (const by of [1130, 1300, 1470]) rc.circle(540, by, 36, O('btn' + by, { fill: '#3a2c22', strokeWidth: 3.5 }));
+        const count = t < a ? 0 : Math.floor((t - a) / step) + 1;
+        for (const [px, id] of [[150, 'l'], [650, 'r']]) {
+          const n = id === 'l' ? clamp(9 - count, 0, 9) : clamp(count - 1, 0, 9);
+          for (let i = 0; i < n; i++) bean(px + 50 + (i % 5) * 46, 1168 - Math.floor(i / 5) * 30 + (i % 2) * 8, i % 2 === 0, 2.0);
+          rc.path(`M ${px} 1170 L ${px + 280} 1170 L ${px + 270} 1470 Q ${px + 140} 1510 ${px + 10} 1470 Z`, O('pkt' + id, { fill: '#7a5c3e', strokeWidth: 6 })); rc.line(px, 1216, px + 280, 1216, O('pks' + id, { strokeWidth: 4, stroke: '#3a2c22' }));
+        }
+        if (count > 0 && count <= 10) { const f = ((t - a) % step) / step; bean(lerp(290, 790, f), 1120 - Math.sin(f * Math.PI) * 260, count % 2 === 1, 2.6); }
+        ctx.save(); ctx.strokeStyle = RED; ctx.lineWidth = 8; ctx.setLineDash([20, 16]); ctx.beginPath(); ctx.moveTo(300, 1090); ctx.quadraticCurveTo(540, 720, 780, 1090); ctx.stroke(); ctx.restore();
+        D.label('pl7', '左ポケット', 290, 1560, 44, t, a - 0.3, a - 0.1); D.label('pr7', '右ポケット', 790, 1560, 44, t, a - 0.2, a);
+      }],
+      [pass, v => {   // one who passes = one bean
+        D.bg('sky'); rc.rectangle(-20, 1150, W + 40, 130, O('st7', { fill: '#b8b2a6' })); D.bg('paper', 1280);
+        ctx.save(); ctx.strokeStyle = RED; ctx.lineWidth = 8; ctx.setLineDash([22, 18]); ctx.beginPath(); ctx.moveTo(540, 660); ctx.lineTo(540, 1270); ctx.stroke(); ctx.restore();
+        let tally = 0;
+        for (let i = 0; i < 8; i++) {
+          const c = pass + 0.2 + i * 0.36, x = 540 + (t - c) * 560;
+          if (t >= c) { tally++; const f = prog(t, c, 0.3); if (f < 1) bean(540, lerp(1180, 1400, f), i % 2 === 0, 2.2); }
+          if (x > -160 && x < 1240) D.person('ps7' + i, x, 1230, { scale: 1.65, suit: ['#3a4a3a', '#7a3b4a', '#2f3f5a', '#4b3f2a', '#3f8f7a'][i % 5], plain: i % 2 === 1, arm: 1.2, arm2: 1.0, step: Math.sin(v * 9 + i) * 0.6, bob: Math.abs(Math.sin(v * 9 + i)) * -4, hat: i % 3 === 0 });
+        }
+        rc.path('M 360 1400 L 720 1400 L 706 1640 Q 540 1690 374 1640 Z', O('pk7', { fill: '#7a5c3e', strokeWidth: 6 })); rc.line(360, 1450, 720, 1450, O('pk7s', { strokeWidth: 4, stroke: '#3a2c22' }));
+        for (let i = 0; i < Math.min(tally, 8); i++) bean(420 + (i % 5) * 60, 1396 - Math.floor(i / 5) * 30, i % 2 === 0, 2.0);
+        if (tally > 0) D.label('tl7', `${tally}人`, 870, 1440, 110, t, pass + 0.2, pass + 0.25, { font: MARK, bold: true, fill: '#fff6cf', still: true });
+      }],
+    ]);
+    D.tag('tg7', '銀座', t, T.at(7, '銀座'));
     rows(t, [
       ['g1', '銀座の交差点に立ち', 350, 56, T.at(7, '銀座'), T.to(7, '立ち')],
       ['g2', 'ポケットの{豆}を一粒ずつ移して', 465, 56, T.at(7, 'ポケット'), T.to(7, '移して')],
@@ -379,19 +438,43 @@ window.SCENES = function (T) {
   });
 
   // 8  1927年、上野と浅草のあいだに、東洋で初めての地下鉄が走りました。
-  scene(T.s(8) - 0.1, (t, u) => {
-    D.bg('sky');
+  scene(T.s(8) - 0.08, (t, u) => {
+    const run = T.at(8, '東洋') - 0.08;
+    shots(t, [
+      [-1, v => {   // the day
+        D.bg('wall');
+        D.calendar('cal8', 540, 1120, pin(t, T.s(8), 0.35) * 2.05, '1927', '12月30日');
+      }],
+      [T.at(8, '上野') - 0.08, v => {   // from Ueno to Asakusa, under the ground
+        D.bg('sky');
+        skyline('sk8', 960, [[330, 150, 190, '#d9d0bd', 2], [520, 170, 250, '#cfc7b6', 2]]);
+        rc.rectangle(-20, 960, W + 40, H, O('ea8', { fill: '#b98a5a' }));
+        rc.rectangle(60, 1180, 960, 230, O('tn8', { fill: '#34323a' })); D.rail('r8', 1396, 60, 1020);
+        [[190, '上野', T.at(8, '上野')], [890, '浅草', T.at(8, '浅草')]].forEach(([x, name, a], i) => {
+          rc.rectangle(x - 46, 960, 92, 220, O('sh8' + i, { fill: '#34323a', strokeWidth: 4 })); for (let k = 0; k < 5; k++) rc.line(x - 40, 990 + k * 40, x + 40, 990 + k * 40, O('stp8' + i + k, { strokeWidth: 3, stroke: '#8d8a84' }));
+          D.at(x, 960, pin(t, a), () => { rc.line(0, 0, 0, -120, O('st8p' + i, { strokeWidth: 9 })); rc.rectangle(-150, -260, 300, 140, O('st8' + i, { fill: '#fbf7ee', strokeWidth: 6 })); D.text(name, 0, -186, 100, { font: MARK }); });
+        });
+        const q = easeInOut(prog(t, T.at(8, '浅草'), 0.9));
+        ctx.save(); ctx.strokeStyle = RED; ctx.lineWidth = 12; ctx.setLineDash([26, 20]); ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(190, 1296); ctx.lineTo(lerp(190, 890, q), 1296); ctx.stroke(); ctx.restore();
+      }],
+      [run, v => {   // the first run: the platform cheers
+        D.bg('wall');
+        rc.rectangle(-20, 640, W + 40, 44, O('cl8', { fill: '#8b9aa5' }));
+        rc.rectangle(150, 700, 780, 130, O('bn8', { fill: '#fbf7ee', strokeWidth: 6 })); rc.rectangle(150, 700, 780, 22, O('bn8a', { fill: RED, strokeWidth: 3 })); rc.rectangle(150, 808, 780, 22, O('bn8b', { fill: RED, strokeWidth: 3 }));
+        D.text('祝　開通', 540, 768, 78, { font: MARK, color: RED });
+        D.rail('r8c', 1330);
+        const x = lerp(-1300, -120, easeOut(prog(v, 0, 1.1))) + v * 12;
+        beam(x + 520 * 1.9, 1330 - 62 * 1.9, 420); car('car8', x, 1330, 1.9);
+        rc.rectangle(-20, 1326, W + 40, 330, O('pf8', { fill: '#cfc8ba' })); rc.rectangle(-20, 1326, W + 40, 16, O('pf8e', { fill: '#fbf7ee', strokeWidth: 3 })); D.bg('paper', 1656);
+        [[170, '#3a4a3a', '#d9a521', true], [540, '#7a3b4a', '#3d74c4', false], [910, '#4b3f2a', '#2e8b57', true]].forEach(([fx, suit, tie, hat], i) => {
+          const fy = 1560 + Math.sin(u * 12 + i * 2) * 10;
+          rc.line(fx + 150, fy + 60, fx + 150, fy - 190, O('fl8p' + i, { strokeWidth: 7 })); rc.rectangle(fx + 150, fy - 190, 110, 76, O('fl8' + i, { fill: '#fbfbf8', strokeWidth: 4 })); rc.circle(fx + 205, fy - 152, 40, O('fl8c' + i, { fill: RED, stroke: RED, strokeWidth: 1 }));
+          D.face('ch8' + i, fx, fy, 0.5, { mood: 'laugh', suit, tie, hat: hat ? true : null, hair: hat ? null : '#4a3b2e', flip: i === 2 });
+        });
+        confetti('cf8', u, 26, 840, 520);
+      }],
+    ]);
     D.tag('tg8', '1927年12月30日', t, T.s(8));
-    building('b8a', 330, 1060, 180, 250, '#d9d0bd', 2); building('b8b', 560, 1060, 190, 310, '#cfc7b6', 2);
-    cut('cut8', 1060, 1200, 1450);
-    const go = easeInOut(prog(t, T.at(8, '東洋') - 0.4, T.e(8) - T.at(8, '東洋') + 1.0));
-    car('car8', lerp(-60, 500, go), 1436, 1.05);
-    [[170, '上野', T.at(8, '上野')], [910, '浅草', T.at(8, '浅草')]].forEach(([x, name, a], i) => {
-      D.at(x, 1060, pin(t, a), () => { rc.line(0, 0, 0, -170, O('st8p' + i, { strokeWidth: 9 })); rc.rectangle(-110, -270, 220, 104, O('st8' + i, { fill: '#fbf7ee' })); D.text(name, 0, -216, 72, { font: MARK }); });
-      if (t > a) rc.line(x, 1060, x, 1200, O('st8d' + i, { strokeWidth: 6, stroke: '#5a5347' }));
-    });
-    const r = (i, m) => ((D.hash('cf8' + i) % 1000) / 1000 * m);
-    if (t > T.at(8, '東洋')) for (let i = 0; i < 22; i++) { const x = r(i, 1080), y = 640 + ((r(i + 99, 400) + (t - T.at(8, '東洋')) * (90 + r(i + 7, 80))) % 420); ctx.save(); ctx.translate(x, y); ctx.rotate(u * 3 + i); ctx.fillStyle = ['#d6453a', '#f6c543', '#3d74c4', '#2e8b57'][i % 4]; ctx.fillRect(-9, -5, 18, 10); ctx.restore(); }
     rows(t, [
       ['h1', '{上野}と{浅草}のあいだに', 370, 60, T.at(8, '上野'), T.to(8, 'あいだに')],
       ['h2', '東洋で初めての地下鉄が走った', 495, 60, T.at(8, '東洋'), T.e(8), { font: MARK, bold: true }],
@@ -399,16 +482,39 @@ window.SCENES = function (T) {
   });
 
   // 9  たった2.2キロでしたが、初日は1時間待ちの行列ができます。
-  scene(T.s(9) - 0.1, (t, u) => {
-    D.bg('paper'); D.ground(1520);
-    // the short line between the two stations
-    const a = T.at(9, '2.2');
-    D.at(540, 760, pin(t, a), () => { rc.line(-300, 0, 300, 0, O('ln9', { strokeWidth: 12, stroke: '#f39700' })); rc.circle(-300, 0, 40, O('s9a', { fill: '#fbf7ee' })); rc.circle(300, 0, 40, O('s9b', { fill: '#fbf7ee' })); D.text('上野', -300, -64, 46, { font: MARK }); D.text('浅草', 300, -64, 46, { font: MARK }); D.text('2.2キロ', 0, 66, 64, { color: RED }); });
-    entrance('en9', 880, 1520, 1.15);
-    const q = T.at(9, '1時間');
-    for (let i = 0; i < 7; i++) D.person('q9b' + i, 90 + i * 100, 1330, { scale: 0.82, suit: ['#7a3b4a', '#3a4a3a', '#2f3f5a', '#4b3f2a', '#3f8f7a'][i % 5], plain: i % 2 === 0, arm: 1.2, arm2: 1.2, bob: Math.sin(u * 4 + i) * 2, hat: i % 3 === 0 });
-    for (let i = 0; i < 6; i++) D.person('q9a' + i, 700 - i * 118, 1520, { scale: 1.05, suit: ['#3a4a3a', '#4a3636', '#2f3f5a', '#4b3f2a', '#3f8f7a', '#7a3b4a'][i], plain: i % 2 === 1, flip: false, arm: 1.2, arm2: 1.2, bob: Math.sin(u * 4 + i * 1.3) * 2, mood: i % 2 ? 'ok' : 'flat', hat: i === 2 });
-    D.at(190, 1010, pin(t, q), () => { rc.line(0, 60, 0, 250, O('pp9', { strokeWidth: 9 })); rc.rectangle(-170, -60, 340, 120, O('bd9', { fill: '#fff6cf' })); D.text('1時間待ち', 0, 4, 64, { font: MARK, color: RED }); });
+  scene(T.s(9) - 0.08, (t, u) => {
+    shots(t, [
+      [-1, v => {   // only 2.2 km: two fingers can hold it
+        D.bg('paper');
+        const a = T.at(9, '2.2');
+        rc.line(380, 1120, 700, 1120, O('ln9', { strokeWidth: 22, stroke: '#f39700' })); rc.circle(380, 1120, 66, O('s9a', { fill: '#fbf7ee', strokeWidth: 6 })); rc.circle(700, 1120, 66, O('s9b', { fill: '#fbf7ee', strokeWidth: 6 }));
+        D.text('上野', 380, 1010, 60, { font: MARK }); D.text('浅草', 700, 1010, 60, { font: MARK });
+        // a thumb and a finger pinch it
+        const g = (1 - easeOut(prog(v, 0, 0.5))) * 170;
+        rc.path('M 330 1760 C 300 1560, 420 1470, 540 1470 C 660 1470, 780 1560, 750 1760 Z', O('palm', { fill: '#f3c891', strokeWidth: 6 }));
+        for (const [tx, dir, id] of [[380 - g, -1, 'a'], [700 + g, 1, 'b']]) {
+          rc.path(`M ${tx - dir * 6} 1196 C ${tx + dir * 44} 1180, ${tx + dir * 70} 1230, ${tx + dir * 66} 1290 L ${540 + dir * 150} 1560 L ${540 + dir * 40} 1540 L ${tx - dir * 36} 1280 C ${tx - dir * 44} 1240, ${tx - dir * 34} 1206, ${tx - dir * 6} 1196 Z`, O('fg' + id, { fill: '#f3c891', strokeWidth: 6 }));
+          rc.ellipse(tx + dir * 14, 1226, 44, 52, O('nail' + id, { fill: '#fbe9d8', strokeWidth: 3.5 }));
+        }
+        D.label('km9', 'たった2.2キロ', 540, 800, 104, t, a, a + 0.25, { bold: true, fill: '#fff6cf', color: RED });
+      }],
+      [T.at(9, '初日') - 0.08, v => {   // the first day: a line that winds and winds
+        D.bg('paper');
+        entrance('en9', 930, 960, 0.6);
+        const pts = [];
+        for (let x = 800; x >= 130; x -= 96) pts.push([x, 1090]);
+        for (let x = 130; x <= 950; x += 96) pts.push([x, 1300]);
+        for (let x = 950; x >= 130; x -= 96) pts.push([x, 1510]);
+        const shown = Math.ceil(pts.length * easeOut(prog(v, 0, 1.2)));
+        pts.slice(0, shown).forEach(([x, y], i) => D.person('q9' + i, x, y + (y === 1300 ? 0 : 0), { scale: 0.74, suit: ['#7a3b4a', '#3a4a3a', '#2f3f5a', '#4b3f2a', '#3f8f7a', '#4a3636'][i % 6], plain: i % 2 === 0, flip: y === 1300, arm: 1.2, arm2: 1.2, bob: Math.sin(u * 4 + i) * 2, hat: i % 4 === 0, mood: i % 3 === 0 ? 'flat' : 'ok' }));
+        const q = T.at(9, '1時間');
+        D.at(230, 770, pin(t, q), () => {   // a clock: a whole hour
+          rc.circle(0, 0, 250, O('ck9', { fill: '#fbf7ee', strokeWidth: 7 })); ctx.fillStyle = 'rgba(207,46,35,0.35)'; ctx.beginPath(); ctx.moveTo(0, 0); ctx.arc(0, 0, 112, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * prog(t, q, 0.8)); ctx.closePath(); ctx.fill();
+          rc.line(0, 0, 0, -84, O('ck9h', { strokeWidth: 8 })); rc.line(0, 0, Math.sin(prog(t, q, 0.8) * 6.283) * 100, -Math.cos(prog(t, q, 0.8) * 6.283) * 100, O('ck9m', { strokeWidth: 6, stroke: RED }));
+        });
+        D.stamp('w9', '1時間待ち', 610, 745, 96, -0.06, t, q + 0.1, { fill: 'rgba(251,247,238,0.94)' });
+      }],
+    ]);
     rows(t, [
       ['i1', 'たった{2.2キロ}でしたが', 370, 60, T.s(9), T.to(9, 'でしたが')],
       ['i2', '初日は{1時間待ち}の行列', 495, 62, T.at(9, '初日'), T.e(9)],
@@ -416,22 +522,39 @@ window.SCENES = function (T) {
   });
 
   // 10 それから13年後、ライバルの鉄道会社が、早川の会社の株を買い集めました。
-  scene(T.s(10) - 0.1, (t, u) => {
-    D.bg('wall'); D.ground(1540, '#bdb4a3');
-    D.tag('tg10', '1940年', t, T.s(10));
+  scene(T.s(10) - 0.08, (t, u) => {
     const a = T.at(10, '株');
-    rc.rectangle(60, 1320, 360, 30, O('tb', { fill: '#9a6b3d' })); rc.line(100, 1350, 100, 1540, O('tb1', { strokeWidth: 9, stroke: '#5a3d22' })); rc.line(380, 1350, 380, 1540, O('tb2', { strokeWidth: 9, stroke: '#5a3d22' }));
-    haya('h10', 240, 1540, { scale: 1.9, hair: '#8d8a84', mood: t > a ? 'wow' : 'flat', worry: true, arm: t > a ? -1.2 : 1.1, arm2: 1.1, noLegs: false });
-    // the rival: a dark figure seen from behind, with a sack
-    D.person('rv', 830, 1540, { scale: 2.0, shade: true, hat: '#1c1c20', arm: 1.2, arm2: 1.2 });
-    D.at(650, 1540, 1, () => { rc.path('M -90 0 C -120 -70, -80 -200, -30 -230 L 40 -230 C 90 -200, 120 -70, 90 0 Z', O('sack', { fill: '#8c7a5a' })); rc.line(-34, -230, 44, -230, O('sackt', { strokeWidth: 8, stroke: '#5a3d22' })); });
-    for (let i = 0; i < 6; i++) {
-      const p = easeInOut(prog(t, a + i * 0.33, 0.7));
-      if (p >= 1) continue;
-      const x = lerp(120 + (i % 3) * 118, 655, p), y = lerp(1296 - Math.floor(i / 3) * 14, 1300, p) - Math.sin(p * Math.PI) * 240;
-      share('sh' + i, x, y, -0.1 + i * 0.05 + p * 3, 0.8 - p * 0.2);
-    }
-    if (t > a) D.sweat(330, 1010, u, 1.6);
+    const shadow = (x, y, s) => D.at(x, y, s, () => {   // the rival: a dark figure with a hat, his back to us
+      rc.path('M -230 360 C -230 220, -130 180, -62 158 L 62 158 C 130 180, 230 220, 230 360 Z', O('rvs', { fill: '#2a2a2e' })); rc.circle(0, 0, 300, O('rvh', { fill: '#2a2a2e' }));
+      rc.path('M -132 -110 C -132 -290, 132 -290, 132 -110 Z', O('rvhat', { fill: '#1c1c20' })); rc.line(-196, -110, 196, -110, O('rvb', { strokeWidth: 16 }));
+    });
+    shots(t, [
+      [-1, v => { D.bg('wall'); yearFlip('cal10', t, T.s(10), T.to(10, '13年後'), 1927, 1940, 520, 1120, 2.05, '13年後'); }],
+      [T.at(10, 'ライバル') - 0.08, v => {   // the rival railway looms over his company
+        D.bg('wall'); D.ground(1560, '#bdb4a3');
+        building('co10', 110, 1560, 330, 420, '#f2d77a', 3); rc.rectangle(100, 1060, 350, 84, O('cos', { fill: '#fbf7ee', strokeWidth: 5 })); D.text('早川の会社', 275, 1104, 54, { font: MARK });
+        const k = easeOut(prog(v, 0, 0.5));
+        shadow(lerp(1300, 760, k), 1010, 1.25);
+        rc.line(lerp(1200, 640, k), 1340, lerp(1200, 500, k), 1260, O('rarm', { strokeWidth: 60, stroke: '#2a2a2e' })); rc.circle(lerp(1200, 490, k), 1256, 96, O('rhand', { fill: '#2a2a2e' }));
+        D.label('rv10', 'ライバルの鉄道会社', 700, 1480, 50, t, T.at(10, 'ライバル') + 0.3, T.to(10, '会社が'), { fill: '#2a2a2e', color: '#f3e9c6' });
+      }],
+      [T.at(10, '早川の') - 0.08, v => {   // the shares of his company, taken piece by piece
+        D.bg('wall');
+        const cx = 460, cy = 1090, r = 300, n = 12;
+        for (let i = 0; i < n; i++) {
+          const taken = i < 4 ? easeOut(prog(t, a + i * 0.26, 0.4)) : 0;
+          const a0 = -Math.PI / 2 + i * 2 * Math.PI / n, a1 = a0 + 2 * Math.PI / n, mid = (a0 + a1) / 2;
+          const ox = Math.cos(mid) * taken * 30 + taken * 150, oy = Math.sin(mid) * taken * 30 - taken * 40;
+          rc.path(`M ${cx + ox} ${cy + oy} L ${cx + ox + Math.cos(a0) * r} ${cy + oy + Math.sin(a0) * r} A ${r} ${r} 0 0 1 ${cx + ox + Math.cos(a1) * r} ${cy + oy + Math.sin(a1) * r} Z`, O('sl' + i, { fill: taken > 0.5 ? '#2a2a2e' : '#f2c230', strokeWidth: 5 }));
+        }
+        rc.circle(cx, cy, 190, O('plc', { fill: '#fbf7ee', strokeWidth: 5 })); D.text('株', cx, cy + 4, 130, { font: MARK, color: '#3d74c4' });
+        D.text('早川の会社', cx, cy + 372, 54, { font: MARK });
+        rc.line(1120, 800, 900, 900, O('rarm2', { strokeWidth: 70, stroke: '#2a2a2e' })); rc.circle(890, 904, 110, O('rhand2', { fill: '#2a2a2e' }));
+        haya('h10', 150, 1640, { scale: 1.5, hair: '#8d8a84', mood: t > a ? 'wow' : 'flat', worry: true, arm: t > a ? -1.2 : 1.1, arm2: 1.1 });
+        if (t > a) D.sweat(210, 1290, u, 1.5);
+      }],
+    ]);
+    D.tag('tg10', '1940年', t, T.to(10, '13年後'));
     rows(t, [
       ['j1', 'それから{13年後}', 345, 56, T.s(10), T.to(10, '13年後')],
       ['j2', 'ライバルの鉄道会社が', 460, 56, T.at(10, 'ライバル'), T.to(10, '会社が')],
@@ -440,11 +563,27 @@ window.SCENES = function (T) {
   });
 
   // 11 早川は社長を退き、自分がつくった地下鉄を去ります。
-  scene(T.s(11) - 0.1, (t, u) => {
-    D.bg('paper'); D.ground(1500);
-    entrance('en11', 250, 1500, 1.3);
-    const x = lerp(470, 800, prog(u, 0.2, 3.6));
-    haya('h11', x, 1500, { scale: 1.85, hair: '#8d8a84', mood: 'sad', arm: 1.35, arm2: 1.2, bag: true, bob: Math.abs(Math.sin(u * 4.5)) * -4, step: Math.sin(u * 4.5) * 0.6, lean: 0.04, look: 4 });
+  scene(T.s(11) - 0.08, (t, u) => {
+    const a = T.at(11, '退き');
+    shots(t, [
+      [-1, v => {   // the president's chair is empty, the name plate falls
+        D.bg('wall'); D.ground(1560, '#bdb4a3');
+        rc.path('M 400 1200 L 400 860 Q 400 780 480 780 L 600 780 Q 680 780 680 860 L 680 1200 Z', O('chair', { fill: '#8c2f25' }));
+        ctx.save(); ctx.strokeStyle = INK; ctx.lineWidth = 6; ctx.setLineDash([18, 14]); ctx.beginPath(); ctx.arc(540, 960, 70, 0, 7); ctx.stroke(); ctx.beginPath(); ctx.ellipse(540, 1120, 70, 90, 0, Math.PI, 0); ctx.stroke(); ctx.restore();
+        rc.rectangle(150, 1200, 780, 60, O('desk', { fill: '#9a6b3d' })); rc.rectangle(190, 1260, 700, 300, O('deskf', { fill: '#7a5230' }));
+        const f = easeOut(prog(t, a, 0.6));
+        D.at(lerp(540, 300, f), lerp(1200, 1560, f * f), 1, () => { rc.polygon([[-170, 0], [170, 0], [140, -110], [-140, -110]], O('np', { fill: '#fbf7ee', strokeWidth: 5 })); D.text('社長', 0, -52, 84, { font: MARK }); }, -f * 1.4);
+        haya('h11', lerp(700, 900, prog(v, 0.2, 1.4)), 1640, { scale: 1.7, hair: '#8d8a84', mood: 'sad', arm: 1.3, arm2: 1.2, bag: true, look: -5 });
+      }],
+      [T.at(11, '自分が') - 0.08, v => {   // he walks away above; under the ground his train runs on without him
+        D.bg('sky');
+        skyline('sk11', 1010, [[560, 160, 190, '#d9d0bd', 2], [760, 150, 250, '#cfc7b6', 2], [930, 150, 160, '#d6ccb8', 2]]);
+        rc.rectangle(-20, 1010, W + 40, H, O('ea11', { fill: '#b98a5a' }));
+        tunnel('tn11', 1170, 1580);
+        car('car11', lerp(-200, 520, prog(v, 0, 2.0)), 1564, 1.5);
+        haya('h11b', lerp(520, 150, prog(v, 0, 2.2)), 1010, { scale: 1.55, hair: '#8d8a84', mood: 'sad', flip: true, arm: 1.35, arm2: 1.2, bag: true, bob: Math.abs(Math.sin(v * 5)) * -4, step: Math.sin(v * 5) * 0.6, lean: 0.04 });
+      }],
+    ]);
     rows(t, [
       ['k1', '早川は{社長を退き}', 370, 60, T.s(11), T.to(11, '退き')],
       ['k2', '自分がつくった地下鉄を去った', 495, 58, T.at(11, '自分が'), T.e(11)],
@@ -452,27 +591,43 @@ window.SCENES = function (T) {
   });
 
   // 12 その2年後、61歳で亡くなりました。
-  scene(T.s(12) - 0.1, (t, u) => {
-    D.bg('room'); D.ground(1500, '#b9c08f', 0.6);
+  scene(T.s(12) - 0.08, (t, u) => {
+    D.bg('room'); D.ground(1560, '#b9c08f', 0.6);
     D.tag('tg12', '1942年', t, T.s(12));
-    // his picture in a frame, white flowers beside it
-    rc.rectangle(330, 760, 420, 520, O('fr', { fill: '#6b5a44' })); rc.rectangle(366, 796, 348, 448, O('fr2', { fill: '#efe7d2' }));
-    haya('h12', 540, 1290, { scale: 1.45, hair: '#8d8a84', mood: 'ok', noLegs: true, arm: 1.3, arm2: 1.3 });
-    rc.rectangle(330, 1244, 420, 36, O('fr3', { fill: '#6b5a44', strokeWidth: 4 }));
-    rc.polygon([[330, 760], [430, 760], [330, 860]], O('rb1', { fill: '#1d1a16' })); rc.polygon([[750, 760], [650, 760], [750, 860]], O('rb2', { fill: '#1d1a16' }));
-    rc.rectangle(840, 1330, 110, 170, O('vase', { fill: '#7fb0d6' }));
-    [[860, 1180], [900, 1130], [940, 1190]].forEach(([fx, fy], i) => { rc.line(fx, 1330, fx, fy, O('stem' + i, { strokeWidth: 5, stroke: '#4f7f4a' })); for (let k = 0; k < 6; k++) rc.circle(fx + Math.cos(k * 1.05) * 22, fy + Math.sin(k * 1.05) * 22, 26, O('pt' + i + k, { fill: '#fbfbf8', strokeWidth: 2.5 })); rc.circle(fx, fy, 20, O('ctr' + i, { fill: '#f6c543', strokeWidth: 2.5 })); });
+    rc.rectangle(250, 690, 580, 760, O('fr', { fill: '#6b5a44' })); rc.rectangle(296, 736, 488, 668, O('fr2', { fill: '#efe7d2' }));
+    ctx.save(); ctx.beginPath(); ctx.rect(300, 740, 480, 660); ctx.clip();
+    D.face('f12', 540, 1010, 0.92, { hair: '#8d8a84', glasses: true, mustache: true, suit: '#6a4f35', tie: '#2e6b4f', mood: 'ok' });
+    ctx.restore();
+    rc.polygon([[250, 690], [400, 690], [250, 840]], O('rb1', { fill: '#1d1a16' })); rc.polygon([[830, 690], [680, 690], [830, 840]], O('rb2', { fill: '#1d1a16' }));
+    for (const [vx, id] of [[130, 'a'], [950, 'b']]) {
+      rc.rectangle(vx - 60, 1380, 120, 180, O('vase' + id, { fill: '#7fb0d6' }));
+      [[-34, 1230], [0, 1170], [36, 1240]].forEach(([dx, fy], i) => { rc.line(vx + dx, 1380, vx + dx, fy, O('stem' + id + i, { strokeWidth: 5, stroke: '#4f7f4a' })); for (let k = 0; k < 6; k++) rc.circle(vx + dx + Math.cos(k * 1.05) * 24, fy + Math.sin(k * 1.05) * 24, 28, O('pt' + id + i + k, { fill: '#fbfbf8', strokeWidth: 2.5 })); rc.circle(vx + dx, fy, 22, O('ctr' + id + i, { fill: '#f6c543', strokeWidth: 2.5 })); });
+    }
     rows(t, [['l1', 'その2年後、{61歳}で亡くなった', 420, 58, T.s(12), T.e(12)]]);
   });
 
   // 13 いま東京の地下鉄は、毎日、何百万人もの人を運んでいます。
-  scene(T.s(13) - 0.1, (t, u) => {
-    D.bg('paper');
+  scene(T.s(13) - 0.08, (t, u) => {
+    shots(t, [
+      [-1, v => {   // from one short line to a whole net
+        D.bg('paper');
+        metro(prog(v, 0.35, 1.0));
+        ctx.save(); ctx.lineCap = 'round'; ctx.strokeStyle = INK; ctx.lineWidth = 34; ctx.beginPath(); ctx.moveTo(60, 760); ctx.lineTo(420, 760); ctx.stroke(); ctx.strokeStyle = '#f39700'; ctx.lineWidth = 24; ctx.beginPath(); ctx.moveTo(60, 760); ctx.lineTo(420, 760); ctx.stroke(); ctx.restore();
+        if (v < 0.9) D.fade(1 - prog(v, 0.6, 0.3), () => D.text('最初は、これだけ', 300, 690, 48, { font: MARK, outline: 12 }));
+      }],
+      [T.at(13, '毎日') - 0.08, v => {   // a full train, a sea of heads
+        D.bg('wall');
+        rc.path('M 250 1390 L 250 860 Q 250 760 350 760 L 730 760 Q 830 760 830 860 L 830 1390 Z', O('tf', { fill: '#dfe3e6' }));
+        rc.rectangle(300, 820, 480, 250, O('tfw', { fill: '#bfe0f0' })); rc.rectangle(250, 1120, 580, 90, O('tfb', { fill: '#f39700', strokeWidth: 5 }));
+        rc.circle(340, 1290, 70, O('tfl1', { fill: '#fff3b0' })); rc.circle(740, 1290, 70, O('tfl2', { fill: '#fff3b0' })); rc.rectangle(430, 770, 220, 40, O('tfd', { fill: '#2a2a2e', strokeWidth: 3 }));
+        for (let i = 0; i < 4; i++) rc.circle(360 + i * 120, 960 + (i % 2) * 20, 86, O('pas' + i, { fill: '#f3c891', strokeWidth: 4 }));
+        const r = (i, m) => ((D.hash('hd' + i) % 1000) / 1000 * m);
+        for (let row = 0; row < 3; row++) for (let i = 0; i < 9; i++) { const k = row * 9 + i, x = 40 + i * 128 + (row % 2) * 60, y = 1470 + row * 80 + Math.sin(u * 5 + k) * 5; rc.circle(x, y, 110, O('hd' + k, { fill: '#f3c891', strokeWidth: 4 })); rc.path(`M ${x - 54} ${y - 10} C ${x - 60} ${y - 80}, ${x + 60} ${y - 80}, ${x + 54} ${y - 10} C ${x + 30} ${y - 40}, ${x - 30} ${y - 40}, ${x - 54} ${y - 10} Z`, O('hh' + k, { fill: ['#2b2622', '#4a3b2e', '#6b5a44', '#8d8a84'][Math.floor(r(k, 4))], strokeWidth: 3 })); }
+        D.stamp('mil', '何百万人', 540, 1240, 150, -0.07, t, T.at(13, '何百万'), { fill: 'rgba(251,247,238,0.95)' });
+        D.label('day13', '毎日', 250, 1060, 70, t, T.at(13, '毎日'), T.at(13, '毎日') + 0.2, { font: MARK, fill: '#fff6cf', rot: -0.06 });
+      }],
+    ]);
     D.tag('tg13', 'いま', t, T.s(13));
-    metro(prog(u, 0.1, 1.6));
-    for (let i = 0; i < 9; i++) D.person('cr13' + i, 70 + i * 118, 1640 + (i % 2) * 30, { scale: 0.85, suit: ['#3a4a3a', '#4a3636', '#2f3f5a', '#4b3f2a', '#3f8f7a', '#7a3b4a'][i % 6], plain: i % 2 === 1, arm: 1.2, arm2: 1.2, bob: Math.sin(u * 5 + i * 1.7) * 3, mood: 'ok' });
-    const a = T.at(13, '何百万');
-    D.stamp('mil', '何百万人', 560, 1050, 120, -0.08, t, a, { fill: 'rgba(251,247,238,0.94)' });
     rows(t, [
       ['m1', 'いま、東京の地下鉄は', 370, 60, T.s(13), T.to(13, '地下鉄は')],
       ['m2', '毎日{何百万人}もの人を運ぶ', 495, 60, T.at(13, '毎日'), T.e(13)],
@@ -480,20 +635,18 @@ window.SCENES = function (T) {
   });
 
   // 14 2027年には、あの最初の線路が100歳になります。
-  scene(T.s(14) - 0.1, (t, u) => {
-    D.bg('sky');
-    cut('cut14', 1180, 1280, 1520);
-    car('car14', 250 + Math.sin(u * 1.5) * 6, 1506, 1.1);
-    [[130, '上野'], [950, '浅草']].forEach(([x, name], i) => { rc.line(x, 1180, x, 1050, O('s14p' + i, { strokeWidth: 8 })); rc.rectangle(x - 90, 960, 180, 90, O('s14' + i, { fill: '#fbf7ee' })); D.text(name, x, 1008, 60, { font: MARK }); });
-    D.calendar('cal14', 250, 780, pin(t, T.s(14)) * 0.7, '2027');
-    // a birthday cake
-    const a = T.at(14, '100歳');
-    D.at(620, 1180, pin(t, a - 0.15) * 0.9, () => {
-      rc.rectangle(-170, -150, 340, 150, O('ck1', { fill: '#f6e3c2' })); rc.path('M -170 -150 Q -130 -90 -90 -150 Q -50 -90 -10 -150 Q 30 -90 70 -150 Q 110 -90 170 -150 L 170 -180 L -170 -180 Z', O('ck2', { fill: '#fbfbf8', strokeWidth: 4 }));
-      rc.rectangle(-110, -280, 220, 100, O('ck3', { fill: '#f6e3c2' })); rc.path('M -110 -280 Q -70 -240 -30 -280 Q 10 -240 50 -280 Q 80 -240 110 -280 L 110 -300 L -110 -300 Z', O('ck4', { fill: '#fbfbf8', strokeWidth: 4 }));
-      for (const cx of [-60, 0, 60]) { rc.rectangle(cx - 7, -360, 14, 60, O('cd' + cx, { fill: '#d6453a', strokeWidth: 3 })); ctx.fillStyle = '#f6a623'; ctx.strokeStyle = INK; ctx.lineWidth = 3; ctx.beginPath(); ctx.ellipse(cx, -378 + Math.sin(u * 12 + cx) * 2, 9, 15, 0, 0, 7); ctx.fill(); ctx.stroke(); }
-      D.text('100', 0, -86, 96, { font: MARK, color: RED });
-    });
+  scene(T.s(14) - 0.08, (t, u) => {
+    shots(t, [
+      [-1, v => { D.bg('wall'); D.calendar('cal14', 540, 1120, pin(t, T.s(14), 0.35) * 2.05, '2027'); }],
+      [T.at(14, 'あの') - 0.08, v => {   // the first line turns 100
+        D.bg('sky');
+        D.rail('r14', 1060); car('car14', lerp(-700, 240, easeOut(prog(v, 0, 1.0))), 1060, 1.35);
+        rc.rectangle(-20, 1070, W + 40, 600, O('fl14', { fill: '#e7d9b8' })); D.bg('paper', 1650);
+        [[150, '上野'], [930, '浅草']].forEach(([x, name], i) => { rc.rectangle(x - 110, 660, 220, 100, O('s14' + i, { fill: '#fbf7ee', strokeWidth: 5 })); D.text(name, x, 712, 70, { font: MARK }); });
+        cake(540, 1600, pin(t, T.at(14, '100歳') - 0.2, 0.4) * 1.5, u);
+        if (t > T.at(14, '100歳')) confetti('cf14', u, 24, 640, 700);
+      }],
+    ]);
     rows(t, [
       ['o1', '{2027年}には', 370, 60, T.s(14), T.to(14, 'には')],
       ['o2', 'あの最初の線路が{100歳}になる', 495, 58, T.at(14, 'あの'), T.e(14)],
@@ -501,17 +654,21 @@ window.SCENES = function (T) {
   });
 
   // 15 「ほら吹き」が豆で数えた答えは、まちがっていなかったのです。
-  scene(T.s(15) - 0.1, (t, u) => {
-    D.bg('dusk'); D.ground(1520, '#d9b98a');
-    D.fade(0.32, () => metro(1, 1));
-    D.bg('dusk', 1400);
-    D.ground(1520, '#d9b98a');
-    haya('h15', 300, 1520, { scale: 2.2, mood: 'ok', arm: -0.75, arm2: 1.1, bob: Math.sin(u * 3) * 1.5 });
-    [[470, 1050, true], [520, 1010, false], [565, 1052, true]].forEach(([x, y, dark], i) => bean(x, y + Math.sin(u * 4 + i) * 6, dark, 2.0));
+  scene(T.s(15) - 0.08, (t, u) => {
     const a = T.at(15, 'まちがって');
-    const k = prog(t, a, 0.45);
-    if (k > 0) { ctx.save(); ctx.strokeStyle = RED; ctx.lineWidth = 22; ctx.lineCap = 'round'; ctx.beginPath(); ctx.arc(810, 1040, 172, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * easeOut(k)); ctx.stroke(); ctx.restore(); }
-    D.stamp('ok', '正解', 810, 1045, 108, -0.1, t, a + 0.3, { fill: 'rgba(251,247,238,0.9)' });
+    D.bg('dusk'); D.ground(1540, '#d9b98a');
+    const k = prog(t, a, 0.5);
+    if (k > 0) { ctx.save(); ctx.strokeStyle = RED; ctx.lineWidth = 34; ctx.lineCap = 'round'; ctx.beginPath(); ctx.arc(540, 1160, 430, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * easeOut(k)); ctx.stroke(); ctx.restore(); }
+    haya('h15', 540, 1540, { scale: 2.5, mood: 'ok', arm: -0.8, arm2: 1.1, bob: Math.sin(u * 3) * 1.5 });
+    [[735, 1050, true], [790, 1000, false], [845, 1052, true]].forEach(([x, y, dark], i) => bean(x, y + Math.sin(u * 4 + i) * 7, dark, 2.4));
+    // the two who laughed at the start: now they stare
+    D.face('lf15a', 140, 1200, 0.5, { mood: t > a ? 'wow' : 'laugh', suit: '#3a4a3a', tie: '#d9a521', hair: '#4a3b2e', tears: t <= a });
+    D.face('lf15b', 950, 1420, 0.5, { mood: t > a ? 'wow' : 'laugh', suit: '#4a3636', tie: '#3d74c4', hat: true, flip: true, tears: t <= a });
+    // the name they gave him is struck out; the one he is known by takes its place
+    const off = easeOut(prog(t, a + 0.25, 0.5));
+    D.fade(1 - off, () => D.label('tag15', 'ほら吹き', 540 - off * 60, 720 + off * off * 500, 84, t, T.s(15), T.s(15) + 0.1, { font: MARK, bold: true, fill: '#fff6cf', color: RED, rot: -0.05 - off * 0.8, still: true }));
+    if (t > a && off < 1) rc.line(390, 730, 690, 710, O('strike', { stroke: RED, strokeWidth: 12 }));
+    D.label('tag15b', '地下鉄の父', 540, 720, 84, t, a + 0.5, a + 0.8, { font: MARK, bold: true, fill: '#1f4d3a', color: '#f3e9c6' });
     rows(t, [
       ['p1', '「{ほら吹き}」が豆で数えた答えは', 370, 56, T.s(15), T.to(15, '答えは')],
       ['p2', 'まちがっていなかった', 495, 70, a, T.e(15), { font: MARK, bold: true }],

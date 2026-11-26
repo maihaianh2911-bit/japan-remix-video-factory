@@ -121,8 +121,29 @@
     },
     {
       "line": 5,
+      "shift": 0.15,
+      "sound": "pop"
+    },
+    {
+      "line": 5,
       "at": "証拠",
+      "sound": "pop"
+    },
+    {
+      "line": 5,
+      "at": "証拠",
+      "shift": 0.15,
       "sound": "thud"
+    },
+    {
+      "line": 6,
+      "sound": "pop"
+    },
+    {
+      "line": 6,
+      "at": "人の流れ",
+      "shift": -0.08,
+      "sound": "whoosh"
     },
     {
       "line": 6,
@@ -131,28 +152,60 @@
     },
     {
       "line": 7,
+      "at": "ポケット",
+      "shift": -0.08,
+      "sound": "pop"
+    },
+    {
+      "line": 7,
       "at": "豆",
       "sound": "pop"
     },
     {
       "line": 7,
-      "at": "一粒",
+      "at": "豆",
+      "shift": 0.36,
       "sound": "pop"
     },
     {
       "line": 7,
-      "at": "移して",
+      "at": "豆",
+      "shift": 0.72,
+      "sound": "pop"
+    },
+    {
+      "line": 7,
+      "at": "豆",
+      "shift": 1.08,
       "sound": "pop"
     },
     {
       "line": 7,
       "at": "通る",
+      "shift": 0.12,
       "sound": "pop"
     },
     {
       "line": 7,
-      "at": "数えた",
+      "at": "通る",
+      "shift": 0.48,
       "sound": "pop"
+    },
+    {
+      "line": 7,
+      "at": "通る",
+      "shift": 0.84,
+      "sound": "pop"
+    },
+    {
+      "line": 7,
+      "at": "通る",
+      "shift": 1.2,
+      "sound": "pop"
+    },
+    {
+      "line": 8,
+      "sound": "thud"
     },
     {
       "line": 8,
@@ -167,12 +220,7 @@
     {
       "line": 8,
       "at": "東洋",
-      "sound": "thud"
-    },
-    {
-      "line": 8,
-      "at": "走りました",
-      "shift": -0.3,
+      "shift": -0.08,
       "sound": "whoosh"
     },
     {
@@ -182,7 +230,24 @@
     },
     {
       "line": 9,
+      "at": "初日",
+      "shift": -0.08,
+      "sound": "whoosh"
+    },
+    {
+      "line": 9,
       "at": "1時間",
+      "shift": 0.1,
+      "sound": "thud"
+    },
+    {
+      "line": 10,
+      "sound": "whoosh"
+    },
+    {
+      "line": 10,
+      "at": "ライバル",
+      "shift": -0.08,
       "sound": "thud"
     },
     {
@@ -192,23 +257,51 @@
     },
     {
       "line": 10,
-      "at": "買い集め",
+      "at": "株",
+      "shift": 0.26,
       "sound": "pop"
     },
     {
       "line": 10,
-      "at": "買い集め",
-      "shift": 0.35,
+      "at": "株",
+      "shift": 0.52,
       "sound": "pop"
     },
     {
-      "line": 12,
-      "at": "61歳",
+      "line": 10,
+      "at": "株",
+      "shift": 0.78,
       "sound": "pop"
+    },
+    {
+      "line": 11,
+      "at": "退き",
+      "sound": "thud"
+    },
+    {
+      "line": 11,
+      "at": "自分が",
+      "shift": -0.08,
+      "sound": "whoosh"
+    },
+    {
+      "line": 13,
+      "shift": 0.35,
+      "sound": "whoosh"
     },
     {
       "line": 13,
       "at": "何百万",
+      "sound": "thud"
+    },
+    {
+      "line": 14,
+      "sound": "pop"
+    },
+    {
+      "line": 14,
+      "at": "100歳",
+      "shift": -0.2,
       "sound": "pop"
     },
     {
@@ -219,6 +312,12 @@
     {
       "line": 15,
       "at": "まちがって",
+      "sound": "whoosh"
+    },
+    {
+      "line": 15,
+      "at": "まちがって",
+      "shift": 0.5,
       "sound": "thud"
     }
   ],
