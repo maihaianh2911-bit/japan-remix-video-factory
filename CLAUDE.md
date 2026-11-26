@@ -223,7 +223,8 @@ asked "Đây là dạng nội dung gì? Dựng cho nhật đc ko? Có làm nhi�
   the owner saw the first** (26/11/2026: "cái màn đen và chữ che mất nhiều tranh quá, k nên để màn đen nữa, còn chữ
   thì cho chạy dọc ở 1 bên (tùy theo ảnh, chọn bên nào ít chi tiết để chữ chạy)"; the first form had the text across
   the foot of the picture on a dark shade, a boxed card for the name and a dimmed picture under the big title):
-  - **nothing dark is laid on the picture**: no shade, no box, no dimming. The text is light with a dark outline;
+  - **nothing dark is laid on the picture**: no shade, no box, no dimming. The text is light with a dark outline.
+    The cut `dip` (the scene goes dark and comes back) is a slow cross-fade in this frame: use `fade`, `page`, `hard`;
   - **all the text is written vertically** (as Japanese is: top to bottom, 、。「」ー turned or placed as vertical
     writing asks, digits upright) **in a narrow strip on one side of the frame**: at the edge the label of the
     picture (its `"name"`, and under it, smaller and in gold, its `"note"`: who made it, when, where), beside it

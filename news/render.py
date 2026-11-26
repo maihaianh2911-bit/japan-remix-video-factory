@@ -1289,6 +1289,8 @@ def transition(old, new, amount, cut=""):
     cut = cut or ("page" if style.grain else "fade")
     if cut == "fade":
         return Image.blend(old, new, amount)
+    if cut == "dip" and style.layout == "gallery":   # nothing goes dark in this frame: a slow cross-fade instead
+        return Image.blend(old, new, ease(amount))
     if cut == "dip":
         # Only the scene (picture and its text) goes dark; the header and the foot change quietly and the caption,
         # drawn afterwards, stays readable.
