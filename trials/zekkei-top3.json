@@ -1,5 +1,5 @@
 {
- "stage": "find",
+ "stage": "render",
  "note": "Kênh mới (cảnh đẹp Nhật): 死ぬまでに一度は見たい日本の絶景トップ3. Video dựng bằng đoạn video, chữ to giữa màn hình.",
  "voice": [
   "もち子さん",
@@ -110,14 +110,22 @@
      "speed": 0.75
     },
     {
-     "id": "p53789",
-     "start": 13,
-     "x": 0.35
+     "id": "i0b83079d",
+     "move": "in",
+     "x": 0.35,
+     "y": 0.4
     },
     {
-     "id": "p53789",
-     "start": 6,
-     "x": 0.7
+     "id": "if405c9df",
+     "move": "in",
+     "x": 0.5,
+     "y": 0.55
+    },
+    {
+     "id": "iaa7e5c74",
+     "move": "out",
+     "x": 0.45,
+     "y": 0.4
     }
    ]
   },
@@ -145,6 +153,11 @@
     {
      "id": "p214939",
      "start": 2
+    },
+    {
+     "id": "i5d63f45a",
+     "move": "left",
+     "y": 0.5
     },
     {
      "id": "p241122",
