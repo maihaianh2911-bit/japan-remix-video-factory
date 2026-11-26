@@ -146,25 +146,27 @@ def spans(text):
 
 
 def rows_of(text, per_row):
+    """The rows of a caption piece: one row when it fits, else cut where a reader would pause (after a particle,
+    else where kana turn to kanji), as near the middle as possible, never inside a keyword."""
     letters = plain(text)
     if len(letters) <= per_row:
         return [text]
-    count = (len(letters) + per_row - 1) // per_row
-    size = (len(letters) + count - 1) // count
-    rows, row, seen = [], "", 0
-    for char in text:
-        row += char
-        if char != "*":
-            seen += 1
-            if seen % size == 0 and seen < len(letters):
-                if row.count("*") % 2:           # a keyword going on: close it here, open it on the next row
-                    rows.append(row + "*")
-                    row = "*"
-                else:
-                    rows.append(row)
-                    row = ""
-    rows.append(row)
-    return [r for r in rows if plain(r)]
+
+    def good(i):
+        before, after = text[i - 1], text[i]
+        if text[:i].count("*") % 2:
+            return 9                                   # inside a keyword: never
+        if before in "はがをにでのともへ、" or after == "*" or before == "*":
+            return 0
+        kana = lambda c: "\u3041" <= c <= "\u309f"
+        if kana(before) and not kana(after):
+            return 1
+        return 3
+    middle = len(text) / 2
+    cut = min(range(2, len(text) - 1), key=lambda i: (good(i), abs(i - middle)) if good(i) < 9 else (9, 0))
+    if good(cut) >= 3 or abs(cut - middle) > per_row / 2:
+        cut = min(range(2, len(text) - 1), key=lambda i: (good(i) >= 9, abs(i - middle) + 1.5 * good(i)))
+    return [part for half in (text[:cut], text[cut:]) for part in rows_of(half, per_row)]
 
 
 def draw_rows(draw, rows, centre_y, size, colours, stroke):
