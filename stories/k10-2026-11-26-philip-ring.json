@@ -1,0 +1,133 @@
+{
+  "channel": "k10",
+  "issue": 15,
+  "stage": "find",
+  "title": "すべてを捨てた王子 フィリップ殿下とエリザベス女王の婚約指輪",
+  "date": "2026-11-26",
+  "searches": [
+    "wiki:Prince Philip, Duke of Edinburgh",
+    "wiki:Elizabeth II",
+    "wiki:Wedding of Princess Elizabeth and Philip Mountbatten",
+    "wiki:Princess Alice of Battenberg",
+    "wiki:Britannia Royal Naval College",
+    "wiki:Balmoral Castle",
+    "wiki:Queen Elizabeth The Queen Mother",
+    "wiki:George VI",
+    "web:Princess Elizabeth Philip engagement 1947 photograph => young Princess Elizabeth and Philip smiling together at their engagement in 1947",
+    "web:エリザベス王女 フィリップ 婚約 1947 => young Princess Elizabeth and Prince Philip together",
+    "web:Prince Philip young naval officer 1940s => handsome young Prince Philip in naval uniform",
+    "web:Philip Elizabeth Dartmouth 1939 => young Princess Elizabeth and Philip at Dartmouth naval college in 1939",
+    "web:Princess Elizabeth 1939 age 13 => thirteen-year-old Princess Elizabeth",
+    "web:Prince Philip Royal Navy war 1942 => young Prince Philip serving in the Royal Navy during the war",
+    "web:Princess Elizabeth ATS uniform 1945 => young Princess Elizabeth in wartime uniform",
+    "web:Princess Elizabeth Philip 1946 Balmoral => young Princess Elizabeth and Philip in 1946",
+    "web:Princess Elizabeth engagement ring 1947 hand => Princess Elizabeth showing her diamond engagement ring",
+    "web:Queen Elizabeth engagement ring Princess Alice tiara diamonds => the Queen's diamond engagement ring",
+    "web:Princess Alice of Battenberg tiara => Princess Alice of Battenberg wearing a tiara",
+    "web:Lieutenant Philip Mountbatten 1947 => Lieutenant Philip Mountbatten in naval uniform in 1947",
+    "web:Princess Elizabeth Philip wedding 1947 Westminster Abbey => Princess Elizabeth and Philip at their wedding in Westminster Abbey",
+    "web:Prince Philip sisters Sophie Theodora Margarita Cecilie => Prince Philip's sisters",
+    "web:Princess Elizabeth Philip honeymoon Broadlands 1947 => Princess Elizabeth and Philip on their honeymoon in 1947",
+    "web:Queen Elizabeth Prince Philip platinum anniversary 2017 => the elderly Queen Elizabeth and Prince Philip together",
+    "web:Queen Elizabeth II engagement ring close up hand => the Queen's hand wearing her diamond engagement ring",
+    "web:King George VI royal family 1947 Philip Elizabeth => the British royal family with Philip in 1947"
+  ],
+  "scenes": [
+    {
+      "label": "フィリップ殿下",
+      "era": "1947年",
+      "headline": "すべてを\n捨てた王子",
+      "lines": [
+        {
+          "text": "エリザベス女王と結婚するために、フィリップ殿下は、王子の称号も、自分の名字さえも捨てました。",
+          "quote": true
+        }
+      ]
+    },
+    {
+      "label": "出会い",
+      "era": "1939年",
+      "headline": "13歳の\n初恋",
+      "lines": [
+        "1939年、海軍の学校で、13歳の王女エリザベスは、18歳の青年に恋をしました。"
+      ]
+    },
+    {
+      "label": "戦争",
+      "era": "1940年代",
+      "headline": "戦地との\n手紙",
+      "lines": [
+        "戦争のあいだも、二人はずっと手紙を送り合いました。"
+      ]
+    },
+    {
+      "label": "求婚",
+      "era": "1946年",
+      "headline": "すぐに\n受け入れた",
+      "lines": [
+        "1946年の夏、殿下が求婚すると、王女はすぐに受け入れました。"
+      ]
+    },
+    {
+      "label": "反対",
+      "era": "1946年",
+      "headline": "王室の中の\n反対",
+      "lines": [
+        "けれど王室の中には、権力も財産もない殿下に、反対する声がありました。"
+      ]
+    },
+    {
+      "label": "決断",
+      "era": "1947年",
+      "headline": "称号も\n名字も信仰も",
+      "lines": [
+        "結局、殿下はギリシャとデンマークの王子の称号を捨ててイギリス人となり、名字も母方のマウントバッテンに変え、ギリシャ正教の信仰まで捨てました。"
+      ]
+    },
+    {
+      "label": "婚約指輪",
+      "era": "1947年",
+      "headline": "母のティアラの\nダイヤモンド",
+      "lines": [
+        "婚約指輪は殿下が自らデザインし、母のティアラから外したダイヤモンドを使いました。"
+      ]
+    },
+    {
+      "label": "結婚式",
+      "era": "1947年11月",
+      "headline": "招かれなかった\n3人の姉",
+      "lines": [
+        "結婚式は1947年11月。",
+        "戦争の傷がまだ癒えず、ドイツ人と結婚していた殿下の3人の姉は、招かれませんでした。"
+      ]
+    },
+    {
+      "label": "手紙",
+      "era": "1947年",
+      "headline": "妻を愛称で\n呼んで",
+      "lines": [
+        "それでも殿下は、王女の母への手紙で、妻を愛称で呼び、こう書きました。",
+        {
+          "text": "「リリベットを大切にする？　その一言で、僕の胸の中にあるものを、すべて言い表せるでしょうか」。",
+          "say": "「リリベットを大切にする？　そのひとことで、僕の胸の中にあるものを、すべて言い表せるでしょうか」。"
+        }
+      ]
+    },
+    {
+      "label": "73年",
+      "era": "1947〜2021年",
+      "headline": "73年続く愛",
+      "lines": [
+        "すべてを捨てたその青年は、73年続く愛を手にしました。"
+      ]
+    },
+    {
+      "label": "指輪",
+      "era": "生涯",
+      "headline": "一度も\n外さなかった指輪",
+      "lines": [
+        "そして女王は生涯、その指輪を一度も外しませんでした。"
+      ]
+    }
+  ]
+}
