@@ -10,11 +10,11 @@ Format (owner, 16/11/2026), UTF-8, Japanese, at most 2000 characters:
                   a rumour (owner, 19/11/2026, k10: "đc dùng tin đồn, sẽ đính chính ở caption"), e.g.
                   ※動画内の〇〇の話は噂として伝えられているもので、事実とは確認されていません。
     one line      5 to 8 hashtags, among them every hashtag of the channel ("hashtags" in channels/<id>.json, e.g.
-                  #歴史 #歴史のなぜ #shorts for k11), then the ones of the story
+                  #世界の王室 #王室 #shorts for k10), then the ones of the story
     blank line
     last line     the credit line, starting with 画像出典 (e.g. 画像出典: … ／ 詳しくは credits.txt; say 元動画 when
                   pictures of the source video are used)
-The channel is read from the file name, which is the story's: k11-2026-11-19-nihonbashi.txt (a sample: mau-k11.txt).
+The channel is read from the file name, which is the story's: k10-2026-11-19-diana.txt (a sample: mau-k10.txt).
 """
 from pathlib import Path
 import re
@@ -81,7 +81,7 @@ def check(path):
     if channel is None:
         return [f"{path}: a caption is named after its story, <channel>-<YYYY-MM-DD>-<short>.txt (a sample: "
                 f"mau-<channel>.txt) with a channel of channels/ ({', '.join(channels.ids())}), e.g. "
-                "k8-2026-11-19-todai-sotsu.txt"]
+                "k10-2026-11-19-diana.txt"]
     return [f"{path}: {problem}" for problem in problems(text, channel["hashtags"])]
 
 

@@ -1,6 +1,6 @@
 name: Japan Remix Video
 
-# One issue "[K8] …", "[K9] …", "[K10] …" or "[K11] …" = one video of that channel (channels/<id>.json). The owner
+# One issue "[K10] …" = one video of that channel (channels/<id>.json; k8, k9 and k11 were dropped on 26/11/2026). The owner
 # sends someone else's video; Claude retells it in its own words. The owner opens the issue → Claude writes
 # stories/<channel>-<YYYY-MM-DD>-<short>.json with "issue": N → this workflow finds pictures → Claude picks them →
 # this workflow makes the voice (the channel's VOICEVOX voice) and the video → Claude checks every scene → done. An
@@ -19,7 +19,7 @@ on:
         options: [story, check]
         default: story
       story:
-        description: 'Tên file trong stories/ (không có .json), ví dụ k11-2026-11-19-nihonbashi, cho chế độ story'
+        description: 'Tên file trong stories/ (không có .json), ví dụ k10-2026-11-19-diana, cho chế độ story'
         type: string
   push:
     branches: [main]

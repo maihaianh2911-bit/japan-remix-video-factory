@@ -6,7 +6,7 @@
    The stills with every effect on are left in <out>/fx/ (sheet.jpg) to look at.
 Needs numpy, opencv-python-headless, onnxruntime, the depth model ($DEPTH_MODEL or ~/.cache/news-depth/), the
 display typeface ($NEWS_DISPLAY_FONT or fonts/ShipporiMinchoB1-ExtraBold.ttf) and ffmpeg.
-Usage: python tools/fx_test.py stories/mau-k11.json tests/fixtures/pictures <out folder>"""
+Usage: python tools/fx_test.py stories/mau-k10.json tests/fixtures/pictures <out folder>"""
 from dataclasses import replace
 from io import BytesIO
 import json

@@ -1,28 +1,24 @@
 # Japan Remix Video Factory
 
-Máy làm video dọc tiếng Nhật (1080 × 1920, dài hơn 61 giây một chút) cho 4 kênh. Cả 4 kênh làm cùng một cách: mày gửi video
+Máy làm video dọc tiếng Nhật (1080 × 1920, dài hơn 61 giây một chút) cho kênh 10 (hoàng gia thế giới; kênh 8, 9 và 11 đã bỏ từ 26/11/2026). Cách làm: mày gửi video
 của kênh khác, Claude kể lại câu chuyện đó bằng lời của mình bằng tiếng Nhật (giữ đúng sự thật, không bịa, không chép
 nguyên văn), tìm ảnh thật, máy đọc bằng giọng VOICEVOX và dựng video, Claude kiểm tra lại từng cảnh.
 
 Video được edit giống hệt kênh Tin Nhật: ảnh lớn kiểu trang báo cũ, câu mở đầu in to trên ảnh đầu, ảnh chuyển động
 có chiều sâu, chữ hiện theo giọng đọc, nhạc nền nhẹ, mỗi cảnh 2 ảnh, Claude duyệt từng ảnh trước khi dựng.
 
-## 4 kênh
+## Kênh
 
 | Kênh | Mẫu phiếu | Nội dung | Kênh tham khảo |
 | --- | --- | --- | --- |
-| 8 | 🎤 Kênh 8 · 3 nghệ sĩ | 3 nghệ sĩ có chung một điểm (芸能人3人) | 芸能トピ速, 芸能バナシのツボ |
-| 9 | 🔥 Kênh 9 · Chuyện ồn ào trên mạng | một vụ 炎上 của người có tiếng, cửa hàng, sự kiện | メシアの告発 |
 | 10 | 👑 Kênh 10 · Hoàng gia thế giới | hoàng gia Anh, hoàng tộc Trung Quốc ngày xưa | 皇室の記憶 |
-| 11 | 📜 Kênh 11 · Lịch sử “vì sao…?” | một câu hỏi "vì sao" của lịch sử và câu trả lời | ヒューマン伝 |
 
-Mỗi kênh có luật riêng để tránh bị kiện và bị YouTube phạt: chỉ kể chuyện báo chí đã đưa tin, không chế giễu ai;
-kênh 9 không nêu tên, không lộ mặt người thường; kênh 10 được kể tin đồn (cả tin báo lá cải), nói rõ là tin đồn và đính chính ở caption; kênh 11 chỉ theo sử đã được
-công nhận, đề tài nhạy cảm kể trung lập. Claude theo các luật này khi viết lại.
+Luật riêng của kênh để tránh bị kiện và bị YouTube phạt: không chế giễu ai; kênh 10 được kể tin đồn (cả tin báo lá
+cải), nói rõ là tin đồn và đính chính ở caption. Claude theo các luật này khi viết lại.
 
 ## Làm một video
 
-1. Vào **Issues → New issue**, chọn mẫu của kênh (Kênh 8, 9, 10 hoặc 11).
+1. Vào **Issues → New issue**, chọn mẫu của kênh 10.
 2. Dán link video gốc, hoặc kéo thả file video vào ô "Video gốc". Có lời của video thì dán vào ô thứ hai. Bấm
    **Create**. Hoặc gửi video vào một phiên chat Claude có kết nối repo này và nói kênh nào: Claude tự mở phiếu.
 3. Không cần làm gì thêm. Claude viết lại kịch bản và gửi trong phiếu thành một đoạn liền (tiếng Nhật, rồi nghĩa
@@ -36,10 +32,7 @@ Video thử (ví dụ bản 20 giây để duyệt giao diện): ghi "thử" ho�
 
 - Bình luận cuối của phiếu có link video, caption để đăng kèm, phụ đề và nguồn ảnh (dán vào phần mô tả video).
 - Mọi video của một kênh nằm trong một trang, mới nhất ở trên:
-  [kênh 8](https://github.com/maihaianh2911-bit/japan-remix-video-factory/blob/renders/kenh-8.md) ·
-  [kênh 9](https://github.com/maihaianh2911-bit/japan-remix-video-factory/blob/renders/kenh-9.md) ·
-  [kênh 10](https://github.com/maihaianh2911-bit/japan-remix-video-factory/blob/renders/kenh-10.md) ·
-  [kênh 11](https://github.com/maihaianh2911-bit/japan-remix-video-factory/blob/renders/kenh-11.md)
+  [kênh 10](https://github.com/maihaianh2911-bit/japan-remix-video-factory/blob/renders/kenh-10.md)
   (trang có sau video đầu tiên của repo).
 - **Tải video về sớm:** mỗi tuần máy xóa video của phiếu đã đóng quá 2 ngày, hoặc phiếu không có hoạt động trong
   14 ngày; khi đó link hết hiệu lực. Video luôn nhẹ hơn 100 MB.
@@ -95,9 +88,8 @@ Mày đọc danh sách luật cứng và thấy mấy luật "ko hợp lí", r�
 
 ## Chưa làm
 
-- Giao diện và giọng riêng cho từng kênh (tiêu đề cố định, huy hiệu xếp hạng cho kênh 8, màu riêng, giọng khác): làm
-  sau, khi mày duyệt video thử 20 giây của từng kênh. Hiện cả 4 kênh dùng chung cách edit của Tin Nhật; giọng
-  青山龍星, riêng kênh 10 giọng nữ もち子さん (cùng giọng mày chốt cho video Hoàng gia Nhật, 25/11) và nhạc sáo trúc mày gửi.
+- Giao diện và giọng riêng cho từng kênh (tiêu đề cố định, màu riêng, giọng khác): làm
+  sau, khi mày duyệt video thử 20 giây của từng kênh. Hiện kênh 10 dùng cách edit của Tin Nhật, giọng nữ もち子さん (cùng giọng mày chốt cho video Hoàng gia Nhật, 25/11) và nhạc sáo trúc mày gửi.
 
 Chi tiết cho Claude: `CLAUDE.md` (luật, cách viết, cách edit, câu mở đầu), `AGENT_REMIX.md` (việc ở từng bước).
 Máy dựng là máy của kênh Tin Nhật (`japan-news-video-factory`).

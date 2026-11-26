@@ -1,7 +1,10 @@
 """Offline checks of the channel layer (news/channels.py): no network, no voice engine.
 
 - the channel files and the tags of the issue titles ("[K8]", "[k10]", never "[K1]" for "[K10] …"), and that
-  every channel has its issue form and its label (.github/);
+  every channel has its issue form, its label (.github/), its sample story and its sample caption;
+- what holds for several channels is checked on the channels of the repository together with the stand-in
+  channels of tests/fixtures/channels (k8, k9 and k11: the channels the owner dropped on 26/11/2026, kept there
+  for the tests only);
 - the story file names (<channel>-<YYYY-MM-DD>-<short>, mau-<channel>) and the refusal of a story without a channel
   or with a name of another channel;
 - the defaults a story inherits from its channel, key by key, without changing the channel;
@@ -15,11 +18,13 @@
 - iron rule 2 in the machine: a story whose voice is under 61 seconds is refused before its video is made, a trial
   ("trial": true) is made all the same (a second of video: needs ffmpeg).
 Usage: python tools/channel_test.py"""
+from contextlib import contextmanager
 from io import BytesIO
 import json
 import os
 import re
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -31,6 +36,7 @@ from news.custom import StoryError, edit_warnings, load_story, read, validate   
 from news.story import voice_credit   # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent
+STAND_INS = REPO / "tests" / "fixtures" / "channels"   # k8, k9, k11: dropped by the owner, stand-ins of the tests
 STORY = {"channel": "k8", "title": "見本", "date": "2026-11-19", "scenes": [{"headline": "見出し", "lines": ["一行目です。"]}]}
 
 
@@ -39,6 +45,23 @@ def problems(change=None, name="k8-2026-11-19-test"):
     if change:
         change(story)
     return "\n".join(validate(story, name))
+
+
+@contextmanager
+def with_stand_ins():
+    """The channels of the repository and the stand-in channels of the tests in one folder: the tags of the titles,
+    the names, the lists, a voice and defaults of a channel's own are checked on several channels."""
+    real = channels.FOLDER
+    with tempfile.TemporaryDirectory(prefix="channel-stand-ins-") as scratch:
+        for path in (*sorted(real.glob("*.json")), *sorted(STAND_INS.glob("*.json"))):
+            shutil.copy(path, Path(scratch) / path.name)
+        try:
+            channels.FOLDER = Path(scratch)
+            channels.channels.cache_clear()
+            yield
+        finally:
+            channels.FOLDER = real
+            channels.channels.cache_clear()
 
 
 def files_and_titles():
@@ -60,7 +83,8 @@ def files_and_titles():
 
 
 def repository_files():
-    """Every channel has its issue form (title = its tag) and its label; the step labels exist (labels.yml)."""
+    """Every channel of the repository has its issue form (title = its tag), its label, its sample story and its
+    sample caption; the step labels exist (labels.yml)."""
     labels = (REPO / ".github" / "workflows" / "labels.yml").read_text(encoding="utf-8")
     names = {line.strip().split("|", 1)[0] for line in labels.splitlines() if line.count("|") == 2}
     steps = {f"remix-{step}" for step in ("plan", "find", "pick", "render", "check", "done", "fix", "failed", "busy")}
@@ -69,6 +93,8 @@ def repository_files():
         form = REPO / ".github" / "ISSUE_TEMPLATE" / f"{cid}.yml"
         assert form.exists() and f'title: "{channels.get(cid)["tag"]} "' in form.read_text(encoding="utf-8"), form
         assert cid in names, f"labels.yml has no label {cid}"
+        for sample in (REPO / "stories" / f"mau-{cid}.json", REPO / "captions" / f"mau-{cid}.txt"):
+            assert sample.exists(), f"{sample} is missing"
     workflow = (REPO / ".github" / "workflows" / "remix-video.yml").read_text(encoding="utf-8")
     assert "startsWith(github.event.issue.title, '[K')" in workflow and "jnews" not in workflow
 
@@ -335,7 +361,7 @@ def lists():
         folder("mau-k8", {"video.mp4": "v"})                    # not a story of a channel: not listed
         (tree / "kenh-9.md").write_text("old", encoding="utf-8")
         result = subprocess.run([sys.executable, str(REPO / "tools" / "channel_lists.py"), str(tree),
-                                 str(REPO / "channels")], capture_output=True, text=True, check=True)
+                                 str(channels.FOLDER)], capture_output=True, text=True, check=True)
         k8, k9, k10 = ((tree / f"kenh-{n}.md").read_text(encoding="utf-8") for n in (8, 9, 10))
         assert k8.startswith("# Kênh 8 · 芸能人3人 (3 nghệ sĩ…)"), k8
         rows = [row for row in k8.splitlines() if row.startswith("- ")]
@@ -394,17 +420,21 @@ def length_rules():
 
 
 def main():
-    files_and_titles()
+    assert channels.check() == [], channels.check()
+    real = channels.ids()
+    assert real, "channels/ holds no channel"
     repository_files()
-    names_and_channel()
-    defaults()
-    edit_rules()
-    voice_of_channel()
-    caption_checks()
-    lists()
-    length_rules()
-    tags = ", ".join(cid + " " + channels.get(cid)["tag"] for cid in channels.ids())
-    print(f"channel checks OK ({tags})")
+    with with_stand_ins():
+        files_and_titles()
+        names_and_channel()
+        defaults()
+        edit_rules()
+        voice_of_channel()
+        caption_checks()
+        lists()
+        length_rules()
+    tags = ", ".join(cid + " " + channels.get(cid)["tag"] for cid in real)
+    print(f"channel checks OK ({tags}; with the stand-in channels of the tests)")
 
 
 if __name__ == "__main__":

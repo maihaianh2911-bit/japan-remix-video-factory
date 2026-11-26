@@ -529,13 +529,13 @@ def whole_run(folder):
     repository (file:) is made in a stand-in repository, so that the test needs no file of stories/media/. A
     search that cannot work as written is recorded with "unusable", is not run again and does not change the exit
     status."""
-    media = Path("stories/media/k8-2026-11-17-run-test/one.jpg")
+    media = Path("stories/media/k10-2026-11-17-run-test/one.jpg")
     (folder / media).parent.mkdir(parents=True, exist_ok=True)
     (folder / media).write_bytes(jpeg(99))
-    story = {"channel": "k8", "title": "t", "date": "2026-11-17",
+    story = {"channel": "k10", "title": "t", "date": "2026-11-17",
              "searches": [f"file:{media}", "web:broken", "web:fine => a house", "url:https://a.example/gone.jpg"],
              "scenes": [{"headline": "h", "lines": ["l"]}]}
-    path = folder / "k8-2026-11-17-run-test.json"
+    path = folder / "k10-2026-11-17-run-test.json"
     path.write_text(json.dumps(story, ensure_ascii=False), encoding="utf-8")
     out = folder / "pictures"
     real = F.web_search, F.web_get, F.Clip, F.time.sleep, sys.argv, F.REPO

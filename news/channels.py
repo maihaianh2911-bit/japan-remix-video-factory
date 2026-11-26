@@ -1,4 +1,5 @@
-"""The channels this repository makes videos for: channels/<id>.json (k8, k9, k10 and k11 since 18/11/2026).
+"""The channels this repository makes videos for: channels/<id>.json (k10 only since 26/11/2026: the owner dropped k8,
+k9 and k11, whose files are kept as stand-in channels of the tests in tests/fixtures/channels).
 
 A channel file holds
     id, number        "k8", 8: a story of the channel is stories/k8-<YYYY-MM-DD>-<short>.json with "channel": "k8",

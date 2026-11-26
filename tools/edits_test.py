@@ -1,6 +1,6 @@
 """Try every edit of the catalogue (news/edits.py) on the pictures of the sample story, without the voice engine.
 
-python tools/edits_test.py stories/mau-k11.json tests/fixtures/pictures <out folder> [<seconds per move, default 2>]
+python tools/edits_test.py stories/mau-k10.json tests/fixtures/pictures <out folder> [<seconds per move, default 2>]
 
 (Any sample story of stories/mau-*.json: they all carry the searches of the fixture tests/fixtures/pictures, whose
 numbering the pictures below use.) Writes <out>/mau-<channel>-edits.json (a story that uses every move and every

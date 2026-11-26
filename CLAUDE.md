@@ -1,7 +1,7 @@
 # japan-remix-video-factory — notes for Claude
 
 ## Iron rules (owner, 16/11/2026) — they come before everything else in this file
-1. **The video is in the channel's language: Japanese (tiếng Nhật).** The voice is the channel's Japanese VOICEVOX voice (`voice` in `channels/<id>.json`: 青山龍星 for k8, k9 and k11; **もち子さん for k10** since 25/11/2026: the owner
+1. **The video is in the channel's language: Japanese (tiếng Nhật).** The voice is the channel's Japanese VOICEVOX voice (`voice` in `channels/<id>.json`: **もち子さん for k10** since 25/11/2026: the owner
    first chose a female voice after a trial, 冥鳴ひまり ("Giọng nữ nào cg ổn"), then the same day the voice chosen for
    the imperial-family videos of `japan-news-video-factory`, もち子さん: "tao vừa chốt voice ở chat hoàng gia nhật, m
    có lấy voice nữ đó luôn đc ko"), and the script lines, subtitles and
@@ -86,8 +86,7 @@ is: frame it again, pick another, or search again.
 
 The owner turned down two more that were proposed, so they are **not** rules: "a picture is used only once in a
 video, and two near-identical pictures are not put side by side", and "the last picture must be a fine one too".
-A picture may be used again where it fits. k9 keeps its own exception to rule 4 for the pictures of people (a TV
-screenshot with its caption may show a person), not for the first picture's sharpness.
+A picture may be used again where it fits.
 
 **What the machine watches** (the preview `python -m news --story … --stills …` prints a `warning:` for each; settle
 every one before the render): the first picture under 900 px on one side, or shown whole / marked flat (rules 1 and
@@ -110,10 +109,15 @@ picture" is one an image generator made up (ChatGPT and the like), never used. F
 colourised copy too (`web:… colorized`, `カラー化`) and prefer it when it is as sharp and shows the same moment.
 
 ## What this repo makes
-Vertical Japanese shorts (1080×1920, a little over 61 s) for four of the owner's 14 Japanese channels, all made the same way:
+Vertical Japanese shorts (1080×1920, a little over 61 s) for **one channel, k10 (世界の王室)**. Until 26/11/2026 it made
+four (k8 芸能人3人, k9 ネット炎上, k10, k11 歴史のなぜ); the owner dropped three of them (26/11/2026: "tao đã bỏ cả 8 9 10
+rồi, xoá phần này đi", and asked which, since k10 had two videos that day: "8, 9, 11 — giữ kênh 10"). Their channel
+files, issue forms, labels, samples, stories and captions were taken out; the three channel files live on in
+`tests/fixtures/channels/` as stand-in channels of `tools/channel_test.py` only. Never make a video for k8, k9 or
+k11, and do not bring them back unless the owner asks. How a video is made:
 the owner sends someone else's short or video, Claude retells it in its own words in Japanese (the same story and
 facts, a better telling), finds real pictures, the machine voices it with VOICEVOX and renders it, and Claude checks
-every scene. One issue `[K8] …` / `[K9] …` / `[K10] …` / `[K11] …` = one video of that channel. The machine steps
+every scene. One issue `[K10] …` = one video of the channel. The machine steps
 run in `.github/workflows/remix-video.yml` (results on the `renders` branch); Claude's steps at each label are in
 `AGENT_REMIX.md`. The engine (`news/`, `tools/`) is the one of `maihaianh2911-bit/japan-news-video-factory` (Tin Nhật,
 which retells the owner's morning source videos the same way), changed only for the channels: a fix to the engine is
@@ -121,46 +125,31 @@ made in both repos, by hand.
 
 | Kênh | id, issue tag | What a video is | Reference channel (its videos are the sources) |
 | --- | --- | --- | --- |
-| 8 | `k8`, `[K8]` | 芸能人3人: three entertainers who share one thing (「実は…な芸能人3人」) | 芸能トピ速 (@geinou.topisoku); also 芸能バナシのツボ (@バナシのツボ) |
-| 9 | `k9`, `[K9]` | ネット炎上: one online uproar about a known person, a shop or an event | メシアの告発 (@メシアの告発), horizontal 26–34 min |
 | 10 | `k10`, `[K10]` | 世界の王室: world royals, above all the British royal family and the old Chinese dynasties | 皇室の記憶 (@ImperialEcho-v1c) |
-| 11 | `k11`, `[K11]` | 歴史のなぜ: one "why" question of history and its main answer | ヒューマン伝 (@humanden_history), horizontal 22–30 min |
 
 Each channel is a file `channels/<id>.json` (`news/channels.py`): its names, its issue tag, its VOICEVOX voice, the
 hashtags every caption of it carries, `"edit": "tin-nhat"` (it edits as Tin Nhật does, below), and the defaults its
-stories inherit (the same for all four: `style` `story`, a `kicker` of its own — 芸能人3人, ネット炎上, 世界の王室,
-歴史のなぜ —, `pace` speed 1.2 with pauses of 0.1 and 0.2 s, and the four picture effects `fx`). **Looks and voices
-of their own come later**: each channel may get additions on top of the Tin Nhật edit (a persistent title, rank
-badges for k8, its colours, another voice) only after the owner approves a 20-second trial of it (owner, 18/11/2026).
-Until then do not add any: all four share the Tin Nhật edit, and 青山龍星 except k10 (もち子さん, owner 25/11/2026, the voice chosen
-for the imperial-family videos of `japan-news-video-factory` from a sampler of 13 voices; 冥鳴ひまり before it that day). A new look or voice is a change of the
+stories inherit (`style` `story`, the `kicker` 世界の王室, `pace` speed 1.2 with pauses of 0.1 and 0.2 s, the four
+picture effects `fx`, and k10's own music and sound, below). **Looks and voices
+of their own come later**: each channel may get additions on top of the Tin Nhật edit (a persistent title, its colours,
+another voice) only after the owner approves a 20-second trial of it (owner, 18/11/2026).
+Until then do not add any: the channel keeps the Tin Nhật edit, and its voice is もち子さん (owner 25/11/2026, the voice chosen
+for the imperial-family videos of `japan-news-video-factory` from a sampler of 13 voices; 冥鳴ひまり before it that day;
+on 26/11/2026 the owner turned that voice down for the imperial-family videos and went back to 青山龍星 there: for k10
+the owner has not said so yet). A new look or voice is a change of the
 channel file (and of the frame code when the look is new), never of each story.
 
-### The rules and risks of each channel (`docs/KENH-NHAT.md`, told to the owner)
-- **All four** retell another channel's video: YouTube penalises reused content, so rewrite in our own words, add
+### The rules and risks of the channel (`docs/KENH-NHAT.md`, told to the owner)
+- **The channel retells** another channel's video: YouTube penalises reused content, so rewrite in our own words, add
   value (a clear meaning, our own angle). **The pictures and the footage of the video the owner sends may be
   used, and its voice and music too** (owner, 19/11/2026: "nếu repo nào đc dựng bằng cách remix video hoặc tao có gửi
   video, có thể sử dụng hình ảnh/video trong video tao gửi", then "Được dùng cả nhạc và giọng"; before that: a few
   pictures only, never the voice or the music): clean ones (a
-  frame with the source's caption, logo or watermark over the picture is cropped clean or left; k9 is the exception,
-  below: a person's picture may be a TV screenshot with its caption), credited `元動画`.
+  frame with the source's caption, logo or watermark over the picture is cropped clean or left), credited `元動画`.
   The more of the source's pictures a video shows, the higher the reused-content risk (told to the owner again on
   19/11): our own words, our own order and pictures of our own search beside them stay the rule.
-  Never two channels on the same story: k10's Chinese side and k11 border on channel 7 (the dark side of history,
-  `japan-dark-history-video-factory`), k11 on channel 12 (a historical person's life, `japan-figures-video-factory`);
-  k10 is never the Japanese imperial family (channels 1–2, `japan-news-video-factory`).
-- **k8 (芸能人3人):** keep the source's details (unconfirmed ones framed as told, see the script rules: owner,
-  18/11/2026); prefer positive or neutral topics (lineage, degrees, a rare name, remembering someone who died); no
-  mocking words of our own. Many of the reference channel's topics speak ill of living
-  people (cosmetic surgery, baldness, scandals): in Japan that is a defamation risk even when true, and YouTube has a
-  harassment policy. The second reference, 芸能バナシのツボ, keeps to positive or neutral topics (Kyoto University,
-  fluent French, a medical licence…): the safer source.
-- **k9 (炎上):** what the press reported, and rumours framed as told (19/11/2026). **Faces of everyone in the story may be shown, private people too**
-  (owner, 19/11/2026, after two videos without a single face: "b" = show people as the source video does, "phần chọn
-  ảnh k phải nghĩ, cứ chọn, tù tội đâu tao chịu": the owner takes the legal risk); every scene with a person in it
-  gets that person's picture, TV screenshots and pictures with burnt-in captions included (the k9 exception to
-  "clean pictures"); a name as the source or the press gives it. No mocking words; add our own angle and meaning,
-  never copy their opinions. The source is a 26–34-minute horizontal video: one case per video, only its main thread.
+  Never two channels on the same story: k10's Chinese side borders on channel 7 (the dark side of history,
+  `japan-dark-history-video-factory`); k10 is never the Japanese imperial family (`japan-news-video-factory`).
 - **k10 (世界の王室):** **rumours may be told**, tabloid ones too (owner, 19/11/2026: "đc dùng tin đồn, sẽ đính chính
   ở caption"; e.g. "Camilla plotted against Kate's parents"): the narration frames each one as told, once, at its key
   line (「…と噂されています」, 「…と報じられています」, 「週刊誌によると」), never as a fact; and **the posting caption corrects
@@ -191,13 +180,9 @@ channel file (and of the frame code when the look is new), never of each story.
   When suggesting scripts, offer topics of this kind. The voice and the music stay the channel's (もち子さん and the
   flute, chosen after the hit video was made with 青山龍星 and Nimrod): if the next three or four k10 love stories get
   no views, say so to the owner and offer a trial with the male voice again.
-- **k11 (歴史のなぜ):** one "why" question per video and its main answer, taken from the long source; big, well-known
-  events (not small customs). Sensitive topics (Hitler, the persecution of the Jews, wars) are told as a neutral
-  explanation, never praising, **no Nazi symbol in the first frame**; accepted history only, a hypothesis said to be
-  one, no "shocking truth" titles.
 
-## The edit: these four channels edit as Tin Nhật does
-Owner, 18/11/2026: "cho 4 kênh này học cách edit của kênh tin nhật đi, học tốt vào" — the four channels edit exactly as
+## The edit: the channel edits as Tin Nhật does
+Owner, 18/11/2026: "cho 4 kênh này học cách edit của kênh tin nhật đi, học tốt vào" — the channels of this repo (k10 alone since 26/11/2026) edit exactly as
 the Tin Nhật channel (`japan-news-video-factory`) does now, with every one of its decisions:
 - **The `story` frame** (trial of 15/11/2026, used for every source video since): the old-newspaper page, the picture
   filling most of it, the scene's `era` at the top, the headline on the foot of the picture, the captions printed on
@@ -270,7 +255,7 @@ only made-up events or quotes of real people told as facts stay forbidden (the r
 
 ## When you were started by GitHub (a Claude task, nobody in the chat)
 The prompt may be as short as "Làm việc đang chờ trong repo này" ("do the work waiting in this repo"), and GitHub
-adds a line such as "Phiếu kênh 11 số 3: ảnh đã tìm xong, chờ chọn ảnh". Then: follow `AGENT_REMIX.md` from §0 (its
+adds a line such as "Phiếu kênh 10 số 3: ảnh đã tìm xong, chờ chọn ảnh". Then: follow `AGENT_REMIX.md` from §0 (its
 first check lists the `remix-*` issues waiting for you). Nobody answers questions, so do not ask; comments go on the
 issues (🤖, Vietnamese). This repo's own Claude task (its prompt: "Làm theo AGENT_REMIX.md của repo
 maihaianh2911-bit/japan-remix-video-factory.") or the owner's shared task "japan-video-factory" once its
@@ -279,19 +264,18 @@ maihaianh2911-bit/japan-remix-video-factory.") or the owner's shared task "japan
 "Gọi Claude ngay" (`wake.yml`) or a chat.
 
 ## When the owner sends a source video in a chat (the usual way)
-The owner sends someone else's short or video (a file or a link) and says which channel (8, 9, 10, 11); when that is
-not clear from the chat or from the reference channel, ask (in a chat you may).
+The owner sends someone else's short or video (a file or a link) for channel 10 (the only channel of this repo since
+26/11/2026). A video that is not about world royals: say so and ask which repo it is for (in a chat you may).
 1. **Read the source.** Every word is the content; the narration starts at 0 s, so an opening title is spoken too.
    - Burnt-in captions (most shorts): sheets of one frame a second,
      `ffmpeg -i <video> -vf "fps=1,crop=1080:500:0:700,scale=540:-1,drawtext=text='%{pts\:hms}':x=5:y=5:fontcolor=yellow:fontsize=24,tile=3x10" cap%02d.jpg`
      (move the crop to where the captions are), and look at every sheet.
-   - A long source (k9, k11: 20–30-minute horizontal videos) or one without captions: its voice. Take its subtitle
+   - A long source (a 20–30-minute horizontal video) or one without captions: its voice. Take its subtitle
      file when the platform has one (`pip install -q yt-dlp`, then
      `yt-dlp --skip-download --write-subs --write-auto-subs --sub-langs ja -o src <link>`), else transcribe its
      sound (`ffmpeg -i <video> -vn -ac 1 -ar 16000 src.wav`, then a speech-to-text model such as
      `pip install faster-whisper`, model `small`, language `ja`). Neither was tried in this repo yet: if both fail,
-     say so in one line and ask the owner for the words. From a long source keep one case (k9) or one question and
-     its main answer (k11).
+     say so in one line and ask the owner for the words. From a long source keep one story, its main thread.
    - A source too thin for a story (a few captions, no events): tell the owner before making it.
 2. **Rewrite it in Japanese** (the script rules; owner, 16–18/11/2026, and the lessons of `docs/KENH-NHAT.md`):
    - Decide the meaning first, in one sentence (what the viewer keeps); the whole story leads to it. A story that
@@ -347,10 +331,10 @@ working since 12/11/2026). If the session may only push to its own branch, say s
 allow `main`.
 
 ## Story format, pictures and preview (used by `AGENT_REMIX.md`)
-1. Write `stories/<channel>-<YYYY-MM-DD>-<short-name>.json` (e.g. `stories/k11-2026-11-19-nihonbashi.json`; ASCII
-   letters, digits, `.`, `_`, `-` only; the samples `stories/mau-k8.json` … `mau-k11.json` show the whole edit) and
+1. Write `stories/<channel>-<YYYY-MM-DD>-<short-name>.json` (e.g. `stories/k10-2026-11-24-philip-elizabeth.json`; ASCII
+   letters, digits, `.`, `_`, `-` only; the sample `stories/mau-k10.json` shows the whole edit) and
    push it to `main`. Every story file added, changed or renamed in a push gets its own run.
-   - `"channel": "k11"` (required; the file name starts with it, `python -m news.custom` refuses another), `title`
+   - `"channel": "k10"` (required; the file name starts with it, `python -m news.custom` refuses another), `title`
      (not shown in the video), `date` (shown at the top of a scene without `era`), `source` (shown as 出典; usually
      left out: the source video is not credited as a news source), `stage: "find"`, `issue` (the issue number: the
      workflow then moves its labels, comments and calls Claude after each step).
@@ -412,7 +396,7 @@ allow `main`.
        archives, libraries and museums (the National Diet Library, city libraries and archives, university
        collections, the cultural-heritage sites): old prints, paintings, photographs, objects, the records
        catalogued as pictures first. Only records whose rights allow use (public domain, CC0, CC BY, CC BY-SA), up
-       to 12, credited to the holding site with the licence. For k11 and the old side of k10 (`"jps:紫禁城"`,
+       to 12, credited to the holding site with the licence. For the old side of k10 (`"jps:紫禁城"`,
        `"jps:関東大震災"`). **Search a thing, a place or an event, not a person**: a name brings mostly books about
        that person, whose cover scans are left out. **A modest source**: tried on GitHub (19/11/2026), of six
        searches two brought 12 pictures (`関東大震災`, `土偶`), two brought 1–2 (`富士山 浮世絵`, `紫禁城`) and two
@@ -480,11 +464,9 @@ allow `main`.
    the video.
 
 ### Posting caption (owner, 16/11/2026: every video comes with its caption)
-`captions/<name>.txt` beside the story (UTF-8, Japanese, ≤ 2000 characters; examples `captions/mau-k8.txt` …
-`mau-k11.txt`): line 1 a hook title (≤ 80 characters, true to the script), then 2–4 short sentences on the video, a
+`captions/<name>.txt` beside the story (UTF-8, Japanese, ≤ 2000 characters; example `captions/mau-k10.txt`): line 1 a hook title (≤ 80 characters, true to the script), then 2–4 short sentences on the video, a
 blank line, one line of 5–8 hashtags **that include every hashtag of the channel** (`hashtags` in
-`channels/<id>.json`: k8 `#芸能人 #芸能 #shorts`, k9 `#炎上 #SNS #shorts`, k10 `#世界の王室 #王室 #shorts`, k11
-`#歴史 #歴史のなぜ #shorts`), a blank line, and the credit line
+`channels/<id>.json`: k10 `#世界の王室 #王室 #shorts`), a blank line, and the credit line
 `画像出典: <元動画 when source-video pictures are used>、<main sites> ほか（写真・音楽の全出典は credits.txt）`. Only
 facts of the script. **A video that tells a rumour gets a correction note** (owner, 19/11/2026, k10: "đc dùng tin
 đồn, sẽ đính chính ở caption"; every k10 video with a rumour, and any other channel's): 1–3 lines starting with ※,
@@ -497,9 +479,10 @@ caption (no new render). Write it before the closing comment and link it there.
 ## Changing the pipeline
 Before pushing a change of `news/`, `tools/`, `channels/` or `tests/`: `bash tools/check.sh <out folder>` (add
 `--fx` when the effects' libraries, model and typeface are installed, see `fx` above), and look at
-`<out>/mau-k8/sheet.jpg` … `<out>/mau-k11/sheet.jpg`, `<out>/moves.jpg`, `<out>/cuts.jpg` (and `<out>/fx/sheet.jpg`).
+`<out>/mau-k10/sheet.jpg`, `<out>/moves.jpg`, `<out>/cuts.jpg` (and `<out>/fx/sheet.jpg`).
 It needs no network: it compiles the code, checks the channel files (`python -m news.channels`), every story and
-caption, runs `tools/find_test.py` (the picture search on made-up answers) and `tools/channel_test.py` (story names,
+caption, runs `tools/find_test.py` (the picture search on made-up answers) and `tools/channel_test.py` (on k10 together with the
+stand-in channels k8, k9 and k11 of `tests/fixtures/channels/`, which exist for this test only: story names,
 inherited defaults, the edit warnings, the voice taken from the channel file, caption hashtags, issue titles, the
 channel lists, the 60-second refusal), draws the stills of every sample story from `tests/fixtures/pictures/`
 (Wikimedia Commons pictures of the Bank of Japan, banknotes, supermarkets and Edo-period boxes, and 20 seconds of

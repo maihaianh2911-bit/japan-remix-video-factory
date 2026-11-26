@@ -1,4 +1,4 @@
-# Retold videos of channels 8–11 from an issue — runbook for Claude
+# Retold videos of channel 10 from an issue — runbook for Claude
 
 > **Iron rules (owner, 16/11/2026; full text at the top of `CLAUDE.md`).** (1) Voice, script lines, subtitles and
 > on-screen text are in **Japanese**, never another language; check before the voice step and on the finished video.
@@ -9,7 +9,7 @@
 > (3) **Vertical and short, a little over 61 seconds** (owner, 19/11/2026: "tất cả video, giảm xuống, luật chỉ còn
 > tối thiểu 61s thôi", replacing 80–160 s): write the script for about 63–70 s, gripping, never padded.
 
-The owner (Vietnamese, not technical) opens an issue `[K8] …`, `[K9] …`, `[K10] …` or `[K11] …` with someone else's
+The owner (Vietnamese, not technical) opens an issue `[K10] …` (channels 8, 9 and 11 were dropped on 26/11/2026) with someone else's
 video (a link or a file, sometimes its words). The result is a vertical short (1080×1920, a little over 61 s) of that channel:
 the same story retold in our own words in Japanese, real pictures, the channel's VOICEVOX voice, captions timed to the
 voice, edited exactly as the Tin Nhật channel edits (`CLAUDE.md`, "The edit" and "The hook"). The channels, their
@@ -21,7 +21,7 @@ Steps (labels): `remix-plan` → you read the source and write `stories/<name>.j
 (machine: picture search) → `remix-pick` → you choose the pictures, edits and music, review them and set
 `stage: "render"` → `remix-render` (machine: voice and video) → `remix-check` → you check the stills → `remix-done`.
 `remix-fix`: the owner commented. `remix-failed`: a machine step failed. Every issue also carries `remix` and its
-channel label (`k8`, `k9`, `k10`, `k11`). GitHub calls you after each machine step; there is no hourly run.
+channel label (`k10`). GitHub calls you after each machine step; there is no hourly run.
 
 ## 0. Every run
 You may run unattended (started by GitHub through the Claude task's API trigger). Nobody answers questions then.
@@ -75,7 +75,7 @@ gh api "repos/$R/issues?state=open&labels=remix&per_page=50" --jq '[.[] | select
   story and facts in the same order, our own sentences, the script rules of `CLAUDE.md` ("When the owner sends a
   source video", step 2). Keep the source's colourful details, framing the unconfirmed ones as told (owner,
   18/11/2026: a script that keeps only what the press printed "sẽ chán hơn rất nhiều"); leave out only what the
-  channel's rules forbid (k11 accepted history,
+  channel's rules forbid (
   no crime or serious accusation against a private person stated as fact) or what is known to be false, and say so
   on the issue. Never make up an event or a quote of a real person and tell it as a fact; the telling may be
   dramatised (owner, 19/11/2026). Every channel may tell rumours, tabloid ones too (owner, 19/11/2026: k10 first, then
@@ -103,7 +103,7 @@ gh api "repos/$R/issues?state=open&labels=remix&per_page=50" --jq '[.[] | select
   4. A wish ` => <English description>` on a search that would bring many wrong pictures: the machine keeps only the
      pictures that show it, best first (`"web:溥儀 皇帝 若い頃 => a young Chinese emperor in imperial robes"`).
   5. **One `music:` search at least** (`"music:Schumann Träumerei piano"`, `"music:Chopin Nocturne piano"`,
-     `"music:Satie Gnossienne piano"`): calm piano under a story; a darker piece for k9 or a war in k11.
+     `"music:Satie Gnossienne piano"`): calm piano under a story (k10 needs none: it has the owner's flute).
 - Picture effects on (inherited from the channel): a flat picture (a document, a newspaper page, a collage, a chart,
   a screenshot, a banknote) gets `"depth": false` in its picture entry.
 - Quality is not traded for usage: preview before rendering.
@@ -168,14 +168,12 @@ Read the issue form (Video gốc, Lời của video gốc, Ghi chú) and the own
      line, no other event's photo on "that day");
    - the main person is whole and seen: face not cut by the crop, not under the headline or the hook;
    - it is clean and sharp enough: no burnt-in news captions, logos or watermarks, not a small picture blown up
-     (k9: TV screenshots and captioned pictures are fine, owner 19/11/2026);
    - it passes **the picture rules of the edit** (`CLAUDE.md`, owner 19/11/2026): the first picture is the best of
      the video (rules 1–5), the whole face stays in the frame during the whole move and no text lies over it (6–7),
      the person spoken of is the clearest of a group and not a very small face (8–9). The preview's `warning:` lines
      about faces and the first picture are settled first (the `"focus"` it gives, another move, `"fit": "contain"`,
      another picture); what it cannot see (2, 3, 8, 9) you check here. A picture may be used again in the video:
      "no near-duplicate" is not a rule, the owner turned it down on 19/11/2026;
-   - the channel's rules hold: k9 shows the people of the story, private people too (owner, 19/11/2026); k11 no Nazi symbol in the first frame.
    Any row that fails: pick another picture (or append searches, step 2), preview, run the review again. When every
    row passes, write `"review": "<n>/<n>"` in the story (the number of pictures); the closing comment says
    "Đã duyệt ảnh: N/N ảnh khớp lời đọc".
@@ -194,7 +192,7 @@ change the "when" column here in the same push.
 
 How to choose: read the lines of the scene first, then look at the picture. Choose by the meaning of the line, not
 by the order of the table. Not the same move on two pictures in a row, unless it is meant (a list of similar things,
-such as the three people of k8). The move follows the picture: pan towards where the people look or walk, rise along
+such as each person of a list). The move follows the picture: pan towards where the people look or walk, rise along
 what stands, push in on the face that matters. Put `focus` on the subject (the move starts from and keeps to that
 point). The speed adapts by itself to how long the picture stays (a short picture moves a shorter way).
 
@@ -219,13 +217,13 @@ With `"fit": "contain"` only `push-in`, `pull-back` and `hold` exist (the whole 
 | `cut` | What it looks like | When |
 | --- | --- | --- |
 | `fade` | cross-fade, half a second | the story simply goes on |
-| `page` | a page turned from the right | a new chapter or a new person (each of the three people of k8) |
+| `page` | a page turned from the right | a new chapter or a new person |
 | `hard` | no transition | a shock, a contrast, a quick list; before a `punch-in` |
 | `dip` | the picture and the scene text go dark and come back (0.9 s); the header and the caption stay | a jump in time ("ten years later"), a death, the ending scene |
 
 `python -m news.custom` refuses an unknown name and lists the valid ones. Names and code: `news/edits.py`,
 `news/render.py` (`named_photo`, `transition`); every edit can be seen with `python tools/edits_test.py
-stories/mau-k11.json tests/fixtures/pictures <out>` (`moves.jpg`, `cuts.jpg`, `punch.jpg` and two short videos).
+stories/mau-k10.json tests/fixtures/pictures <out>` (`moves.jpg`, `cuts.jpg`, `punch.jpg` and two short videos).
 
 ## 3. `remix-check` → done
 Fetch `<name>/` (its `status.json` must have your commit). Look at `stills/sheet.jpg`, read `subtitles.srt` against

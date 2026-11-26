@@ -16,7 +16,7 @@ FX="${2:-}"
 mkdir -p "$OUT" && OUT=$(cd "$OUT" && pwd)
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 PICTURES=tests/fixtures/pictures
-SAMPLE=stories/mau-k11.json   # the sample the encode, edits and effects tests use
+SAMPLE=stories/mau-k10.json   # the sample the encode, edits and effects tests use
 WORK=$(mktemp -d)
 trap 'rm -rf "$WORK"' EXIT
 shopt -s nullglob

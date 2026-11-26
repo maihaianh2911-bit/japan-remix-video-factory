@@ -1,7 +1,7 @@
 """Encode 3 seconds of a story without the voice engine: two scenes with a scene change, in the three frames (news,
 paper with its film grain, story with a quote over the picture and a test tone as music under the voice), with silence
 as the voice. Checks that the frames, FFmpeg, the music mix and the output format work.
-Usage: python tools/encode_test.py stories/mau-k11.json tests/fixtures/pictures <out folder>"""
+Usage: python tools/encode_test.py stories/mau-k10.json tests/fixtures/pictures <out folder>"""
 from dataclasses import replace
 import json
 from pathlib import Path
