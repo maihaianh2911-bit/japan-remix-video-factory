@@ -35,6 +35,8 @@ from news.render import reading_weight              # noqa: E402
 from news.voice import request, speaker_id, spoken_times   # noqa: E402
 
 W, H, FPS = 1080, 1920, 30
+PW, PH = W, H          # the size of the moving picture: the whole frame, or the box of the "frame" layout
+BOX = (60, 360, 960, 1200)          # "frame" layout: x, y, width, height of the picture's box
 RATE = 24000
 UA = {"User-Agent": "japan-video-factory/1.0 (trial of short clips; GitHub Actions) python-urllib"}
 BROWSER = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"}
@@ -333,6 +335,31 @@ def caption_layers(text):
     return [(shadowed(image), 0.0)]
 
 
+def framed_caption_layers(text):
+    """A caption on the foot of the picture's box, on a dark rounded band so that it reads on snow and sky."""
+    size = 74
+    rows = rows_of(text, 12)
+    image = canvas()
+    draw = ImageDraw.Draw(image)
+    face = font(size)
+    widest = max(sum(draw.textlength(t, font=face) for t, _ in spans(row)) for row in rows)
+    centre = BOX[1] + BOX[3] - 70 - (len(rows) - 1) * size // 2
+    total = len(rows) * size + (len(rows) - 1) * int(size * 0.22)
+    draw.rounded_rectangle(((W - widest) / 2 - 34, centre - total / 2 - 22, (W + widest) / 2 + 34,
+                            centre + total / 2 + 26), 30, fill=(0, 0, 0, 150))
+    draw_rows(draw, rows, centre, size, [WHITE] * len(rows), 6)
+    return [(image, 0.0)]
+
+
+def header_layers(lines):
+    """The question of the video, above the picture's box, for the whole video."""
+    size = min(96, 940 // max(len(plain(line)) for line in lines))
+    image = canvas()
+    draw_rows(ImageDraw.Draw(image), lines, BOX[1] // 2 + 25, size,
+              [WHITE] * len(lines), 10)
+    return [(shadowed(image, 12, 200), 0.0)]
+
+
 def title_layers(lines, number=None, top=520):
     """The big title as layers that come in one after the other: (image, delay in seconds)."""
     layers = []
@@ -451,7 +478,37 @@ class Layer:
         frame.alpha_composite(small, (round(centre_x - width / 2), round(centre_y - height / 2)))
 
 
-def compose(clips, layers, length, target):
+class Framed:
+    """The "frame" layout: the picture in a rounded box with a soft shadow, over a blurred and darkened copy of
+    itself that fills the screen."""
+    def __init__(self):
+        from PIL import ImageFilter
+        x, y, w, h = BOX
+        self.mask = Image.new("L", (w, h), 0)
+        ImageDraw.Draw(self.mask).rounded_rectangle((0, 0, w - 1, h - 1), 38, fill=255)
+        shade = Image.new("L", (W, H), 0)
+        ImageDraw.Draw(shade).rounded_rectangle((x, y + 16, x + w, y + h + 16), 38, fill=190)
+        self.shadow = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        self.shadow.putalpha(shade.filter(ImageFilter.GaussianBlur(26)))
+        self.edge = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        ImageDraw.Draw(self.edge).rounded_rectangle((x - 3, y - 3, x + w + 2, y + h + 2), 41,
+                                                    outline=(255, 255, 255, 215), width=5)
+
+    def __call__(self, picture):
+        from PIL import ImageFilter, ImageEnhance
+        small = picture.resize((45, 56), Image.BILINEAR).filter(ImageFilter.GaussianBlur(2.5))
+        scale = max(W / small.width, H / small.height)
+        size = (round(small.width * scale), round(small.height * scale))
+        back = small.resize(size, Image.BICUBIC)
+        back = back.crop(((size[0] - W) // 2, (size[1] - H) // 2, (size[0] - W) // 2 + W, (size[1] - H) // 2 + H))
+        frame = ImageEnhance.Brightness(back).enhance(0.48).convert("RGBA")
+        frame.alpha_composite(self.shadow)
+        frame.paste(picture, BOX[:2], self.mask)
+        frame.alpha_composite(self.edge)
+        return frame
+
+
+def compose(clips, layers, length, target, framed=None):
     """The clip track with the text drawn over it, frame by frame (the text grows in, as in the source)."""
     count = round(length * FPS)
     reader = subprocess.Popen(["ffmpeg", "-v", "error", "-i", str(clips), "-f", "rawvideo", "-pix_fmt", "rgb24",
@@ -459,7 +516,7 @@ def compose(clips, layers, length, target):
     writer = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}",
                                "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "medium", "-crf", "17",
                                "-pix_fmt", "yuv420p", str(target)], stdin=subprocess.PIPE)
-    size, last = W * H * 3, None
+    size, last = PW * PH * 3, None
     for number in range(count):
         data = reader.stdout.read(size)
         if len(data) < size:
@@ -467,7 +524,12 @@ def compose(clips, layers, length, target):
         last = data
         t = number / FPS
         active = [layer for layer in layers if layer.begin <= t < layer.end]
-        if active:
+        if framed:
+            frame = framed(Image.frombytes("RGB", (PW, PH), data))
+            for layer in active:
+                layer.draw(frame, t)
+            data = frame.convert("RGB").tobytes()
+        elif active:
             frame = Image.frombytes("RGB", (W, H), data).convert("RGBA")
             for layer in active:
                 layer.draw(frame, t)
@@ -497,14 +559,14 @@ def still_part(source, seconds, clip, target):
     move, fx, fy = clip.get("move", "in"), clip.get("x", 0.5), clip.get("y", 0.5)
     travel = clip.get("travel", 0.12)                       # how far the move goes: 12 % of the frame
     margin = 1 + travel
-    cover = max(W * margin / image.width, H * margin / image.height)
+    cover = max(PW * margin / image.width, PH * margin / image.height)
     if cover < 1:                                            # keep only the pixels the frames can use
         image = image.resize((round(image.width * cover), round(image.height * cover)), Image.LANCZOS)
         cover = 1.0
     image = ImageEnhance.Color(image).enhance(1.1)
-    full_w, full_h = W / cover, H / cover                    # the view at zoom 1 (with room to move)
+    full_w, full_h = PW / cover, PH / cover                    # the view at zoom 1 (with room to move)
     count = max(1, round(seconds * FPS))
-    writer = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}",
+    writer = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{PW}x{PH}",
                                "-r", str(FPS), "-i", "-", *PART_FORMAT, str(target)], stdin=subprocess.PIPE)
     for n in range(count):
         p = ease(n / max(1, count - 1))
@@ -525,7 +587,7 @@ def still_part(source, seconds, clip, target):
         view_w, view_h = min(view_w, image.width), min(view_h, image.height)   # rounding: never past the edge
         left = max(0.0, min(cx - view_w / 2, image.width - view_w))
         top = max(0.0, min(cy - view_h / 2, image.height - view_h))
-        frame = image.resize((W, H), Image.BICUBIC, box=(left, top, left + view_w, top + view_h))
+        frame = image.resize((PW, PH), Image.BICUBIC, box=(left, top, left + view_w, top + view_h))
         writer.stdin.write(frame.tobytes())
     writer.stdin.close()
     if writer.wait():
@@ -545,6 +607,10 @@ def fetch(entry, folder):
 
 
 def render(spec, out):
+    global PW, PH
+    framed = spec.get("layout") == "frame"
+    if framed:
+        PW, PH = BOX[2], BOX[3]
     out.mkdir(parents=True, exist_ok=True)
     work = out / "work"
     work.mkdir(exist_ok=True)
@@ -589,8 +655,8 @@ def render(spec, out):
             zoom = clip.get("zoom", 1.0)
             target = work / f"part_{s:02d}_{c}.mp4"
             vf = (f"setpts=PTS/{speed},"
-                  f"scale={round(W * zoom)}:{round(H * zoom)}:force_original_aspect_ratio=increase:flags=lanczos,"
-                  f"crop={W}:{H}:(iw-{W})*{x}:(ih-{H})*{y},fps={FPS},setsar=1,setpts=PTS-STARTPTS,"
+                  f"scale={round(PW * zoom)}:{round(PH * zoom)}:force_original_aspect_ratio=increase:flags=lanczos,"
+                  f"crop={PW}:{PH}:(iw-{PW})*{x}:(ih-{PH})*{y},fps={FPS},setsar=1,setpts=PTS-STARTPTS,"
                   "eq=saturation=1.12:contrast=1.04,"
                   # every part the same colour description (a change at a join made ffmpeg drop the text once)
                   "scale=out_color_matrix=bt709:out_range=tv,format=yuv420p,"
@@ -605,6 +671,9 @@ def render(spec, out):
 
     # the text: the hook title over the first scene, an item's number and name over its first line, captions
     layers = []
+    if spec.get("header"):
+        for image, delay in header_layers(spec["header"]):
+            layers.append(Layer(image, delay, length + 1))
     for s, l, text, start, duration, times in lines:
         scene = spec["scenes"][s]
         if l == 0 and scene.get("title"):
@@ -614,11 +683,11 @@ def render(spec, out):
                 layers.append(Layer(image, begin + delay, stop))
             continue
         for piece, b, e in piece_times(text, start, duration, times):
-            for image, delay in caption_layers(piece):
+            for image, delay in (framed_caption_layers if framed else caption_layers)(piece):
                 layers.append(Layer(image, b + delay, e))
     for layer in layers:
         print(f"text {layer.begin:6.2f}–{layer.end:6.2f}")
-    compose(work / "clips.mp4", layers, length, work / "picture.mp4")
+    compose(work / "clips.mp4", layers, length, work / "picture.mp4", Framed() if framed else None)
 
     # the sound: the voice, the music under it, the whole brought to about -14 LUFS
     music = spec.get("music")

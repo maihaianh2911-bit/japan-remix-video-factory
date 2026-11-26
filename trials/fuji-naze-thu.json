@@ -1,13 +1,23 @@
 {
- "stage": "find",
+ "stage": "render",
  "trial": true,
  "note": "Bản thử 20s, bố cục mới: câu hỏi cố định ở trên, ảnh trong khung ở giữa, phụ đề dưới ảnh. Kịch bản: なぜ富士山は夏しか登れない？",
  "layout": "frame",
- "header": ["なぜ富士山は", "*夏*しか登れない？"],
- "voice": ["もち子さん", "ノーマル"],
+ "header": [
+  "なぜ富士山は",
+  "*夏*しか登れない？"
+ ],
+ "voice": [
+  "もち子さん",
+  "ノーマル"
+ ],
  "speed": 1.2,
  "tail": 0.6,
- "music": {"file": "music/k10-sao-truc.mp3", "title": "竹笛", "volume": 0.25},
+ "music": {
+  "file": "music/k10-sao-truc.mp3",
+  "title": "竹笛",
+  "volume": 0.25
+ },
  "searches": [
   "mount fuji",
   "mount fuji summer",
@@ -20,5 +30,85 @@
   "photo:Mount Fuji crater",
   "photo:Mount Fuji sunrise goraiko"
  ],
- "scenes": []
+ "scenes": [
+  {
+   "label": "hook",
+   "lines": [
+    {
+     "text": "富士山に登れるのは、1年のうち、たった*2か月*ほど。",
+     "say": "富士山に登れるのは、1年のうち、たった、にかげつほど。"
+    },
+    "いったい、なぜなのでしょうか。"
+   ],
+   "clips": [
+    {
+     "id": "p214939",
+     "start": 1,
+     "x": 0.5
+    }
+   ]
+  },
+  {
+   "label": "season",
+   "lines": [
+    "富士山の登山道が開くのは、毎年*7月上旬*から*9月上旬*まで。"
+   ],
+   "clips": [
+    {
+     "id": "ib961b126",
+     "move": "in",
+     "x": 0.4,
+     "y": 0.5
+    }
+   ]
+  },
+  {
+   "label": "closed",
+   "lines": [
+    "それ以外の季節は、*閉ざされて*しまいます。"
+   ],
+   "clips": [
+    {
+     "id": "p248447",
+     "start": 1,
+     "x": 0.45
+    }
+   ]
+  },
+  {
+   "label": "cold",
+   "lines": [
+    "理由は、山頂の*厳しい寒さ*です。"
+   ],
+   "clips": [
+    {
+     "id": "i881c6d9a",
+     "move": "in",
+     "x": 0.5,
+     "y": 0.45
+    }
+   ]
+  },
+  {
+   "label": "summit",
+   "lines": [
+    "標高3776メートルの山頂は、ふもとより*20度以上*も気温が低く、",
+    "真夏の8月でも、平均気温は*およそ6度*。"
+   ],
+   "clips": [
+    {
+     "id": "i4997ea2e",
+     "move": "left",
+     "y": 0.5
+    },
+    {
+     "id": "ia6674071",
+     "move": "in",
+     "x": 0.5,
+     "y": 0.4
+    }
+   ]
+  }
+ ],
+ "scene_pause": 0.12
 }
