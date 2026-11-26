@@ -1,5 +1,5 @@
 {
- "stage": "find",
+ "stage": "render",
  "note": "Bản thử 20 giây: video dựng bằng đoạn video (Pixabay), chữ to giữa màn hình. Kênh mới (cảnh đẹp Nhật).",
  "voice": [
   "もち子さん",
@@ -46,7 +46,7 @@
    ],
    "clips": [
     {
-     "id": 136017,
+     "id": "p136017",
      "start": 0
     }
    ]
@@ -67,12 +67,16 @@
    ],
    "clips": [
     {
-     "id": 53789,
-     "start": 2
+     "id": "p53789",
+     "start": 1
     },
     {
-     "id": 257871,
+     "id": "p239191",
      "start": 0
+    },
+    {
+     "id": "c8b348c77",
+     "start": 12
     }
    ]
   },
@@ -88,15 +92,20 @@
    ],
    "clips": [
     {
-     "id": 266009,
+     "id": "p266009",
      "start": 1,
-     "x": 0.3
+     "x": 0.28
     },
     {
-     "id": 327388,
-     "start": 2
+     "id": "p266006",
+     "start": 8
+    },
+    {
+     "id": "p327388",
+     "start": 3
     }
    ]
   }
- ]
+ ],
+ "tail": 0.6
 }
