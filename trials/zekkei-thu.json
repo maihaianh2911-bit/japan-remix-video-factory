@@ -1,0 +1,9 @@
+{
+ "stage": "find",
+ "note": "Bản thử 20 giây: video dựng bằng đoạn video (Pixabay), chữ to giữa màn hình. Kênh mới (cảnh đẹp Nhật).",
+ "voice": ["もち子さん", "ノーマル"],
+ "speed": 1.2,
+ "music": {"file": "music/k10-sao-truc.mp3", "title": "竹笛", "volume": 0.25},
+ "searches": ["fushimi inari", "伏見稲荷", "torii", "shirakawa-go", "白川郷", "gassho", "mount fuji", "富士山"],
+ "scenes": []
+}
