@@ -132,10 +132,11 @@ owner first. **In the push that sets `stage: "render"`, add the story's line** a
 name between backticks): `python -m news.custom` warns of a story at stage render that is not in the list. Trials
 and samples are not listed as videos. The story files stay in `stories/` as the scripts of the videos made.
 **The chosen pictures stay too** (owner, 26/11/2026: "kho ảnh đã đc chọn thì để lại nhé"): the reviewed picks of the
-eleven k10 videos made to 26/11/2026 are in `stories/media/library/<story>/` (175 pictures; `credits.json` says for
-each the scene it showed, its search, its page and author). A new video about the same people looks there first and
+eleven k10 videos made to 26/11/2026 are in `stories/media/library/<story>/` (175 pictures; `credits.txt` says for
+each the scene it showed, its search, its page and author; a `.txt` on purpose: the workflow takes every
+`.json` under `stories/` for a story). A new video about the same people looks there first and
 takes a picture with a search `file:stories/media/library/<story>/<file>`; its credit is written by hand from
-`credits.json` (this engine credits a `file:` picture as 元動画: correct it in the caption's credit line and say so in
+`credits.txt` (this engine credits a `file:` picture as 元動画: correct it in the caption's credit line and say so in
 the closing comment). From now on, before a video is deleted from `renders`, its reviewed picks are saved there the
 same way.
 

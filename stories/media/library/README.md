@@ -1,8 +1,8 @@
 # Kho ảnh đã chọn — kênh 10 (chủ kênh, 26/11/2026: "kho ảnh đã đc chọn thì để lại nhé")
 
-Ảnh đã qua vòng duyệt của từng video, giữ lại khi video trên GitHub bị xoá. Mỗi thư mục là một video; `credits.json`
+Ảnh đã qua vòng duyệt của từng video, giữ lại khi video trên GitHub bị xoá. Mỗi thư mục là một video; `credits.txt`
 ghi mỗi ảnh thuộc cảnh nào, tìm bằng câu tìm nào, lấy từ trang nào, của ai. Video mới về cùng một người có thể dùng
-lại ảnh ở đây bằng một câu tìm `file:stories/media/library/<video>/<tên ảnh>` (nguồn ảnh ghi theo `credits.json`).
+lại ảnh ở đây bằng một câu tìm `file:stories/media/library/<video>/<tên ảnh>` (nguồn ảnh ghi theo `credits.txt`).
 
 | Video | Chuyện | Số ảnh |
 | --- | --- | --- |
