@@ -288,7 +288,7 @@ def caption_layers(text):
     return [(shadowed(image), 0.0)]
 
 
-def title_layers(lines, number=None):
+def title_layers(lines, number=None, top=520):
     """The big title as layers that come in one after the other: (image, delay in seconds)."""
     layers = []
     if number:
@@ -301,7 +301,7 @@ def title_layers(lines, number=None):
         return layers
     sizes = [min(150, 900 // max(1, len(plain(line)))) for line in lines]   # every line inside the box
     colours = [WHITE, ORANGE, WHITE, ORANGE]
-    y = 520
+    y = top                         # where the first line starts: keep the landmark of the picture clear
     total = sum(sizes) + 40 * (len(lines) - 1)
     box = canvas()
     ImageDraw.Draw(box).rounded_rectangle((50, y - 50, W - 50, y + total + 50), 40, fill=(0, 0, 0, 100))
@@ -309,7 +309,7 @@ def title_layers(lines, number=None):
     for n, (line, size, colour) in enumerate(zip(lines, sizes, colours)):
         image = canvas()
         draw_rows(ImageDraw.Draw(image), [line], y + size // 2, size, [colour], 13)
-        layers.append((shadowed(image), 0.1 + 0.22 * n))
+        layers.append((shadowed(image), 0.22 * n))
         y += size + 40
     return layers
 
@@ -502,7 +502,7 @@ def render(spec, out):
         if l == 0 and scene.get("title"):
             stop = edges[s + 1] if not scene.get("number") else start + duration + 0.3
             begin = edges[s]
-            for image, delay in title_layers(scene["title"], scene.get("number")):
+            for image, delay in title_layers(scene["title"], scene.get("number"), scene.get("title_top", 520)):
                 layers.append(Layer(image, begin + delay, stop))
             continue
         for piece, b, e in piece_times(text, start, duration, times):
