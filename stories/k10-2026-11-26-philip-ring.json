@@ -211,15 +211,12 @@
           "move": "push-in"
         },
         {
-          "pick": "17-5",
-          "focus": [
-            0.45,
-            0.5
-          ],
+          "pick": "17-9",
+          "fit": "contain",
           "move": "push-in"
         }
       ],
-      "why": "Chiếc nhẫn: bà Alice mẹ ông đội vương miện, rồi cận cảnh chiếc nhẫn kim cương."
+      "why": "Chiếc nhẫn: bà Alice mẹ ông đội vương miện, rồi chiếc nhẫn kim cương trên tay Nữ hoàng (cả ảnh, tiến lại gần)."
     },
     {
       "label": "結婚式",
