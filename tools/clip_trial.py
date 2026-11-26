@@ -302,7 +302,11 @@ def render(spec, out):
             x = clip.get("x", 0.5)
             target = work / f"part_{s:02d}_{c}.mp4"
             vf = (f"scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos,"
-                  f"crop={W}:{H}:(iw-{W})*{x}:(ih-{H})/2,fps={FPS},setsar=1")
+                  f"crop={W}:{H}:(iw-{W})*{x}:(ih-{H})/2,fps={FPS},setsar=1,setpts=PTS-STARTPTS,"
+                  # every part the same colour description: a change between two parts makes ffmpeg rebuild the
+                  # text graph at the join, and the one-frame text pictures are gone after it (trial of 26/11/2026)
+                  "scale=out_color_matrix=bt709:out_range=tv,format=yuv420p,"
+                  "setparams=range=tv:color_primaries=bt709:color_trc=bt709:colorspace=bt709")
             subprocess.run(["ffmpeg", "-v", "error", "-y", "-stream_loop", "-1", "-ss", str(clip.get("start", 0)),
                             "-i", str(source), "-t", f"{share:.3f}", "-an", "-vf", vf, "-c:v", "libx264",
                             "-preset", "veryfast", "-crf", "16", "-pix_fmt", "yuv420p", str(target)], check=True)
@@ -342,7 +346,9 @@ def render(spec, out):
         chain.append(f"[{m - 1}:a][mu]amix=inputs=2:duration=first:normalize=0,loudnorm=I=-14:TP=-1.5[a]")
     else:
         chain.append(f"[{m - 1}:a]loudnorm=I=-14:TP=-1.5[a]")
-    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(work / "clips.mp4"), *inputs, *audio_in,
+    for path, b, e in overlays:
+        print(f"text {b:6.2f}–{e:6.2f}  {path.name}")
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-reinit_filter", "0", "-i", str(work / "clips.mp4"), *inputs, *audio_in,
                     "-filter_complex", ";".join(chain), "-map", f"[{last}]", "-map", "[a]", "-t", f"{length:.3f}",
                     "-c:v", "libx264", "-preset", "slow", "-crf", "20", "-pix_fmt", "yuv420p", "-c:a", "aac",
                     "-b:a", "192k", "-ar", "48000", "-movflags", "+faststart", str(out / "video.mp4")], check=True)
