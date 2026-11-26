@@ -107,6 +107,9 @@ picture and is welcome** (owner, 26/11/2026, after asking why the pictures were 
 dựng có màu đc ko", then "ảnh có màu ko tính là ảnh AI, ảnh AI tao nói đến là ảnh do chatgpt tạo ấy"): an "AI
 picture" is one an image generator made up (ChatGPT and the like), never used. For the old years search the
 colourised copy too (`web:… colorized`, `カラー化`) and prefer it when it is as sharp and shows the same moment.
+**One exception, and not for k10:** for the videos that explain a style of art (a trial, section "A trial: videos that
+explain a style of art") an AI picture found by a search may be used, never one made for the video (owner,
+26/11/2026: "Cho phép m dùng ảnh AI", then "Ảnh AI tìm kiếm thôi, k tạo").
 
 ## What this repo makes
 Vertical Japanese shorts (1080×1920, a little over 61 s) for **one channel, k10 (世界の王室)**. Until 26/11/2026 it made
@@ -197,6 +200,52 @@ channel file (and of the frame code when the look is new), never of each story.
   When suggesting scripts, offer topics of this kind. The voice and the music stay the channel's (もち子さん and the
   flute, chosen after the hit video was made with 青山龍星 and Nimrod): if the next three or four k10 love stories get
   no views, say so to the owner and offer a trial with the male voice again.
+
+## A trial: videos that explain a style of art (the `gallery` frame) — not a channel yet
+Owner, 26/11/2026: sent three Vietnamese TikTok videos of one channel (each explains one style: Deco Noir, Art
+Nouveau, Dark Fantasy; about 2 min 15 s; a film or a game everyone knows first, then where the style came from, the
+signs that tell it — shape, light, colour, material —, where it lives today, a question to the viewer at the end) and
+asked "Đây là dạng nội dung gì? Dựng cho nhật đc ko? Có làm nhiều video đủ xây kênh đc ko", then "làm thử".
+- **What the owner was told:** it can be made for Japan (Mucha is loved there, Dark Souls, Elden Ring and Berserk are
+  Japanese, Art Nouveau learned from ukiyo-e); there are well over 100 topics (Western styles, Japanese ones, the
+  styles of films, games and the internet, then comparisons and the style of one artist or film); whether it gets
+  views in Japan is **not known** (no Japanese channel of this kind was found; on the owner's channels only love
+  stories of famous people had views): try 2–3 videos before deciding. It is not k10 and none of the 14 channels: it
+  would be a new channel, with no number, name, voice or hashtags yet. The owner decides after the trial.
+- **AI pictures, for this kind of video only** (owner: "Cho phép m dùng ảnh AI", then "Ảnh AI tìm kiếm thôi, k
+  tạo"): an AI picture found by a search (`web:`, `page:`) may be used and is credited to its site like any web
+  picture; none is made for a video (neither Claude's session nor the machine has an image generator). How Claude
+  uses them, as told to the owner: an AI picture only shows the mood of a style, it is never named as a real work, a
+  real film still or a real person (the source videos print "Đại gia Gatsby 2013" and "Guts – Kentaro Miura" on AI
+  pictures: never here); what exists (a painting, a building) is shown by its real picture; when posting, a
+  realistic AI picture needs the platform's "AI content" label. k10 stays real pictures only.
+- **The `gallery` frame** (`"style": "gallery"`, `news/render.py`), made for the trial:
+  - the picture fills the whole frame, with a dark shade on its foot and its top. A horizontal picture is better
+    shown whole (`"fit": "contain"`: the pictures found are at most 1920 px wide, so one blown up to fill the height
+    looks soft): it then stands in the upper part, with a thin gold line around it;
+  - a picture entry may carry `"name"` and `"note"` (what it shows; who made it, when, where): its small dark card
+    above the captions. Pictures without a name share a card made of the scene's headline and evidence. (The other
+    frames accept the two keys and do not draw them.);
+  - a scene with a `"value"` prints the big title: the value (the name of the style, in capitals), a gold rule, the
+    headline in gold and the evidence small, over its picture, which is dimmed. Choose a picture without a face
+    there (rule 7: the title lies on the middle of the picture);
+  - the captions lie on the foot of the picture, larger than on a page (60 px), all there from the start: pale, gold
+    while the voice reads them, light once read; the hook line (a quote) is printed big there, and the card of the
+    picture stands above it;
+  - `kicker` is the name of the video, small at the top left from scene 2 on (not under a big title); `era` stands
+    at the top right; the credits are small at the bottom (the picture's at the left, music and voice at the right);
+  - the machine's face check counts the foot of the frame (the last third, more under the hook line) as covered by
+    text; a painting as the first picture is not warned about as a flat picture.
+  Not made: the drawn diagrams and maps of the source (the outline of a tower, colour swatches, a map with routes),
+  moving footage, a new channel file. Each needs new code and the owner's word.
+- **The trial video:** `stories/k10-2026-11-26-thu-art-nouveau.json` (about 25 s, `"trial": true`; under k10 only
+  because a story needs a channel, so it has k10's voice もち子さん and loudness, its own music, Debussy's Clair de
+  lune from a `music:` search, and the one edit warning that its style is not `story`). Real pictures only, nine of
+  them, all from Wikimedia Commons. Its find folder was made by the workflow run from the session's branch (Run
+  workflow with that branch as the ref: the workflow reads the story and the code of the branch it is run from).
+- **State on 26/11/2026:** the trial was sent to the owner in the chat and the look is **not approved yet**. The
+  frame and the trial story were made on the branch of that chat session; they come to `main` when the owner
+  approves the look. Until then: no channel for it and no other video in this frame, and k10 keeps the `story` frame.
 
 ## The edit: the channel edits as Tin Nhật does
 Owner, 18/11/2026: "cho 4 kênh này học cách edit của kênh tin nhật đi, học tốt vào" — the channels of this repo (k10 alone since 26/11/2026) edit exactly as
@@ -374,7 +423,7 @@ allow `main`.
      story reaches today). `"music": {"pick": "<k>-<n>", "volume": 1}` from a search `music:<words>` (recordings on
      Wikimedia Commons with a free licence, e.g. `music:Schumann Träumerei piano`, `music:Gymnopédie Satie piano`;
      index.json gives title, `seconds` and licence; the piece loops, fades in and out, about 17 dB under the voice,
-     credited on screen and in credits.txt). (`"style": "news"` and `"paper"`, the other frames of the engine, are
+     credited on screen and in credits.txt). (`"style": "gallery"` is the frame of the trial above; `"style": "news"` and `"paper"`, the other frames of the engine, are
      not part of the edit of these channels.)
    - `"fx"` (inherited, all four on): `motion` (the camera starts quick and settles), `depth` (a picture that fills
      the frame gets a light depth from a depth map, Depth Anything V2 Small; **a flat picture gets `"depth": false`**
@@ -504,7 +553,7 @@ inherited defaults, the edit warnings, the voice taken from the channel file, ca
 channel lists, the 60-second refusal), draws the stills of every sample story from `tests/fixtures/pictures/`
 (Wikimedia Commons pictures of the Bank of Japan, banknotes, supermarkets and Edo-period boxes, and 20 seconds of
 Schumann's Träumerei, all under free licences, downsized; authors and licences in its `index.json`: the samples'
-pictures are stand-ins, so samples carry no `review`), encodes 3 seconds of video in the three frames and every move
+pictures are stand-ins, so samples carry no `review`), encodes 3 seconds of video in the four frames and every move
 and cut of the catalogue (`tools/encode_test.py`, `tools/edits_test.py`), and with `--fx` checks the effects
 (`tools/fx_test.py`). A push of code to `main` runs the same with `--fx` on GitHub (the stills are in the run's
 Artifacts); a change of a sample story `stories/mau-*.json` or its caption runs it too (samples are never voiced or

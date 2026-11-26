@@ -1,6 +1,7 @@
-"""Encode 3 seconds of a story without the voice engine: two scenes with a scene change, in the three frames (news,
-paper with its film grain, story with a quote over the picture and a test tone as music under the voice), with silence
-as the voice. Checks that the frames, FFmpeg, the music mix and the output format work.
+"""Encode 3 seconds of a story without the voice engine: two scenes with a scene change, in the four frames (news,
+paper with its film grain, story with a quote over the picture and a test tone as music under the voice, gallery with
+the hook line, the cards that name its pictures and a big title), with silence as the voice. Checks that the frames,
+FFmpeg, the music mix and the output format work.
 Usage: python tools/encode_test.py stories/mau-k10.json tests/fixtures/pictures <out folder>"""
 from dataclasses import replace
 import json
@@ -24,22 +25,26 @@ def main():
     half = SECONDS / len(beats)
     intervals = [(index * half, (index + 1) * half) for index in range(len(beats))]
     captions = [Caption(start, end, caption_chunks(beat.lines[0])[0]) for beat, (start, end) in zip(beats, intervals)]
-    for name in ("news", "paper", "story"):
+    for name in ("news", "paper", "story", "gallery"):
         folder = out / name
         folder.mkdir(parents=True, exist_ok=True)
-        scene_beats, scene_release = beats, release
-        if name == "story":   # the first line printed big as a quote, a test tone as the music
+        scene_beats, scene_release, scene_photos = beats, release, photos
+        if name in ("story", "gallery"):   # the first line printed big as a quote, a test tone as the music
             tone = folder / "tone.ogg"
             subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "sine=frequency=330:duration=2",
                             "-c:a", "libvorbis", str(tone)], check=True)
             scene_beats = [replace(beats[0], quotes=(0,), era="1921年"), *beats[1:]]
             scene_release = replace(release, music=Music(str(tone), "Test tone.ogg", "", "", ""))
+        if name == "gallery":   # every picture named on its card, the second scene with the big title of a "value"
+            scene_beats = [scene_beats[0], *(replace(beat, value="ART NOUVEAU") for beat in scene_beats[1:])]
+            scene_photos = {index: [replace(photo, name="見本の名前", note="作者・1900年") for photo in group]
+                            for index, group in photos.items()}
         wav = folder / "silence.wav"
         with wave.open(str(wav), "wb") as silence:
             silence.setparams((1, 2, RATE, 0, "NONE", "not compressed"))
             silence.writeframes(bytes(2 * int(SECONDS * RATE)))
         use_style(name)
-        encode(scene_beats, scene_release, photos, False, intervals, captions, wav, folder)
+        encode(scene_beats, scene_release, scene_photos, False, intervals, captions, wav, folder)
         wav.unlink()
         probe = json.loads(subprocess.run(
             ["ffprobe", "-v", "error", "-show_entries", "stream=codec_name,codec_type,width,height,r_frame_rate:"

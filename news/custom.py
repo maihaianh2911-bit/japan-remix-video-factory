@@ -33,10 +33,12 @@ HOOK_LIMIT = 55   # the hook line is said in about 5 seconds: 45-50 characters a
 # a scene whose words last over TWO_FROM seconds has at least two pictures. Before the voice is made the length
 # is estimated: about SPOKEN written characters a second at speed 1.2, pauses included (CLAUDE.md, "Length").
 TWO_FROM, SPOKEN = 6.0, 6.4
-STYLES = ("news", "paper", "story")
+STYLES = ("news", "paper", "story", "gallery")
 SCENE_KEYS = {"label", "headline", "lines", "value", "evidence", "photo", "cut", "why", "era"}
 LINE_KEYS = {"text", "say", "quote"}
-PHOTO_KEYS = {"pick", "focus", "fit", "move", "tone", "depth"}
+PHOTO_KEYS = {"pick", "focus", "fit", "move", "tone", "depth", "name", "note"}
+# "name", "note": what the picture shows and who made it, when, where: the card of the picture in the "gallery"
+# frame (the other frames do not draw them)
 FX_KEYS = {"motion", "depth", "text", "face"}
 TONES = ("sepia", "mono", "color")
 MUSIC_KEYS = {"pick", "volume", "start", "file", "title", "creator", "license", "page"}
@@ -177,6 +179,10 @@ def check_photo(photo, where, searches):
         problems.append(f'{where}: "depth" must be true or false (false: a flat picture such as a document), got {photo["depth"]!r}')
     if "tone" in photo and photo["tone"] not in TONES:
         problems.append(f'{where}: "tone" must be one of {", ".join(TONES)}, got {photo["tone"]!r}')
+    for key in ("name", "note"):
+        problems += text_problem(photo.get(key), f'{where}: "{key}"', required=False)
+    if photo.get("note") and not photo.get("name"):
+        problems.append(f'{where}: "note" stands under a "name" (what the picture shows): give the "name" too')
     problems += move_problems(photo, where)
     return problems
 
@@ -558,7 +564,8 @@ def load_story(path, pictures=None):
                 photos[index].append(Photo(image, entry["page"], entry["title"].removeprefix("File:"),
                                            entry.get("artist") or "Wikimedia Commons", entry.get("license", ""),
                                            entry.get("license_url", ""), tuple(pick.get("focus", (0.5, 0.5))),
-                                           pick.get("fit", "cover"), pick.get("move", ""), pick.get("depth", True)))
+                                           pick.get("fit", "cover"), pick.get("move", ""), pick.get("depth", True),
+                                           pick.get("name", ""), pick.get("note", "")))
     return release, beats, photos
 
 
