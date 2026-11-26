@@ -1,5 +1,5 @@
 {
- "stage": "render",
+ "stage": "find",
  "note": "Kênh mới (cảnh đẹp Nhật): 死ぬまでに一度は見たい日本の絶景トップ3. Video dựng bằng đoạn video, chữ to giữa màn hình.",
  "voice": [
   "もち子さん",
@@ -13,18 +13,12 @@
   "volume": 0.25
  },
  "searches": [
-  "tokyo mount fuji",
-  "tokyo skyline fuji",
-  "fox statue shrine",
-  "kyoto tourists",
-  "torii tunnel",
-  "red torii",
-  "shirakawa light up",
-  "thatched roof snow",
-  "japan pagoda sunset",
-  "japan autumn temple",
-  "commons:Fushimi Inari-taisha",
-  "commons:Mount Fuji Tokyo"
+  "photo:Fushimi Inari-taisha torii",
+  "photo:Fushimi Inari fox statue",
+  "photo:Fushimi Inari Inariyama",
+  "photo:Hokusai Fine Wind Clear Morning",
+  "photo:Shirakawa-go illumination",
+  "photo:Shirakawa-go gassho"
  ],
  "scenes": [
   {

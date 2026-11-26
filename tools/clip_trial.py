@@ -8,7 +8,10 @@ the screen (the style of the source the owner sent on 26/11/2026). A trial only,
 The clips come from Pixabay (free licence, no credit required; credited all the same in credits.txt; the key is
 the secret PIXABAY_API_KEY), Wikimedia Commons (free licences, author and licence in credits.txt) and Mixkit (free
 licence; its free files are 720p, so mostly for a horizontal shot shown smaller). A search is "<words>" (Pixabay),
-"commons:<words>" or "mixkit:<words>". AI-generated clips are allowed (owner, 26/11/2026: "K cần bỏ video AI, m đc phép
+"commons:<words>" or "mixkit:<words>". A scene may also show a still photograph that moves (owner, 26/11/2026: "K cần
+cố ép full video đâu, có thể xem vào hình ảnh 4k rồi cho chuyển động cg đc"): "photo:<words>" searches Wikimedia
+Commons for photographs of at least 2500 px (free licences, author and licence credited); a clip whose id starts
+with "i" is such a photo, shown with a slow move ("move": in, out, left, right, up, down; "x"/"y": the point kept). AI-generated clips are allowed (owner, 26/11/2026: "K cần bỏ video AI, m đc phép
 dùng"); the sheet marks them "AI" so that each can be looked at.
 """
 import hashlib
@@ -113,6 +116,32 @@ def commons_hits(words):
     return found
 
 
+def photo_hits(words):
+    """Photographs on Wikimedia Commons, at least 2500 px on their long side (a 4K-ish still that can move)."""
+    url = ("https://commons.wikimedia.org/w/api.php?action=query&format=json&generator=search&gsrnamespace=6"
+           "&gsrlimit=50&gsrsearch=" + urllib.parse.quote(f"filetype:bitmap {words}")
+           + "&prop=imageinfo&iiprop=url%7Csize%7Cmime%7Cextmetadata&iiurlwidth=400"
+           "&iiextmetadatafilter=Artist%7CLicenseShortName%7CDateTimeOriginal")
+    pages = json.loads(get(url)).get("query", {}).get("pages", {}).values()
+    found = []
+    for page in sorted(pages, key=lambda p: p.get("index", 0)):
+        info = (page.get("imageinfo") or [{}])[0]
+        if max(info.get("width", 0), info.get("height", 0)) < 2500 or info.get("mime") not in ("image/jpeg", "image/png", "image/tiff"):
+            continue
+        meta = info.get("extmetadata") or {}
+        artist = re.sub(r"<[^>]+>", "", (meta.get("Artist") or {}).get("value", "")).strip()
+        thumb = info.get("thumburl") or info["url"]
+        large = info["url"] if max(info["width"], info["height"]) <= 5000 or "/400px-" not in thumb \
+            else thumb.replace("/400px-", "/4000px-")
+        found.append({"key": "i" + hashlib.md5(page["title"].encode()).hexdigest()[:8], "source": "Wikimedia Commons",
+                      "w": info["width"], "h": info["height"], "seconds": 0, "ai": False, "photo": True,
+                      "title": page["title"][5:], "page": info.get("descriptionurl"), "author": artist[:80],
+                      "licence": (meta.get("LicenseShortName") or {}).get("value", "?"), "url": large,
+                      "preview": thumb, "score": 0})
+    time.sleep(1)
+    return found
+
+
 def mixkit_hits(words):
     body = get(f"https://mixkit.co/free-stock-video/{words.replace(' ', '-')}/", headers=BROWSER).decode("utf-8", "replace")
     found, seen = [], set()
@@ -129,7 +158,19 @@ def mixkit_hits(words):
 
 
 def frames_of(entry, folder):
-    """Three small frames of a clip (a sixth, the middle, five sixths in), read straight from its file."""
+    """Three small frames of a clip (a sixth, the middle, five sixths in), read straight from its file; a photo's
+    small picture alone."""
+    if entry.get("photo"):
+        path = folder / f"{entry['key']}.jpg"
+        try:
+            if not path.exists():
+                path.write_bytes(get(entry["preview"]))
+                time.sleep(0.3)
+            picture = Image.open(path).convert("RGB")
+            picture.thumbnail((300, 300))
+            return [picture]
+        except Exception:
+            return [Image.new("RGB", (300, 169), (60, 60, 60))]
     pictures = []
     seconds = entry["seconds"] or 10
     for n, share in enumerate((1 / 6, 1 / 2, 5 / 6)):
@@ -152,9 +193,11 @@ def find(spec, out, keep=9):
     frames.mkdir(exist_ok=True)
     index = json.loads((out / "index.json").read_text()) if (out / "index.json").exists() else {}
     for number, search in enumerate(spec["searches"], 1):
-        kind, _, words = search.partition(":") if search.split(":")[0] in ("commons", "mixkit") else ("pixabay", "", search)
+        kind, _, words = search.partition(":") if search.split(":")[0] in ("commons", "mixkit", "photo") \
+            else ("pixabay", "", search)
         try:
-            hits = {"pixabay": pixabay_hits, "commons": commons_hits, "mixkit": mixkit_hits}[kind](words)
+            hits = {"pixabay": pixabay_hits, "commons": commons_hits, "mixkit": mixkit_hits,
+                    "photo": photo_hits}[kind](words)
         except Exception as error:
             print(f"::warning::{search}: {error}")
             hits = []
@@ -164,7 +207,8 @@ def find(spec, out, keep=9):
         hits = hits[:keep]
         for hit in hits:
             index[hit["key"]] = hit
-        tiles = [(frames_of(hit, frames), f"{hit['key']}  {hit['w']}x{hit['h']}  {hit['seconds']}s"
+        tiles = [(frames_of(hit, frames), f"{hit['key']}  {hit['w']}x{hit['h']}  "
+                  + ("ảnh" if hit.get("photo") else f"{hit['seconds']}s")
                   + ("  AI" if hit["ai"] else ""), (hit["title"] or "")[:44]) for hit in hits]
         sheet(tiles, f"{number}. {search}  ({len(hits)} mới)", out / f"sheet_{number:02d}.jpg")
     (out / "index.json").write_text(json.dumps(index, ensure_ascii=False, indent=1))
@@ -435,7 +479,64 @@ def compose(clips, layers, length, target):
         raise RuntimeError("compose failed")
 
 
+PART_FORMAT = ["-c:v", "libx264", "-preset", "veryfast", "-crf", "14", "-pix_fmt", "yuv420p",
+               "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709", "-color_range", "tv"]
+
+
+def ease(p):
+    """Slow at both ends (a sine), so that a still glides rather than jerks."""
+    import math
+    return 0.5 - 0.5 * math.cos(math.pi * min(1.0, max(0.0, p)))
+
+
+def still_part(source, seconds, clip, target):
+    """A photograph as a moving shot: a slow zoom or pan over it, drawn frame by frame with sub-pixel steps
+    (an ffmpeg zoompan steps by whole pixels and shakes)."""
+    from PIL import ImageEnhance
+    image = Image.open(source).convert("RGB")
+    move, fx, fy = clip.get("move", "in"), clip.get("x", 0.5), clip.get("y", 0.5)
+    travel = clip.get("travel", 0.12)                       # how far the move goes: 12 % of the frame
+    margin = 1 + travel
+    cover = max(W * margin / image.width, H * margin / image.height)
+    if cover < 1:                                            # keep only the pixels the frames can use
+        image = image.resize((round(image.width * cover), round(image.height * cover)), Image.LANCZOS)
+        cover = 1.0
+    image = ImageEnhance.Color(image).enhance(1.1)
+    full_w, full_h = W / cover, H / cover                    # the view at zoom 1 (with room to move)
+    count = max(1, round(seconds * FPS))
+    writer = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}",
+                               "-r", str(FPS), "-i", "-", *PART_FORMAT, str(target)], stdin=subprocess.PIPE)
+    for n in range(count):
+        p = ease(n / max(1, count - 1))
+        if move in ("in", "out"):
+            zoom = 1 + travel * (p if move == "in" else 1 - p)
+            view_w, view_h = full_w * margin / zoom, full_h * margin / zoom
+            cx, cy = fx * image.width, fy * image.height
+        else:
+            view_w, view_h = full_w * margin / (1 + travel / 2), full_h * margin / (1 + travel / 2)
+            span_x, span_y = image.width - view_w, image.height - view_h
+            cx, cy = fx * image.width, fy * image.height
+            if move in ("left", "right"):
+                start, end = (0.75, 0.25) if move == "left" else (0.25, 0.75)
+                cx = view_w / 2 + span_x * (start + (end - start) * p)
+            else:
+                start, end = (0.75, 0.25) if move == "up" else (0.25, 0.75)
+                cy = view_h / 2 + span_y * (start + (end - start) * p)
+        left = min(max(cx - view_w / 2, 0), image.width - view_w)
+        top = min(max(cy - view_h / 2, 0), image.height - view_h)
+        frame = image.resize((W, H), Image.BICUBIC, box=(left, top, left + view_w, top + view_h))
+        writer.stdin.write(frame.tobytes())
+    writer.stdin.close()
+    if writer.wait():
+        raise RuntimeError(f"still part {target.name} failed")
+
+
 def fetch(entry, folder):
+    if entry.get("photo"):
+        path = folder / (entry["key"] + ".jpg")
+        if not path.exists():
+            path.write_bytes(get(entry["url"], timeout=300))
+        return path
     path = folder / (entry["key"] + (".webm" if entry["url"].endswith(".webm") else ".mp4"))
     if not path.exists():
         path.write_bytes(get(entry["url"], timeout=600))
@@ -478,6 +579,11 @@ def render(spec, out):
                            f"{entry.get('author') or '?'} — {entry.get('licence')} — {entry.get('page')}"
                            + ("  (AI-generated)" if entry.get("ai") else ""))
             seconds = cuts[c + 1] - cuts[c]
+            if entry.get("photo"):
+                target = work / f"part_{s:02d}_{c}.mp4"
+                still_part(source, seconds, clip, target)
+                parts.append(target)
+                continue
             x, y, speed = clip.get("x", 0.5), clip.get("y", 0.5), clip.get("speed", 1.0)
             zoom = clip.get("zoom", 1.0)
             target = work / f"part_{s:02d}_{c}.mp4"
@@ -489,8 +595,8 @@ def render(spec, out):
                   "scale=out_color_matrix=bt709:out_range=tv,format=yuv420p,"
                   "setparams=range=tv:color_primaries=bt709:color_trc=bt709:colorspace=bt709")
             subprocess.run(["ffmpeg", "-v", "error", "-y", "-stream_loop", "-1", "-ss", str(clip.get("start", 0)),
-                            "-i", str(source), "-t", f"{seconds:.3f}", "-an", "-vf", vf, "-c:v", "libx264",
-                            "-preset", "veryfast", "-crf", "14", "-pix_fmt", "yuv420p", str(target)], check=True)
+                            "-i", str(source), "-t", f"{seconds:.3f}", "-an", "-vf", vf, *PART_FORMAT, str(target)],
+                           check=True)
             parts.append(target)
     (work / "list.txt").write_text("".join(f"file '{p.name}'\n" for p in parts))
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(work / "list.txt"),
