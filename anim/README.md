@@ -9,9 +9,12 @@ là kênh bản đồ; không cần tên kênh hay hashtag riêng), *"mình sẽ
 hình 2D; bỏ các hình nhỏ nổi 3D của video gốc). Về nội dung, Claude đề nghị lấy "ranh giới" làm trục (kể các sự thật về vùng và đường ranh); chủ kênh trả lời:
 *"Tao lại nghĩ nên gắn cho nó 1 câu chuyện"*. Vậy **mỗi video của kênh bản đồ là một câu chuyện** (có người, có
 biến cố, có ý nghĩa, như các bài học kịch bản trong `docs/KENH-NHAT.md`), bản đồ là nơi câu chuyện diễn ra: đường
-đi, khoảng cách, ranh giới hiện lên theo lời kể. Không làm video chỉ liệt kê sự thật về bản đồ. Claude đề nghị vài
-chuyện đầu (伊能忠敬, 桶狭間, 淡路島, ジョン万次郎): chủ kênh chưa chọn. Tránh chuyện "nếu thắng chiến tranh" và lãnh thổ
-tranh chấp (đề nghị của Claude, chủ kênh chưa nói gì).
+đi, khoảng cách, ranh giới hiện lên theo lời kể. Không làm video chỉ liệt kê sự thật về bản đồ. Các chuyện lịch sử
+Claude đề nghị đầu tiên (伊能忠敬, 桶狭間, 淡路島, ジョン万次郎) bị chê: *"Ko hay tí nào"*. Hỏi lại bằng bốn kiểu chuyện, chủ
+kênh chọn **"Samurai là nhân vật chính"**: nhân vật samurai có chuyện riêng xuyên suốt cả kênh, mỗi tập nó đi tới
+một vùng, tập sau nối tập trước. Ba kiểu chủ kênh không chọn: nơi bí ẩn có thật, "Nhật suýt thành thế này", trốn
+chạy và truy đuổi. Claude đã đưa cốt truyện và kịch bản tập 1 trong chat (samurai thời Chiến Quốc của Nobunaga lạc
+tới nước Nhật bây giờ, đi hết 47 tỉnh để tìm đường về với mẹ; tập 1 là Aichi): **chờ chủ kênh duyệt**.
 Chưa chốt: repo của kênh, giọng đọc, nhân vật.
 
 1. **Kiểu khung (`layout` mặc định, `stage/index.html`)**: theo video TikTok của @otona_study (「大人の教養」): tiêu
