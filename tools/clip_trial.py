@@ -189,15 +189,16 @@ def sheet(tiles, title, path):
 # ---------------------------------------------------------------- text
 
 def plain(text):
-    return text.replace("*", "")
+    return text.replace("*", "").replace("|", "")
 
 
 def chunks_of(line, longest=13):
     """The caption pieces of a line, cut at its commas and stops, a long piece cut again near its middle after a
-    particle; '*' marks the keyword spans (shown yellow) and stays in the pieces."""
+    particle; '*' marks the keyword spans (shown yellow) and stays in the pieces; '|' is a break chosen by hand
+    (neither shown nor spoken)."""
     pieces, current = [], ""
     for char in line:
-        if char in "、。！？":
+        if char in "、。！？|":
             if plain(current).strip():
                 pieces.append(current)
             current = ""
