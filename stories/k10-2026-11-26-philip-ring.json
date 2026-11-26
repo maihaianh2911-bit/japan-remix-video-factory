@@ -1,7 +1,7 @@
 {
   "channel": "k10",
   "issue": 15,
-  "stage": "find",
+  "stage": "render",
   "title": "すべてを捨てた王子 フィリップ殿下とエリザベス女王の婚約指輪",
   "date": "2026-11-26",
   "searches": [
@@ -42,7 +42,23 @@
           "text": "エリザベス女王と結婚するために、フィリップ殿下は、王子の称号も、自分の名字さえも捨てました。",
           "quote": true
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "16-8",
+          "focus": [
+            0.5,
+            0.22
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "10-11",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "why": "Mở đầu: ảnh đính hôn 1947, hai người nhìn nhau cười (Philip trẻ, đẹp trai), rồi ảnh màu hai người cười với nhau (cả ảnh, tiến lại gần)."
     },
     {
       "label": "出会い",
@@ -50,7 +66,27 @@
       "headline": "13歳の\n初恋",
       "lines": [
         "1939年、海軍の学校で、13歳の王女エリザベスは、18歳の青年に恋をしました。"
-      ]
+      ],
+      "cut": "dip",
+      "photo": [
+        {
+          "pick": "13-1",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "11-2",
+          "focus": [
+            0.5,
+            0.4
+          ],
+          "move": "push-in"
+        }
+      ],
+      "why": "Lùi về 1939: cô bé Elizabeth 13 tuổi, rồi chàng thiếu sinh quân Philip 18 tuổi."
     },
     {
       "label": "戦争",
@@ -58,7 +94,27 @@
       "headline": "戦地との\n手紙",
       "lines": [
         "戦争のあいだも、二人はずっと手紙を送り合いました。"
-      ]
+      ],
+      "cut": "fade",
+      "photo": [
+        {
+          "pick": "1-17",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "15-3",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "why": "Chiến tranh: Philip sĩ quan hải quân để râu (thời chiến), rồi Elizabeth trong quân phục 1945: thư qua lại hai phía."
     },
     {
       "label": "求婚",
@@ -66,7 +122,19 @@
       "headline": "すぐに\n受け入れた",
       "lines": [
         "1946年の夏、殿下が求婚すると、王女はすぐに受け入れました。"
-      ]
+      ],
+      "cut": "fade",
+      "photo": [
+        {
+          "pick": "1-22",
+          "focus": [
+            0.5,
+            0.25
+          ],
+          "move": "push-in"
+        }
+      ],
+      "why": "Lời cầu hôn được nhận lời: ảnh đính hôn của hai người."
     },
     {
       "label": "反対",
@@ -74,7 +142,20 @@
       "headline": "王室の中の\n反対",
       "lines": [
         "けれど王室の中には、権力も財産もない殿下に、反対する声がありました。"
-      ]
+      ],
+      "cut": "hard",
+      "photo": [
+        {
+          "pick": "16-12",
+          "focus": [
+            0.45,
+            0.25
+          ],
+          "move": "push-in",
+          "depth": false
+        }
+      ],
+      "why": "\"Nhưng\": cắt thẳng sang tờ báo năm 1946 \"Công chúa Elizabeth KHÔNG đính hôn\" (hoàng gia còn chưa chấp nhận), tiến lại gần dòng tít."
     },
     {
       "label": "決断",
@@ -82,7 +163,35 @@
       "headline": "称号も\n名字も信仰も",
       "lines": [
         "結局、殿下はギリシャとデンマークの王子の称号を捨ててイギリス人となり、名字も母方のマウントバッテンに変え、ギリシャ正教の信仰まで捨てました。"
-      ]
+      ],
+      "cut": "page",
+      "photo": [
+        {
+          "pick": "1-16",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "11-1",
+          "focus": [
+            0.48,
+            0.38
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "20-1",
+          "focus": [
+            0.49,
+            0.39
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "why": "Quyết định: Philip sinh ra là hoàng tử (ảnh lúc bé), rồi chàng trai bỏ tước hiệu, bỏ họ, bỏ đạo."
     },
     {
       "label": "婚約指輪",
@@ -90,7 +199,27 @@
       "headline": "母のティアラの\nダイヤモンド",
       "lines": [
         "婚約指輪は殿下が自らデザインし、母のティアラから外したダイヤモンドを使いました。"
-      ]
+      ],
+      "cut": "fade",
+      "photo": [
+        {
+          "pick": "18-10",
+          "focus": [
+            0.5,
+            0.2
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "17-5",
+          "focus": [
+            0.45,
+            0.5
+          ],
+          "move": "push-in"
+        }
+      ],
+      "why": "Chiếc nhẫn: bà Alice mẹ ông đội vương miện, rồi cận cảnh chiếc nhẫn kim cương."
     },
     {
       "label": "結婚式",
@@ -99,7 +228,24 @@
       "lines": [
         "結婚式は1947年11月。",
         "戦争の傷がまだ癒えず、ドイツ人と結婚していた殿下の3人の姉は、招かれませんでした。"
-      ]
+      ],
+      "cut": "page",
+      "photo": [
+        {
+          "pick": "21-7",
+          "fit": "contain",
+          "move": "push-in"
+        },
+        {
+          "pick": "22-8",
+          "focus": [
+            0.5,
+            0.4
+          ],
+          "move": "fall"
+        }
+      ],
+      "why": "Đám cưới 1947: cô dâu chú rể nhìn nhau; rồi các chị của Philip, những người không được mời (lia xuống, buồn)."
     },
     {
       "label": "手紙",
@@ -111,7 +257,24 @@
           "text": "「リリベットを大切にする？　その一言で、僕の胸の中にあるものを、すべて言い表せるでしょうか」。",
           "say": "「リリベットを大切にする？　そのひとことで、僕の胸の中にあるものを、すべて言い表せるでしょうか」。"
         }
-      ]
+      ],
+      "cut": "fade",
+      "photo": [
+        {
+          "pick": "26-6",
+          "fit": "contain",
+          "move": "push-in"
+        },
+        {
+          "pick": "9-3",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        }
+      ],
+      "why": "Lá thư gửi mẹ vợ: ảnh màu Philip đứng cạnh Hoàng hậu (mẹ Elizabeth), rồi tuần trăng mật 1947 hai người nhìn nhau khi đọc câu trong thư."
     },
     {
       "label": "73年",
@@ -119,7 +282,16 @@
       "headline": "73年続く愛",
       "lines": [
         "すべてを捨てたその青年は、73年続く愛を手にしました。"
-      ]
+      ],
+      "cut": "dip",
+      "photo": [
+        {
+          "pick": "24-1",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "why": "73 năm sau: tối rồi sáng lại, hai người lúc già vẫn nhìn nhau."
     },
     {
       "label": "指輪",
@@ -127,7 +299,20 @@
       "headline": "一度も\n外さなかった指輪",
       "lines": [
         "そして女王は生涯、その指輪を一度も外しませんでした。"
-      ]
+      ],
+      "cut": "fade",
+      "photo": [
+        {
+          "pick": "25-14",
+          "focus": [
+            0.45,
+            0.4
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "why": "Kết: chiếc nhẫn trên bàn tay Nữ hoàng lúc già, lùi ra."
     }
-  ]
+  ],
+  "review": "19/19"
 }
