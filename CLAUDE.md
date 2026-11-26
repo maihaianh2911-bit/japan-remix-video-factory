@@ -103,7 +103,11 @@ The owner is Vietnamese and not technical: answer in short, simple Vietnamese, n
 `maihaianh2911-bit/japan-video-factory` → `docs/HANDOVER.md`, and the plan of their 14 Japanese channels with the
 decisions and risks of each, the script lessons and the hook rules in `docs/KENH-NHAT.md` of that repo (18/11/2026):
 read it before any work on a channel of this repo. Real pictures only (never AI pictures), Claude looks at every
-picture, quality is not traded for usage.
+picture, quality is not traded for usage. **A colourised (restored) copy of a real black-and-white photo is a real
+picture and is welcome** (owner, 26/11/2026, after asking why the pictures were all black and white: "tìm ảnh phục
+dựng có màu đc ko", then "ảnh có màu ko tính là ảnh AI, ảnh AI tao nói đến là ảnh do chatgpt tạo ấy"): an "AI
+picture" is one an image generator made up (ChatGPT and the like), never used. For the old years search the
+colourised copy too (`web:… colorized`, `カラー化`) and prefer it when it is as sharp and shows the same moment.
 
 ## What this repo makes
 Vertical Japanese shorts (1080×1920, a little over 61 s) for four of the owner's 14 Japanese channels, all made the same way:

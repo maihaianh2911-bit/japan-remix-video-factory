@@ -1,7 +1,7 @@
 {
   "channel": "k10",
   "issue": 15,
-  "stage": "render",
+  "stage": "find",
   "title": "すべてを捨てた王子 フィリップ殿下とエリザベス女王の婚約指輪",
   "date": "2026-11-26",
   "searches": [
@@ -30,7 +30,17 @@
     "web:Princess Elizabeth Philip honeymoon Broadlands 1947 => Princess Elizabeth and Philip on their honeymoon in 1947",
     "web:Queen Elizabeth Prince Philip platinum anniversary 2017 => the elderly Queen Elizabeth and Prince Philip together",
     "web:Queen Elizabeth II engagement ring close up hand => the Queen's hand wearing her diamond engagement ring",
-    "web:King George VI royal family 1947 Philip Elizabeth => the British royal family with Philip in 1947"
+    "web:King George VI royal family 1947 Philip Elizabeth => the British royal family with Philip in 1947",
+    "web:Princess Elizabeth Philip engagement 1947 colorized => colorized photo of young Princess Elizabeth and Philip smiling together at their engagement",
+    "web:エリザベス フィリップ 婚約 カラー化 => colorized photo of young Princess Elizabeth and Prince Philip together",
+    "web:Princess Elizabeth 1939 colorized => colorized photo of teenage Princess Elizabeth",
+    "web:young Prince Philip navy colorized => colorized photo of young Prince Philip in naval uniform",
+    "web:Prince Philip colorized portrait 1940s => colorized portrait of handsome young Prince Philip",
+    "web:Princess Elizabeth Philip wedding 1947 colorized => colorized photo of Princess Elizabeth and Philip on their wedding day",
+    "web:Princess Elizabeth Philip honeymoon 1947 colorized => colorized photo of Princess Elizabeth and Philip walking together on honeymoon",
+    "web:Princess Alice of Battenberg colorized => colorized portrait of Princess Alice of Battenberg wearing a tiara",
+    "web:Prince Philip baby colorized => colorized photo of baby Prince Philip",
+    "web:Prince Philip sisters colorized => colorized photo of Prince Philip's four sisters"
   ],
   "scenes": [
     {
