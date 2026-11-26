@@ -23,6 +23,10 @@ Steps (labels): `remix-plan` → you read the source and write `stories/<name>.j
 `remix-fix`: the owner commented. `remix-failed`: a machine step failed. Every issue also carries `remix` and its
 channel label (`k10`). GitHub calls you after each machine step; there is no hourly run.
 
+**No story twice** (owner, 26/11/2026): at `remix-plan`, read `DA-LAM.md` (the list of the videos made, at the root of
+`main`); a story that is already there is not made again: say so on the issue (🤖) and stop. In the push that sets
+`stage: "render"`, add the story's line at the foot of its table (`python -m news.custom` warns when it is missing).
+
 ## 0. Every run
 You may run unattended (started by GitHub through the Claude task's API trigger). Nobody answers questions then.
 **First action** (one API call, no clone):

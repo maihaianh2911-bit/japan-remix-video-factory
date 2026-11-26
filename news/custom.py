@@ -468,9 +468,27 @@ def edit_warnings(data, sample=False):
     return found
 
 
+DONE_LIST = Path(__file__).resolve().parent.parent / "DA-LAM.md"
+
+
+def done_warnings(data, path):
+    """A story that goes to its render stands in DA-LAM.md, the list of the videos made (owner, 26/11/2026: the
+    videos are deleted from GitHub once saved, "nhưng lưu cái gì lại để khỏi dựng nhầm 1 video 2 lần"): the list
+    is what keeps a story from being told twice. A sample or a trial is not a video of the list."""
+    name = Path(path).stem
+    if data.get("stage") != "render" or data.get("trial") or name.startswith("mau-") or not channels.of_name(name):
+        return []
+    try:
+        listed = f"`{name}`" in DONE_LIST.read_text(encoding="utf-8")
+    except OSError:
+        return [f"{DONE_LIST.name} is missing: the list of the videos made, which keeps a story from being told twice"]
+    return [] if listed else [f"this story is not in {DONE_LIST.name} (the list of the videos made): add its line "
+                              f"in this push, so that no story is told twice"]
+
+
 def report_edit(data, path):
     """Print the edit warnings of a story (GitHub annotations in a workflow)."""
-    found = edit_warnings(data, Path(path).stem.startswith("mau-"))
+    found = edit_warnings(data, Path(path).stem.startswith("mau-")) + done_warnings(data, path)
     prefix = "::warning::" if os.environ.get("GITHUB_ACTIONS") else "warning: "
     for warning in found:
         print(f"{prefix}{Path(path).name}, the edit: {warning}")

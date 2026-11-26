@@ -86,6 +86,11 @@ Mày đọc danh sách luật cứng và thấy mấy luật "ko hợp lí", r�
   tĩnh: muốn chèn đoạn video phải làm thêm và có bản thử cho mày duyệt.
 - **Bớt báo đỏ giả**: nguồn ảnh không bao giờ lấy được chỉ còn là một dòng ghi chú, máy không báo lỗi và không thử lại.
 
+## Danh sách video đã làm
+
+[DA-LAM.md](DA-LAM.md): mọi video đã làm của kênh, để không dựng trùng một chuyện hai lần. Video trên GitHub có thể đã
+bị xoá sau khi mày lưu về máy; danh sách này thì luôn giữ.
+
 ## Chưa làm
 
 - Giao diện và giọng riêng cho từng kênh (tiêu đề cố định, màu riêng, giọng khác): làm

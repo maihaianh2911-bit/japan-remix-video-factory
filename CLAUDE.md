@@ -123,6 +123,15 @@ run in `.github/workflows/remix-video.yml` (results on the `renders` branch); Cl
 which retells the owner's morning source videos the same way), changed only for the channels: a fix to the engine is
 made in both repos, by hand.
 
+**The list of the videos made: `DA-LAM.md`** (owner, 26/11/2026: "xoá tất cả video đi (t đã lưu cả rồi), nhưng lưu cái
+gì lại để khỏi dựng nhầm 1 video 2 lần"). The videos on the `renders` branch are deleted once the owner has saved
+them (all of them on 26/11/2026), so the list at the root of `main` is the record: date, Japanese title, the idea in
+Vietnamese, the story's name. **Before writing a script or opening an issue, read it**: a story that is already
+there (the same people and the same story; the same people in another story is fine) is not made again — tell the
+owner first. **In the push that sets `stage: "render"`, add the story's line** at the foot of the table (the story's
+name between backticks): `python -m news.custom` warns of a story at stage render that is not in the list. Trials
+and samples are not listed as videos. The story files stay in `stories/` as the scripts of the videos made.
+
 | Kênh | id, issue tag | What a video is | Reference channel (its videos are the sources) |
 | --- | --- | --- | --- |
 | 10 | `k10`, `[K10]` | 世界の王室: world royals, above all the British royal family and the old Chinese dynasties | 皇室の記憶 (@ImperialEcho-v1c) |
