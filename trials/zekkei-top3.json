@@ -1,0 +1,30 @@
+{
+ "stage": "find",
+ "note": "Kênh mới (cảnh đẹp Nhật): 死ぬまでに一度は見たい日本の絶景トップ3. Video dựng bằng đoạn video, chữ to giữa màn hình.",
+ "voice": [
+  "もち子さん",
+  "ノーマル"
+ ],
+ "speed": 1.2,
+ "tail": 0.6,
+ "music": {
+  "file": "music/k10-sao-truc.mp3",
+  "title": "竹笛",
+  "volume": 0.25
+ },
+ "searches": [
+  "tokyo mount fuji",
+  "tokyo skyline fuji",
+  "fox statue shrine",
+  "kyoto tourists",
+  "torii tunnel",
+  "red torii",
+  "shirakawa light up",
+  "thatched roof snow",
+  "japan pagoda sunset",
+  "japan autumn temple",
+  "commons:Fushimi Inari-taisha",
+  "commons:Mount Fuji Tokyo"
+ ],
+ "scenes": []
+}

@@ -3,7 +3,7 @@ name: clip-trial
 on:
   push:
     branches: [ccr-d5640a04-6s686r]
-    paths: ['trials/*.json', 'tools/clip_trial.py', '.github/workflows/clip-trial.yml']
+    paths: ['trials/*.json', 'trials/active.txt', 'tools/clip_trial.py', '.github/workflows/clip-trial.yml']
 permissions:
   contents: write
 concurrency: clip-trial
@@ -24,10 +24,11 @@ jobs:
             https://raw.githubusercontent.com/google/fonts/main/ofl/mplusrounded1c/MPLUSRounded1c-ExtraBold.ttf \
             || echo "::warning::không tải được phông M PLUS Rounded: dùng Noto"
       - name: voice engine
-        if: hashFiles('trials/zekkei-thu.json') != ''
         run: |
-          STAGE=$(python -c "import json;print(json.load(open('trials/zekkei-thu.json'))['stage'])")
+          NAME=$(cat trials/active.txt)                     # the video being made: trials/<name>.json
+          STAGE=$(python -c "import json;print(json.load(open('trials/$NAME.json'))['stage'])")
           echo "STAGE=$STAGE" >> $GITHUB_ENV
+          echo "NAME=$NAME" >> $GITHUB_ENV
           if [ "$STAGE" = render ]; then
             docker run --detach --name voicevox --publish 127.0.0.1:50021:50021 voicevox/voicevox_engine:cpu-0.26.1
             for i in $(seq 1 60); do curl -fs --max-time 4 http://127.0.0.1:50021/version && exit 0; sleep 3; done
@@ -37,7 +38,7 @@ jobs:
         env:
           PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
         run: |
-          python tools/clip_trial.py "$STAGE" trials/zekkei-thu.json trials/out/$STAGE
-          rm -rf trials/out/$STAGE/work trials/out/$STAGE/frames
+          python tools/clip_trial.py "$STAGE" trials/$NAME.json trials/out/$NAME/$STAGE
+          rm -rf trials/out/$NAME/$STAGE/work trials/out/$NAME/$STAGE/frames
           git config user.name "github-actions[bot]"; git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          git add trials/out && git commit -q -m "Bản thử: kết quả bước $STAGE" && git pull -q --rebase origin ccr-d5640a04-6s686r && git push -q origin HEAD:ccr-d5640a04-6s686r
+          git add trials/out && git commit -q -m "$NAME: kết quả bước $STAGE" && git pull -q --rebase origin ccr-d5640a04-6s686r && git push -q origin HEAD:ccr-d5640a04-6s686r
