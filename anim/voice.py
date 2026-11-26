@@ -3,7 +3,9 @@
     python anim/voice.py anim/trials/<name>.json <out folder>
 
 Writes <out>/voice.wav and <out>/timing.json (the start and end of every line and of every caption chunk, in
-seconds), which the animation follows. A chunk is one caption: "[...]" marks its gold words, "\n" its row break.
+seconds), which the animation follows. A chunk is one caption: "[...]" marks its gold words ("[o|...]" orange,
+"[g|...]" green, "[b|...]" blue), "\n" its row break. "heads" (layout "map"): the large words at the top, one for
+each chunk, null where the one before stays.
 """
 import json
 import sys
@@ -40,7 +42,8 @@ def main(story_path, out):
         silence(0.25)   # the picture is there a moment before the first word
         for line in story["lines"]:
             texts = [plain(chunk) for chunk in line["chunks"]]
-            text = line.get("say") or "".join(texts)
+            said = [say or shown for say, shown in zip(line.get("says") or texts, texts)]   # "says": the reading of a chunk
+            text = "".join(said)
             query = json.loads(request("/audio_query", params={"text": text, "speaker": speaker}, data=b""))
             query.update(speedScale=pace.get("speed", 1.2), prePhonemeLength=0.07, postPhonemeLength=0.12,
                          pauseLengthScale=0.72, outputSamplingRate=RATE, outputStereo=False)
@@ -48,15 +51,15 @@ def main(story_path, out):
             with wave.open(BytesIO(wav)) as segment:
                 duration = segment.getnframes() / RATE
                 output.writeframesraw(segment.readframes(segment.getnframes()))
-            times = None if line.get("say") else spoken_times("".join(texts), query, duration)
+            times = spoken_times(text, query, duration)
             chunks, offset = [], 0
-            for number, (chunk, shown) in enumerate(zip(line["chunks"], texts)):
+            for number, (chunk, shown) in enumerate(zip(line["chunks"], said)):
                 if times:
                     begin = next((b for b, e in times[offset:offset + len(shown)] if e > b), times[offset][0])
                     start = position + (max(0.0, begin - 0.08) if number else 0.0)
                 else:
-                    start = position + duration * offset / max(1, sum(map(len, texts)))
-                chunks.append({"text": chunk, "start": round(start, 3)})
+                    start = position + duration * offset / max(1, len(text))
+                chunks.append({"text": chunk, "start": round(start, 3), "head": (line.get("heads") or [None] * 99)[number]})
                 offset += len(shown)
             for number, chunk in enumerate(chunks):
                 chunk["end"] = chunks[number + 1]["start"] if number + 1 < len(chunks) else round(position + duration, 3)
@@ -66,7 +69,8 @@ def main(story_path, out):
             position += duration
             silence(pace.get("line_pause", 0.1))
         silence(0.9)    # the last picture stays a moment
-    timing = {"duration": round(position, 3), "tag": story.get("tag"), "title": story.get("title"), "lines": lines}
+    timing = {"duration": round(position, 3), "layout": story.get("layout", "panel"), "tag": story.get("tag"),
+              "title": story.get("title"), "lines": lines}
     (out / "timing.json").write_text(json.dumps(timing, ensure_ascii=False, indent=1), encoding="utf-8")
     for line in lines:
         print(f"{line['start']:6.2f}–{line['end']:6.2f}  {line['id']:5} {line['reading']}")

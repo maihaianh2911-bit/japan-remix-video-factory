@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>anim stage: map</title>
+<style>
+@font-face { font-family: "Gothic"; font-weight: 900; src: url(/lib/noto-sans-jp-900.woff2) format("woff2"); }
+@font-face { font-family: "Gothic"; font-weight: 700; src: url(/lib/noto-sans-jp-700.woff2) format("woff2"); }
+@font-face { font-family: "Mincho"; font-weight: 800; src: url(/lib/shippori-mincho-b1-800.woff2) format("woff2"); }
+
+:root { --ink: #061026; --gold: #ffc93c; --orange: #ff9a3c; --green: #4fd69a; --blue: #58c7ff; }
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: var(--ink); }
+#frame { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: #fff; font-family: "Gothic", sans-serif;
+  background: linear-gradient(180deg, #0b2a55 0%, #0c2f60 45%, #082046 100%); }
+#under, #over { position: absolute; left: 0; top: 0; }
+#world { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-origin: 0 0; }
+#world canvas { position: absolute; }
+#night { position: absolute; inset: 0; background: #030818; }
+#pins { position: absolute; inset: 0; }
+.shade-top { position: absolute; left: 0; top: 0; width: 1080px; height: 700px; pointer-events: none;
+  background: linear-gradient(180deg, rgba(4,9,26,.86) 0%, rgba(4,9,26,.62) 45%, rgba(4,9,26,0) 100%); }
+.shade-foot { position: absolute; left: 0; top: 1220px; width: 1080px; height: 700px; pointer-events: none;
+  background: linear-gradient(180deg, rgba(6,18,46,0) 0%, rgba(6,18,46,.88) 26%, #06122e 56%); }
+
+.foreign { fill: #1f3a2c; stroke: #2f5540; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.homeland { fill: #24452f; }
+.edge { fill: none; stroke: #fff; stroke-width: 4; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.border { fill: none; stroke: #fff; stroke-width: 7; vector-effect: non-scaling-stroke; stroke-linejoin: round; stroke-linecap: round; }
+.border-glow { fill: none; stroke: #ff4b3a; stroke-width: 16; vector-effect: non-scaling-stroke; stroke-linejoin: round; stroke-linecap: round; }
+
+/* a name on the map: a point, a line, a pale tag */
+.pin { position: absolute; left: 0; top: 0; }
+.pin .tip { position: absolute; left: -9px; top: -9px; width: 18px; height: 18px; border-radius: 50%; background: #fff;
+  box-shadow: 0 0 0 4px rgba(6,16,38,.55); }
+.pin .lead { position: absolute; left: 0; top: -1.5px; height: 3px; background: rgba(255,255,255,.9); transform-origin: 0 50%; }
+.pin .name { position: absolute; white-space: nowrap; padding: 8px 22px 11px; border-radius: 12px; font-weight: 900; font-size: 44px;
+  background: rgba(244,248,255,.92); color: #0b1a36; box-shadow: 0 8px 20px rgba(0,0,0,.45); }
+.pin .name small { display: block; font-size: 24px; font-weight: 700; text-align: center; color: #44546e; margin-top: -2px; }
+/* words said by a region */
+.bubble { position: absolute; left: 0; top: 0; }
+.bubble .say { position: absolute; white-space: nowrap; padding: 10px 26px 14px; border-radius: 40px; font-weight: 900; font-size: 46px;
+  background: #fff; color: #0b1a36; border: 6px solid var(--c, #333); box-shadow: 0 10px 22px rgba(0,0,0,.45); transform: translate(-50%, -100%); }
+.bubble .say::after { content: ""; position: absolute; left: 50%; bottom: -26px; margin-left: -14px; border: 14px solid transparent;
+  border-top: 22px solid var(--c, #333); border-bottom: 0; }
+/* the name of an old province, like a seal */
+.seal { position: absolute; left: 0; top: 0; }
+.seal .say { position: absolute; white-space: nowrap; padding: 6px 24px 10px; border-radius: 12px; font-weight: 900; font-size: 54px;
+  color: #fff; border: 6px solid #fff; background: var(--c, #333); box-shadow: 0 10px 24px rgba(0,0,0,.5); transform: translate(-50%, -50%) rotate(-5deg); }
+
+/* the top: the large words, a key word in colour */
+#headline { position: absolute; left: 0; top: 262px; width: 1080px; height: 190px; }
+.head { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; white-space: nowrap;
+  font-weight: 900; font-size: 98px; letter-spacing: .01em; -webkit-text-stroke: 16px var(--ink); paint-order: stroke fill;
+  text-shadow: 0 8px 0 rgba(0,0,0,.4); }
+.gold { color: var(--gold); } .k-o { color: var(--orange); } .k-g { color: var(--green); } .k-b { color: var(--blue); }
+/* the foot: the words being spoken */
+#captions { position: absolute; left: 0; top: 1372px; width: 1080px; height: 120px; }
+.cap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; white-space: nowrap;
+  font-weight: 900; font-size: 54px; -webkit-text-stroke: 10px var(--ink); paint-order: stroke fill; text-shadow: 0 5px 0 rgba(0,0,0,.4); }
+#credit { position: absolute; left: 0; top: 1502px; width: 1080px; text-align: center; font-weight: 700; font-size: 24px; color: rgba(255,255,255,.5); }
+</style>
+</head>
+<body>
+<div id="frame">
+  <svg id="under" width="1080" height="1920" viewBox="0 0 1080 1920"></svg>
+  <div id="world"></div>
+  <div id="night"></div>
+  <svg id="over" width="1080" height="1920" viewBox="0 0 1080 1920"></svg>
+  <div class="shade-top"></div>
+  <div class="shade-foot"></div>
+  <div id="pins"></div>
+  <div id="headline"></div>
+  <div id="captions"></div>
+  <div id="credit"></div>
+</div>
+<script src="/lib/d3-array.min.js"></script>
+<script src="/lib/d3-geo.min.js"></script>
+<script src="/lib/topojson-client.min.js"></script>
+<script src="/engine.js"></script>
+<script src="/satmap.js"></script>
+<script src="/trial.js"></script>
+<script>
+window.ready = (async () => {
+  const get = url => fetch(url).then(response => { if (!response.ok) throw new Error("not found: " + url); return response.json(); });
+  const [timing, world, tiles] = await Promise.all(["/out/timing.json", "/lib/countries-50m.json", "/map/tiles.json"].map(get));
+  const stage = new Anim.Stage(timing);
+  await window.TRIAL(stage, { world, tiles, get });
+  await stage.settle();
+  window.DURATION = timing.duration;
+  window.seek = t => stage.tl.seek(t);
+  window.seek(0);
+  return timing.duration;
+})();
+</script>
+</body>
+</html>

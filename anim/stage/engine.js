@@ -80,8 +80,10 @@
   const h = (tag, attrs, parent) => make(null, tag, attrs, parent);
   const svg = (tag, attrs, parent) => make(NS, tag, attrs, parent);
   const px = values => Object.fromEntries(Object.entries(values).map(([k, v]) => [k, typeof v === "number" ? v + "px" : v]));
-  /* "[金]の文字\n二行目" -> gold words and a row break */
-  const rich = text => text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/\[/g, '<span class="gold">').replace(/\]/g, "</span>").replace(/\n/g, "<br>");
+  /* "[金]の文字\n二行目" -> gold words and a row break; "[o|…]" orange, "[g|…]" green, "[b|…]" blue */
+  const rich = text => text.replace(/&/g, "&amp;").replace(/</g, "&lt;")
+    .replace(/\[(?:([a-z])\|)?([^\]]*)\]/g, (_, color, words) => `<span class="gold${color ? " k-" + color : ""}">${words}</span>`)
+    .replace(/\n/g, "<br>");
 
   class Stage {
     constructor(timing) {
@@ -89,9 +91,11 @@
       this.tl = new Timeline();
       this.panel = document.getElementById("panel");
       this.lines = Object.fromEntries(timing.lines.map(line => [line.id, line]));
-      document.getElementById("tag").textContent = timing.tag || "";
-      document.getElementById("title").innerHTML = (timing.title || []).map(rich).join("<br>");
+      const tag = document.getElementById("tag"), title = document.getElementById("title");
+      if (tag) tag.textContent = timing.tag || "";
+      if (title) title.innerHTML = (timing.title || []).map(rich).join("<br>");
       this.captions();
+      if (document.getElementById("headline")) this.headlines();
     }
     /* every caption comes in with its first sound and stays until the next one */
     captions() {
@@ -103,6 +107,23 @@
         tl.set(el, { opacity: 0, y: 18, scale: 0.94 });
         tl.to(el, { opacity: 1 }, chunk.start, 0.1, "linear").to(el, { y: 0, scale: 1 }, chunk.start, 0.22, "back");
         tl.to(el, { opacity: 0 }, end, 0);
+      });
+    }
+    /* layout "map": the large words at the top. Each one is written in from the left with the first sound of its
+       chunk and stays until the next one */
+    headlines() {
+      const box = document.getElementById("headline"), tl = this.tl;
+      const heads = this.timing.lines.flatMap(line => line.chunks).filter(chunk => chunk.head);
+      heads.forEach((chunk, i) => {
+        const el = h("div", { class: "head", html: "<div>" + rich(chunk.head) + "</div>" }, box);
+        const end = i + 1 < heads.length ? heads[i + 1].start : this.timing.duration + 1;
+        if (i === 0) tl.set(el, { opacity: 1 });        // the first one is there from the first frame (the hook)
+        else {
+          tl.set(el, { opacity: 0, scale: 1.06 });
+          tl.to(el, { opacity: 1 }, chunk.start, 0.08, "linear").to(el, { scale: 1 }, chunk.start, 0.3, "out");
+          tl.fn(chunk.start, 0.32, "out", p => { el.style.clipPath = `inset(-20% ${(1 - p) * 100}% -20% -5%)`; });
+        }
+        tl.to(el, { opacity: 0 }, end - 0.1, 0.1, "linear");
       });
     }
     /* a layer of the panel; `from`..`to` is when it is shown (it fades in and out over `fade` seconds) */
