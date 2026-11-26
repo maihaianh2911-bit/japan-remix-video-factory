@@ -1147,9 +1147,12 @@ MUSIC_LUFS = -35   # the music sits about 17 dB under the voice (VOICEVOX speaks
 
 def loudness(gain=1.0):
     """The filter that brings the finished sound to its loudness: -16 LUFS times `gain` (the "loudness" of a
-    story's or channel's "audio": 1.6 = 60 % louder, about -11.9 LUFS), never above -9 LUFS."""
+    story's or channel's "audio": 1.6 = 60 % louder, about -11.9 LUFS), never above -9 LUFS. Louder than usual, a
+    gentle compressor first lowers the peaks of the voice: without it loudnorm stops short of the target (its true
+    peak limit), and a video asked 60 % louder came out only about 30 % louder (owner's k10 videos, 26/11/2026)."""
     target = min(-9.0, LOUDNESS_LUFS + 20 * math.log10(max(0.25, gain)))
-    return f"loudnorm=I={target:.1f}:TP=-1.5:LRA=7"
+    squeeze = "acompressor=threshold=0.1:ratio=3:attack=5:release=120," if gain > 1 else ""
+    return f"{squeeze}loudnorm=I={target:.1f}:TP=-1.5:LRA=7"
 
 
 LOUDNESS = loudness()

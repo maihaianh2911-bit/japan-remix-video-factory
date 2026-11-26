@@ -281,7 +281,8 @@ def voice_of_channel():
         release, beats, photos = load_story(path)
         assert render.audio_levels(release) == (1.6, 1.3), release.audio
         assert "loudnorm=I=-11.9:" in render.loudness(1.6) and render.loudness() == render.LOUDNESS, render.loudness(1.6)
-        assert "I=-16.0:" in render.LOUDNESS, render.LOUDNESS
+        assert render.LOUDNESS == "loudnorm=I=-16.0:TP=-1.5:LRA=7", render.LOUDNESS   # the other channels: as before
+        assert render.loudness(1.6).startswith("acompressor="), render.loudness(1.6)
         inputs, mapping = render.music_args(release.music, 60.0, 1.6, 1.3)
         graph = mapping[mapping.index("-filter_complex") + 1]
         assert "mono,volume=1.300[voice]" in graph and "loudnorm=I=-11.9:" in graph, graph
