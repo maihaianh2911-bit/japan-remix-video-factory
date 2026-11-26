@@ -145,9 +145,10 @@
 
   // ---------- people ----------
   // (x, y) is where the feet stand. o: scale, flip, suit, tie, mood (ok sad wow laugh stern flat), arm (angle),
-  // arm2, old (grey hair, glasses), helmet, back (seen from behind), noLegs, bob, look, bag
+  // arm2, old (grey hair, glasses), hair (a colour), glasses, mustache, hat, helmet, back (seen from behind),
+  // shade (a dark figure, no face), noLegs, bob, look, bag
   D.person = (key, x, y, o = {}) => {
-    const suit = o.suit || '#27304a', skin = '#f3c891';
+    const suit = o.shade ? '#2a2a2e' : (o.suit || '#27304a'), skin = o.shade ? '#2a2a2e' : '#f3c891';
     ctx.save(); ctx.translate(x, y); const k = o.scale || 1; ctx.scale(k * (o.flip ? -1 : 1), k);
     if (o.lean) ctx.rotate(o.lean);
     if (!o.noLegs) {
@@ -159,7 +160,7 @@
     }
     ctx.translate(0, o.bob || 0);
     rc.ellipse(0, -112, 92, 132, O(key + 'body', { fill: suit }));
-    if (!o.back && !o.plain) {
+    if (!o.back && !o.plain && !o.shade) {
       rc.polygon([[-13, -172], [13, -172], [0, -128]], O(key + 'shirt', { fill: '#ffffff', strokeWidth: 3 }));
       rc.polygon([[-6, -168], [6, -168], [8, -118], [0, -106], [-8, -118]], O(key + 'tie', { fill: o.tie || '#c0392b', strokeWidth: 3 }));
     }
@@ -181,7 +182,8 @@
       rc.path('M -47 -216 C -62 -240, -44 -262, -22 -258 C -34 -246, -40 -232, -47 -216 Z', O(key + 'h1', { fill: '#d9d9d6', strokeWidth: 3.5 }));
       rc.path('M 47 -216 C 62 -240, 44 -262, 22 -258 C 34 -246, 40 -232, 47 -216 Z', O(key + 'h2', { fill: '#d9d9d6', strokeWidth: 3.5 }));
     }
-    if (o.back) {
+    if (o.hair) rc.path('M -47 -222 C -56 -278, 56 -278, 47 -222 C 30 -252, -30 -252, -47 -222 Z', O(key + 'hair', { fill: o.hair, strokeWidth: 3.5 }));
+    if (o.back || o.shade) {
       if (o.old) rc.path('M -46 -206 C -50 -250, 50 -250, 46 -206 C 30 -190, -30 -190, -46 -206 Z', O(key + 'hb', { fill: '#d9d9d6', strokeWidth: 3.5 }));
     } else {
       const ex = o.look || 0;
@@ -192,12 +194,13 @@
       } else {
         ctx.beginPath(); ctx.arc(-15 + ex, -218, 4.6, 0, 7); ctx.arc(17 + ex, -218, 4.6, 0, 7); ctx.fill();
       }
-      if (o.old) {
+      if (o.old || o.glasses) {
         ctx.lineWidth = 3.5;
         ctx.beginPath(); ctx.arc(-15 + ex, -218, 15, 0, 7); ctx.stroke();
         ctx.beginPath(); ctx.arc(17 + ex, -218, 15, 0, 7); ctx.stroke();
         ctx.beginPath(); ctx.moveTo(0 + ex, -219); ctx.lineTo(2 + ex, -219); ctx.stroke();
       }
+      if (o.mustache) { ctx.fillStyle = INK; ctx.beginPath(); ctx.moveTo(-17 + ex, -196); ctx.quadraticCurveTo(-8 + ex, -208, 1 + ex, -200); ctx.quadraticCurveTo(10 + ex, -208, 19 + ex, -196); ctx.quadraticCurveTo(8 + ex, -198, 1 + ex, -195); ctx.quadraticCurveTo(-6 + ex, -198, -17 + ex, -196); ctx.fill(); ctx.translate(0, 9); }
       ctx.lineWidth = 4.5; ctx.beginPath();
       const m = o.mood || 'ok';
       if (m === 'sad') { ctx.arc(1 + ex, -180, 13, Math.PI * 1.15, Math.PI * 1.85); ctx.stroke(); }
@@ -206,7 +209,12 @@
       else if (m === 'wow') { ctx.ellipse(1 + ex, -191, 8, 10, 0, 0, 7); ctx.stroke(); }
       else if (m === 'laugh') { ctx.moveTo(-18 + ex, -198); ctx.quadraticCurveTo(1 + ex, -166, 20 + ex, -198); ctx.closePath(); ctx.fillStyle = '#7a2a22'; ctx.fill(); ctx.stroke(); }
       else { ctx.arc(1 + ex, -204, 15, Math.PI * 0.15, Math.PI * 0.85); ctx.stroke(); }
+      if (o.mustache) ctx.translate(0, -9);
       if (o.worry) { ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(-28 + ex, -238); ctx.lineTo(-8 + ex, -244); ctx.moveTo(30 + ex, -238); ctx.lineTo(10 + ex, -244); ctx.stroke(); }
+    }
+    if (o.hat) {
+      rc.path('M -42 -250 C -42 -306, 42 -306, 42 -250 Z', O(key + 'hat', { fill: o.hat === true ? '#3a3632' : o.hat, strokeWidth: 4.5 }));
+      rc.line(-62, -250, 62, -250, O(key + 'hatb', { strokeWidth: 8 }));
     }
     if (o.helmet) {
       rc.path('M -50 -238 C -48 -290, 48 -290, 50 -238 Z', O(key + 'helm', { fill: '#f2c230', strokeWidth: 4.5 }));

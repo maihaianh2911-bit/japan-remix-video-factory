@@ -16,6 +16,14 @@ on `main`, and no workflow runs it.
   (stages, "do you remember what I said at the start", "comment below").
 - So a big story is told through one thread only; a second thread is another video (the World Bank loan was left out
   of `shinkansen-uso` for that).
+- **The kind of story that works** (owner, 26/11/2026): after `shinkansen-uso` ("hay rồi đấy") a script on Inō Tadataka
+  and his map was turned down ("ko hay, có loại nào như kịch bản 1 vừa rồi ko"). What script 1 has and a plain life
+  of a great man lacks: a thing the Japanese use every day (the Shinkansen, the subway), a surprise at its birth (a
+  lie, beans in a pocket), and the one who made it paying for it (not invited, pushed out). Offer stories of that kind.
+- **The hook carries the wrong done, not the cute detail** (owner, 26/11/2026, on "日本で最初の地下鉄は、ポケットの豆から
+  生まれました": "hook chưa hay lắm"; the owner then wrote the hook: the man everyone laughed at built Japan's first
+  subway in the middle of Tokyo, and 13 years later he was thrown out of it). A hook the owner writes is put into
+  Japanese word for word.
 - The iron rules of the repo hold: Japanese, not under 61 s, vertical; the script is shown in the chat first (Japanese
   in one piece, then the Vietnamese meaning) and the video is made only when the owner says so.
 
@@ -52,3 +60,4 @@ GitHub release page and runs without Docker: `./run --host 127.0.0.1 --port 5002
 | Date | Story | Title | Idea (Vietnamese) |
 | --- | --- | --- | --- |
 | 26/11/2026 | `shinkansen-uso` | 新幹線は、ひとつのウソから生まれた | Ông Sogō Shinji nói dối về ngân sách để làm được Shinkansen, rồi không được mời tới lễ xuất phát |
+| 26/11/2026 | `chikatetsu-horafuki` | 「ほら吹き」と笑われた男が、日本で最初の地下鉄をつくった | Ông Hayakawa Noritsugu bị cười là nói khoác, đếm người bằng hạt đậu, làm tàu điện ngầm đầu tiên, rồi bị đẩy khỏi nó |
