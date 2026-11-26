@@ -551,47 +551,97 @@ def ease(p):
     return 0.5 - 0.5 * math.cos(math.pi * min(1.0, max(0.0, p)))
 
 
+MOVES = ["in", "left", "out", "right"]          # the moves given in turn to pictures that name none
+PUNCH, PUNCH_TIME = 0.07, 0.45                 # every shot starts a little closer and settles: the camera's beat
+
+
+def ease_out(p):
+    p = min(1.0, max(0.0, p))
+    return 1 - (1 - p) ** 3
+
+
+def view_box(n, count, width, height, clip, travel):
+    """The part of a width x height picture shown at frame n of count: a zoom or a pan over it, with the short
+    settle at the start of the shot. The whole picture is the view at zoom 1."""
+    move, fx, fy = clip.get("move", "in"), clip.get("x", 0.5), clip.get("y", 0.5)
+    p = ease(n / max(1, count - 1))
+    settle = 1 + PUNCH * (1 - ease_out(n / FPS / PUNCH_TIME))
+    aspect = PW / PH
+    full_w, full_h = (width, width / aspect) if width / height < aspect else (height * aspect, height)
+    cx, cy = fx * width, fy * height
+    if move in ("in", "out", "none"):
+        zoom = 1 + (0 if move == "none" else travel * (p if move == "in" else 1 - p))
+    else:
+        zoom = 1 + travel / 2
+    view_w, view_h = full_w / (zoom * settle), full_h / (zoom * settle)
+    if move in ("left", "right", "up", "down"):
+        span_x, span_y = width - view_w, height - view_h
+        a, b = (0.8, 0.2) if move in ("left", "up") else (0.2, 0.8)
+        if move in ("left", "right"):
+            cx = view_w / 2 + span_x * (a + (b - a) * p)
+        else:
+            cy = view_h / 2 + span_y * (a + (b - a) * p)
+    view_w, view_h = min(view_w, width), min(view_h, height)        # rounding: never past the edge
+    left = max(0.0, min(cx - view_w / 2, width - view_w))
+    top = max(0.0, min(cy - view_h / 2, height - view_h))
+    return left, top, left + view_w, top + view_h
+
+
+def part_writer(target):
+    return subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{PW}x{PH}",
+                             "-r", str(FPS), "-i", "-", "-vf", "scale=out_color_matrix=bt709:out_range=tv",
+                             *PART_FORMAT, str(target)], stdin=subprocess.PIPE)
+
+
 def still_part(source, seconds, clip, target):
-    """A photograph as a moving shot: a slow zoom or pan over it, drawn frame by frame with sub-pixel steps
+    """A photograph as a moving shot: a zoom or a pan over it, drawn frame by frame with sub-pixel steps
     (an ffmpeg zoompan steps by whole pixels and shakes)."""
     from PIL import ImageEnhance
     image = Image.open(source).convert("RGB")
-    move, fx, fy = clip.get("move", "in"), clip.get("x", 0.5), clip.get("y", 0.5)
-    travel = clip.get("travel", 0.12)                       # how far the move goes: 12 % of the frame
-    margin = 1 + travel
-    cover = max(PW * margin / image.width, PH * margin / image.height)
+    travel = clip.get("travel", 0.22)                       # how far the move goes: 22 % of the frame
+    cover = max(PW * (1 + travel) / image.width, PH * (1 + travel) / image.height)
     if cover < 1:                                            # keep only the pixels the frames can use
         image = image.resize((round(image.width * cover), round(image.height * cover)), Image.LANCZOS)
-        cover = 1.0
     image = ImageEnhance.Color(image).enhance(1.1)
-    full_w, full_h = PW / cover, PH / cover                    # the view at zoom 1 (with room to move)
     count = max(1, round(seconds * FPS))
-    writer = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{PW}x{PH}",
-                               "-r", str(FPS), "-i", "-", *PART_FORMAT, str(target)], stdin=subprocess.PIPE)
+    writer = part_writer(target)
     for n in range(count):
-        p = ease(n / max(1, count - 1))
-        if move in ("in", "out"):
-            zoom = 1 + travel * (p if move == "in" else 1 - p)
-            view_w, view_h = full_w * margin / zoom, full_h * margin / zoom
-            cx, cy = fx * image.width, fy * image.height
-        else:
-            view_w, view_h = full_w * margin / (1 + travel / 2), full_h * margin / (1 + travel / 2)
-            span_x, span_y = image.width - view_w, image.height - view_h
-            cx, cy = fx * image.width, fy * image.height
-            if move in ("left", "right"):
-                start, end = (0.75, 0.25) if move == "left" else (0.25, 0.75)
-                cx = view_w / 2 + span_x * (start + (end - start) * p)
-            else:
-                start, end = (0.75, 0.25) if move == "up" else (0.25, 0.75)
-                cy = view_h / 2 + span_y * (start + (end - start) * p)
-        view_w, view_h = min(view_w, image.width), min(view_h, image.height)   # rounding: never past the edge
-        left = max(0.0, min(cx - view_w / 2, image.width - view_w))
-        top = max(0.0, min(cy - view_h / 2, image.height - view_h))
-        frame = image.resize((PW, PH), Image.BICUBIC, box=(left, top, left + view_w, top + view_h))
-        writer.stdin.write(frame.tobytes())
+        box = view_box(n, count, image.width, image.height, clip, travel)
+        writer.stdin.write(image.resize((PW, PH), Image.BICUBIC, box=box).tobytes())
     writer.stdin.close()
     if writer.wait():
         raise RuntimeError(f"still part {target.name} failed")
+
+
+def clip_part(source, seconds, clip, target):
+    """A video clip with a camera move of its own over it: the clip is cut out larger than the frame, then a
+    zoom or a pan runs over it frame by frame, as over a photograph (a gentler one: the clip moves too)."""
+    travel = clip.get("travel", 0.14)
+    big_w, big_h = 2 * round(PW * (1 + travel) / 2), 2 * round(PH * (1 + travel) / 2)
+    x, y, speed, zoom = clip.get("x", 0.5), clip.get("y", 0.5), clip.get("speed", 1.0), clip.get("zoom", 1.0)
+    vf = (f"setpts=PTS/{speed},"
+          f"scale={round(big_w * zoom)}:{round(big_h * zoom)}:force_original_aspect_ratio=increase:flags=lanczos,"
+          f"crop={big_w}:{big_h}:(iw-{big_w})*{x}:(ih-{big_h})*{y},fps={FPS},setsar=1,"
+          "eq=saturation=1.12:contrast=1.04")
+    count = max(1, round(seconds * FPS))
+    reader = subprocess.Popen(["ffmpeg", "-v", "error", "-stream_loop", "-1", "-ss", str(clip.get("start", 0)),
+                               "-i", str(source), "-an", "-vf", vf, "-frames:v", str(count),
+                               "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], stdout=subprocess.PIPE)
+    writer = part_writer(target)
+    size, last = big_w * big_h * 3, None
+    centred = dict(clip, x=0.5, y=0.5)                     # x and y already chose the cut-out
+    for n in range(count):
+        data = reader.stdout.read(size)
+        if len(data) < size:
+            data = last
+        last = data
+        frame = Image.frombytes("RGB", (big_w, big_h), data)
+        box = view_box(n, count, big_w, big_h, centred, travel)
+        writer.stdin.write(frame.resize((PW, PH), Image.BICUBIC, box=box).tobytes())
+    writer.stdin.close()
+    reader.stdout.close()
+    if writer.wait() or reader.wait() not in (0, -13, 255):
+        raise RuntimeError(f"clip part {target.name} failed")
 
 
 def fetch(entry, folder):
@@ -646,24 +696,10 @@ def render(spec, out):
                            f"{entry.get('author') or '?'} — {entry.get('licence')} — {entry.get('page')}"
                            + ("  (AI-generated)" if entry.get("ai") else ""))
             seconds = cuts[c + 1] - cuts[c]
-            if entry.get("photo"):
-                target = work / f"part_{s:02d}_{c}.mp4"
-                still_part(source, seconds, clip, target)
-                parts.append(target)
-                continue
-            x, y, speed = clip.get("x", 0.5), clip.get("y", 0.5), clip.get("speed", 1.0)
-            zoom = clip.get("zoom", 1.0)
+            if "move" not in clip:
+                clip = dict(clip, move=MOVES[len(parts) % len(MOVES)])
             target = work / f"part_{s:02d}_{c}.mp4"
-            vf = (f"setpts=PTS/{speed},"
-                  f"scale={round(PW * zoom)}:{round(PH * zoom)}:force_original_aspect_ratio=increase:flags=lanczos,"
-                  f"crop={PW}:{PH}:(iw-{PW})*{x}:(ih-{PH})*{y},fps={FPS},setsar=1,setpts=PTS-STARTPTS,"
-                  "eq=saturation=1.12:contrast=1.04,"
-                  # every part the same colour description (a change at a join made ffmpeg drop the text once)
-                  "scale=out_color_matrix=bt709:out_range=tv,format=yuv420p,"
-                  "setparams=range=tv:color_primaries=bt709:color_trc=bt709:colorspace=bt709")
-            subprocess.run(["ffmpeg", "-v", "error", "-y", "-stream_loop", "-1", "-ss", str(clip.get("start", 0)),
-                            "-i", str(source), "-t", f"{seconds:.3f}", "-an", "-vf", vf, *PART_FORMAT, str(target)],
-                           check=True)
+            (still_part if entry.get("photo") else clip_part)(source, seconds, clip, target)
             parts.append(target)
     (work / "list.txt").write_text("".join(f"file '{p.name}'\n" for p in parts))
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(work / "list.txt"),
