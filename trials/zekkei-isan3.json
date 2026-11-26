@@ -1,5 +1,5 @@
 {
- "stage": "render",
+ "stage": "find",
  "note": "Kênh mới (cảnh đẹp Nhật): 死ぬまでに一度は見たい日本の世界遺産トップ3 (厳島神社, 金閣寺, 姫路城).",
  "voice": [
   "もち子さん",
@@ -26,7 +26,13 @@
   "japan world heritage",
   "commons:Itsukushima Shrine",
   "commons:Kinkaku-ji",
-  "commons:Himeji Castle"
+  "commons:Himeji Castle",
+  "photo:Itsukushima Shrine torii",
+  "photo:Itsukushima torii low tide",
+  "photo:Kinkaku-ji",
+  "photo:Himeji Castle",
+  "photo:Himeji Castle keep white",
+  "photo:Himeji Castle cherry blossoms"
  ],
  "scenes": [
   {
