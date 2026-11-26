@@ -2,17 +2,23 @@
 the screen (the style of the source the owner sent on 26/11/2026). A trial only, kept apart from the engine
 (`news/`) until the owner approves it: the engine changes only after that.
 
-    python tools/clip_trial.py find   trials/<name>.json <out>   # Pixabay searches → sheets of candidates
+    python tools/clip_trial.py find   trials/<name>.json <out>   # searches → sheets of candidates (3 frames each)
     python tools/clip_trial.py render trials/<name>.json <out>   # the voice (VOICEVOX at 127.0.0.1:50021) + the video
 
-The clips come from Pixabay (free licence, no credit required; credited all the same in credits.txt); the key is
-the secret PIXABAY_API_KEY. AI-generated clips are allowed (owner, 26/11/2026: "K cần bỏ video AI, m đc phép
+The clips come from Pixabay (free licence, no credit required; credited all the same in credits.txt; the key is
+the secret PIXABAY_API_KEY), Wikimedia Commons (free licences, author and licence in credits.txt) and Mixkit (free
+licence; its free files are 720p, so mostly for a horizontal shot shown smaller). A search is "<words>" (Pixabay),
+"commons:<words>" or "mixkit:<words>". AI-generated clips are allowed (owner, 26/11/2026: "K cần bỏ video AI, m đc phép
 dùng"); the sheet marks them "AI" so that each can be looked at.
 """
+import hashlib
 import json
+import re
+import time
 import os
 import subprocess
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 import wave
@@ -27,7 +33,8 @@ from news.voice import request, speaker_id, spoken_times   # noqa: E402
 
 W, H, FPS = 1080, 1920, 30
 RATE = 24000
-UA = {"User-Agent": "video-factory-trial"}
+UA = {"User-Agent": "japan-video-factory/1.0 (trial of short clips; GitHub Actions) python-urllib"}
+BROWSER = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"}
 ROUNDED = "fonts/MPLUSRounded1c-ExtraBold.ttf"
 FALLBACK = "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc"
 WHITE, YELLOW, ORANGE, INK = (255, 255, 255), (255, 225, 53), (255, 140, 26), (20, 20, 20)
@@ -40,9 +47,15 @@ def font(size):
         return ImageFont.truetype(FALLBACK, size)
 
 
-def get(url, timeout=60):
-    with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=timeout) as answer:
-        return answer.read()
+def get(url, timeout=60, headers=None):
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers=headers or UA), timeout=timeout) as answer:
+                return answer.read()
+        except urllib.error.HTTPError as error:
+            if error.code not in (429, 503) or attempt == 2:
+                raise
+            time.sleep(5 * (attempt + 1))
 
 
 def pixabay(params):
@@ -64,45 +77,113 @@ def rendition(hit):
 
 # ---------------------------------------------------------------- find
 
-def find(spec, out):
+def pixabay_hits(words):
+    lang = "en" if words.isascii() else "ja"
+    hits = pixabay({"q": words, "lang": lang, "per_page": 50, "safesearch": "true"}).get("hits", [])
+    found = []
+    for hit in hits:
+        file = rendition(hit)
+        found.append({"key": f"p{hit['id']}", "source": "Pixabay", "w": file["width"], "h": file["height"],
+                      "seconds": hit["duration"], "ai": bool(hit.get("isAiGenerated")), "title": hit.get("tags"),
+                      "page": hit["pageURL"], "author": hit.get("user"), "licence": "Pixabay License",
+                      "url": file["url"], "preview": hit["videos"].get("tiny", {}).get("url") or file["url"],
+                      "score": hit.get("downloads", 0) + 20 * hit.get("likes", 0)})
+    return found
+
+
+def commons_hits(words):
+    url = ("https://commons.wikimedia.org/w/api.php?action=query&format=json&generator=search&gsrnamespace=6"
+           "&gsrlimit=50&gsrsearch=" + urllib.parse.quote(f"filetype:video {words}")
+           + "&prop=imageinfo&iiprop=url%7Csize%7Cmime%7Cextmetadata&iiextmetadatafilter=Artist%7CLicenseShortName")
+    pages = json.loads(get(url)).get("query", {}).get("pages", {}).values()
+    found = []
+    for page in pages:
+        info = (page.get("imageinfo") or [{}])[0]
+        seconds = info.get("duration") or 0
+        if not info.get("url") or min(info.get("width", 0), info.get("height", 0)) < 720 or not 3 <= seconds <= 240:
+            continue
+        meta = info.get("extmetadata") or {}
+        artist = re.sub(r"<[^>]+>", "", (meta.get("Artist") or {}).get("value", "")).strip()
+        found.append({"key": "c" + hashlib.md5(page["title"].encode()).hexdigest()[:8], "source": "Wikimedia Commons",
+                      "w": info["width"], "h": info["height"], "seconds": round(seconds), "ai": False,
+                      "title": page["title"][5:], "page": info.get("descriptionurl"), "author": artist[:80],
+                      "licence": (meta.get("LicenseShortName") or {}).get("value", "?"), "url": info["url"],
+                      "preview": info["url"], "score": 0})
+    time.sleep(1)
+    return found
+
+
+def mixkit_hits(words):
+    body = get(f"https://mixkit.co/free-stock-video/{words.replace(' ', '-')}/", headers=BROWSER).decode("utf-8", "replace")
+    found, seen = [], set()
+    for slug, number in re.findall(r"/free-stock-video/([a-z0-9-]+)-(\d+)/", body):
+        if number in seen:
+            continue
+        seen.add(number)
+        found.append({"key": f"m{number}", "source": "Mixkit", "w": 1280, "h": 720, "seconds": 0, "ai": False,
+                      "title": slug.replace("-", " "), "page": f"https://mixkit.co/free-stock-video/{slug}-{number}/",
+                      "author": "Mixkit", "licence": "Mixkit License",
+                      "url": f"https://assets.mixkit.co/videos/{number}/{number}-720.mp4",
+                      "preview": f"https://assets.mixkit.co/videos/{number}/{number}-360.mp4", "score": 0})
+    return found
+
+
+def frames_of(entry, folder):
+    """Three small frames of a clip (a sixth, the middle, five sixths in), read straight from its file."""
+    pictures = []
+    seconds = entry["seconds"] or 10
+    for n, share in enumerate((1 / 6, 1 / 2, 5 / 6)):
+        path = folder / f"{entry['key']}_{n}.jpg"
+        if not path.exists():
+            subprocess.run(["ffmpeg", "-v", "error", "-y", "-user_agent", UA["User-Agent"], "-ss",
+                            f"{seconds * share:.2f}", "-i", entry["preview"], "-frames:v", "1",
+                            "-vf", "scale=300:300:force_original_aspect_ratio=decrease", str(path)],
+                           timeout=90, check=False)
+        try:
+            pictures.append(Image.open(path).convert("RGB"))
+        except OSError:
+            pictures.append(Image.new("RGB", (300, 169), (60, 60, 60)))
+    return pictures
+
+
+def find(spec, out, keep=9):
     out.mkdir(parents=True, exist_ok=True)
-    index = {}
-    for number, words in enumerate(spec["searches"], 1):
-        lang = "en" if words.isascii() else "ja"
-        hits = pixabay({"q": words, "lang": lang, "per_page": 40, "safesearch": "true"}).get("hits", [])
-        # tall clips first, then the sharpest
-        hits.sort(key=lambda h: (-(rendition(h)["height"] > rendition(h)["width"]), -rendition(h)["width"]))
-        hits = hits[:16]
-        tiles = []
+    frames = out / "frames"
+    frames.mkdir(exist_ok=True)
+    index = json.loads((out / "index.json").read_text()) if (out / "index.json").exists() else {}
+    for number, search in enumerate(spec["searches"], 1):
+        kind, _, words = search.partition(":") if search.split(":")[0] in ("commons", "mixkit") else ("pixabay", "", search)
+        try:
+            hits = {"pixabay": pixabay_hits, "commons": commons_hits, "mixkit": mixkit_hits}[kind](words)
+        except Exception as error:
+            print(f"::warning::{search}: {error}")
+            hits = []
+        # tall first, then sharp, then liked; a clip already shown in an earlier sheet is left out
+        hits = [h for h in hits if h["key"] not in index]
+        hits.sort(key=lambda h: (-(h["h"] > h["w"]), -min(max(h["w"], h["h"]), 3840), -h["score"]))
+        hits = hits[:keep]
         for hit in hits:
-            file = rendition(hit)
-            entry = {"id": hit["id"], "w": file["width"], "h": file["height"], "seconds": hit["duration"],
-                     "ai": bool(hit.get("isAiGenerated")), "tags": hit.get("tags"), "page": hit["pageURL"],
-                     "user": hit.get("user"), "url": file["url"]}
-            index[str(hit["id"])] = entry
-            try:
-                thumb = Image.open(BytesIO(get(hit["videos"]["medium"]["thumbnail"]))).convert("RGB")
-            except Exception:
-                thumb = Image.new("RGB", (320, 320), (60, 60, 60))
-            tiles.append((thumb, f"{hit['id']}  {file['width']}x{file['height']}  {hit['duration']}s"
-                                 + ("  AI" if entry["ai"] else "")))
-        sheet(tiles, f"{number}. {words}  ({len(hits)})", out / f"sheet_{number}.jpg")
+            index[hit["key"]] = hit
+        tiles = [(frames_of(hit, frames), f"{hit['key']}  {hit['w']}x{hit['h']}  {hit['seconds']}s"
+                  + ("  AI" if hit["ai"] else ""), (hit["title"] or "")[:44]) for hit in hits]
+        sheet(tiles, f"{number}. {search}  ({len(hits)} mới)", out / f"sheet_{number:02d}.jpg")
     (out / "index.json").write_text(json.dumps(index, ensure_ascii=False, indent=1))
 
 
 def sheet(tiles, title, path):
-    size, label = 340, 40
-    columns = 4
-    rows = max(1, (len(tiles) + columns - 1) // columns)
-    canvas = Image.new("RGB", (columns * size, 60 + rows * (size + label)), (25, 25, 25))
+    cell, columns = 300, 9           # three candidates a row, three frames each
+    rows = max(1, (len(tiles) + 2) // 3)
+    canvas = Image.new("RGB", (columns * cell, 60 + rows * (cell + 70)), (25, 25, 25))
     draw = ImageDraw.Draw(canvas)
     draw.text((12, 10), title, font=font(36), fill=WHITE)
-    for n, (thumb, text) in enumerate(tiles):
-        x, y = n % columns * size, 60 + n // columns * (size + label)
-        thumb.thumbnail((size - 8, size - 8))
-        canvas.paste(thumb, (x + (size - thumb.width) // 2, y + (size - thumb.height) // 2))
-        draw.text((x + 6, y + size + 4), text, font=font(22), fill=YELLOW if text.endswith("AI") else WHITE)
-    canvas.save(path, quality=88)
+    for n, (pictures, label, words) in enumerate(tiles):
+        x0, y = n % 3 * 3 * cell, 60 + n // 3 * (cell + 70)
+        for k, picture in enumerate(pictures):
+            canvas.paste(picture, (x0 + k * cell + (cell - picture.width) // 2, y + (cell - picture.height) // 2))
+        draw.rectangle((x0, y, x0 + 3 * cell - 1, y + cell + 68), outline=(90, 90, 90), width=2)
+        draw.text((x0 + 8, y + cell + 4), label, font=font(26), fill=YELLOW if label.endswith("AI") else WHITE)
+        draw.text((x0 + 8, y + cell + 36), words, font=font(20), fill=(190, 190, 190))
+    canvas.save(path, quality=86)
 
 
 # ---------------------------------------------------------------- text
@@ -184,36 +265,54 @@ def draw_rows(draw, rows, centre_y, size, colours, stroke):
         y += size + gap
 
 
-def caption_png(text, path):
-    image = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+def canvas():
+    return Image.new("RGBA", (W, H), (0, 0, 0, 0))
+
+
+def shadowed(image, blur=10, strength=150):
+    """A soft dark shadow under the text, so that it reads on snow and sky as well."""
+    from PIL import ImageFilter
+    alpha = image.getchannel("A").filter(ImageFilter.GaussianBlur(blur))
+    shadow = Image.new("RGBA", image.size, (0, 0, 0, 0))
+    shadow.putalpha(alpha.point(lambda v: min(255, v * strength // 255)))
+    result = canvas()
+    result.alpha_composite(shadow, (0, 8))
+    result.alpha_composite(image)
+    return result
+
+
+def caption_layers(text):
+    image = canvas()
     rows = rows_of(text, 10)
-    draw_rows(ImageDraw.Draw(image), rows, 1180, 92, [WHITE] * len(rows), 11)
-    image.save(path)
+    draw_rows(ImageDraw.Draw(image), rows, 1180, 96, [WHITE] * len(rows), 12)
+    return [(shadowed(image), 0.0)]
 
 
-def title_png(lines, path, number=None):
-    """The big title: the hook's lines, or the number and name of an item."""
-    image = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    draw = ImageDraw.Draw(image)
+def title_layers(lines, number=None):
+    """The big title as layers that come in one after the other: (image, delay in seconds)."""
+    layers = []
     if number:
-        draw_rows(draw, [number], 820, 230, [YELLOW], 14)
-        draw_rows(draw, lines, 1080, 120, [WHITE] * len(lines), 13)
-    else:
-        sizes = [min(150, 900 // max(1, len(plain(line)))) for line in lines]   # every line inside the box
-        colours = [WHITE, ORANGE, WHITE, ORANGE]
-        y = 520
-        box = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-        total = sum(sizes) + 40 * (len(lines) - 1)
-        ImageDraw.Draw(box).rounded_rectangle((50, y - 50, W - 50, y + total + 50), 40, fill=(0, 0, 0, 90))
-        image.alpha_composite(box)
-        draw = ImageDraw.Draw(image)
-        for line, size, colour in zip(lines, sizes, colours):
-            draw_rows(draw, [line], y + size // 2, size, [colour], 13)
-            y += size + 40
-    image.save(path)
+        image = canvas()
+        draw_rows(ImageDraw.Draw(image), [number], 800, 240, [YELLOW], 15)
+        layers.append((shadowed(image), 0.0))
+        image = canvas()
+        draw_rows(ImageDraw.Draw(image), lines, 1070, 126, [WHITE] * len(lines), 13)
+        layers.append((shadowed(image), 0.12))
+        return layers
+    sizes = [min(150, 900 // max(1, len(plain(line)))) for line in lines]   # every line inside the box
+    colours = [WHITE, ORANGE, WHITE, ORANGE]
+    y = 520
+    total = sum(sizes) + 40 * (len(lines) - 1)
+    box = canvas()
+    ImageDraw.Draw(box).rounded_rectangle((50, y - 50, W - 50, y + total + 50), 40, fill=(0, 0, 0, 100))
+    layers.append((box, 0.0))
+    for n, (line, size, colour) in enumerate(zip(lines, sizes, colours)):
+        image = canvas()
+        draw_rows(ImageDraw.Draw(image), [line], y + size // 2, size, [colour], 13)
+        layers.append((shadowed(image), 0.1 + 0.22 * n))
+        y += size + 40
+    return layers
 
-
-# ---------------------------------------------------------------- render
 
 def voice_lines(spec, out):
     """Every line voiced: [(scene, line, start, duration, per-character times or None)] and voice.wav."""
@@ -273,93 +372,165 @@ def piece_times(text, start, duration, times):
             for n, (p, b, _) in enumerate(result)]
 
 
+# ---------------------------------------------------------------- the picture: clips and animated text
+
+POP = 0.18          # seconds a text takes to come in: it grows from 82 % with a small overshoot
+
+
+def pop(progress):
+    """0 → 1 with a small overshoot (ease-out-back)."""
+    p = min(1.0, max(0.0, progress)) - 1
+    return 1 + 2.2 * p ** 3 + 1.2 * p ** 2
+
+
+class Layer:
+    def __init__(self, image, begin, end):
+        box = image.getbbox() or (0, 0, 1, 1)
+        self.image, self.box = image.crop(box), box
+        self.begin, self.end = begin, end
+
+    def draw(self, frame, t):
+        if not self.begin <= t < self.end:
+            return
+        grown = pop((t - self.begin) / POP)
+        if grown >= 0.999 and t - self.begin > POP:
+            frame.alpha_composite(self.image, self.box[:2])
+            return
+        scale = 0.82 + 0.18 * grown
+        width, height = max(1, round(self.image.width * scale)), max(1, round(self.image.height * scale))
+        small = self.image.resize((width, height), Image.BILINEAR)
+        alpha = min(1.0, (t - self.begin) / (POP * 0.6))
+        if alpha < 1:
+            small.putalpha(small.getchannel("A").point(lambda v: int(v * alpha)))
+        centre_x, centre_y = (self.box[0] + self.box[2]) / 2, (self.box[1] + self.box[3]) / 2
+        frame.alpha_composite(small, (round(centre_x - width / 2), round(centre_y - height / 2)))
+
+
+def compose(clips, layers, length, target):
+    """The clip track with the text drawn over it, frame by frame (the text grows in, as in the source)."""
+    count = round(length * FPS)
+    reader = subprocess.Popen(["ffmpeg", "-v", "error", "-i", str(clips), "-f", "rawvideo", "-pix_fmt", "rgb24",
+                               "-frames:v", str(count), "-"], stdout=subprocess.PIPE)
+    writer = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}",
+                               "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "medium", "-crf", "17",
+                               "-pix_fmt", "yuv420p", str(target)], stdin=subprocess.PIPE)
+    size, last = W * H * 3, None
+    for number in range(count):
+        data = reader.stdout.read(size)
+        if len(data) < size:
+            data = last                      # the clip track a frame short: hold its last frame
+        last = data
+        t = number / FPS
+        active = [layer for layer in layers if layer.begin <= t < layer.end]
+        if active:
+            frame = Image.frombytes("RGB", (W, H), data).convert("RGBA")
+            for layer in active:
+                layer.draw(frame, t)
+            data = frame.convert("RGB").tobytes()
+        writer.stdin.write(data)
+    writer.stdin.close()
+    reader.stdout.close()
+    if writer.wait() or reader.wait() not in (0, -13, 255):
+        raise RuntimeError("compose failed")
+
+
+def fetch(entry, folder):
+    path = folder / (entry["key"] + (".webm" if entry["url"].endswith(".webm") else ".mp4"))
+    if not path.exists():
+        path.write_bytes(get(entry["url"], timeout=600))
+    return path
+
+
 def render(spec, out):
     out.mkdir(parents=True, exist_ok=True)
     work = out / "work"
     work.mkdir(exist_ok=True)
+    found = out.parent / "find" / "index.json"
+    index = json.loads(found.read_text()) if found.exists() else {}
     lines, length = voice_lines(spec, out)
-    index = json.loads((out.parent / "find" / "index.json").read_text()) if (out.parent / "find" / "index.json").exists() else {}
+    length += spec.get("tail", 0.6)
 
-    # scene spans on the voice's timeline
-    spans_of = {}
+    # scene spans on the voice's timeline; a scene's clips change where one of its lines starts
+    starts = {}
     for s, l, text, start, duration, times in lines:
-        first = spans_of.get(s, (start, start))[0]
-        spans_of[s] = (first, start + duration)
-    edges = [spans_of[s][0] for s in range(len(spec["scenes"]))] + [length]
-    edges[0] = 0.0
-
-    # the clips, cut to the scenes, each scene's time shared by its clips
+        starts.setdefault(s, []).append(start)
+    edges = [0.0] + [starts[s][0] for s in range(1, len(spec["scenes"]))] + [length]
     parts, credits = [], []
     for s, scene in enumerate(spec["scenes"]):
         begin, end = edges[s], edges[s + 1]
-        share = (end - begin) / len(scene["clips"])
-        for c, clip in enumerate(scene["clips"]):
-            hit = index.get(str(clip["id"])) or {}
-            url = hit.get("url") or rendition(pixabay({"id": clip["id"]})["hits"][0])["url"]
-            source = work / f"{clip['id']}.mp4"
-            if not source.exists():
-                source.write_bytes(get(url, timeout=300))
-            credits.append(f"scene {s + 1}: Pixabay {clip['id']} by {hit.get('user', '?')} {hit.get('page', '')}"
-                           + (" (AI-generated)" if hit.get("ai") else ""))
-            x = clip.get("x", 0.5)
+        clips = scene["clips"]
+        cuts = [begin]
+        for c in range(1, len(clips)):
+            wanted = begin + (end - begin) * c / len(clips)
+            near = min(starts[s][1:] or [wanted], key=lambda at: abs(at - wanted))
+            cuts.append(near if abs(near - wanted) < 1.5 and near > cuts[-1] + 1.0 else wanted)
+        cuts.append(end)
+        for c, clip in enumerate(clips):
+            key = clip["id"] if isinstance(clip["id"], str) else f"p{clip['id']}"
+            entry = index.get(key)
+            if entry is None and key.startswith("p"):
+                hit = pixabay({"id": key[1:]})["hits"][0]
+                entry = {"key": key, "url": rendition(hit)["url"], "source": "Pixabay", "author": hit.get("user"),
+                         "page": hit["pageURL"], "licence": "Pixabay License", "ai": bool(hit.get("isAiGenerated"))}
+            source = fetch(entry, work)
+            credits.append(f"{scene.get('label', s + 1)}: {entry['source']} — {entry.get('title') or ''} — "
+                           f"{entry.get('author') or '?'} — {entry.get('licence')} — {entry.get('page')}"
+                           + ("  (AI-generated)" if entry.get("ai") else ""))
+            seconds = cuts[c + 1] - cuts[c]
+            x, y, speed = clip.get("x", 0.5), clip.get("y", 0.5), clip.get("speed", 1.0)
+            zoom = clip.get("zoom", 1.0)
             target = work / f"part_{s:02d}_{c}.mp4"
-            vf = (f"scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos,"
-                  f"crop={W}:{H}:(iw-{W})*{x}:(ih-{H})/2,fps={FPS},setsar=1,setpts=PTS-STARTPTS,"
-                  # every part the same colour description: a change between two parts makes ffmpeg rebuild the
-                  # text graph at the join, and the one-frame text pictures are gone after it (trial of 26/11/2026)
+            vf = (f"setpts=PTS/{speed},"
+                  f"scale={round(W * zoom)}:{round(H * zoom)}:force_original_aspect_ratio=increase:flags=lanczos,"
+                  f"crop={W}:{H}:(iw-{W})*{x}:(ih-{H})*{y},fps={FPS},setsar=1,setpts=PTS-STARTPTS,"
+                  "eq=saturation=1.12:contrast=1.04,"
+                  # every part the same colour description (a change at a join made ffmpeg drop the text once)
                   "scale=out_color_matrix=bt709:out_range=tv,format=yuv420p,"
                   "setparams=range=tv:color_primaries=bt709:color_trc=bt709:colorspace=bt709")
             subprocess.run(["ffmpeg", "-v", "error", "-y", "-stream_loop", "-1", "-ss", str(clip.get("start", 0)),
-                            "-i", str(source), "-t", f"{share:.3f}", "-an", "-vf", vf, "-c:v", "libx264",
-                            "-preset", "veryfast", "-crf", "16", "-pix_fmt", "yuv420p", str(target)], check=True)
+                            "-i", str(source), "-t", f"{seconds:.3f}", "-an", "-vf", vf, "-c:v", "libx264",
+                            "-preset", "veryfast", "-crf", "14", "-pix_fmt", "yuv420p", str(target)], check=True)
             parts.append(target)
     (work / "list.txt").write_text("".join(f"file '{p.name}'\n" for p in parts))
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(work / "list.txt"),
                     "-c", "copy", str(work / "clips.mp4")], check=True)
 
     # the text: the hook title over the first scene, an item's number and name over its first line, captions
-    overlays = []
+    layers = []
     for s, l, text, start, duration, times in lines:
         scene = spec["scenes"][s]
         if l == 0 and scene.get("title"):
-            path = work / f"t_{s}.png"
-            title_png(scene["title"], path, scene.get("number"))
-            stop = edges[s + 1] if not scene.get("number") else start + duration + 0.25
-            overlays.append((path, edges[s], stop))
+            stop = edges[s + 1] if not scene.get("number") else start + duration + 0.3
+            begin = edges[s]
+            for image, delay in title_layers(scene["title"], scene.get("number")):
+                layers.append(Layer(image, begin + delay, stop))
             continue
-        for n, (piece, b, e) in enumerate(piece_times(text, start, duration, times)):
-            path = work / f"c_{s}_{l}_{n}.png"
-            caption_png(piece, path)
-            overlays.append((path, b, e))
-    inputs, chain, last = [], [], "0:v"
-    for n, (path, b, e) in enumerate(overlays, 1):
-        inputs += ["-i", str(path)]
-        chain.append(f"[{last}][{n}:v]overlay=0:0:enable='between(t,{b:.3f},{e:.3f})'[v{n}]")
-        last = f"v{n}"
+        for piece, b, e in piece_times(text, start, duration, times):
+            for image, delay in caption_layers(piece):
+                layers.append(Layer(image, b + delay, e))
+    for layer in layers:
+        print(f"text {layer.begin:6.2f}–{layer.end:6.2f}")
+    compose(work / "clips.mp4", layers, length, work / "picture.mp4")
 
     # the sound: the voice, the music under it, the whole brought to about -14 LUFS
     music = spec.get("music")
-    audio_in = ["-i", str(out / "voice.wav")]
-    m = len(overlays) + 2
+    command = ["ffmpeg", "-v", "error", "-y", "-i", str(work / "picture.mp4"), "-i", str(out / "voice.wav")]
     if music:
-        audio_in += ["-stream_loop", "-1", "-i", music["file"]]
-        chain.append(f"[{m}:a]volume={music.get('volume', 0.2)},atrim=0:{length:.3f},afade=t=in:d=1,"
-                     f"afade=t=out:st={max(0, length - 1.5):.3f}:d=1.5[mu]")
-        chain.append(f"[{m - 1}:a][mu]amix=inputs=2:duration=first:normalize=0,loudnorm=I=-14:TP=-1.5[a]")
+        command += ["-stream_loop", "-1", "-i", music["file"], "-filter_complex",
+                    f"[1:a]apad,atrim=0:{length:.3f}[v];"
+                    f"[2:a]volume={music.get('volume', 0.2)},atrim=0:{length:.3f},afade=t=in:d=1,"
+                    f"afade=t=out:st={max(0, length - 1.5):.3f}:d=1.5[mu];"
+                    "[v][mu]amix=inputs=2:duration=first:normalize=0,loudnorm=I=-14:TP=-1.5[a]"]
     else:
-        chain.append(f"[{m - 1}:a]loudnorm=I=-14:TP=-1.5[a]")
-    for path, b, e in overlays:
-        print(f"text {b:6.2f}–{e:6.2f}  {path.name}")
-    subprocess.run(["ffmpeg", "-v", "error", "-y", "-reinit_filter", "0", "-i", str(work / "clips.mp4"), *inputs, *audio_in,
-                    "-filter_complex", ";".join(chain), "-map", f"[{last}]", "-map", "[a]", "-t", f"{length:.3f}",
-                    "-c:v", "libx264", "-preset", "slow", "-crf", "20", "-pix_fmt", "yuv420p", "-c:a", "aac",
-                    "-b:a", "192k", "-ar", "48000", "-movflags", "+faststart", str(out / "video.mp4")], check=True)
-    (out / "credits.txt").write_text("映像: Pixabay (Pixabay License)\n" + "\n".join(credits)
+        command += ["-filter_complex", f"[1:a]apad,atrim=0:{length:.3f},loudnorm=I=-14:TP=-1.5[a]"]
+    command += ["-map", "0:v", "-map", "[a]", "-t", f"{length:.3f}", "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
+                "-ar", "48000", "-movflags", "+faststart", str(out / "video.mp4")]
+    subprocess.run(command, check=True)
+    (out / "credits.txt").write_text("映像:\n" + "\n".join(credits)
                                      + (f"\n音楽: {music.get('title', music['file'])}\n" if music else "\n"))
-    # a sheet of stills, one a second
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(out / "video.mp4"), "-vf",
-                    "fps=1,scale=270:480,tile=6x4", "-frames:v", "1", "-q:v", "3", str(out / "sheet.jpg")], check=True)
-    print(f"video {length:.1f}s, {len(parts)} clips, {len(overlays)} text overlays")
+                    "fps=2,scale=180:320,tile=10x5", "-frames:v", "1", "-q:v", "3", str(out / "sheet.jpg")], check=True)
+    print(f"video {length:.1f}s, {len(parts)} clips, {len(layers)} text layers")
 
 
 if __name__ == "__main__":

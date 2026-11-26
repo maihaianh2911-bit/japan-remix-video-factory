@@ -1,5 +1,5 @@
 {
- "stage": "render",
+ "stage": "find",
  "note": "Bản thử 20 giây: video dựng bằng đoạn video (Pixabay), chữ to giữa màn hình. Kênh mới (cảnh đẹp Nhật).",
  "voice": [
   "もち子さん",
@@ -12,14 +12,26 @@
   "volume": 0.25
  },
  "searches": [
-  "fushimi inari",
-  "伏見稲荷",
+  "chureito pagoda",
+  "fuji pagoda",
+  "富士山 五重塔",
+  "commons:Chureito Pagoda",
   "torii",
+  "torii gate",
+  "fushimi",
+  "inari",
+  "kyoto shrine",
+  "千本鳥居",
+  "commons:Fushimi Inari",
+  "commons:Senbon torii",
+  "mixkit:kyoto",
+  "shirakawago",
   "shirakawa-go",
-  "白川郷",
   "gassho",
-  "mount fuji",
-  "富士山"
+  "白川郷",
+  "japanese village snow",
+  "commons:Shirakawa-go",
+  "commons:Gassho-zukuri"
  ],
  "scenes": [
   {
