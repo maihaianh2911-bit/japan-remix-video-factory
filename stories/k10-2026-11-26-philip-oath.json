@@ -1,7 +1,7 @@
 {
   "channel": "k10",
   "issue": 16,
-  "stage": "find",
+  "stage": "render",
   "title": "妻への誓い フィリップ殿下とエリザベス女王の戴冠式",
   "date": "2026-11-26",
   "pace": {
@@ -28,14 +28,7 @@
     "web:Queen Elizabeth Prince Philip old age smiling together => the elderly Queen and Prince Philip smiling together",
     "web:Queen Elizabeth funeral Prince Philip 2021 alone => the Queen sitting alone at Prince Philip's funeral",
     "web:Prince Philip funeral 2021 Windsor => Prince Philip's funeral at Windsor in 2021",
-    "web:Queen Elizabeth Prince Philip coronation balcony 1953 => the Queen and Prince Philip on the balcony after the coronation",
-    "web:Queen Elizabeth Philip coronation balcony 1953 colour => colour photo of the crowned Queen and Prince Philip waving on the balcony",
-    "web:Queen Elizabeth coronation 1953 Philip colorized => colorized photo of Queen Elizabeth and Prince Philip at the coronation",
-    "web:Prince Philip homage coronation colorized => colorized photo of Prince Philip kneeling before the Queen at the coronation",
-    "web:Cecil Beaton coronation portrait Queen Philip 1953 colour => colour coronation portrait of Queen Elizabeth and Prince Philip",
-    "web:Prince Philip navy 1951 colorized => colorized photo of Prince Philip as a young naval officer",
-    "web:Prince Philip 1950s colorized portrait => colorized portrait of Prince Philip in the 1950s",
-    "web:Queen Elizabeth Philip children 1960 colour photo => colour photo of the Queen and Prince Philip with their young children"
+    "web:Queen Elizabeth Prince Philip coronation balcony 1953 => the Queen and Prince Philip on the balcony after the coronation"
   ],
   "scenes": [
     {
