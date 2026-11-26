@@ -26,7 +26,7 @@ from .story import Beat
 from .visuals import Photo
 
 STORY_KEYS = {"stage", "title", "date", "source", "source_url", "searches", "scenes", "issue", "style", "kicker",
-              "music", "pace", "fx", "channel", "trial", "review", "voice"}
+              "music", "pace", "fx", "channel", "trial", "review", "voice", "audio"}
 REVIEW = re.compile(r"^([0-9]+)/([0-9]+)$")   # "review": "<pictures that passed>/<pictures>" (tools/review_picks.py)
 HOOK_LIMIT = 55   # the hook line is said in about 5 seconds: 45-50 characters at speed 1.2; warned above this
 # Pictures a scene (owner, 19/11/2026: "nếu nội dung quá 6s thì phải tìm 2 ảnh, dưới 6s thì 1 ảnh cũng đc, tự do"):
@@ -42,6 +42,8 @@ TONES = ("sepia", "mono", "color")
 MUSIC_KEYS = {"pick", "volume", "start", "file", "title", "creator", "license", "page"}
 ROOT = Path(__file__).resolve().parent.parent   # the repository: "music": {"file": "music/<name>.mp3"} is read from it
 AUDIO = (".mp3", ".ogg", ".oga", ".opus", ".wav", ".flac", ".m4a")
+LEVEL_KEYS = {"loudness", "voice"}   # "audio": the loudness of the whole sound, the voice over the music (1 = usual)
+LEVEL_LIMITS = (0.5, 2.5)
 PACE_KEYS = {"speed", "line_pause", "scene_pause"}
 PACE_LIMITS = {"speed": (0.7, 1.3), "line_pause": (0.0, 2.0), "scene_pause": (0.0, 3.0)}
 
@@ -275,6 +277,17 @@ def validate(data, name=None):
             problems.append(f'"fx" must be {{"motion": true, "depth": true, "text": true, "face": true}}, got {fx!r}')
         else:
             problems += unknown(fx, FX_KEYS, "fx")
+    audio = data.get("audio")
+    if audio is not None:
+        if not isinstance(audio, dict):
+            problems.append(f'"audio" must be {{"loudness": 1.6, "voice": 1.3}}, got {audio!r}')
+        else:
+            problems += unknown(audio, LEVEL_KEYS, "audio")
+            low, high = LEVEL_LIMITS
+            for key in sorted(LEVEL_KEYS & set(audio)):
+                value = audio[key]
+                if not isinstance(value, (int, float)) or isinstance(value, bool) or not low <= value <= high:
+                    problems.append(f'"audio": "{key}" must be a number from {low} to {high} (1 = usual), got {value!r}')
     pace = data.get("pace")
     if pace is not None:
         if not isinstance(pace, dict):
@@ -502,7 +515,7 @@ def load_story(path, pictures=None):
                       data.get("source", ""), (), data.get("style", "news"), data.get("kicker", ""), music,
                       float(pace.get("speed", 0.96)), float(pace.get("line_pause", 0.0)),
                       float(pace.get("scene_pause", 0.0)), data.get("fx"),
-                      voice_of(data, channel), channel["id"], bool(data.get("trial")))
+                      voice_of(data, channel), channel["id"], bool(data.get("trial")), data.get("audio"))
     report_without_picture(data)
     beats, photos = [], {}
     for index, scene in enumerate(data["scenes"]):

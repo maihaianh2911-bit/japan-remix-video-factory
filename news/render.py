@@ -1141,28 +1141,49 @@ def video_kbps(duration, budget=SIZE_BUDGET):
     return max(300, min(MAX_VIDEO_KBPS, int(room)))
 
 
-LOUDNESS = "loudnorm=I=-16:TP=-1.5:LRA=7"
+LOUDNESS_LUFS = -16   # the loudness of the finished sound (EBU R128 integrated), at "audio": {"loudness": 1}
 MUSIC_LUFS = -35   # the music sits about 17 dB under the voice (VOICEVOX speaks at about -18 LUFS)
 
 
-def codec_args(duration, mixed=False):
+def loudness(gain=1.0):
+    """The filter that brings the finished sound to its loudness: -16 LUFS times `gain` (the "loudness" of a
+    story's or channel's "audio": 1.6 = 60 % louder, about -11.9 LUFS), never above -9 LUFS."""
+    target = min(-9.0, LOUDNESS_LUFS + 20 * math.log10(max(0.25, gain)))
+    return f"loudnorm=I={target:.1f}:TP=-1.5:LRA=7"
+
+
+LOUDNESS = loudness()
+
+
+def audio_levels(release):
+    """(loudness, voice) of a story: its "audio" (inherited from the channel), 1 and 1 without it. "voice" raises
+    the voice over the music (1.3 = 30 % louder than the music than usual); the whole sound is then brought to
+    the loudness, so it does not change how loud the video is."""
+    audio = getattr(release, "audio", None) or {}
+    return float(audio.get("loudness", 1.0)), float(audio.get("voice", 1.0))
+
+
+def codec_args(duration, mixed=False, gain=1.0):
     """FFmpeg output options: H.264 at constant quality, capped so that the file fits the size budget. `mixed`:
-    the audio comes from a -filter_complex (voice and music), already brought to the loudness."""
+    the audio comes from a -filter_complex (voice and music), already brought to the loudness; else it is brought
+    to the loudness `gain` here."""
     kbps = video_kbps(duration)
     return ["-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-maxrate", f"{kbps}k", "-bufsize", f"{2 * kbps}k",
             "-pix_fmt", "yuv420p",
-            "-c:a", "aac", "-b:a", f"{AUDIO_KBPS}k", *([] if mixed else ["-af", LOUDNESS]),
+            "-c:a", "aac", "-b:a", f"{AUDIO_KBPS}k", *([] if mixed else ["-af", loudness(gain)]),
             "-movflags", "+faststart", "-shortest"]
 
 
-def music_args(music, duration):
-    """Inputs and audio graph that lay the music (looped if short, faded in and out) under the voice (input 1)."""
+def music_args(music, duration, gain=1.0, voice=1.0):
+    """Inputs and audio graph that lay the music (looped if short, faded in and out) under the voice (input 1).
+    `voice` raises the voice over the music, `gain` the loudness of the whole (audio_levels)."""
     level = MUSIC_LUFS + 20 * math.log10(max(0.2, music.volume))
     fade_out = max(0.0, duration - 3.0)
-    graph = (f"[1:a]aformat=sample_rates=44100:channel_layouts=mono[voice];"
+    lift = f",volume={voice:.3f}" if voice != 1.0 else ""
+    graph = (f"[1:a]aformat=sample_rates=44100:channel_layouts=mono{lift}[voice];"
              f"[2:a]aformat=channel_layouts=mono,loudnorm=I={level:.1f}:TP=-9:LRA=11,aresample=44100,"
              f"afade=t=in:st=0:d=2,afade=t=out:st={fade_out:.2f}:d=3,atrim=0:{duration:.2f}[music];"
-             f"[voice][music]amix=inputs=2:duration=first:normalize=0,{LOUDNESS},aresample=44100[mix]")
+             f"[voice][music]amix=inputs=2:duration=first:normalize=0,{loudness(gain)},aresample=44100[mix]")
     skip = ["-ss", f"{music.start:.2f}"] if getattr(music, "start", 0) else []
     return [*skip, "-stream_loop", "-1", "-i", music.path], ["-filter_complex", graph, "-map", "0:v", "-map", "[mix]"]
 
@@ -1184,11 +1205,12 @@ def encode(beats, release, photos, demo, intervals, captions, wav, out):
 
     duration = intervals[-1][1]
     music = getattr(release, "music", None)
-    inputs, mapping = music_args(music, duration) if music else ([], [])
+    gain, voice = audio_levels(release)
+    inputs, mapping = music_args(music, duration, gain, voice) if music else ([], [])
     cmd = [
         "ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
         "-f", "rawvideo", "-pixel_format", "rgb24", "-video_size", f"{W}x{H}", "-framerate", str(FPS), "-i", "-",
-        "-i", str(wav), *inputs, *mapping, *codec_args(duration, mixed=bool(music)), str(out / "video.mp4"),
+        "-i", str(wav), *inputs, *mapping, *codec_args(duration, mixed=bool(music), gain=gain), str(out / "video.mp4"),
     ]
     cue = 0
     frame_index = 0

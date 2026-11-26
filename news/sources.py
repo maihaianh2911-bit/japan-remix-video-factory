@@ -53,6 +53,7 @@ class Release:
     voice: tuple = ()            # (speaker, style) of VOICEVOX: the voice of the story's channel (channels/<id>.json)
     channel: str = ""            # the channel of the story, "k8"
     trial: bool = False          # a trial or sample video: the length rule (61 s at least) does not stop its render
+    audio: object = None         # {"loudness": 1.6, "voice": 1.3} of the story (or its channel), or None (1 and 1)
 
 
 def compact(value):

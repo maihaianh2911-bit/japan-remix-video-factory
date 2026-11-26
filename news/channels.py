@@ -13,8 +13,10 @@ A channel file holds
                       and a why for every scene, the picture review. python -m news.custom warns about what a story
                       leaves out of it (custom.edit_warnings).
     defaults          what a story of the channel inherits for the keys it leaves out: style, kicker, pace, fx, and
-                      music (a recording kept in music/, {"file": …, "title": …}: k10's bamboo flute, 25/11/2026).
-                      A dict ("pace", "fx") is inherited key by key, "music" whole; a key set to null inherits nothing.
+                      music (a recording kept in music/, {"file": …, "title": …}: k10's bamboo flute, 25/11/2026),
+                      audio ({"loudness": 1.6, "voice": 1.3}: the whole sound 60 % louder, the voice 30 % louder over
+                      the music; k10, owner 26/11/2026). A dict ("pace", "fx", "audio") is inherited key by key,
+                      "music" whole; a key set to null inherits nothing.
 Only the Python standard library is used here: the caption check runs without the requirements.
 
 python -m news.channels                          checks every channel file (and the stories its defaults make)
@@ -32,7 +34,7 @@ import sys
 FOLDER = Path(__file__).resolve().parent.parent / "channels"
 ID = re.compile(r"^k[1-9][0-9]*$")
 KEYS = {"id", "number", "name_ja", "name_vi", "tag", "voice", "hashtags", "edit", "defaults"}
-DEFAULT_KEYS = {"style", "kicker", "pace", "fx", "music"}
+DEFAULT_KEYS = {"style", "kicker", "pace", "fx", "music", "audio"}
 EDITS = ("tin-nhat",)   # the edits a channel may follow (CLAUDE.md, "The edit")
 STORY_NAME = re.compile(r"^(k[1-9][0-9]*)-([0-9]{4}-[0-9]{2}-[0-9]{2})-[A-Za-z0-9._-]+$")
 SAMPLE_NAME = re.compile(r"^mau-(k[1-9][0-9]*)(?:-[A-Za-z0-9._-]+)?$")
@@ -142,7 +144,7 @@ def problems(data, stem):
                      f"got {data.get('edit')!r}")
     defaults = data.get("defaults")
     if not isinstance(defaults, dict):
-        found.append(f'{where}: "defaults" must be an object (style, kicker, pace, fx), got {defaults!r}')
+        found.append(f'{where}: "defaults" must be an object (style, kicker, pace, fx, music, audio), got {defaults!r}')
     else:
         found += [f'{where}: "defaults" cannot hold {key!r} (allowed: {", ".join(sorted(DEFAULT_KEYS))})'
                   for key in sorted(set(defaults) - DEFAULT_KEYS)]

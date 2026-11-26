@@ -209,6 +209,10 @@ the Tin Nhật channel (`japan-news-video-factory`) does now, with every one of 
   "volume": 0.84}` (1.2 at first, then 30 % quieter: owner, 25/11/2026, "giảm nhạc nền đi 30%"), so a k10 story needs no `music:` search and no `"music"`; a story's own `"music"` replaces it whole.
   Its source and licence are not known (the owner's file): YouTube may recognise it if it is under copyright, a risk
   the owner took for the music of their own videos on 19/11/2026.
+  **k10's sound is louder** (owner, 26/11/2026: "Tăng âm thanh lên 60%, tăng riêng voice lên 30%"): the channel's
+  `defaults` give `"audio": {"loudness": 1.6, "voice": 1.3}`: the whole sound brought to about -12 LUFS instead of
+  -16 (`news/render.py` `loudness`), and the voice 30 % louder over the music before the mix. A story may set its
+  own `"audio"` (merged key by key, each 0.5–2.5, 1 = as before); the other channels stay at 1 and 1.
 - **Read fast like the source** (16/11/2026: "đọc nhanh như video gốc"): speed 1.2, short pauses (inherited).
 - **Two pictures for a scene over 6 seconds, one is enough under that** (19/11/2026: "nếu nội dung quá 6s thì phải
   tìm 2 ảnh, dưới 6s thì 1 ảnh cũng đc, tự do"; before: two a scene) and **every scene its own fitting picture**

@@ -273,6 +273,26 @@ def voice_of_channel():
         assert any("not in the repository" in p for p in validate(bad, path.stem)), validate(bad, path.stem)
         both = dict(story, music={"file": "music/k10-sao-truc.mp3", "title": "x", "pick": "1-1"})
         assert any("not both" in p for p in validate(both, path.stem)), validate(both, path.stem)
+    # k10's sound (owner, 26/11/2026: "Tăng âm thanh lên 60%, tăng riêng voice lên 30%"): inherited key by key
+    with tempfile.TemporaryDirectory(prefix="channel-audio-") as scratch:
+        path = Path(scratch) / "k10-2026-11-26-audio.json"
+        story = dict(STORY, channel="k10")
+        path.write_text(json.dumps(story, ensure_ascii=False), encoding="utf-8")
+        release, beats, photos = load_story(path)
+        assert render.audio_levels(release) == (1.6, 1.3), release.audio
+        assert "loudnorm=I=-11.9:" in render.loudness(1.6) and render.loudness() == render.LOUDNESS, render.loudness(1.6)
+        assert "I=-16.0:" in render.LOUDNESS, render.LOUDNESS
+        inputs, mapping = render.music_args(release.music, 60.0, 1.6, 1.3)
+        graph = mapping[mapping.index("-filter_complex") + 1]
+        assert "mono,volume=1.300[voice]" in graph and "loudnorm=I=-11.9:" in graph, graph
+        assert channels.inherit(dict(story, audio={"voice": 1.0}))["audio"] == {"loudness": 1.6, "voice": 1.0}
+        other = dict(STORY, channel="k8")
+        path.with_name("k8-2026-11-26-audio.json").write_text(json.dumps(other, ensure_ascii=False), encoding="utf-8")
+        release, beats, photos = load_story(path.with_name("k8-2026-11-26-audio.json"))
+        assert render.audio_levels(release) == (1.0, 1.0), release.audio   # the other channels: as before
+        bad = dict(story, audio={"loudness": 5, "bass": 1})
+        found = validate(bad, path.stem)
+        assert any('"loudness" must be a number' in p for p in found) and any("bass" in p for p in found), found
 
 
 def caption_checks():
