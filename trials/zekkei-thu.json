@@ -1,9 +1,90 @@
 {
- "stage": "find",
+ "stage": "render",
  "note": "Bản thử 20 giây: video dựng bằng đoạn video (Pixabay), chữ to giữa màn hình. Kênh mới (cảnh đẹp Nhật).",
- "voice": ["もち子さん", "ノーマル"],
+ "voice": [
+  "もち子さん",
+  "ノーマル"
+ ],
  "speed": 1.2,
- "music": {"file": "music/k10-sao-truc.mp3", "title": "竹笛", "volume": 0.25},
- "searches": ["fushimi inari", "伏見稲荷", "torii", "shirakawa-go", "白川郷", "gassho", "mount fuji", "富士山"],
- "scenes": []
+ "music": {
+  "file": "music/k10-sao-truc.mp3",
+  "title": "竹笛",
+  "volume": 0.25
+ },
+ "searches": [
+  "fushimi inari",
+  "伏見稲荷",
+  "torii",
+  "shirakawa-go",
+  "白川郷",
+  "gassho",
+  "mount fuji",
+  "富士山"
+ ],
+ "scenes": [
+  {
+   "label": "hook",
+   "title": [
+    "死ぬまでに一度は見たい",
+    "日本の絶景",
+    "5選"
+   ],
+   "lines": [
+    "死ぬまでに一度は見たい、日本の絶景5選。"
+   ],
+   "clips": [
+    {
+     "id": 136017,
+     "start": 0
+    }
+   ]
+  },
+  {
+   "label": "fushimi",
+   "number": "①",
+   "title": [
+    "伏見稲荷大社"
+   ],
+   "lines": [
+    "京都の、伏見稲荷大社。",
+    {
+     "text": "山の上まで続く*朱色の鳥居*は、およそ*1万基*。",
+     "say": "山の上まで続く朱色の鳥居は、およそいちまんき。"
+    },
+    "全国に約3万ある*稲荷神社*の、総本宮です。"
+   ],
+   "clips": [
+    {
+     "id": 53789,
+     "start": 2
+    },
+    {
+     "id": 257871,
+     "start": 0
+    }
+   ]
+  },
+  {
+   "label": "shirakawa",
+   "number": "②",
+   "title": [
+    "白川郷"
+   ],
+   "lines": [
+    "岐阜県の、白川郷。",
+    "雪に包まれた*合掌造り*の家々は、1995年に*世界遺産*に登録されました。"
+   ],
+   "clips": [
+    {
+     "id": 266009,
+     "start": 1,
+     "x": 0.3
+    },
+    {
+     "id": 327388,
+     "start": 2
+    }
+   ]
+  }
+ ]
 }
