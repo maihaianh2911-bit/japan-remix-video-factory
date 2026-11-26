@@ -1,7 +1,7 @@
 {
   "channel": "k10",
   "issue": 16,
-  "stage": "find",
+  "stage": "render",
   "title": "妻への誓い フィリップ殿下とエリザベス女王の戴冠式",
   "date": "2026-11-26",
   "pace": {
@@ -40,7 +40,26 @@
           "text": "エリザベス女王の戴冠式で、フィリップ殿下は妻の前にひざまずき、「身も心も、あなたの臣下となります」と誓いました。",
           "quote": true
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "6-5",
+          "focus": [
+            0.51,
+            0.38
+          ],
+          "move": "hold"
+        },
+        {
+          "pick": "9-5",
+          "focus": [
+            0.53,
+            0.15
+          ],
+          "move": "push-in"
+        }
+      ],
+      "why": "Mở đầu: Nữ hoàng đội vương miện và Philip trên ban công ngày đăng quang 1953, mặt hai người lớn (để yên cho hai mặt không bị cắt); rồi ảnh chính thức ngày đăng quang, tiến lại gần."
     },
     {
       "label": "口づけ",
@@ -48,7 +67,19 @@
       "headline": "誓いのあとの\n口づけ",
       "lines": [
         "誓いのあと、殿下は立ち上がり、女王の頬にそっと口づけをしました。"
-      ]
+      ],
+      "cut": "fade",
+      "photo": [
+        {
+          "pick": "6-2",
+          "focus": [
+            0.45,
+            0.3
+          ],
+          "move": "push-in"
+        }
+      ],
+      "why": "Sau lời thề: ảnh Philip cúi người trước Nữ hoàng trong lễ đăng quang, tiến lại gần."
     },
     {
       "label": "海軍",
@@ -56,7 +87,19 @@
       "headline": "閉ざされた\n海軍の道",
       "lines": [
         "将来を期待されていた殿下の海軍の道は、閉ざされました。"
-      ]
+      ],
+      "cut": "fade",
+      "photo": [
+        {
+          "pick": "10-12",
+          "focus": [
+            0.6,
+            0.15
+          ],
+          "move": "push-in"
+        }
+      ],
+      "why": "Nghề hải quân: Philip là sĩ quan trên tàu, Elizabeth đến thăm."
     },
     {
       "label": "名字",
@@ -64,7 +107,27 @@
       "headline": "継がせられない\n名字",
       "lines": [
         "子どもたちに自分の名字を継がせることも許されず、「僕はただのアメーバだ」と嘆いたといいます。"
-      ]
+      ],
+      "cut": "fade",
+      "photo": [
+        {
+          "pick": "12-2",
+          "focus": [
+            0.45,
+            0.3
+          ],
+          "move": "pull-back"
+        },
+        {
+          "pick": "10-10",
+          "focus": [
+            0.47,
+            0.18
+          ],
+          "move": "push-in"
+        }
+      ],
+      "why": "Họ của con: Philip bế con trai, vợ bế con gái; rồi gương mặt ông khi than \"tôi chỉ là con amip\"."
     },
     {
       "label": "女王の答え",
@@ -73,7 +136,24 @@
       "lines": [
         "女王は、そんな夫に応えました。",
         "1957年には夫にイギリスの王子の称号を与え、1960年には子孫の名に夫の名マウントバッテンを加えたのです。"
-      ]
+      ],
+      "cut": "page",
+      "photo": [
+        {
+          "pick": "13-3",
+          "focus": [
+            0.5,
+            0.2
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "14-1",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "why": "Nữ hoàng đáp lại: Philip những năm 1950 (tước hiệu hoàng tử 1957), rồi gia đình năm 1960 với bé Andrew."
     },
     {
       "label": "公務",
@@ -81,7 +161,24 @@
       "headline": "2万2千回の\n公務",
       "lines": [
         "殿下はひとりで2万2千回以上の公務をこなし、96歳でようやく引退しました。"
-      ]
+      ],
+      "cut": "dip",
+      "photo": [
+        {
+          "pick": "15-14",
+          "fit": "contain",
+          "move": "push-in"
+        },
+        {
+          "pick": "15-11",
+          "focus": [
+            0.46,
+            0.36
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "why": "Nhảy tới năm 2017: buổi làm việc cuối cùng dưới mưa, ông bước qua hàng sĩ quan, rồi ngả mũ chào (lùi ra)."
     },
     {
       "label": "結婚50年",
@@ -89,7 +186,24 @@
       "headline": "私の力であり\n支え",
       "lines": [
         "結婚50年の日、女王は「彼は褒められるのが苦手な人ですが、この長い年月、私の力であり、支えでした」と語りました。"
-      ]
+      ],
+      "cut": "dip",
+      "photo": [
+        {
+          "pick": "17-4",
+          "move": "push-in",
+          "fit": "contain"
+        },
+        {
+          "pick": "17-5",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "rise"
+        }
+      ],
+      "why": "Kỷ niệm 50 năm cưới 1997: hai người cười bên nhau, rồi ông đi bên cạnh Nữ hoàng."
     },
     {
       "label": "別れ",
@@ -98,7 +212,27 @@
       "lines": [
         "2021年、殿下は99歳で亡くなりました。",
         "女王は「人生に大きな穴が空いた」と語りました。"
-      ]
+      ],
+      "cut": "dip",
+      "photo": [
+        {
+          "pick": "15-2",
+          "focus": [
+            0.55,
+            0.35
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "19-2",
+          "focus": [
+            0.37,
+            0.25
+          ],
+          "move": "push-in"
+        }
+      ],
+      "why": "Năm 2021: gương mặt Philip lúc già cười hiền, rồi Nữ hoàng ngồi một mình ở đám tang (tiến lại gần)."
     },
     {
       "label": "68年",
@@ -106,7 +240,20 @@
       "headline": "68年後",
       "lines": [
         "それは、戴冠式で妻の前にひざまずいた日から、68年後のことでした。"
-      ]
+      ],
+      "cut": "dip",
+      "photo": [
+        {
+          "pick": "6-2",
+          "focus": [
+            0.45,
+            0.3
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "why": "Kết: quay về khoảnh khắc ông cúi trước vợ trong lễ đăng quang, lùi ra."
     }
-  ]
+  ],
+  "review": "15/15"
 }
