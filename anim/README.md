@@ -4,6 +4,13 @@ Chủ kênh, 26/11/2026, cho **một kênh mới, "kênh bản đồ"** (chưa c
 tên, chưa có repo). Thư mục này là hai bản thử, **chưa được duyệt**: máy dựng (`news/`), workflow và kênh 10 không
 dùng tới nó.
 
+**Chủ kênh đã chốt cho kênh bản đồ (26/11/2026, sau khi xem hai bản thử):** *"Bản đồ, k cần hastag riêng đâu"* (kênh
+là kênh bản đồ; không cần tên kênh hay hashtag riêng), *"mình sẽ chỉ làm 2d thôi nhỉ, 3d hơi mất công"* (chỉ làm
+hình 2D; bỏ các hình nhỏ nổi 3D của video gốc). Chủ kênh hỏi Claude nên làm dạng nội dung gì; Claude đề nghị lấy
+"ranh giới" làm trục (trong một tỉnh có hai vùng, đường ranh tỉnh kỳ lạ, ranh giới thói quen và tiếng nói trên cả
+nước) và tránh chuyện "nếu thắng chiến tranh" và lãnh thổ tranh chấp: **chủ kênh chưa trả lời, chưa phải quyết định**.
+Chưa chốt: repo của kênh, giọng đọc, nhân vật.
+
 1. **Kiểu khung (`layout` mặc định, `stage/index.html`)**: theo video TikTok của @otona_study (「大人の教養」): tiêu
    đề đứng yên ở trên, khung hình động ở giữa (bản đồ vẽ, biểu đồ, nhân vật), phụ đề chữ vàng ở dưới. Chủ kênh:
    "Video dạng này m dựng đc ko", rồi gửi 6 hình samurai trên nền xanh: "Dùng tạm hình này". Bản thử
