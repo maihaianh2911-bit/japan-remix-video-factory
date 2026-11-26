@@ -1,0 +1,79 @@
+{
+  "channel": "k10",
+  "stage": "find",
+  "trial": true,
+  "title": "【試し】アール・ヌーヴォー 日本の浮世絵に恋をした様式（新しい見た目の試し・約20秒）",
+  "date": "2026-11-26",
+  "kicker": "アール・ヌーヴォー",
+  "searches": [
+    "wiki:アルフォンス・ミュシャ",
+    "Mucha Zodiac 1896",
+    "Mucha Gismonda 1894 poster",
+    "Mucha Job 1896 poster",
+    "Mucha Reverie 1897",
+    "wiki:アール・ヌーヴォー",
+    "wiki:Paris Métro entrances by Hector Guimard",
+    "Guimard métro entrance Porte Dauphine",
+    "Guimard métro entrance Abbesses",
+    "wiki:タッセル邸",
+    "Hôtel Tassel staircase Horta",
+    "wiki:神奈川沖浪裏",
+    "wiki:喜多川歌麿",
+    "wiki:Siegfried Bing",
+    "Maison de l'Art Nouveau Bing",
+    "Le Japon artistique Bing",
+    "wiki:カサ・バトリョ",
+    "Tiffany lamp wisteria",
+    "Émile Gallé vase",
+    "web:ミュシャ 黄道十二宮 ポスター",
+    "web:ギマール パリ メトロ 入口 アール・ヌーヴォー",
+    "web:タッセル邸 階段 オルタ",
+    "web:サミュエル・ビング アール・ヌーヴォーの店 1895",
+    "music:Gymnopédie Satie piano",
+    "music:Debussy Arabesque piano",
+    "music:Debussy Clair de lune piano"
+  ],
+  "scenes": [
+    {
+      "label": "様式",
+      "headline": "日本に恋をした\n一つの様式",
+      "lines": [
+        {
+          "text": "ミュシャの絵も、パリの地下鉄の入口も、日本の浮世絵に恋をした、一つの様式から生まれました。",
+          "quote": true
+        }
+      ]
+    },
+    {
+      "label": "名前",
+      "headline": "アール・ヌーヴォー",
+      "lines": [
+        "その名は、アール・ヌーヴォー。フランス語で「新しい芸術」という意味です。"
+      ]
+    },
+    {
+      "label": "曲線",
+      "headline": "花や蔓のような曲線",
+      "lines": [
+        {
+          "text": "花や蔓のように、どこまでもうねる曲線。",
+          "say": "はなやつるのように、どこまでもうねるきょくせん。"
+        }
+      ]
+    },
+    {
+      "label": "浮世絵",
+      "headline": "浮世絵から学んだ\n輪郭と構図",
+      "lines": [
+        "くっきりした輪郭と大胆な構図は、海を渡った浮世絵から学んだものでした。"
+      ]
+    },
+    {
+      "label": "名付け親",
+      "headline": "名前は画商の店から",
+      "lines": [
+        "しかもこの名前は、パリで日本美術を売っていた画商の、店の名前だったのです。"
+      ]
+    }
+  ]
+}
