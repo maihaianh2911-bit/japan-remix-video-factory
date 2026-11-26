@@ -492,5 +492,32 @@
   D.cloud = (key, x, y, w) => rc.ellipse(x, y, w, w * 0.2, O(key, { fill: '#f8fbfd', strokeWidth: 3.5 }));
   D.burst = (key, x, y, r, n, color, width = 7) => { ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = width; ctx.lineCap = 'round'; for (let i = 0; i < n; i++) { const a = i * 2 * Math.PI / n + 0.3; ctx.beginPath(); ctx.moveTo(x + Math.cos(a) * r, y + Math.sin(a) * r); ctx.lineTo(x + Math.cos(a) * r * 1.45, y + Math.sin(a) * r * 1.45); ctx.stroke(); } ctx.restore(); };
 
+  // ---------- the second way of drawing (26/11/2026): one big picture for every part of a sentence ----------
+  // shots(t, [[start, draw(v)], …]): the picture of the moment; each new one comes in with a small push.
+  // Give the first one the start -1 (no push at the very first frame of a scene).
+  D.shots = (t, list) => {
+    let cur = list[0]; for (const s of list) if (t >= s[0]) cur = s;
+    const k = 1 + 0.05 * (1 - easeOut(clamp((t - cur[0]) / 0.22)));
+    ctx.save(); ctx.translate(540, 1100); ctx.scale(k, k); ctx.translate(-540, -1100);
+    cur[1](Math.max(0, t - cur[0])); ctx.restore();
+  };
+  D.building = (key, x, y, w, h, color, cols = 3) => {
+    rc.rectangle(x, y - h, w, h, O(key, { fill: color }));
+    const gap = w / (cols + 0.5);
+    for (let r = 0; r * 86 + 70 < h; r++) for (let c = 0; c < cols; c++) rc.rectangle(x + gap * (c + 0.45), y - h + 34 + r * 86, gap * 0.55, 46, O(key + 'w' + r + c, { fill: '#cfe6f3', strokeWidth: 3, roughness: 0.5 }));
+  };
+  D.skyline = (key, y, list) => list.forEach(([x, w, h, c, cols], i) => D.building(key + i, x, y, w, h, c, cols));
+  D.haha = (t, a, spots, u) => spots.forEach(([x, y, r], i) => { const k = D.pin(t, a + i * 0.12, 0.25); if (k > 0) D.at(x, y + Math.sin(u * 9 + i) * 6, k, () => D.text('ハハハ', 0, 0, 66, { font: MARK, color: '#e2742b', outline: 12 }), r); });
+  D.confetti = (key, u, n, y0, h) => { const r = (i, m) => ((hash(key + i) % 1000) / 1000 * m); for (let i = 0; i < n; i++) { const x = r(i, 1080), y = y0 + ((r(i + 99, h) + u * (110 + r(i + 7, 90))) % h); ctx.save(); ctx.translate(x, y); ctx.rotate(u * 3 + i); ctx.fillStyle = ['#d6453a', '#f6c543', '#3d74c4', '#2e8b57'][i % 4]; ctx.fillRect(-11, -6, 22, 12); ctx.restore(); } };
+  // a calendar whose year runs from one to the other between the moments a and b, its pages flying off
+  D.yearFlip = (key, t, a, b, from, to, cx, cy, s, small) => {
+    const q = easeInOut(prog(t, a, b - a));
+    for (let i = 0; i < 7; i++) { const f = clamp(q * 1.3 - i * 0.12); if (f > 0 && f < 1) D.at(lerp(cx + 80, cx + 640, f), lerp(cy - 220, cy - 500 - i * 30, f), 0.6, () => rc.rectangle(-150, -110, 300, 220, O(key + 'fly' + i, { fill: '#fbf7ee' })), f * 2.4); }
+    D.calendar(key, cx, cy, s, String(Math.round(lerp(from, to, q))), q >= 1 ? small : '');
+  };
+  D.beam = (x, y, len, dir = 1) => { ctx.save(); const g = ctx.createLinearGradient(x, y, x + len * dir, y); g.addColorStop(0, 'rgba(255,240,150,0.75)'); g.addColorStop(1, 'rgba(255,240,150,0)'); ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(x, y - 14); ctx.lineTo(x + len * dir, y - 130); ctx.lineTo(x + len * dir, y + 130); ctx.lineTo(x, y + 14); ctx.closePath(); ctx.fill(); ctx.restore(); };
+  // a tower of coins: n coins high, (x, y) the middle of its foot
+  D.tower = (key, x, y, n, s = 1) => { ctx.save(); ctx.translate(x, y); ctx.scale(s, s); for (let i = 0; i < n; i++) rc.ellipse(Math.sin(i * 1.7) * 5, -i * 17 - 12, 150, 44, O(key + i, { fill: i % 2 ? '#f0c64a' : '#e8b93c', strokeWidth: 3.5, roughness: 0.5 })); ctx.restore(); };
+
   window.D = D;
 })();

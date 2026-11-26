@@ -27,6 +27,21 @@
     },
     {
       "line": 1,
+      "shift": 0.2,
+      "sound": "pop"
+    },
+    {
+      "line": 1,
+      "at": "71歳",
+      "sound": "pop"
+    },
+    {
+      "line": 1,
+      "at": "国鉄",
+      "sound": "pop"
+    },
+    {
+      "line": 1,
       "at": "十河信二",
       "sound": "pop"
     },
@@ -38,30 +53,46 @@
     {
       "line": 3,
       "at": "もう古い",
+      "shift": -0.1,
+      "sound": "whoosh"
+    },
+    {
+      "line": 3,
+      "at": "もう古い",
+      "sound": "thud"
+    },
+    {
+      "line": 4,
+      "at": "大阪",
+      "sound": "pop"
+    },
+    {
+      "line": 4,
+      "at": "計画は",
       "sound": "thud"
     },
     {
       "line": 4,
       "at": "ピラミッド",
-      "shift": -0.1,
-      "sound": "pop"
+      "shift": -0.08,
+      "sound": "thud"
     },
     {
       "line": 4,
       "at": "万里",
-      "shift": -0.1,
-      "sound": "pop"
+      "shift": -0.08,
+      "sound": "thud"
     },
     {
       "line": 4,
       "at": "戦艦",
-      "shift": -0.1,
-      "sound": "pop"
+      "shift": -0.08,
+      "sound": "thud"
     },
     {
       "line": 4,
       "at": "に続く",
-      "shift": -0.1,
+      "shift": -0.08,
       "sound": "pop"
     },
     {
@@ -70,30 +101,84 @@
       "sound": "thud"
     },
     {
+      "line": 4,
+      "at": "とまで",
+      "sound": "pop"
+    },
+    {
+      "line": 4,
+      "at": "とまで",
+      "shift": 0.15,
+      "sound": "pop"
+    },
+    {
       "line": 5,
-      "shift": 0.4,
-      "sound": "thud"
+      "at": "建設費",
+      "sound": "pop"
+    },
+    {
+      "line": 5,
+      "at": "国会",
+      "shift": -0.08,
+      "sound": "pop"
     },
     {
       "line": 5,
       "at": "ない",
-      "sound": "pop"
+      "sound": "thud"
     },
     {
-      "line": 7,
-      "shift": -0.12,
+      "line": 6,
+      "at": "こう",
       "sound": "pop"
     },
     {
       "line": 7,
       "at": "半分",
+      "sound": "pop"
+    },
+    {
+      "line": 7,
+      "at": "半分",
+      "shift": 0.4,
+      "sound": "thud"
+    },
+    {
+      "line": 7,
+      "at": "通れば",
+      "shift": 0.15,
+      "sound": "pop"
+    },
+    {
+      "line": 7,
+      "at": "あとは",
       "shift": 0.35,
       "sound": "thud"
+    },
+    {
+      "line": 7,
+      "at": "心配",
+      "sound": "pop"
+    },
+    {
+      "line": 8,
+      "sound": "whoosh"
+    },
+    {
+      "line": 8,
+      "at": "安く",
+      "sound": "pop"
     },
     {
       "line": 8,
       "at": "通りました",
       "sound": "thud"
+    },
+    {
+      "line": 9,
+      "at": "予算の",
+      "shift": -0.3,
+      "sound": "whoosh"
     },
     {
       "line": 9,
@@ -103,24 +188,66 @@
     {
       "line": 10,
       "at": "開業",
+      "shift": -0.08,
+      "sound": "pop"
+    },
+    {
+      "line": 10,
+      "at": "開業",
+      "shift": 0.2,
+      "sound": "pop"
+    },
+    {
+      "line": 11,
+      "sound": "thud"
+    },
+    {
+      "line": 11,
+      "at": "新幹線",
+      "shift": -0.08,
+      "sound": "whoosh"
+    },
+    {
+      "line": 11,
+      "at": "東京駅",
+      "shift": 0.3,
       "sound": "pop"
     },
     {
       "line": 11,
       "at": "十河は",
-      "shift": -0.1,
       "sound": "pop"
     },
     {
       "line": 11,
-      "at": "十河は",
-      "shift": 0.5,
+      "at": "招かれ",
+      "sound": "thud"
+    },
+    {
+      "line": 12,
+      "shift": 0.1,
+      "sound": "pop"
+    },
+    {
+      "line": 12,
+      "at": "自宅",
+      "shift": -0.08,
+      "sound": "pop"
+    },
+    {
+      "line": 13,
       "sound": "whoosh"
     },
     {
       "line": 13,
-      "at": "記念碑",
-      "shift": -0.35,
+      "at": "その",
+      "shift": -0.08,
+      "sound": "pop"
+    },
+    {
+      "line": 13,
+      "at": "十河の",
+      "shift": -0.08,
       "sound": "thud"
     },
     {
@@ -134,8 +261,15 @@
       "sound": "pop"
     },
     {
+      "line": 14,
+      "at": "端",
+      "shift": 0.05,
+      "sound": "whoosh"
+    },
+    {
       "line": 15,
-      "shift": 0.6,
+      "at": "今も",
+      "shift": 0.2,
       "sound": "whoosh"
     }
   ],

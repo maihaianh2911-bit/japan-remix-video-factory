@@ -29,17 +29,22 @@ on `main`, and no workflow runs it.
 
 ## What the owner said about the pictures (26/11/2026)
 After the two first videos: "hình ảnh video rất sơ sài, k thể hiện đc nội dung". The fault was in the way of drawing,
-not in the look: a man beside a label and a stamp shows a noun, not what the sentence says. The second way (tried
-on the first 20 seconds of `chikatetsu-horafuki`, lines 0–4 of its `scenes.js`; the owner has not judged it yet):
+not in the look: a man beside a label and a stamp shows a noun, not what the sentence says. The second way was
+tried on the first 20 seconds of `chikatetsu-horafuki`; the owner approved it ("Ok đc đó"), and both stories were
+drawn again whole that way (34 and 36 pictures). **Every drawn video is made this way**:
 - **One big picture for every part of a sentence**, changed every 2–3 seconds (the model video: about 2.5 s a
   picture; the first way: 4 s and nothing moving inside). `shots(t, [[start, draw], …])` in that `scenes.js` holds the
-  pictures of one line; the labels of the line stay across them.
+  pictures of one line; the labels of the line stay across them (`D.shots` in the kit, with `D.skyline`, `D.haha`,
+  `D.confetti`, `D.yearFlip`, `D.beam`, `D.tower`).
 - **The picture must say the idea with the labels off**: a pin dropped on a target for "the very middle of Tokyo", a
   medal 日本初 on the train, the years flying on a calendar, the man pushed out of his own train which leaves without
   him, his idea as the same tunnel under Tokyo in a thought cloud, the soft ground as a block of tofu in which the
   tunnel sinks, the plan crumpled into a bin while three faces laugh.
 - **One thing at a time, large, in the middle** (a face close up with `D.face`, a train 400 px high), no small
   figures scattered over an empty frame; the best image of the story (here the beans) gets the whole frame.
+- **A thing that comes back** ties the video together: the egg 「ウソ」 the train comes out of and the rock 「責任」 Sogo
+  carries (`shinkansen-uso`); the beans, the yellow car and the paper tag 「ほら吹き」 struck out for 「地下鉄の父」 at the
+  end (`chikatetsu-horafuki`).
 - A real person is still a simple figure: no likeness.
 
 ## Making a video
