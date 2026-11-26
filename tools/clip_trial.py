@@ -522,8 +522,9 @@ def still_part(source, seconds, clip, target):
             else:
                 start, end = (0.75, 0.25) if move == "up" else (0.25, 0.75)
                 cy = view_h / 2 + span_y * (start + (end - start) * p)
-        left = min(max(cx - view_w / 2, 0), image.width - view_w)
-        top = min(max(cy - view_h / 2, 0), image.height - view_h)
+        view_w, view_h = min(view_w, image.width), min(view_h, image.height)   # rounding: never past the edge
+        left = max(0.0, min(cx - view_w / 2, image.width - view_w))
+        top = max(0.0, min(cy - view_h / 2, image.height - view_h))
         frame = image.resize((W, H), Image.BICUBIC, box=(left, top, left + view_w, top + view_h))
         writer.stdin.write(frame.tobytes())
     writer.stdin.close()
