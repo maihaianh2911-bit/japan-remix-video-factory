@@ -61,7 +61,8 @@ def get(url, timeout=60, headers=None):
             if error.code not in (429, 503) or attempt == 4:
                 raise
             wait = error.headers.get("Retry-After")
-            time.sleep(min(120, int(wait)) if wait and wait.isdigit() else 15 * (attempt + 1))
+            print(f"  {error.code} from {url[:90]}… waiting", flush=True)
+            time.sleep(min(120, int(wait)) if wait and wait.isdigit() else 30 * (attempt + 1))
 
 
 def pixabay(params):
@@ -646,17 +647,26 @@ def clip_part(source, seconds, clip, target):
         raise RuntimeError(f"clip part {target.name} failed")
 
 
+MEDIA = Path("trials/media")        # downloaded pictures, kept between runs by the workflow's cache
+
+
 def fetch(entry, folder):
     if entry.get("photo"):
-        path = folder / (entry["key"] + ".jpg")
+        MEDIA.mkdir(parents=True, exist_ok=True)
+        path = MEDIA / (entry["key"] + ".jpg")
         if not path.exists():
-            # Wikimedia serves thumbnails of its standard widths only (20 … 960, 1280, 1920, 3840; others get 429):
-            # a picture wider than 3840 px comes as its 3840 px thumbnail, a smaller one as the original
+            # Wikimedia serves thumbnails of its standard widths only (… 960, 1280, 1920, 3840; others get 429), and
+            # limits clients that ask for many large files at once: a portrait comes 1920 px wide, a landscape
+            # 3840 px wide, a smaller picture as its original; one download every few seconds
+            w, h = entry.get("w", 0), entry.get("h", 0)
+            width = 1920 if h > w else 3840
             url = entry["url"]
-            if entry.get("w", 0) > 3840 and "/400px-" in entry.get("preview", ""):
-                url = entry["preview"].replace("/400px-", "/3840px-")
-            path.write_bytes(get(url, timeout=300))
-            time.sleep(2)
+            if w > width and "/400px-" in entry.get("preview", ""):
+                url = entry["preview"].replace("/400px-", f"/{width}px-")
+            print(f"picture {entry['key']}: {url}", flush=True)
+            data = get(url, timeout=300)
+            path.write_bytes(data)
+            time.sleep(6)
         return path
     path = folder / (entry["key"] + (".webm" if entry["url"].endswith(".webm") else ".mp4"))
     if not path.exists():

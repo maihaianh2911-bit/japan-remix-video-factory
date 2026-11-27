@@ -15,6 +15,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ccr-d5640a04-6s686r
+      - name: pictures downloaded before
+        uses: actions/cache/restore@v4
+        with:
+          path: trials/media
+          key: trial-media-${{ github.run_id }}
+          restore-keys: trial-media-
       - name: setup
         run: |
           python -m pip install -q -r requirements.txt
@@ -42,3 +48,9 @@ jobs:
           rm -rf trials/out/$NAME/$STAGE/work trials/out/$NAME/$STAGE/frames
           git config user.name "github-actions[bot]"; git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
           git add trials/out && git commit -q -m "$NAME: kết quả bước $STAGE" && git pull -q --rebase origin ccr-d5640a04-6s686r && git push -q origin HEAD:ccr-d5640a04-6s686r
+      - name: keep the downloaded pictures for the next run (also when this one failed)
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: trials/media
+          key: trial-media-${{ github.run_id }}
