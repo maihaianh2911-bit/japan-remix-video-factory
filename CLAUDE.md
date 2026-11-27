@@ -107,6 +107,9 @@ picture and is welcome** (owner, 26/11/2026, after asking why the pictures were 
 dựng có màu đc ko", then "ảnh có màu ko tính là ảnh AI, ảnh AI tao nói đến là ảnh do chatgpt tạo ấy"): an "AI
 picture" is one an image generator made up (ChatGPT and the like), never used. For the old years search the
 colourised copy too (`web:… colorized`, `カラー化`) and prefer it when it is as sharp and shows the same moment.
+**One exception, and not for k10:** for the videos that explain a style of art (a trial, section "A trial: videos that
+explain a style of art") an AI picture found by a search may be used, never one made for the video (owner,
+26/11/2026: "Cho phép m dùng ảnh AI", then "Ảnh AI tìm kiếm thôi, k tạo").
 
 ## What this repo makes
 Vertical Japanese shorts (1080×1920, a little over 61 s) for **one channel, k10 (世界の王室)**. Until 26/11/2026 it made
@@ -197,6 +200,92 @@ channel file (and of the frame code when the look is new), never of each story.
   When suggesting scripts, offer topics of this kind. The voice and the music stay the channel's (もち子さん and the
   flute, chosen after the hit video was made with 青山龍星 and Nimrod): if the next three or four k10 love stories get
   no views, say so to the owner and offer a trial with the male voice again.
+
+## A trial: videos that explain a style of art (the `gallery` frame) — not a channel yet
+Owner, 26/11/2026: sent three Vietnamese TikTok videos of one channel (each explains one style: Deco Noir, Art
+Nouveau, Dark Fantasy; about 2 min 15 s; a film or a game everyone knows first, then where the style came from, the
+signs that tell it — shape, light, colour, material —, where it lives today, a question to the viewer at the end) and
+asked "Đây là dạng nội dung gì? Dựng cho nhật đc ko? Có làm nhiều video đủ xây kênh đc ko", then "làm thử".
+- **What the owner was told:** it can be made for Japan (Mucha is loved there, Dark Souls, Elden Ring and Berserk are
+  Japanese, Art Nouveau learned from ukiyo-e); there are well over 100 topics (Western styles, Japanese ones, the
+  styles of films, games and the internet, then comparisons and the style of one artist or film); whether it gets
+  views in Japan is **not known** (no Japanese channel of this kind was found; on the owner's channels only love
+  stories of famous people had views): try 2–3 videos before deciding. It is not k10 and none of the 14 channels: it
+  would be a new channel, with no number, name, voice or hashtags yet. The owner decides after the trial.
+- **How a script of this kind is written: as the three sources are** (owner, 27/11/2026, on a first script about
+  ukiyo-e that opened on a banknote and a price and listed "three points to recognise it": "Vớ vẩn, đọc lại nội dung
+  tao gửi, m viết cái đéo gì vậy". Claude had read only the openings; the captions come in word by word, so read
+  the frame where each phrase stands whole, every phrase of every source). What the three do, and ours must:
+  - the subject is **a look met in films, games and manga** (an aesthetic: Deco Noir, Art Nouveau, Dark Fantasy),
+    not an art genre told as facts and prices;
+  - **the hook names works everyone knows, then the style**: "Nếu bạn từng bị hút hồn trước thành phố Gotham trong
+    phim Người Dơi … thì bạn đã gặp phong cách Deco Noir"; "Trong game Elden Ring hay bộ truyện Berserk, ta thường
+    gặp … Đó là Dark Fantasy, một phong cách u tối, vậy mà càng nhìn lại càng thấy say mê"; or a striking quote
+    turned round (Ruskin, for Art Nouveau);
+  - then where it came from, with names and years (Paris 1925, The Maltese Falcon 1941, the French critics of 1946;
+    Ruskin, Morris, Bing's shop of 1895; the writer Charles Grant; the sham ruins of 18th-century English gardens);
+  - **what the eye sees, told for the senses**: shape, material, colour, light (stepped towers drawn with ruler and
+    compass, black marble and chrome, black and gold, one hard light from the side; iron and glass bent into
+    whiplash curves; broken spires, moss on the steps, dented armour, earth brown and ash grey, one torch);
+  - **why it moves us, in everyday comparisons and a warm first person** ("giống như khi ta lật lại một cuốn album
+    ảnh cũ của gia đình", "như đang đi giữa một khu vườn", "ngồi trong nhà nhìn ra cơn giông", "Mình thích nhất ở
+    phong cách này một suy nghĩ rất giản dị…"): this is the heart of the script, never a list of points;
+  - where it lives today (the 1992 Batman series and its "Dark Deco", Sin City, Gatsby, BioShock; Rivendell, Arcane;
+    Guts, the bonfire of Dark Souls), sometimes a tie to the viewer's own country (Art Nouveau in Hanoi and Saigon);
+  - a question to the viewer at the end. The sources run about 2 min 15 s; ours keeps iron rule 3 (63–70 s) until
+    the owner says otherwise, so each part is one or two sentences.
+- **AI pictures, for this kind of video only** (owner: "Cho phép m dùng ảnh AI", then "Ảnh AI tìm kiếm thôi, k
+  tạo"): an AI picture found by a search (`web:`, `page:`) may be used and is credited to its site like any web
+  picture; none is made for a video (neither Claude's session nor the machine has an image generator). How Claude
+  uses them, as told to the owner: an AI picture only shows the mood of a style, it is never named as a real work, a
+  real film still or a real person (the source videos print "Đại gia Gatsby 2013" and "Guts – Kentaro Miura" on AI
+  pictures: never here); what exists (a painting, a building) is shown by its real picture; when posting, a
+  realistic AI picture needs the platform's "AI content" label. k10 stays real pictures only.
+- **The `gallery` frame** (`"style": "gallery"`, `news/render.py`), made for the trial. **Its second form, after
+  the owner saw the first** (26/11/2026: "cái màn đen và chữ che mất nhiều tranh quá, k nên để màn đen nữa, còn chữ
+  thì cho chạy dọc ở 1 bên (tùy theo ảnh, chọn bên nào ít chi tiết để chữ chạy)"; the first form had the text across
+  the foot of the picture on a dark shade, a boxed card for the name and a dimmed picture under the big title):
+  - **nothing dark is laid on the picture**: no shade, no box, no dimming. The text is light with a dark outline.
+    The cut `dip` (the scene goes dark and comes back) is a slow cross-fade in this frame: use `fade`, `page`, `hard`;
+  - **all the text is written vertically** (as Japanese is: top to bottom, 、。「」ー turned or placed as vertical
+    writing asks, digits upright) **in a narrow strip on one side of the frame**: at the edge the label of the
+    picture (its `"name"`, and under it, smaller and in gold, its `"note"`: who made it, when, where), beside it
+    the caption, one column at a time (58 px; pale, gold while the voice reads it, light once read). The hook line
+    (a quote) runs the same way, larger (70 px), its first column there from frame 0: it is not printed as a block
+    over the picture any more;
+  - **the side** is the one with less to see: a picture's `"side": "left"` or `"right"`; without it the machine
+    takes the calmer side of the scene's pictures (fewer lines and textures in the strip, no face there), one side
+    for the whole scene so that the text does not jump while a sentence is read; a picture with its own `"side"`
+    decides for the pictures of its scene that have none. Look at every still and set `"side"` where the machine's
+    choice covers what matters; when two pictures of one sentence need different sides, give each its own scene
+    and sentence. On the right the strip stands 150 px in from the edge (the apps' buttons are there), so it
+    covers more of the picture: the left wins a near tie;
+  - a scene with a `"value"` prints the big title at the edge of the strip: its headline as one tall column (the
+    name of the style in Japanese), and beside it the value lying on its side when it is in Latin letters
+    ("ART NOUVEAU"). Its `"evidence"` is not drawn;
+  - **a picture shown whole** (`"fit": "contain"`: a document, a poster whose words must be read, a picture too
+    small to fill the frame sharply) stands on a light blurred copy of itself, never a dark bed, with a thin gold
+    line, and leaves the strip free: the text stands beside it, not on it. A horizontal work fills the frame
+    better: take a larger copy (a `url:` search of the 3840 px Commons thumbnail; the search keeps 2400 px) and
+    pan across it;
+  - `kicker` is the name of the video, small above the strip from scene 2 on (not with a big title); `era` stands
+    at the other top corner; the credits are small at the bottom (the picture's at the left, music and voice at
+    the right);
+  - the machine warns of a face standing in the strip when the story gives the `"side"`; a painting as the first
+    picture is not warned about as a flat picture.
+  Not made: the drawn diagrams and maps of the source (the outline of a tower, colour swatches, a map with routes),
+  moving footage, a new channel file. Each needs new code and the owner's word.
+- **The trial video:** `stories/k10-2026-11-26-thu-art-nouveau.json` (about 26 s, `"trial": true`; under k10 only
+  because a story needs a channel, so it has k10's voice もち子さん and loudness, its own music, Debussy's Clair de
+  lune from a `music:` search, and the one edit warning that its style is not `story`). Real pictures only, nine of
+  them, all from Wikimedia Commons. Its find folder and its video were made by the workflow run from the session's
+  branch (Run workflow with that branch as the ref: the workflow reads the story and the code of the branch it is
+  run from).
+- **State on 26/11/2026:** the first form was sent to the owner in the chat and turned down for its dark shade and
+  its text over the picture; the second form (vertical text on one side) was sent the same day and is **not
+  approved yet**. The frame and the trial story were made on the branch of that chat session; they come to `main`
+  when the owner approves the look. Until then: no channel for it and no other video in this frame, and k10 keeps
+  the `story` frame.
 
 ## The edit: the channel edits as Tin Nhật does
 Owner, 18/11/2026: "cho 4 kênh này học cách edit của kênh tin nhật đi, học tốt vào" — the channels of this repo (k10 alone since 26/11/2026) edit exactly as
@@ -374,7 +463,7 @@ allow `main`.
      story reaches today). `"music": {"pick": "<k>-<n>", "volume": 1}` from a search `music:<words>` (recordings on
      Wikimedia Commons with a free licence, e.g. `music:Schumann Träumerei piano`, `music:Gymnopédie Satie piano`;
      index.json gives title, `seconds` and licence; the piece loops, fades in and out, about 17 dB under the voice,
-     credited on screen and in credits.txt). (`"style": "news"` and `"paper"`, the other frames of the engine, are
+     credited on screen and in credits.txt). (`"style": "gallery"` is the frame of the trial above; `"style": "news"` and `"paper"`, the other frames of the engine, are
      not part of the edit of these channels.)
    - `"fx"` (inherited, all four on): `motion` (the camera starts quick and settles), `depth` (a picture that fills
      the frame gets a light depth from a depth map, Depth Anything V2 Small; **a flat picture gets `"depth": false`**
@@ -514,7 +603,7 @@ inherited defaults, the edit warnings, the voice taken from the channel file, ca
 channel lists, the 60-second refusal), draws the stills of every sample story from `tests/fixtures/pictures/`
 (Wikimedia Commons pictures of the Bank of Japan, banknotes, supermarkets and Edo-period boxes, and 20 seconds of
 Schumann's Träumerei, all under free licences, downsized; authors and licences in its `index.json`: the samples'
-pictures are stand-ins, so samples carry no `review`), encodes 3 seconds of video in the three frames and every move
+pictures are stand-ins, so samples carry no `review`), encodes 3 seconds of video in the four frames and every move
 and cut of the catalogue (`tools/encode_test.py`, `tools/edits_test.py`), and with `--fx` checks the effects
 (`tools/fx_test.py`). A push of code to `main` runs the same with `--fx` on GitHub (the stills are in the run's
 Artifacts); a change of a sample story `stories/mau-*.json` or its caption runs it too (samples are never voiced or

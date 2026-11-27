@@ -32,6 +32,9 @@ class Photo:
     fit: str = "cover"                        # "contain" shows the whole picture
     move: str = ""                            # a name of news/edits.py MOVES; "" = the automatic choice
     depth: bool = True                        # False: a flat picture (a document, a collage): no parallax with "fx"
+    name: str = ""                            # "gallery" frame: the name of what the picture shows, on its card
+    note: str = ""                            # "gallery" frame: who made it, when, where (small, under the name)
+    side: str = ""                            # "gallery" frame: the side its text runs down, "left" or "right"; "" = the calmer one
 
     def credit(self):
         record = {key: getattr(self, key)
