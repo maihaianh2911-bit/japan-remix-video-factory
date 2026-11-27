@@ -617,6 +617,22 @@ remix workflow leaves it alone) and a folder `renders/ve-<story>/` (`video.mp4`,
 runs Remotion here yet) and pushed to `renders` by hand. The weekly clean-up deletes such a folder 14 days after it was
 published (it has no story under `stories/`). Open points: the owner has not said which channel the format is for.
 
+## The health channel trial (`health-sign5/`): a Remotion project of 27/11/2026, not a channel yet
+Owner, 27/11/2026: asked for a new Remotion project in `health-sign5/` for a Japanese health TikTok channel in the
+format 「〜のサイン5選」 (real photographs filling the frame, text and frames made by code), with the first 20 seconds
+of 「睡眠不足のサイン5選」 as `out/intro.mp4` (a 20-second sample, so iron rule 2 does not apply to it). **Read
+`health-sign5/README.md` before working on it**: the script is `src/script.ts` (changing the topic = that file and the
+pictures), the look is `src/theme.ts`, and four stills are checked before every render. The owner first asked for the
+Pexels API with a key in `.env`; there is no key in a session and Pexels refuses the cloud session, and the owner said
+"repo này có chỗ tìm ảnh mà": **its pictures are found with this repo's picture search**, through a search-only story
+(`stories/k10-2026-11-27-thu-suimin-sign5.json`, `"stage": "find"`, `"trial": true`, never rendered; `web:pexels …`
+searches bring Pexels pictures, a `url:` search of `images.pexels.com/photos/<id>/…?h=2400` brings the large copy),
+then `node scripts/use-picks.mjs <find folder> <scene>=<k>-<n> …` copies the picks and writes `credits.md` (author
+names are read on the Pexels page and kept in `scripts/authors.json`). It is rendered in a session
+(`--browser-executable=/usr/bin/google-chrome --chrome-mode=chrome-for-testing`), no workflow runs it, it has no
+channel file, no issue and no voice yet (`voiceFile` in `src/script.ts`). Open points: signs 3–5 and the ending, the
+voice, the channel's name and number.
+
 ## Changing the pipeline
 Before pushing a change of `news/`, `tools/`, `channels/` or `tests/`: `bash tools/check.sh <out folder>` (add
 `--fx` when the effects' libraries, model and typeface are installed, see `fx` above), and look at

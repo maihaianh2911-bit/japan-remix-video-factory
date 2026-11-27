@@ -1,0 +1,27 @@
+{
+  "name": "health-sign5",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TikTok 縦動画「〜のサイン5選」テンプレート (Remotion)",
+  "scripts": {
+    "studio": "remotion studio",
+    "sfx": "bash scripts/make-sfx.sh",
+    "stills": "bash scripts/stills.sh",
+    "render": "remotion render Intro out/intro.mp4 --codec=h264 --crf=18",
+    "use-picks": "node scripts/use-picks.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource/noto-sans-jp": "5.3.1",
+    "@remotion/cli": "4.0.547",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "remotion": "4.0.547"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.11",
+    "@types/react": "19.3.3",
+    "@types/react-dom": "19.3.0",
+    "typescript": "7.0.2"
+  }
+}
