@@ -661,8 +661,8 @@ def fetch(entry, folder):
             w, h = entry.get("w", 0), entry.get("h", 0)
             width = 1920 if h > w else 3840
             url = entry["url"]
-            if w > width and "/400px-" in entry.get("preview", ""):
-                url = entry["preview"].replace("/400px-", f"/{width}px-")
+            if w > width and re.search(r"/\d+px-", entry.get("preview", "")):
+                url = re.sub(r"/\d+px-", f"/{width}px-", entry["preview"], count=1)
             print(f"picture {entry['key']}: {url}", flush=True)
             data = get(url, timeout=300)
             path.write_bytes(data)
