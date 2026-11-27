@@ -1,0 +1,29 @@
+{
+  "channel": "k10",
+  "stage": "find",
+  "trial": true,
+  "title": "【試し・画像検索のみ】睡眠不足のサイン5選（健康チャンネル health-sign5/ の写真さがし）",
+  "date": "2026-11-27",
+  "searches": [
+    "web:目をこする 眠い 女性 フリー写真素材 => an Asian woman rubbing her tired eyes, photograph",
+    "web:pexels asian woman tired rubbing eyes => an Asian woman rubbing her tired eyes, photograph",
+    "tired woman rubbing eyes => a tired person rubbing their eyes, photograph",
+    "web:眠れない 夜 ベッド 女性 フリー写真素材 => an Asian woman lying awake in bed at night, photograph",
+    "web:unsplash asian woman awake in bed at night => an Asian woman lying awake in bed at night, photograph",
+    "web:朝寝坊 ベッド 明るい部屋 女性 フリー写真素材 => an Asian person sleeping in bed in a bright sunlit bedroom, photograph",
+    "web:pexels asian woman sleeping in bed morning sunlight => an Asian person sleeping in bed in a bright sunlit bedroom, photograph",
+    "woman sleeping in bed morning light => a person sleeping in bed in a bright sunlit bedroom, photograph",
+    "web:デスク 居眠り 眠い 会社員 フリー写真素材 => an Asian office worker dozing at a desk with a laptop, photograph",
+    "web:pexels asian office worker sleepy at desk laptop => an Asian office worker dozing at a desk with a laptop, photograph",
+    "sleeping at desk office worker => an office worker dozing at a desk, photograph"
+  ],
+  "scenes": [
+    {
+      "label": "サイン",
+      "headline": "睡眠不足の\nサイン5選",
+      "lines": [
+        {"text": "その眠気、ただの疲れじゃないかも…?", "quote": true}
+      ]
+    }
+  ]
+}
