@@ -1,7 +1,7 @@
 {
   "channel": "k10",
   "issue": 20,
-  "stage": "find",
+  "stage": "render",
   "title": "母との最後の電話 ダイアナ妃とウィリアム王子・ハリー王子",
   "date": "2026-11-27",
   "searches": [
@@ -39,7 +39,23 @@
           "text": "ダイアナ妃が亡くなる数時間前、15歳と12歳の息子たちは、母からの電話を急いで切っていました。",
           "quote": true
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "14-1",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "hold"
+        },
+        {
+          "pick": "9-4",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "why": "Mở đầu: Diana cười cùng hai con (Thorpe Park 1993), cả ba mặt ở nửa trên; rồi ba mẹ con đi trượt tuyết. Câu mở đầu in to."
     },
     {
       "label": "夏休み",
@@ -47,7 +63,20 @@
       "headline": "バルモラル城の\n夏休み",
       "lines": [
         "1997年8月、ウィリアム王子とハリー王子は、スコットランドのバルモラル城で夏休みを過ごしていました。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "11-11",
+          "move": "pan-right"
+        },
+        {
+          "pick": "10-7",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "cut": "dip",
+      "why": "Lâu đài Balmoral, rồi William, Charles và Harry ở Balmoral mùa hè 1997."
     },
     {
       "label": "パリから",
@@ -56,7 +85,24 @@
       "lines": [
         "その日の午後、パリにいた母から電話がかかってきます。",
         "けれど二人は、いとこたちとの遊びに夢中でした。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "12-2",
+          "focus": [
+            0.5,
+            0.2
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "7-19",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "cut": "fade",
+      "why": "Diana năm 1997 (mẹ gọi từ Paris), rồi hai cậu bé đang mải cười đùa."
     },
     {
       "label": "また後で",
@@ -64,7 +110,27 @@
       "headline": "「もう\n行っていい？」",
       "lines": [
         "ウィリアム王子は、「じゃあね、また後で。もう行っていい？」と言ったと振り返っています。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "23-17",
+          "focus": [
+            0.45,
+            0.4
+          ],
+          "move": "hold"
+        },
+        {
+          "pick": "14-20",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "fade",
+      "why": "William và mẹ: câu chào vội 'con đi được chưa?'."
     },
     {
       "label": "事故",
@@ -72,7 +138,19 @@
       "headline": "36歳の\n死",
       "lines": [
         "その夜遅く、ダイアナ妃はパリで交通事故に遭い、36歳で亡くなりました。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "15-9",
+          "move": "push-in"
+        },
+        {
+          "pick": "16-10",
+          "move": "pull-back"
+        }
+      ],
+      "cut": "dip",
+      "why": "Đường hầm ở Paris, rồi biển hoa trước điện Kensington: cái chết của Diana."
     },
     {
       "label": "葬儀",
@@ -80,7 +158,16 @@
       "headline": "母の棺の\n後ろを",
       "lines": [
         "6日後の葬儀で、二人は母の棺の後ろを黙って歩きました。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "17-20",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "cut": "dip",
+      "why": "Tang lễ: William và Harry cúi đầu đi sau quan tài mẹ."
     },
     {
       "label": "白いバラ",
@@ -89,7 +176,21 @@
       "lines": [
         "棺の上の白いバラには、ハリー王子が書いたカードが添えられていました。",
         "宛名は、ただひとこと、「ママ」。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "18-7",
+          "fit": "contain",
+          "move": "push-in"
+        },
+        {
+          "pick": "18-3",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "cut": "fade",
+      "why": "Quan tài với hoa hồng trắng và tấm thiệp, rồi cận tấm thiệp ghi 'Mummy'."
     },
     {
       "label": "20年後",
@@ -98,7 +199,21 @@
       "lines": [
         "20年後、二人はあの電話のことを語っています。",
         "ウィリアム王子は、「何が起きるか分かっていたら、あんなにそっけなくはしなかった」。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "20-1",
+          "fit": "contain",
+          "move": "push-in"
+        },
+        {
+          "pick": "21-6",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "cut": "page",
+      "why": "20 năm sau: hai anh em trong phim tài liệu 2017, rồi William ở vườn tưởng niệm mẹ."
     },
     {
       "label": "20年後",
@@ -106,7 +221,24 @@
       "headline": "ハリー王子の\n後悔",
       "lines": [
         "ハリー王子は、「何を話したかは覚えていません。覚えているのは、電話が短かったことを、たぶん一生悔やみ続けるということだけです」。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "22-12",
+          "focus": [
+            0.55,
+            0.4
+          ],
+          "move": "hold"
+        },
+        {
+          "pick": "20-9",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "cut": "fade",
+      "why": "Harry trầm ngâm, rồi Harry bé bên mẹ năm 1995: nỗi hối hận vì cuộc gọi quá ngắn."
     },
     {
       "label": "最後の会話",
@@ -114,7 +246,17 @@
       "headline": "母と息子たちの\n最後の会話",
       "lines": [
         "あの短い電話が、母と息子たちの最後の会話になりました。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "9-9",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "cut": "dip",
+      "why": "Kết: quay về hình ảnh mẹ ôm hai con, như lúc mở đầu."
     }
-  ]
+  ],
+  "review": "18/18"
 }

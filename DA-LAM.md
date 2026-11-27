@@ -20,6 +20,7 @@ Cùng một người thì được làm tiếp, cùng một chuyện thì không
 | 26/11/2026 | 妻への誓い フィリップ殿下とエリザベス女王の戴冠式 | Philip quỳ thề làm bề tôi của vợ trong lễ đăng quang | `k10-2026-11-26-philip-oath` |
 | 26/11/2026 | すべてを捨てた王子 フィリップ殿下とエリザベス女王の婚約指輪 | Philip bỏ tước hiệu, bỏ cả họ để cưới Elizabeth; chiếc nhẫn đính hôn | `k10-2026-11-26-philip-ring` |
 | 27/11/2026 | 初めて会った日と同じ瞳 エリザベス女王の最後のクリスマスメッセージ | Giáng sinh 2021, Nữ hoàng nói ánh mắt Philip đến cuối đời vẫn sáng như lần đầu gặp | `k10-2026-11-27-philip-eyes` |
+| 27/11/2026 | 母との最後の電話 ダイアナ妃とウィリアム王子・ハリー王子 | Vài giờ trước khi Diana mất, hai con trai vội cúp máy khi mẹ gọi; 20 năm sau vẫn hối hận | `k10-2026-11-27-diana-last-call` |
 
 Bản thử, không tính là video: `k10-2026-11-25-thu-giong-nu-himari`, `k10-2026-11-25-thu-giong-nu-no7` (thử giọng nữ, 25/11/2026).
 
