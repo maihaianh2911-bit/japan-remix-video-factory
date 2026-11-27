@@ -15,7 +15,11 @@ Format (owner, 16/11/2026), UTF-8, Japanese, at most 2000 characters:
     last line     the credit line, starting with 画像出典 (e.g. 画像出典: … ／ 詳しくは credits.txt; say 元動画 when
                   pictures of the source video are used)
 The channel is read from the file name, which is the story's: k10-2026-11-19-diana.txt (a sample: mau-k10.txt).
+The caption of a trial (its story, stories/<name>.json beside captions/, carries "trial": true) need not carry the
+channel's hashtags: a trial is not a video of the channel (27/11/2026, the trial videos that explain a style of art,
+kept under k10 until they have a channel: 世界の王室 would be wrong on them). Everything else is checked the same.
 """
+import json
 from pathlib import Path
 import re
 import sys
@@ -71,6 +75,16 @@ def problems(text, required=()):
     return found
 
 
+def of_trial(path):
+    """True when the story of this caption (stories/<name>.json beside the captions folder) is a trial."""
+    story = Path(path).resolve().parent.parent / "stories" / f"{Path(path).stem}.json"
+    try:
+        data = json.loads(story.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return False
+    return isinstance(data, dict) and data.get("trial") is True
+
+
 def check(path):
     path = Path(path)
     try:
@@ -82,7 +96,8 @@ def check(path):
         return [f"{path}: a caption is named after its story, <channel>-<YYYY-MM-DD>-<short>.txt (a sample: "
                 f"mau-<channel>.txt) with a channel of channels/ ({', '.join(channels.ids())}), e.g. "
                 "k10-2026-11-19-diana.txt"]
-    return [f"{path}: {problem}" for problem in problems(text, channel["hashtags"])]
+    required = () if of_trial(path) else channel["hashtags"]
+    return [f"{path}: {problem}" for problem in problems(text, required)]
 
 
 def main():

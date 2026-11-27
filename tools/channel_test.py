@@ -342,6 +342,18 @@ def caption_checks():
             found = captions.check(path)
             assert (found == []) == ok, (name, found)
         assert "is named after its story" in captions.check(Path(scratch) / "2026-11-19-nihonbashi.txt")[0]
+        # the caption of a trial need not carry the channel's hashtags (its story says "trial": true); the caption
+        # of a video of the channel does (27/11/2026)
+        folders = Path(scratch) / "repo"
+        (folders / "captions").mkdir(parents=True)
+        (folders / "stories").mkdir()
+        own = good.replace("#歴史のなぜ ", "#大正ロマン ")
+        for name, trial, ok in (("k11-2026-11-27-thu-x", True, True), ("k11-2026-11-27-y", False, False)):
+            (folders / "stories" / f"{name}.json").write_text(json.dumps({"channel": "k11", "trial": trial}),
+                                                               encoding="utf-8")
+            (folders / "captions" / f"{name}.txt").write_text(own, encoding="utf-8")
+            found = captions.check(folders / "captions" / f"{name}.txt")
+            assert (found == []) == ok, (name, found)
 
 
 def lists():

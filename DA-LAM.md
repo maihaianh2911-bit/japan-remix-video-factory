@@ -22,3 +22,7 @@ Cùng một người thì được làm tiếp, cùng một chuyện thì không
 | 27/11/2026 | 初めて会った日と同じ瞳 エリザベス女王の最後のクリスマスメッセージ | Giáng sinh 2021, Nữ hoàng nói ánh mắt Philip đến cuối đời vẫn sáng như lần đầu gặp | `k10-2026-11-27-philip-eyes` |
 
 Bản thử, không tính là video: `k10-2026-11-25-thu-giong-nu-himari`, `k10-2026-11-25-thu-giong-nu-no7` (thử giọng nữ, 25/11/2026).
+
+Bản thử dạng video giải thích một phong cách mỹ thuật (chưa có kênh, tạm để dưới tên kênh 10; không phải video kênh 10),
+ghi ở đây để không làm trùng đề tài: `k10-2026-11-26-thu-art-nouveau` (アール・ヌーヴォー, 26 giây, 26/11/2026),
+`k10-2026-11-27-thu-taisho-roman` (大正ロマン, 71 giây, 27/11/2026).

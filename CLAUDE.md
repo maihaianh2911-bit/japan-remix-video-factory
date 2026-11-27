@@ -293,13 +293,17 @@ asked "Đây là dạng nội dung gì? Dựng cho nhật đc ko? Có làm nhi�
   - old postcards are horizontal and under 1200 px: they are shown whole (`"fit": "contain"`), text on the left
     (the left leaves them 862 px, the right only 752); a vertical poster or painting fills the frame;
   - a painting of a face: put the text on the side of the bare paper (`"side"`), not over the hair;
-  - its posting caption is not in `captions/` (the caption check asks for k10's hashtags, which are wrong for
-    this content): it was sent to the owner as a file in the chat, with hashtags of its own.
+  - its posting caption was first sent only as a file in the chat, because the caption check asked for k10's
+    hashtags; the owner looked for it on GitHub ("caption đâu rồi ?"). Since then **the caption of a trial
+    (`"trial": true`) carries its own hashtags** (`news/captions.py`), and it is in `captions/` and published
+    beside the video like any other: write it there for every video of this kind.
 - **State on 26/11/2026:** the first form was sent to the owner in the chat and turned down for its dark shade and
   its text over the picture; the second form (vertical text on one side) was sent the same day and is **not
   approved yet** in words; on 27/11/2026 the owner had the 大正ロマン video made in it without asking for a change.
-  The frame and the two stories were made on the branch of that chat session; they come to `main` when the owner
-  approves the look or opens the channel. Until then: no channel for it, and k10 keeps the `story` frame.
+  The frame and the two stories were made on the branch of that chat session and **are on `main` since 27/11/2026**
+  (owner, after the 大正ロマン video was delivered: "video chưa đc đẩy lên nhánh chính à, đẩy đi"; the frame and the
+  first trial had already come to `main` with a merge of that branch by another session). Still no channel for it:
+  its videos stay trials under k10 until the owner opens one, and k10 keeps the `story` frame.
 
 ## The edit: the channel edits as Tin Nhật does
 Owner, 18/11/2026: "cho 4 kênh này học cách edit của kênh tin nhật đi, học tốt vào" — the channels of this repo (k10 alone since 26/11/2026) edit exactly as
@@ -592,7 +596,9 @@ facts of the script. **A video that tells a rumour gets a correction note** (own
 đồn, sẽ đính chính ở caption"; every k10 video with a rumour, and any other channel's): 1–3 lines starting with ※,
 its own block between the sentences and the hashtags, saying which part is a rumour and what is known, e.g.
 `※カミラ夫人がケイト妃の両親に対して画策したという話は、一部で噂として伝えられているもので、事実とは確認されていません。`
-(and 「王室は否定しています」 when the palace denied it). `python -m news.captions captions/<name>.txt` checks it (`python -m news.custom` too). The
+(and 「王室は否定しています」 when the palace denied it). The caption of a trial (its story carries `"trial": true`)
+need not carry the channel's hashtags: it has its own (27/11/2026, the videos that explain a style of art).
+`python -m news.captions captions/<name>.txt` checks it (`python -m news.custom` too). The
 render publishes it as `renders/<name>/caption.txt`; a push that changes only the caption publishes only the
 caption (no new render). Write it before the closing comment and link it there.
 
