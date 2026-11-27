@@ -87,3 +87,23 @@ GitHub release page and runs without Docker: `./run --host 127.0.0.1 --port 5002
 | --- | --- | --- | --- |
 | 26/11/2026 | `shinkansen-uso` | 新幹線は、ひとつのウソから生まれた | Ông Sogō Shinji nói dối về ngân sách để làm được Shinkansen, rồi không được mời tới lễ xuất phát |
 | 26/11/2026 | `chikatetsu-horafuki` | 「ほら吹き」と笑われた男が、日本で最初の地下鉄をつくった | Ông Hayakawa Noritsugu bị cười là nói khoác, đếm người bằng hạt đậu, làm tàu điện ngầm đầu tiên, rồi bị đẩy khỏi nó |
+
+## The Remotion trial (27/11/2026): `doodle/remotion/`
+The owner asked whether the drawn videos are made with Remotion on GitHub (they were not: `doodle/` draws with
+rough.js on a canvas in this session) and whether a richer, more concrete look is possible: "nếu đc thì dựng thử 15s".
+`doodle/remotion/` draws the first four lines of `chikatetsu-horafuki` (16.5 s) with Remotion 4.0.290 and React
+18.3.1, the versions of `japan-3d-video-factory`: flat illustration in SVG with outlines, people with hair, hats,
+glasses, jointed arms and legs, pointing fingers, faces that blink; old Ginza's brick shops with hanging signboards,
+a streetcar, the street cut open over pipes and the tunnel; London 1914 with the clock tower, an open-top bus and the
+Underground roundel; an old photograph in sepia; a paper grain and a light over every frame (`src/kit.tsx`, the
+shots in `src/Trial.tsx`). The voice, the music and the small sounds are the same as the drawn video's
+(`doodle/stories/chikatetsu-remotion-thu`: its `out/voice.wav` is the first 16.5 s of the full voice).
+
+    (cd doodle/remotion && npm install)
+    cd doodle/remotion && npx remotion render src/index.ts Trial out/picture.mp4 --muted --concurrency=4 \
+      --browser-executable=/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell
+    # then, from the root: copy out/picture.mp4 to doodle/stories/chikatetsu-remotion-thu/out/ and
+    python -m doodle.sound doodle/stories/chikatetsu-remotion-thu
+
+About a minute for 16.5 s here. It is not on GitHub yet: Remotion renders on GitHub Actions in the 3D repo
+(`video.yml`), the same can be done here once the owner chooses this look.
