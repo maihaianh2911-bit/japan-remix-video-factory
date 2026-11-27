@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="node_modules/@fontsource/yomogi/index.css">
+<link rel="stylesheet" href="node_modules/@fontsource/yusei-magic/index.css">
+<link rel="stylesheet" href="node_modules/@fontsource/klee-one/600.css">
+<style>html, body { margin: 0; background: #000; } canvas { display: block; }</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script src="node_modules/roughjs/bundled/rough.js"></script>
+<script src="lib.js"></script>
+<script>
+// The page of a drawn video. render.js loads the story's scenes.js, hands over the voice's timing (setup), then
+// asks for one frame after the other (draw). A frame depends on its moment only.
+D.init(document.getElementById('c'));
+const TAIL = 1.4;   // the last picture stays this long after the last word
+let scenes = [];
+window.setup = timing => {
+  const L = timing.lines;
+  const find = (i, words) => { const at = L[i].text.indexOf(words); if (at < 0) throw new Error(`line ${i} does not say "${words}": ${L[i].text}`); return at; };
+  const T = {
+    s: i => L[i].start, e: i => L[i].end,
+    at: (i, words) => L[i].start + L[i].chars[find(i, words)][0],
+    to: (i, words) => L[i].start + L[i].chars[find(i, words) + words.length - 1][1],
+    total: timing.duration + TAIL,
+  };
+  scenes = window.SCENES(T).sort((a, b) => a.start - b.start);
+  scenes.forEach((scene, i) => { scene.end = i + 1 < scenes.length ? scenes[i + 1].start : T.total; });
+  window.DUR = T.total;
+  window.STARTS = scenes.map(scene => scene.start);
+  return T.total;
+};
+window.draw = t => {
+  const ctx = D.ctx;
+  let scene = scenes[0];
+  for (const s of scenes) if (s.start <= t) scene = s;
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  // the camera moves in a very little during every scene
+  const k = 1 + 0.02 * D.clamp((t - scene.start) / Math.max(1, scene.end - scene.start));
+  ctx.translate(540, 1000); ctx.scale(k, k); ctx.translate(-540, -1000);
+  D.t = t; D.sceneStart = scene.start;
+  scene.draw(t, t - scene.start, scene);
+  // light: a soft warm light from above and the corners a little darker, as on a sheet of paper under a lamp
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.fillStyle = LIGHT; ctx.fillRect(0, 0, 1080, 1920);
+  ctx.fillStyle = VIGNETTE; ctx.fillRect(0, 0, 1080, 1920);
+};
+const LIGHT = (() => { const g = D.ctx.createLinearGradient(0, 0, 0, 1920); g.addColorStop(0, 'rgba(255,250,235,0.10)'); g.addColorStop(0.5, 'rgba(255,250,235,0)'); g.addColorStop(1, 'rgba(60,40,20,0.06)'); return g; })();
+const VIGNETTE = (() => { const g = D.ctx.createRadialGradient(540, 1050, 520, 540, 1050, 1280); g.addColorStop(0, 'rgba(60,40,20,0)'); g.addColorStop(1, 'rgba(60,40,20,0.20)'); return g; })();
+// every character the story draws must be loaded before the first real frame (the typefaces come in pieces)
+window.loadFonts = async () => {
+  for (let t = 0; t < window.DUR; t += 0.1) window.draw(t);
+  const all = [...D.chars].join('');
+  await Promise.all([document.fonts.load('50px "Yomogi"', all), document.fonts.load('50px "Yusei Magic"', all), document.fonts.load('600 50px "Klee One"', all)]);
+  await document.fonts.ready;
+  return all.length;
+};
+</script>
+</body>
+</html>

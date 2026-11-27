@@ -1,0 +1,341 @@
+{
+  "title": "新幹線は、ひとつのウソから生まれた",
+  "trial": true,
+  "voice": {
+    "speaker": "青山龍星",
+    "style": "ノーマル"
+  },
+  "pace": {
+    "speed": 1.2,
+    "line_pause": 0.1,
+    "scene_pause": 0.2
+  },
+  "music": {
+    "file": "music/k10-sao-truc.mp3",
+    "title": "竹笛",
+    "volume": 0.84
+  },
+  "sounds": [
+    {
+      "line": 0,
+      "sound": "whoosh"
+    },
+    {
+      "line": 0,
+      "at": "ウソ",
+      "sound": "pop"
+    },
+    {
+      "line": 1,
+      "shift": 0.2,
+      "sound": "pop"
+    },
+    {
+      "line": 1,
+      "at": "71歳",
+      "sound": "pop"
+    },
+    {
+      "line": 1,
+      "at": "国鉄",
+      "sound": "pop"
+    },
+    {
+      "line": 1,
+      "at": "十河信二",
+      "sound": "pop"
+    },
+    {
+      "line": 2,
+      "at": "なぜ",
+      "sound": "pop"
+    },
+    {
+      "line": 3,
+      "at": "もう古い",
+      "shift": -0.1,
+      "sound": "whoosh"
+    },
+    {
+      "line": 3,
+      "at": "もう古い",
+      "sound": "thud"
+    },
+    {
+      "line": 4,
+      "at": "大阪",
+      "sound": "pop"
+    },
+    {
+      "line": 4,
+      "at": "計画は",
+      "sound": "thud"
+    },
+    {
+      "line": 4,
+      "at": "ピラミッド",
+      "shift": -0.08,
+      "sound": "thud"
+    },
+    {
+      "line": 4,
+      "at": "万里",
+      "shift": -0.08,
+      "sound": "thud"
+    },
+    {
+      "line": 4,
+      "at": "戦艦",
+      "shift": -0.08,
+      "sound": "thud"
+    },
+    {
+      "line": 4,
+      "at": "に続く",
+      "shift": -0.08,
+      "sound": "pop"
+    },
+    {
+      "line": 4,
+      "at": "世界四バカ",
+      "sound": "thud"
+    },
+    {
+      "line": 4,
+      "at": "とまで",
+      "sound": "pop"
+    },
+    {
+      "line": 4,
+      "at": "とまで",
+      "shift": 0.15,
+      "sound": "pop"
+    },
+    {
+      "line": 5,
+      "at": "建設費",
+      "sound": "pop"
+    },
+    {
+      "line": 5,
+      "at": "国会",
+      "shift": -0.08,
+      "sound": "pop"
+    },
+    {
+      "line": 5,
+      "at": "ない",
+      "sound": "thud"
+    },
+    {
+      "line": 6,
+      "at": "こう",
+      "sound": "pop"
+    },
+    {
+      "line": 7,
+      "at": "半分",
+      "sound": "pop"
+    },
+    {
+      "line": 7,
+      "at": "半分",
+      "shift": 0.4,
+      "sound": "thud"
+    },
+    {
+      "line": 7,
+      "at": "通れば",
+      "shift": 0.15,
+      "sound": "pop"
+    },
+    {
+      "line": 7,
+      "at": "あとは",
+      "shift": 0.35,
+      "sound": "thud"
+    },
+    {
+      "line": 7,
+      "at": "心配",
+      "sound": "pop"
+    },
+    {
+      "line": 8,
+      "sound": "whoosh"
+    },
+    {
+      "line": 8,
+      "at": "安く",
+      "sound": "pop"
+    },
+    {
+      "line": 8,
+      "at": "通りました",
+      "sound": "thud"
+    },
+    {
+      "line": 9,
+      "at": "予算の",
+      "shift": -0.3,
+      "sound": "whoosh"
+    },
+    {
+      "line": 9,
+      "at": "2倍",
+      "sound": "thud"
+    },
+    {
+      "line": 10,
+      "at": "開業",
+      "shift": -0.08,
+      "sound": "pop"
+    },
+    {
+      "line": 10,
+      "at": "開業",
+      "shift": 0.2,
+      "sound": "pop"
+    },
+    {
+      "line": 11,
+      "sound": "thud"
+    },
+    {
+      "line": 11,
+      "at": "新幹線",
+      "shift": -0.08,
+      "sound": "whoosh"
+    },
+    {
+      "line": 11,
+      "at": "東京駅",
+      "shift": 0.3,
+      "sound": "pop"
+    },
+    {
+      "line": 11,
+      "at": "十河は",
+      "sound": "pop"
+    },
+    {
+      "line": 11,
+      "at": "招かれ",
+      "sound": "thud"
+    },
+    {
+      "line": 12,
+      "shift": 0.1,
+      "sound": "pop"
+    },
+    {
+      "line": 12,
+      "at": "自宅",
+      "shift": -0.08,
+      "sound": "pop"
+    },
+    {
+      "line": 13,
+      "sound": "whoosh"
+    },
+    {
+      "line": 13,
+      "at": "その",
+      "shift": -0.08,
+      "sound": "pop"
+    },
+    {
+      "line": 13,
+      "at": "十河の",
+      "shift": -0.08,
+      "sound": "thud"
+    },
+    {
+      "line": 14,
+      "at": "18番",
+      "sound": "pop"
+    },
+    {
+      "line": 14,
+      "at": "19番",
+      "sound": "pop"
+    },
+    {
+      "line": 14,
+      "at": "端",
+      "shift": 0.05,
+      "sound": "whoosh"
+    },
+    {
+      "line": 15,
+      "at": "今も",
+      "shift": 0.2,
+      "sound": "whoosh"
+    }
+  ],
+  "lines": [
+    {
+      "text": "新幹線は、ひとつのウソから生まれました。",
+      "end": true
+    },
+    {
+      "text": "ウソをついたのは、71歳で国鉄のトップになった、十河信二です。",
+      "end": true
+    },
+    {
+      "text": "なぜ、ウソが必要だったのでしょうか。",
+      "end": true
+    },
+    {
+      "text": "当時、鉄道はもう古いと言われていました。",
+      "end": true
+    },
+    {
+      "text": "東京と大阪を結ぶ高速鉄道の計画は、ピラミッド、万里の長城、戦艦大和に続く「世界四バカ」とまで笑われました。",
+      "end": true
+    },
+    {
+      "text": "しかも建設費は、国会が認めるはずのない金額でした。",
+      "end": true
+    },
+    {
+      "text": "すると十河は、こう言ったと伝えられています。"
+    },
+    {
+      "text": "「半分にした予算が国会を通れば、あとはおれが責任を持つ。心配するな」。",
+      "end": true
+    },
+    {
+      "text": "わざと安く見せた予算は、国会を通りました。",
+      "end": true
+    },
+    {
+      "text": "けれど工事費は、予算のほぼ2倍にふくらみます。",
+      "end": true
+    },
+    {
+      "text": "十河は責任を取る形で、開業の前の年に国鉄を去りました。",
+      "end": true
+    },
+    {
+      "text": "1964年10月1日、新幹線が走り出した朝、東京駅の出発式に、十河は招かれませんでした。",
+      "end": true
+    },
+    {
+      "text": "80歳の十河は、自宅のテレビでそれを見ていたといいます。",
+      "end": true
+    },
+    {
+      "text": "9年後、その東京駅のホームに、十河の顔を刻んだ記念碑が建ちました。",
+      "end": true
+    },
+    {
+      "text": "新幹線に乗るときは、18番、19番ホームの端を探してみてください。",
+      "end": true
+    },
+    {
+      "text": "ウソの責任を一人で背負った男が、今もそこから、列車を見送っています。",
+      "end": true
+    }
+  ]
+}

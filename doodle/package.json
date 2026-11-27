@@ -1,0 +1,11 @@
+{
+  "name": "doodle",
+  "private": true,
+  "description": "Drawn (hand-sketch style) videos: frames drawn by code in a browser page, voiced by VOICEVOX",
+  "dependencies": {
+    "@fontsource/klee-one": "^5.2.5",
+    "@fontsource/yomogi": "^5.2.5",
+    "@fontsource/yusei-magic": "^5.2.5",
+    "roughjs": "^4.6.6"
+  }
+}

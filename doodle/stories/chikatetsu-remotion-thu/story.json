@@ -1,0 +1,99 @@
+{
+  "title": "「ほら吹き」と笑われた男が、日本で最初の地下鉄をつくった — Remotion trial (lines 0-3)",
+  "trial": true,
+  "music": {
+    "file": "music/k10-sao-truc.mp3",
+    "title": "竹笛",
+    "volume": 0.84
+  },
+  "sounds": [
+    {
+      "line": 0,
+      "sound": "whoosh"
+    },
+    {
+      "line": 0,
+      "at": "ほら吹き",
+      "sound": "pop"
+    },
+    {
+      "line": 0,
+      "at": "東京",
+      "shift": 0.28,
+      "sound": "thud"
+    },
+    {
+      "line": 0,
+      "at": "ど真ん中",
+      "sound": "thud"
+    },
+    {
+      "line": 0,
+      "at": "日本で",
+      "shift": -0.08,
+      "sound": "whoosh"
+    },
+    {
+      "line": 0,
+      "at": "最初",
+      "sound": "pop"
+    },
+    {
+      "line": 1,
+      "sound": "whoosh"
+    },
+    {
+      "line": 1,
+      "at": "彼は",
+      "shift": -0.08,
+      "sound": "pop"
+    },
+    {
+      "line": 1,
+      "at": "追い出され",
+      "sound": "thud"
+    },
+    {
+      "line": 1,
+      "at": "追い出され",
+      "shift": 0.85,
+      "sound": "whoosh"
+    },
+    {
+      "line": 2,
+      "sound": "pop"
+    },
+    {
+      "line": 2,
+      "at": "早川徳次",
+      "sound": "pop"
+    },
+    {
+      "line": 2,
+      "at": "早川徳次",
+      "shift": 1.0,
+      "sound": "thud"
+    },
+    {
+      "line": 3,
+      "sound": "whoosh"
+    },
+    {
+      "line": 3,
+      "at": "地下鉄",
+      "shift": -0.08,
+      "sound": "whoosh"
+    },
+    {
+      "line": 3,
+      "at": "東京にも",
+      "sound": "pop"
+    },
+    {
+      "line": 3,
+      "at": "東京にも",
+      "shift": 0.2,
+      "sound": "pop"
+    }
+  ]
+}

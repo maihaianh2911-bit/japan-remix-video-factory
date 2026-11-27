@@ -1,0 +1,220 @@
+{
+ "stage": "render",
+ "note": "Kênh mới (cảnh đẹp Nhật), bố cục khung ảnh: vì sao người thời Edo nhảy từ sân khấu 清水寺.",
+ "layout": "frame",
+ "header": [
+  "清水の舞台から",
+  "*本当に*飛び降りた？"
+ ],
+ "voice": [
+  "もち子さん",
+  "ノーマル"
+ ],
+ "speed": 1.2,
+ "tail": 0.6,
+ "scene_pause": 0.12,
+ "music": {
+  "file": "music/k10-sao-truc.mp3",
+  "title": "竹笛",
+  "volume": 0.25
+ },
+ "searches": [
+  "kiyomizu",
+  "kiyomizudera",
+  "清水寺",
+  "kyoto temple",
+  "photo:Kiyomizu-dera stage",
+  "photo:Kiyomizu-dera pillars",
+  "photo:Kiyomizu-dera autumn",
+  "photo:Kiyomizu-dera Kyoto view",
+  "photo:Harunobu Kiyomizu jumping",
+  "photo:Kiyomizu-dera ukiyo-e",
+  "photo:Kiyomizu-dera hondo",
+  "photo:Otowa waterfall Kiyomizu",
+  "print:Harunobu woman jumping Kiyomizu",
+  "print:Kiyomizu stage jumping umbrella",
+  "print:清水の舞台 飛び降り",
+  "photo:Kiyomizu-dera stage wooden pillars scaffold",
+  "print:Young Woman Jumping from the Kiyomizu Temple Balcony",
+  "print:Suzuki Harunobu Kiyomizu",
+  "print:Harunobu umbrella parachute"
+ ],
+ "scenes": [
+  {
+   "label": "hook",
+   "lines": [
+    {
+     "text": "「清水の舞台から|飛び降りる」。",
+     "say": "きよみずのぶたいから、とびおりる。"
+    },
+    "思い切って何かを決める時の言葉ですが、",
+    "実は江戸時代、本当にここから|飛び降りた人が、*200人以上*もいたんです。"
+   ],
+   "clips": [
+    {
+     "id": "i9a8870b0",
+     "move": "in",
+     "x": 0.62,
+     "y": 0.45
+    },
+    {
+     "id": "iaa2bcbc0",
+     "move": "down",
+     "x": 0.5
+    }
+   ]
+  },
+  {
+   "label": "stage",
+   "lines": [
+    {
+     "text": "京都の清水寺。",
+     "say": "京都の、きよみずでら。"
+    },
+    "崖の上に張り出した舞台は、高さおよそ*13メートル*。",
+    "4階建てのビルほどの|高さがあります。"
+   ],
+   "clips": [
+    {
+     "id": "ie85c7fe3",
+     "move": "in",
+     "x": 0.5,
+     "y": 0.45
+    },
+    {
+     "id": "ief15c10f",
+     "move": "up",
+     "x": 0.4
+    }
+   ]
+  },
+  {
+   "label": "pillars",
+   "lines": [
+    "この舞台を支えるのは、*18本*の太いケヤキの柱。",
+    "*釘を1本も使わず*、木と木を組み合わせるだけで|建てられています。"
+   ],
+   "clips": [
+    {
+     "id": "i55452efd",
+     "move": "up",
+     "x": 0.7
+    },
+    {
+     "id": "i819ecf94",
+     "move": "right",
+     "y": 0.5
+    }
+   ]
+  },
+  {
+   "label": "why",
+   "lines": [
+    "では、なぜ人々は、ここから|飛び降りたのでしょうか。"
+   ],
+   "clips": [
+    {
+     "id": "if614e01d",
+     "move": "down",
+     "x": 0.5
+    }
+   ]
+  },
+  {
+   "label": "belief",
+   "lines": [
+    "当時は、*観音様*に願いをかけて|飛び降りれば、命は助かり、*願いがかなう*と|信じられていたのです。"
+   ],
+   "clips": [
+    {
+     "id": "i9457b080",
+     "move": "down",
+     "x": 0.5
+    },
+    {
+     "id": "id571db24",
+     "move": "in",
+     "x": 0.45,
+     "y": 0.4
+    }
+   ]
+  },
+  {
+   "label": "record",
+   "lines": [
+    "寺に残る記録によると、飛び降りた人は*234人*。",
+    "そのうち、およそ*85パーセント*が|助かったといいます。"
+   ],
+   "clips": [
+    {
+     "id": "iaa2bcbc0",
+     "move": "in",
+     "x": 0.45,
+     "y": 0.3,
+     "travel": 0.3
+    },
+    {
+     "id": "i21420257",
+     "move": "down",
+     "x": 0.5
+    }
+   ]
+  },
+  {
+   "label": "ground",
+   "lines": [
+    "下には木々が茂り、地面も柔らかかったから、と伝えられています。"
+   ],
+   "clips": [
+    {
+     "id": "i2630a600",
+     "move": "down",
+     "x": 0.5
+    }
+   ]
+  },
+  {
+   "label": "ban",
+   "lines": [
+    "しかし命に関わるため、明治時代になって、飛び降りは*禁止*されました。"
+   ],
+   "clips": [
+    {
+     "id": "i51285c00",
+     "move": "in",
+     "x": 0.5,
+     "y": 0.5
+    }
+   ]
+  },
+  {
+   "label": "today",
+   "lines": [
+    "今、舞台から見えるのは、京都の街と、四季の景色だけ。",
+    {
+     "text": "清水寺は、1994年に、*世界遺産*にも|登録されました。",
+     "say": "きよみずでらは、1994年に、世界遺産にも登録されました。"
+    },
+    "ことわざの中にだけ、あの時代の祈りが|残っています。"
+   ],
+   "clips": [
+    {
+     "id": "ibff04e17",
+     "move": "right",
+     "y": 0.5
+    },
+    {
+     "id": "i5cee8c09",
+     "move": "up",
+     "x": 0.5
+    },
+    {
+     "id": "i411d876d",
+     "move": "out",
+     "x": 0.62,
+     "y": 0.45
+    }
+   ]
+  }
+ ]
+}

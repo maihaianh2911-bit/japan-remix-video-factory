@@ -1,0 +1,257 @@
+{
+  "channel": "k10",
+  "issue": 17,
+  "stage": "render",
+  "title": "初めて会った日と同じ瞳 エリザベス女王の最後のクリスマスメッセージ",
+  "date": "2026-11-27",
+  "searches": [
+    "wiki:Elizabeth II",
+    "wiki:Prince Philip, Duke of Edinburgh",
+    "wiki:Britannia Royal Naval College",
+    "wiki:Wedding of Princess Elizabeth and Philip Mountbatten",
+    "wiki:King George VI Memorial Chapel",
+    "wiki:St George's Chapel, Windsor Castle",
+    "wiki:Death and funeral of Prince Philip, Duke of Edinburgh",
+    "wiki:Death and state funeral of Elizabeth II",
+    "web:Princess Elizabeth Philip engagement 1947 colorized => colorized photo of young Princess Elizabeth and Philip smiling at each other",
+    "web:エリザベス フィリップ 婚約 1947 カラー => colour photo of young Princess Elizabeth and Prince Philip smiling together",
+    "web:Princess Elizabeth Philip Dartmouth 1939 => Princess Elizabeth and young Philip at Dartmouth naval college in 1939",
+    "web:Prince Philip cadet 1939 Dartmouth => eighteen-year-old Prince Philip as a naval cadet",
+    "web:Princess Elizabeth 1939 age 13 colorized => colorized photo of thirteen-year-old Princess Elizabeth",
+    "web:young Prince Philip athlete sport 1930s => young Prince Philip playing sport",
+    "web:Princess Elizabeth Philip wedding 1947 colorized => colorized photo of Princess Elizabeth and Philip on their wedding day",
+    "web:Prince Philip 2021 death Windsor portrait => elderly Prince Philip smiling",
+    "web:Queen Christmas message 2021 photo Philip desk => the Queen during her 2021 Christmas broadcast with a photo of Prince Philip on the desk",
+    "web:Queen Christmas speech 2021 sapphire brooch => the Queen wearing a sapphire brooch in her 2021 Christmas speech",
+    "web:Princess Elizabeth honeymoon 1947 Broadlands brooch => Princess Elizabeth and Philip on honeymoon at Broadlands in 1947",
+    "web:Queen Philip diamond anniversary 2007 Broadlands => the Queen and Prince Philip together at Broadlands in 2007",
+    "web:young Prince Philip smiling colorized => colorized photo of handsome young Prince Philip smiling",
+    "web:Queen Elizabeth funeral September 2022 St George's Chapel => the Queen's funeral at St George's Chapel in Windsor",
+    "web:King George VI Memorial Chapel ledger stone Elizabeth Philip => the ledger stone with the names of Elizabeth II and Philip",
+    "web:Queen Elizabeth Prince Philip elderly smiling together => the elderly Queen and Prince Philip smiling at each other"
+  ],
+  "scenes": [
+    {
+      "label": "73年の愛",
+      "era": "1947〜2021年",
+      "headline": "初めて会った日と\n同じ瞳",
+      "lines": [
+        {
+          "text": "エリザベス女王は、73年連れ添った夫の瞳を、「最後まで、初めて会った日と同じように輝いていた」と語りました。",
+          "quote": true
+        }
+      ],
+      "photo": [
+        {
+          "pick": "9-3",
+          "focus": [
+            0.545,
+            0.15
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "17-16",
+          "focus": [
+            0.52,
+            0.3
+          ],
+          "move": "hold"
+        }
+      ],
+      "why": "Mở đầu: ảnh cưới 1947 bản màu, hai người cười, mặt ở nửa trên; rồi 60 năm sau hai người vẫn nhìn nhau (73 năm)."
+    },
+    {
+      "label": "出会い",
+      "era": "1939年",
+      "headline": "13歳と\n18歳",
+      "lines": [
+        "1939年、13歳の王女は、海軍の学校で18歳の士官候補生フィリップに出会います。"
+      ],
+      "cut": "dip",
+      "photo": [
+        {
+          "pick": "13-6",
+          "focus": [
+            0.45,
+            0.25
+          ],
+          "move": "push-in"
+        }
+      ],
+      "why": "Lùi về 1939: công chúa Elizabeth 13–14 tuổi (ảnh tô màu)."
+    },
+    {
+      "label": "初恋",
+      "era": "1939年",
+      "headline": "目を離さなかった\n王女",
+      "lines": [
+        "テニスコートのネットを軽々と飛び越える彼を見て、王女は家庭教師に「なんて高く跳べるの」と言い、ずっと彼から目を離さなかったといいます。"
+      ],
+      "cut": "fade",
+      "photo": [
+        {
+          "pick": "14-3",
+          "focus": [
+            0.51,
+            0.15
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "11-9",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "why": "Chàng thiếu niên Philip mặc đồ thể thao (đúng tuổi lúc ấy), rồi chính buổi gặp ở trường hải quân Dartmouth 1939 (cả ảnh)."
+    },
+    {
+      "label": "結婚",
+      "era": "1947年",
+      "headline": "8年後の\n結婚",
+      "lines": [
+        "8年後、二人は結婚しました。"
+      ],
+      "cut": "page",
+      "photo": [
+        {
+          "pick": "9-8",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "why": "Đám cưới 1947 (ảnh màu, cả ảnh, tiến lại gần)."
+    },
+    {
+      "label": "別れ",
+      "era": "2021年4月",
+      "headline": "99歳の\n旅立ち",
+      "lines": [
+        "2021年4月、殿下は100歳の誕生日を2か月後に控えて、99歳で亡くなります。"
+      ],
+      "cut": "dip",
+      "photo": [
+        {
+          "pick": "21-3",
+          "focus": [
+            0.5,
+            0.2
+          ],
+          "move": "push-in"
+        }
+      ],
+      "why": "Năm 2021: Hoàng thân lúc già; tối rồi sáng lại vì ông mất."
+    },
+    {
+      "label": "クリスマス",
+      "era": "2021年12月",
+      "headline": "最後の\nクリスマス",
+      "lines": [
+        "その年のクリスマス、女王はテレビのメッセージで、亡き夫について語りました。",
+        "胸には、74年前の新婚旅行で着けていたサファイアのブローチがありました。"
+      ],
+      "cut": "fade",
+      "photo": [
+        {
+          "pick": "17-2",
+          "focus": [
+            0.62,
+            0.3
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "11-2",
+          "focus": [
+            0.65,
+            0.4
+          ],
+          "move": "push-in"
+        }
+      ],
+      "why": "Giáng sinh 2021: Nữ hoàng áo đỏ đeo trâm sapphire, ảnh chồng trên bàn; rồi chính chiếc trâm ấy trong tuần trăng mật 1947."
+    },
+    {
+      "label": "女王の言葉",
+      "era": "2021年12月",
+      "headline": "いたずらっぽい\n瞳の輝き",
+      "lines": [
+        "「あのいたずらっぽく、好奇心に満ちた瞳の輝きは、最後まで、私が初めて彼を見た日と同じでした」。"
+      ],
+      "cut": "fade",
+      "photo": [
+        {
+          "pick": "21-7",
+          "focus": [
+            0.5,
+            0.42
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "10-1",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "why": "Lời Nữ hoàng về đôi mắt: Philip lúc già cười, rồi ảnh đính hôn 1947 tô màu, hai người cười nhìn nhau (cả ảnh)."
+    },
+    {
+      "label": "出会いと別れ",
+      "era": "2021年12月",
+      "headline": "最初の出会い\n最後の別れ",
+      "lines": [
+        "そして、こう続けました。「人生には、最初の出会いもあれば、最後の別れもあります」。",
+        "これが、女王の最後のクリスマスメッセージになりました。"
+      ],
+      "cut": "fade",
+      "photo": [
+        {
+          "pick": "17-16",
+          "fit": "contain",
+          "move": "push-in"
+        },
+        {
+          "pick": "17-12",
+          "focus": [
+            0.52,
+            0.36
+          ],
+          "move": "push-in"
+        }
+      ],
+      "why": "Lần gặp đầu và lần chia tay cuối: bức ảnh năm 2007 (chính bức trên bàn của Nữ hoàng), rồi hai người già bên nhau."
+    },
+    {
+      "label": "同じ礼拝堂",
+      "era": "2022年9月",
+      "headline": "並んで\n眠る二人",
+      "lines": [
+        "翌年9月、女王は96歳で亡くなりました。",
+        "1939年に海軍の学校で出会った二人は、今、同じ礼拝堂に並んで眠っています。"
+      ],
+      "cut": "dip",
+      "photo": [
+        {
+          "pick": "22-11",
+          "focus": [
+            0.5,
+            0.4
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "23-5",
+          "focus": [
+            0.72,
+            0.5
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "why": "Kết: lễ tang Nữ hoàng 2022, rồi bia mộ khắc tên ELIZABETH II và PHILIP nằm cạnh nhau (lùi ra)."
+    }
+  ],
+  "review": "15/15"
+}
