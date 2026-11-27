@@ -1,0 +1,120 @@
+{
+  "channel": "k10",
+  "issue": 20,
+  "stage": "find",
+  "title": "母との最後の電話 ダイアナ妃とウィリアム王子・ハリー王子",
+  "date": "2026-11-27",
+  "searches": [
+    "wiki:Diana, Princess of Wales",
+    "wiki:William, Prince of Wales",
+    "wiki:Prince Harry, Duke of Sussex",
+    "wiki:Balmoral Castle",
+    "wiki:Death of Diana, Princess of Wales",
+    "wiki:Funeral of Diana, Princess of Wales",
+    "web:Princess Diana William Harry laughing => Princess Diana laughing with her two young sons William and Harry",
+    "web:ダイアナ妃 ウィリアム王子 ハリー王子 笑顔 => Princess Diana smiling with her two young sons",
+    "web:Princess Diana hugging sons William Harry => Princess Diana hugging her young sons",
+    "web:Prince William Prince Harry Balmoral 1997 => teenage Prince William and young Prince Harry in Scotland",
+    "web:Balmoral Castle summer => Balmoral Castle in Scotland in summer",
+    "web:Princess Diana August 1997 last summer => Princess Diana smiling in the summer of 1997",
+    "web:Princess Diana Paris August 1997 => Princess Diana in Paris in August 1997",
+    "web:young Prince William Prince Harry laughing 1990s => young Prince William and Prince Harry laughing together",
+    "web:Pont de l'Alma tunnel Paris night => the Pont de l'Alma tunnel in Paris at night",
+    "web:Kensington Palace flowers Diana 1997 => a sea of flowers at Kensington Palace after Diana's death in 1997",
+    "web:Diana funeral William Harry walk behind coffin => Prince William and Prince Harry walking behind their mother's coffin in 1997",
+    "web:Diana coffin white roses Mummy card => Diana's coffin with white roses and a card reading Mummy",
+    "web:ダイアナ妃 葬儀 棺 ママ カード => Princess Diana's coffin with white flowers and a card",
+    "web:Diana Our Mother documentary 2017 William Harry => Prince William and Prince Harry in the 2017 documentary about their mother",
+    "web:William Harry Diana memorial garden Kensington 2017 => Prince William and Prince Harry looking at tributes to their mother in 2017",
+    "web:Prince Harry 2017 interview mother Diana => Prince Harry in 2017 talking about his mother",
+    "web:Prince William 2017 interview mother Diana => Prince William in 2017 talking about his mother"
+  ],
+  "scenes": [
+    {
+      "label": "最後の電話",
+      "era": "1997年8月",
+      "headline": "母との\n最後の電話",
+      "lines": [
+        {
+          "text": "ダイアナ妃が亡くなる数時間前、15歳と12歳の息子たちは、母からの電話を急いで切っていました。",
+          "quote": true
+        }
+      ]
+    },
+    {
+      "label": "夏休み",
+      "era": "1997年8月",
+      "headline": "バルモラル城の\n夏休み",
+      "lines": [
+        "1997年8月、ウィリアム王子とハリー王子は、スコットランドのバルモラル城で夏休みを過ごしていました。"
+      ]
+    },
+    {
+      "label": "パリから",
+      "era": "1997年8月30日",
+      "headline": "パリからの\n電話",
+      "lines": [
+        "その日の午後、パリにいた母から電話がかかってきます。",
+        "けれど二人は、いとこたちとの遊びに夢中でした。"
+      ]
+    },
+    {
+      "label": "また後で",
+      "era": "1997年8月30日",
+      "headline": "「もう\n行っていい？」",
+      "lines": [
+        "ウィリアム王子は、「じゃあね、また後で。もう行っていい？」と言ったと振り返っています。"
+      ]
+    },
+    {
+      "label": "事故",
+      "era": "1997年8月31日",
+      "headline": "36歳の\n死",
+      "lines": [
+        "その夜遅く、ダイアナ妃はパリで交通事故に遭い、36歳で亡くなりました。"
+      ]
+    },
+    {
+      "label": "葬儀",
+      "era": "1997年9月6日",
+      "headline": "母の棺の\n後ろを",
+      "lines": [
+        "6日後の葬儀で、二人は母の棺の後ろを黙って歩きました。"
+      ]
+    },
+    {
+      "label": "白いバラ",
+      "era": "1997年9月6日",
+      "headline": "宛名は\n「ママ」",
+      "lines": [
+        "棺の上の白いバラには、ハリー王子が書いたカードが添えられていました。",
+        "宛名は、ただひとこと、「ママ」。"
+      ]
+    },
+    {
+      "label": "20年後",
+      "era": "2017年",
+      "headline": "ウィリアム王子の\n後悔",
+      "lines": [
+        "20年後、二人はあの電話のことを語っています。",
+        "ウィリアム王子は、「何が起きるか分かっていたら、あんなにそっけなくはしなかった」。"
+      ]
+    },
+    {
+      "label": "20年後",
+      "era": "2017年",
+      "headline": "ハリー王子の\n後悔",
+      "lines": [
+        "ハリー王子は、「何を話したかは覚えていません。覚えているのは、電話が短かったことを、たぶん一生悔やみ続けるということだけです」。"
+      ]
+    },
+    {
+      "label": "最後の会話",
+      "era": "1997年",
+      "headline": "母と息子たちの\n最後の会話",
+      "lines": [
+        "あの短い電話が、母と息子たちの最後の会話になりました。"
+      ]
+    }
+  ]
+}
