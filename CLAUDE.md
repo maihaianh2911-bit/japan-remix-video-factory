@@ -281,11 +281,25 @@ asked "Đây là dạng nội dung gì? Dựng cho nhật đc ko? Có làm nhi�
   them, all from Wikimedia Commons. Its find folder and its video were made by the workflow run from the session's
   branch (Run workflow with that branch as the ref: the workflow reads the story and the code of the branch it is
   run from).
+- **The second video, a full one: `stories/k10-2026-11-27-thu-taisho-roman.json`** (大正ロマン, 71 s, 12 scenes, 24
+  pictures, `"trial": true` under k10 for the same reason; owner, 27/11/2026, on the script shown in the chat: "ok dựng
+  đi"). The owner had asked for a script on a subject tied to Japan ("Viết 1 kịch bản, chọn chủ đề liên quan đến
+  nhật"); the script follows the sources' way (the bullet above). What was learned making it:
+  - a hook that names an anime: the real frames found are horizontal and small (1200 × 670), so the first picture
+    is a vertical fan-made picture in that world (probably AI), **labelled 「イメージ画」** and never named as the work;
+    the caption says so in a ※ note. The same for a free illustration of a café;
+  - the pictures of a scene share its time equally, so **order and count them by the phrases**: three pictures for
+    a hook of three phrases, four postcards for a line that names four things, each on screen when it is named;
+  - old postcards are horizontal and under 1200 px: they are shown whole (`"fit": "contain"`), text on the left
+    (the left leaves them 862 px, the right only 752); a vertical poster or painting fills the frame;
+  - a painting of a face: put the text on the side of the bare paper (`"side"`), not over the hair;
+  - its posting caption is not in `captions/` (the caption check asks for k10's hashtags, which are wrong for
+    this content): it was sent to the owner as a file in the chat, with hashtags of its own.
 - **State on 26/11/2026:** the first form was sent to the owner in the chat and turned down for its dark shade and
   its text over the picture; the second form (vertical text on one side) was sent the same day and is **not
-  approved yet**. The frame and the trial story were made on the branch of that chat session; they come to `main`
-  when the owner approves the look. Until then: no channel for it and no other video in this frame, and k10 keeps
-  the `story` frame.
+  approved yet** in words; on 27/11/2026 the owner had the 大正ロマン video made in it without asking for a change.
+  The frame and the two stories were made on the branch of that chat session; they come to `main` when the owner
+  approves the look or opens the channel. Until then: no channel for it, and k10 keeps the `story` frame.
 
 ## The edit: the channel edits as Tin Nhật does
 Owner, 18/11/2026: "cho 4 kênh này học cách edit của kênh tin nhật đi, học tốt vào" — the channels of this repo (k10 alone since 26/11/2026) edit exactly as

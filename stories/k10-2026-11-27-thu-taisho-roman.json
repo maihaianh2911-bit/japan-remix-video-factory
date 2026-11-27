@@ -1,6 +1,6 @@
 {
   "channel": "k10",
-  "stage": "find",
+  "stage": "render",
   "trial": true,
   "style": "gallery",
   "kicker": "大正ロマン",
@@ -60,14 +60,82 @@
           "say": "きめつのやいばの、夜の浅草や、袴にブーツの女学生に心ひかれたなら、あなたはもう大正ロマンに出会っています。",
           "quote": true
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "36-4",
+          "focus": [
+            0.5,
+            0.55
+          ],
+          "move": "push-in",
+          "depth": false,
+          "name": "夜の浅草",
+          "note": "イメージ画"
+        },
+        {
+          "pick": "40-1",
+          "focus": [
+            0.5,
+            0.4
+          ],
+          "move": "push-in",
+          "depth": false,
+          "name": "袴にブーツの女学生",
+          "note": "当時の写真"
+        },
+        {
+          "pick": "1-16",
+          "focus": [
+            0.6,
+            0.3
+          ],
+          "move": "pull-back",
+          "depth": false,
+          "name": "長崎十二景「眼鏡橋」",
+          "note": "竹久夢二・1920年"
+        }
+      ],
+      "why": "Câu móc, ba ảnh theo ba vế: phố đêm mưa kiểu Asakusa trong Kimetsu (tranh minh hoạ, có ghi là ảnh minh hoạ), ảnh thật hai nữ sinh mặc hakama đi bốt, rồi một bức người đẹp của Yumeji khi nói \"bạn đã gặp Taisho lãng mạn\"."
     },
     {
       "label": "和と洋",
       "headline": "着物に革のブーツ",
       "lines": [
         "着物なのに足もとは革のブーツという、和と洋がまだ混ざりきらないまま並んでいる、どこか懐かしくて少し切ない美しさです。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "26-16",
+          "focus": [
+            1.0,
+            0.0
+          ],
+          "move": "push-in",
+          "name": "着物に袴",
+          "side": "left"
+        },
+        {
+          "pick": "26-16",
+          "focus": [
+            0.0,
+            0.6
+          ],
+          "move": "push-in",
+          "side": "right",
+          "name": "編み上げブーツ"
+        },
+        {
+          "pick": "40-4",
+          "fit": "contain",
+          "move": "pull-back",
+          "side": "left",
+          "name": "洋装の少女と袴の少女",
+          "note": "大正時代の絵"
+        }
+      ],
+      "cut": "fade",
+      "why": "Kimono mà đi bốt da: cô gái mặc hakama, rồi đôi bốt; câu \"Đông và Tây đứng cạnh nhau\" là tranh một cô mặc đồ Tây đi cạnh một cô mặc hakama."
     },
     {
       "label": "十五年",
@@ -78,21 +146,102 @@
           "text": "大正時代は、一九一二年から、わずか十五年でした。",
           "say": "大正時代は、1912年から、わずか15年でした。"
         }
-      ]
+      ],
+      "era": "1912〜1926年",
+      "photo": [
+        {
+          "pick": "6-2",
+          "focus": [
+            0.6,
+            0.5
+          ],
+          "move": "rise",
+          "depth": false,
+          "side": "left"
+        }
+      ],
+      "cut": "page",
+      "why": "Tên phong cách viết dọc thật to; nền là bưu thiếp tô màu tháp 12 tầng ở Asakusa thời Taisho, lia từ dưới lên theo thân tháp."
     },
     {
       "label": "街",
       "headline": "電灯とカフェーの街",
       "lines": [
         "街には電灯がともり、カフェーや百貨店、活動写真に人があふれ、人々は洋食の味を覚えていきます。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "16-4",
+          "fit": "contain",
+          "move": "push-in",
+          "side": "left",
+          "name": "浅草六区の夜",
+          "note": "絵葉書"
+        },
+        {
+          "pick": "4-8",
+          "fit": "contain",
+          "move": "push-in",
+          "side": "left",
+          "name": "三越呉服店のポスター",
+          "note": "杉浦非水・1914年"
+        },
+        {
+          "pick": "8-7",
+          "fit": "contain",
+          "move": "push-in",
+          "side": "left",
+          "name": "浅草六区の活動写真街",
+          "note": "絵葉書"
+        },
+        {
+          "pick": "14-2",
+          "fit": "contain",
+          "move": "push-in",
+          "side": "left",
+          "name": "カフェーの女給たち",
+          "note": "大正期の写真"
+        }
+      ],
+      "cut": "fade",
+      "why": "Bốn tấm lật nhanh, đúng thứ tự được nhắc: phố lên đèn (bưu thiếp Asakusa về đêm), bách hoá (áp phích Mitsukoshi 1914, hiện cả tấm), phố rạp chiếu bóng đông người, rồi các cô phục vụ quán cà phê."
     },
     {
       "label": "目印",
       "headline": "矢がすり、赤れんが、\nステンドグラス",
       "lines": [
         "目印は、矢がすりの着物にえび茶の袴、赤れんがの建物、そして窓にはめたステンドグラスです。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "21-1",
+          "fit": "contain",
+          "move": "push-in",
+          "name": "矢がすりにえび茶の袴"
+        },
+        {
+          "pick": "12-2",
+          "focus": [
+            0.65,
+            0.55
+          ],
+          "move": "push-in",
+          "name": "東京駅 丸の内駅舎",
+          "note": "1914年開業"
+        },
+        {
+          "pick": "17-3",
+          "focus": [
+            0.6,
+            0.45
+          ],
+          "move": "rise",
+          "name": "鳩山会館のステンドグラス",
+          "note": "小川三知・1924年"
+        }
+      ],
+      "cut": "fade",
+      "why": "Ba dấu hiệu, mỗi cái một ảnh đúng lúc được nhắc: kimono mũi tên với hakama nâu đỏ, nhà gạch đỏ (ga Tokyo), kính màu (nhà Hatoyama)."
     },
     {
       "label": "色と光",
@@ -102,7 +251,22 @@
           "text": "色はえんじや深緑のような少し沈んだ色で、そこに電球のあたたかい光が重なります。",
           "say": "色はえんじや、ふかみどりのような少し沈んだ色で、そこに電球のあたたかい光が重なります。"
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "42-18",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "move": "pan-right",
+          "depth": false,
+          "name": "大正ロマンの喫茶店",
+          "note": "イメージ画"
+        }
+      ],
+      "cut": "fade",
+      "why": "Màu trầm và ánh đèn ấm: tranh một quán cà phê kiểu Taisho (ghế đỏ sẫm, kính màu, đèn tròn), lia ngang chậm; ghi rõ là ảnh minh hoạ."
     },
     {
       "label": "夢二",
@@ -112,42 +276,166 @@
           "text": "この空気を絵にしたのが竹久夢二で、大きな瞳で遠くを見つめる、ほっそりとした「夢二式美人」は、いまも大正ロマンの顔です。",
           "say": "この空気を絵にしたのが竹久夢二で、大きな瞳で遠くを見つめる、ほっそりとした、ゆめじしき美人は、いまも大正ロマンの顔です。"
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "1-22",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in",
+          "depth": false,
+          "name": "女十題「木場の娘」",
+          "note": "竹久夢二・1921年",
+          "side": "left"
+        },
+        {
+          "pick": "1-24",
+          "focus": [
+            0.6,
+            0.35
+          ],
+          "move": "pull-back",
+          "depth": false,
+          "name": "女十題「朝の光へ」",
+          "note": "竹久夢二・1921年",
+          "side": "left"
+        },
+        {
+          "pick": "1-13",
+          "focus": [
+            0.55,
+            0.4
+          ],
+          "move": "push-in",
+          "depth": false,
+          "name": "長崎十二景「出島」",
+          "note": "竹久夢二・1920年",
+          "side": "left"
+        }
+      ],
+      "cut": "page",
+      "why": "Sang một người mới, Takehisa Yumeji: ba bức người đẹp của ông; bức mắt to nhìn xa hiện đúng lúc đọc tới câu đó."
     },
     {
       "label": "欲ばり",
       "headline": "新しいものも、\n古いものも",
       "lines": [
         "私がいちばん好きなのは、新しいものに胸をおどらせながら、古いものも手放さなかった、その欲ばりなところです。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "4-9",
+          "focus": [
+            0.62,
+            0.3
+          ],
+          "move": "push-in",
+          "depth": false,
+          "name": "三越呉服店 春の新柄陳列会",
+          "note": "杉浦非水・1914年"
+        },
+        {
+          "pick": "28-18",
+          "focus": [
+            0.2,
+            0.5
+          ],
+          "move": "pull-back",
+          "name": "和洋折衷の部屋",
+          "note": "大正ロマン風の家"
+        }
+      ],
+      "cut": "fade",
+      "why": "Vừa mới vừa cũ: người mặc kimono ngồi ghế Tây đọc tạp chí (áp phích 1914), rồi căn phòng có cả chiếu tatami lẫn sàn gỗ kiểu Tây."
     },
     {
       "label": "震災",
       "headline": "関東大震災",
       "lines": [
         "けれどこの華やぎは、関東大震災と、そのあとの戦争の時代にのみこまれていきました。"
-      ]
+      ],
+      "era": "1923年",
+      "photo": [
+        {
+          "pick": "6-12",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "punch-in",
+          "depth": false,
+          "name": "凌雲閣（浅草十二階）",
+          "note": "関東大震災・1923年"
+        }
+      ],
+      "cut": "hard",
+      "why": "Cú sốc: chính ngọn tháp ở cảnh tên phong cách, giờ gãy sau động đất 1923; cắt thẳng và giật vào."
     },
     {
       "label": "夢",
       "headline": "短かったからこそ",
       "lines": [
         "短かったからこそ、大正は、いつまでも夢のように見えるのかもしれません。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "24-17",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "move": "pull-back",
+          "name": "銀山温泉",
+          "note": "山形県"
+        }
+      ],
+      "cut": "fade",
+      "why": "Như một giấc mơ: đèn lồng trôi trên sông ở Ginzan lúc chạng vạng, lùi ra chậm."
     },
     {
       "label": "名残",
       "headline": "卒業式の袴",
       "lines": [
         "卒業式の袴姿は、その名残です。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "11-14",
+          "fit": "contain",
+          "move": "push-in",
+          "name": "卒業式の袴姿"
+        }
+      ],
+      "cut": "fade",
+      "why": "Dấu vết còn lại: hai nữ sinh mặc hakama ngày tốt nghiệp, chụp từ phía sau."
     },
     {
       "label": "あなたは",
       "headline": "あなたの大正ロマン",
       "lines": [
         "あなたが大正ロマンを感じるのは、どんな風景ですか。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "24-16",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "move": "pull-back",
+          "name": "銀山温泉の夜",
+          "note": "山形県"
+        }
+      ],
+      "cut": "fade",
+      "why": "Câu hỏi cuối trên cảnh Taisho lãng mạn quen thuộc nhất: phố suối nước nóng Ginzan sáng đèn, lùi ra chậm."
     }
-  ]
+  ],
+  "music": {
+    "pick": "35-1",
+    "volume": 1
+  },
+  "review": "24/24"
 }
