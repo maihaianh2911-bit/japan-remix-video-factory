@@ -1,0 +1,113 @@
+{
+ "stage": "render",
+ "note": "Bản thử 20 giây: video dựng bằng đoạn video (Pixabay), chữ to giữa màn hình. Kênh mới (cảnh đẹp Nhật).",
+ "voice": [
+  "もち子さん",
+  "ノーマル"
+ ],
+ "speed": 1.2,
+ "music": {
+  "file": "music/k10-sao-truc.mp3",
+  "title": "竹笛",
+  "volume": 0.25
+ },
+ "searches": [
+  "chureito pagoda",
+  "fuji pagoda",
+  "富士山 五重塔",
+  "commons:Chureito Pagoda",
+  "torii",
+  "torii gate",
+  "fushimi",
+  "inari",
+  "kyoto shrine",
+  "千本鳥居",
+  "commons:Fushimi Inari",
+  "commons:Senbon torii",
+  "mixkit:kyoto",
+  "shirakawago",
+  "shirakawa-go",
+  "gassho",
+  "白川郷",
+  "japanese village snow",
+  "commons:Shirakawa-go",
+  "commons:Gassho-zukuri"
+ ],
+ "scenes": [
+  {
+   "label": "hook",
+   "title": [
+    "死ぬまでに一度は見たい",
+    "日本の絶景",
+    "5選"
+   ],
+   "lines": [
+    "死ぬまでに一度は見たい、日本の絶景5選。"
+   ],
+   "clips": [
+    {
+     "id": "p136017",
+     "start": 0
+    }
+   ],
+   "title_top": 1150
+  },
+  {
+   "label": "fushimi",
+   "number": "①",
+   "title": [
+    "伏見稲荷大社"
+   ],
+   "lines": [
+    "京都の、伏見稲荷大社。",
+    {
+     "text": "山の上まで続く*朱色の鳥居*は、およそ*1万基*。",
+     "say": "山の上まで続く朱色の鳥居は、およそいちまんき。"
+    },
+    "全国に約3万ある*稲荷神社*の、総本宮です。"
+   ],
+   "clips": [
+    {
+     "id": "p53789",
+     "start": 1
+    },
+    {
+     "id": "p239191",
+     "start": 0
+    },
+    {
+     "id": "p53789",
+     "start": 13,
+     "x": 0.35
+    }
+   ]
+  },
+  {
+   "label": "shirakawa",
+   "number": "②",
+   "title": [
+    "白川郷"
+   ],
+   "lines": [
+    "岐阜県の、白川郷。",
+    "雪に包まれた*合掌造り*の家々は、1995年に*世界遺産*に登録されました。"
+   ],
+   "clips": [
+    {
+     "id": "p266009",
+     "start": 1,
+     "x": 0.28
+    },
+    {
+     "id": "p266006",
+     "start": 8
+    },
+    {
+     "id": "p327388",
+     "start": 3
+    }
+   ]
+  }
+ ],
+ "tail": 0.6
+}

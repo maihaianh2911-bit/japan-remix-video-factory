@@ -1,0 +1,192 @@
+{
+ "stage": "render",
+ "note": "Kênh mới (cảnh đẹp Nhật): 死ぬまでに一度は見たい日本の世界遺産トップ3 (厳島神社, 金閣寺, 姫路城).",
+ "voice": [
+  "もち子さん",
+  "ノーマル"
+ ],
+ "speed": 1.2,
+ "tail": 0.6,
+ "music": {
+  "file": "music/k10-sao-truc.mp3",
+  "title": "竹笛",
+  "volume": 0.25
+ },
+ "searches": [
+  "miyajima",
+  "itsukushima",
+  "厳島神社",
+  "floating torii",
+  "kinkakuji",
+  "golden pavilion",
+  "金閣寺",
+  "himeji castle",
+  "姫路城",
+  "white castle japan",
+  "japan world heritage",
+  "commons:Itsukushima Shrine",
+  "commons:Kinkaku-ji",
+  "commons:Himeji Castle",
+  "photo:Itsukushima Shrine torii",
+  "photo:Itsukushima torii low tide",
+  "photo:Kinkaku-ji",
+  "photo:Himeji Castle",
+  "photo:Himeji Castle keep white",
+  "photo:Himeji Castle cherry blossoms"
+ ],
+ "scenes": [
+  {
+   "label": "hook",
+   "title": [
+    "死ぬまでに一度は見たい",
+    "日本の世界遺産",
+    "TOP3"
+   ],
+   "lines": [
+    "死ぬまでに一度は見たい、日本の世界遺産トップ3。",
+    "第1位は、日本で*最初に世界遺産*に|なった場所のひとつです。"
+   ],
+   "clips": [
+    {
+     "id": "p33821",
+     "start": 5
+    },
+    {
+     "id": "p184370",
+     "start": 2,
+     "x": 0.45
+    }
+   ]
+  },
+  {
+   "label": "itsukushima",
+   "number": "第3位",
+   "title": [
+    "厳島神社"
+   ],
+   "lines": [
+    {
+     "text": "第3位、広島県の厳島神社。",
+     "say": "第3位、広島県のいつくしまじんじゃ。"
+    },
+    "海の上に立つ*朱色の大鳥居*は、高さおよそ*16メートル*。",
+    "実はこの鳥居、地面に埋められておらず、*自分の重さだけ*で立っているんです。",
+    "潮が引くと、歩いて|すぐそばまで行けます。"
+   ],
+   "clips": [
+    {
+     "id": "p254093",
+     "start": 1
+    },
+    {
+     "id": "i019c4c19",
+     "move": "in",
+     "x": 0.5,
+     "y": 0.45
+    },
+    {
+     "id": "id31e2c56",
+     "move": "up",
+     "x": 0.45
+    },
+    {
+     "id": "i9f429874",
+     "move": "out",
+     "x": 0.5,
+     "y": 0.5
+    }
+   ]
+  },
+  {
+   "label": "kinkaku",
+   "number": "第2位",
+   "title": [
+    "金閣寺"
+   ],
+   "lines": [
+    "第2位、京都の金閣寺。",
+    "池に映る金色の姿は、およそ*20万枚の金箔*に|包まれています。",
+    {
+     "text": "正式な名前は、*鹿苑寺*といいます。",
+     "say": "正式な名前は、ろくおんじといいます。"
+    },
+    "1950年に*放火*で焼けてしまいましたが、5年後に再建され、*輝きを取り戻しました*。"
+   ],
+   "clips": [
+    {
+     "id": "p336514",
+     "start": 2,
+     "x": 0.55
+    },
+    {
+     "id": "p151806",
+     "start": 1
+    },
+    {
+     "id": "ifaad9ba6",
+     "move": "in",
+     "x": 0.5,
+     "y": 0.55
+    },
+    {
+     "id": "p40531",
+     "start": 0
+    }
+   ]
+  },
+  {
+   "label": "himeji",
+   "number": "第1位",
+   "title": [
+    "姫路城"
+   ],
+   "lines": [
+    "そして第1位は、兵庫県の姫路城。",
+    {
+     "text": "白く美しい姿から、*白鷺城*とも呼ばれます。",
+     "say": "白く美しい姿から、しらさぎじょうとも呼ばれます。"
+    },
+    "1993年、法隆寺とともに、日本で*初めて世界遺産*に登録されました。",
+    "戦争も大地震もくぐり抜け、*400年以上前*の|天守が、今も当時の姿のまま|残っています。",
+    {
+     "text": "2015年の大修理のあとは、あまりの白さに「*白すぎ城*」と|呼ばれたほど。",
+     "say": "2015年の大修理のあとは、あまりの白さに、しろすぎじょうと呼ばれたほど。"
+    },
+    "一度は、この白さを|自分の目で確かめてみてください。"
+   ],
+   "clips": [
+    {
+     "id": "p306552",
+     "start": 1
+    },
+    {
+     "id": "ic228f126",
+     "move": "right",
+     "y": 0.55
+    },
+    {
+     "id": "i56928bf9",
+     "move": "in",
+     "x": 0.5,
+     "y": 0.4
+    },
+    {
+     "id": "icbb4f0a9",
+     "move": "up",
+     "x": 0.4
+    },
+    {
+     "id": "i3eea9de4",
+     "move": "left",
+     "y": 0.45
+    },
+    {
+     "id": "i5097e6be",
+     "move": "out",
+     "x": 0.55,
+     "y": 0.45
+    }
+   ]
+  }
+ ]
+}
