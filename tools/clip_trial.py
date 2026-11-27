@@ -650,10 +650,11 @@ def fetch(entry, folder):
     if entry.get("photo"):
         path = folder / (entry["key"] + ".jpg")
         if not path.exists():
-            # Wikimedia asks for a thumbnail of a standard width rather than a large original (it answered 429)
+            # Wikimedia serves thumbnails of its standard widths only (20 … 960, 1280, 1920, 3840; others get 429):
+            # a picture wider than 3840 px comes as its 3840 px thumbnail, a smaller one as the original
             url = entry["url"]
-            if max(entry.get("w", 0), entry.get("h", 0)) > 2560 and "/400px-" in entry.get("preview", ""):
-                url = entry["preview"].replace("/400px-", "/2560px-")
+            if entry.get("w", 0) > 3840 and "/400px-" in entry.get("preview", ""):
+                url = entry["preview"].replace("/400px-", "/3840px-")
             path.write_bytes(get(url, timeout=300))
             time.sleep(2)
         return path
