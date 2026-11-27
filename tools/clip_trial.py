@@ -53,14 +53,15 @@ def font(size):
 
 
 def get(url, timeout=60, headers=None):
-    for attempt in range(3):
+    for attempt in range(5):
         try:
             with urllib.request.urlopen(urllib.request.Request(url, headers=headers or UA), timeout=timeout) as answer:
                 return answer.read()
         except urllib.error.HTTPError as error:
-            if error.code not in (429, 503) or attempt == 2:
+            if error.code not in (429, 503) or attempt == 4:
                 raise
-            time.sleep(5 * (attempt + 1))
+            wait = error.headers.get("Retry-After")
+            time.sleep(min(120, int(wait)) if wait and wait.isdigit() else 15 * (attempt + 1))
 
 
 def pixabay(params):
@@ -649,7 +650,12 @@ def fetch(entry, folder):
     if entry.get("photo"):
         path = folder / (entry["key"] + ".jpg")
         if not path.exists():
-            path.write_bytes(get(entry["url"], timeout=300))
+            # Wikimedia asks for a thumbnail of a standard width rather than a large original (it answered 429)
+            url = entry["url"]
+            if max(entry.get("w", 0), entry.get("h", 0)) > 2560 and "/400px-" in entry.get("preview", ""):
+                url = entry["preview"].replace("/400px-", "/2560px-")
+            path.write_bytes(get(url, timeout=300))
+            time.sleep(2)
         return path
     path = folder / (entry["key"] + (".webm" if entry["url"].endswith(".webm") else ".mp4"))
     if not path.exists():
