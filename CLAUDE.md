@@ -212,6 +212,28 @@ asked "Đây là dạng nội dung gì? Dựng cho nhật đc ko? Có làm nhi�
   views in Japan is **not known** (no Japanese channel of this kind was found; on the owner's channels only love
   stories of famous people had views): try 2–3 videos before deciding. It is not k10 and none of the 14 channels: it
   would be a new channel, with no number, name, voice or hashtags yet. The owner decides after the trial.
+- **How a script of this kind is written: as the three sources are** (owner, 27/11/2026, on a first script about
+  ukiyo-e that opened on a banknote and a price and listed "three points to recognise it": "Vớ vẩn, đọc lại nội dung
+  tao gửi, m viết cái đéo gì vậy". Claude had read only the openings; the captions come in word by word, so read
+  the frame where each phrase stands whole, every phrase of every source). What the three do, and ours must:
+  - the subject is **a look met in films, games and manga** (an aesthetic: Deco Noir, Art Nouveau, Dark Fantasy),
+    not an art genre told as facts and prices;
+  - **the hook names works everyone knows, then the style**: "Nếu bạn từng bị hút hồn trước thành phố Gotham trong
+    phim Người Dơi … thì bạn đã gặp phong cách Deco Noir"; "Trong game Elden Ring hay bộ truyện Berserk, ta thường
+    gặp … Đó là Dark Fantasy, một phong cách u tối, vậy mà càng nhìn lại càng thấy say mê"; or a striking quote
+    turned round (Ruskin, for Art Nouveau);
+  - then where it came from, with names and years (Paris 1925, The Maltese Falcon 1941, the French critics of 1946;
+    Ruskin, Morris, Bing's shop of 1895; the writer Charles Grant; the sham ruins of 18th-century English gardens);
+  - **what the eye sees, told for the senses**: shape, material, colour, light (stepped towers drawn with ruler and
+    compass, black marble and chrome, black and gold, one hard light from the side; iron and glass bent into
+    whiplash curves; broken spires, moss on the steps, dented armour, earth brown and ash grey, one torch);
+  - **why it moves us, in everyday comparisons and a warm first person** ("giống như khi ta lật lại một cuốn album
+    ảnh cũ của gia đình", "như đang đi giữa một khu vườn", "ngồi trong nhà nhìn ra cơn giông", "Mình thích nhất ở
+    phong cách này một suy nghĩ rất giản dị…"): this is the heart of the script, never a list of points;
+  - where it lives today (the 1992 Batman series and its "Dark Deco", Sin City, Gatsby, BioShock; Rivendell, Arcane;
+    Guts, the bonfire of Dark Souls), sometimes a tie to the viewer's own country (Art Nouveau in Hanoi and Saigon);
+  - a question to the viewer at the end. The sources run about 2 min 15 s; ours keeps iron rule 3 (63–70 s) until
+    the owner says otherwise, so each part is one or two sentences.
 - **AI pictures, for this kind of video only** (owner: "Cho phép m dùng ảnh AI", then "Ảnh AI tìm kiếm thôi, k
   tạo"): an AI picture found by a search (`web:`, `page:`) may be used and is credited to its site like any web
   picture; none is made for a video (neither Claude's session nor the machine has an image generator). How Claude
