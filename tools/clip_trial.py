@@ -118,8 +118,9 @@ def commons_hits(words):
     return found
 
 
-def photo_hits(words):
-    """Photographs on Wikimedia Commons, at least 2500 px on their long side (a 4K-ish still that can move)."""
+def photo_hits(words, least=2500):
+    """Photographs on Wikimedia Commons, at least 2500 px on their long side (a 4K-ish still that can move);
+    "print:" asks for old prints and paintings, kept from 1200 px."""
     url = ("https://commons.wikimedia.org/w/api.php?action=query&format=json&generator=search&gsrnamespace=6"
            "&gsrlimit=50&gsrsearch=" + urllib.parse.quote(f"filetype:bitmap {words}")
            + "&prop=imageinfo&iiprop=url%7Csize%7Cmime%7Cextmetadata&iiurlwidth=400"
@@ -128,7 +129,7 @@ def photo_hits(words):
     found = []
     for page in sorted(pages, key=lambda p: p.get("index", 0)):
         info = (page.get("imageinfo") or [{}])[0]
-        if max(info.get("width", 0), info.get("height", 0)) < 2500 or info.get("mime") not in ("image/jpeg", "image/png", "image/tiff"):
+        if max(info.get("width", 0), info.get("height", 0)) < least or info.get("mime") not in ("image/jpeg", "image/png", "image/tiff"):
             continue
         meta = info.get("extmetadata") or {}
         artist = re.sub(r"<[^>]+>", "", (meta.get("Artist") or {}).get("value", "")).strip()
@@ -195,11 +196,11 @@ def find(spec, out, keep=9):
     frames.mkdir(exist_ok=True)
     index = json.loads((out / "index.json").read_text()) if (out / "index.json").exists() else {}
     for number, search in enumerate(spec["searches"], 1):
-        kind, _, words = search.partition(":") if search.split(":")[0] in ("commons", "mixkit", "photo") \
+        kind, _, words = search.partition(":") if search.split(":")[0] in ("commons", "mixkit", "photo", "print") \
             else ("pixabay", "", search)
         try:
             hits = {"pixabay": pixabay_hits, "commons": commons_hits, "mixkit": mixkit_hits,
-                    "photo": photo_hits}[kind](words)
+                    "photo": photo_hits, "print": lambda w: photo_hits(w, 1200)}[kind](words)
         except Exception as error:
             print(f"::warning::{search}: {error}")
             hits = []
