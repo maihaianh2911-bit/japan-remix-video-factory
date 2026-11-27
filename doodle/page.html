@@ -41,9 +41,15 @@ window.draw = t => {
   // the camera moves in a very little during every scene
   const k = 1 + 0.02 * D.clamp((t - scene.start) / Math.max(1, scene.end - scene.start));
   ctx.translate(540, 1000); ctx.scale(k, k); ctx.translate(-540, -1000);
-  D.t = t;
+  D.t = t; D.sceneStart = scene.start;
   scene.draw(t, t - scene.start, scene);
+  // light: a soft warm light from above and the corners a little darker, as on a sheet of paper under a lamp
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.fillStyle = LIGHT; ctx.fillRect(0, 0, 1080, 1920);
+  ctx.fillStyle = VIGNETTE; ctx.fillRect(0, 0, 1080, 1920);
 };
+const LIGHT = (() => { const g = D.ctx.createLinearGradient(0, 0, 0, 1920); g.addColorStop(0, 'rgba(255,250,235,0.10)'); g.addColorStop(0.5, 'rgba(255,250,235,0)'); g.addColorStop(1, 'rgba(60,40,20,0.06)'); return g; })();
+const VIGNETTE = (() => { const g = D.ctx.createRadialGradient(540, 1050, 520, 540, 1050, 1280); g.addColorStop(0, 'rgba(60,40,20,0)'); g.addColorStop(1, 'rgba(60,40,20,0.20)'); return g; })();
 // every character the story draws must be loaded before the first real frame (the typefaces come in pieces)
 window.loadFonts = async () => {
   for (let t = 0; t < window.DUR; t += 0.1) window.draw(t);

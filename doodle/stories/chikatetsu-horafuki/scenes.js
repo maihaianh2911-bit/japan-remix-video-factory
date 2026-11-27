@@ -73,14 +73,29 @@ window.SCENES = function (T) {
     ctx.restore();
   };
 
+  // the street of Tokyo cut open: buildings on top, the yellow train running in its tunnel below (the time passes)
+  const underTokyo = (key, v, street = 1180, x0 = 60) => {
+    D.bg('sky');
+    D.cloud(key + 'c', 240 + v * 14, street - 560, 230);
+    D.skyline(key + 'sk', street, [[-30, 190, 330, '#d9d0bd', 2], [170, 170, 450, '#cfc7b6', 2], [350, 150, 260, '#d6ccb8', 2], [600, 150, 300, '#d9d0bd', 2], [760, 170, 470, '#cfc7b6', 2], [940, 170, 340, '#d6ccb8', 2]]);
+    rc.rectangle(-20, street, W + 40, 40, O(key + 'rd', { fill: '#b8b2a6' }));
+    rc.rectangle(-20, street + 40, W + 40, H, O(key + 'ea', { fill: '#b98a5a' }));
+    for (let i = 0; i < 14; i++) rc.circle((D.hash(key + 'st' + i) % 1080), street + 90 + (D.hash(key + 'sy' + i) % 520), 12 + i % 3 * 6, O(key + 'stone' + i, { fill: '#a3784c', strokeWidth: 2.5 }));
+    tunnel(key + 'tn', street + 120, street + 420);
+    const x = x0 + v * 60;
+    D.beam(x + 520 * 1.35, street + 404 - 62 * 1.35, 360);
+    car(key + 'car', x, street + 404, 1.35);
+  };
+  const glove = (key, x, y, s, rot) => D.at(x, y, s, () => {   // the rival's dark hand, fingers forward
+    for (const [fx, fy, l] of [[60, -58, 110], [76, -20, 124], [70, 20, 116], [52, 56, 92]]) rc.path(`M 0 ${fy - 18} L ${fx + l - 20} ${fy - 18} Q ${fx + l + 6} ${fy} ${fx + l - 20} ${fy + 18} L 0 ${fy + 18} Z`, O(key + 'f' + fy, { fill: '#2a2a2e', strokeWidth: 4 }));
+    rc.path('M -40 -60 C 10 -110, 40 -120, 60 -90 L 20 -40 Z', O(key + 'th', { fill: '#2a2a2e', strokeWidth: 4 }));
+    rc.ellipse(-10, 0, 170, 170, O(key + 'p', { fill: '#2a2a2e', strokeWidth: 4 }));
+    rc.rectangle(-190, -60, 120, 120, O(key + 'cuff', { fill: '#1c1c20', strokeWidth: 4 }));
+  }, rot);
+
   // ---------- lines 0–4, drawn the second way (26/11/2026): one big picture for every part of a sentence ----------
   // shots(t, [[start, draw(v)], …]): the picture of the moment; each new one comes in with a small push
-  const shots = (t, list) => {
-    let cur = list[0]; for (const s of list) if (t >= s[0]) cur = s;
-    const k = 1 + 0.05 * (1 - easeOut(clamp((t - cur[0]) / 0.22)));
-    ctx.save(); ctx.translate(540, 1100); ctx.scale(k, k); ctx.translate(-540, -1100);
-    cur[1](Math.max(0, t - cur[0])); ctx.restore();
-  };
+  const shots = D.shots;   // the kit's: a first picture given -1 starts with its line
   const skyline = (key, y, list) => list.forEach(([x, w, h, c, cols], i) => building(key + i, x, y, w, h, c, cols));
   const tunnel = (key, y1, y2, earth = '#b98a5a') => {   // a big tunnel: lamps on its roof, a rail on its floor
     rc.rectangle(-20, y1, W + 40, y2 - y1, O(key + 'tn', { fill: '#34323a' }));
@@ -94,16 +109,12 @@ window.SCENES = function (T) {
   // 0  みんなに笑われた「ほら吹き」が、東京のど真ん中に、日本で最初の地下鉄をつくりました。
   scene(0, (t, u) => {
     shots(t, [
-      [-1, v => {   // everybody laughs at him
-        D.bg('paper'); D.ground(1540);
-        haya('h0', 540, 1540, { scale: 2.5, mood: 'stern', arm: 1.1, arm2: 1.1 });
-        pointer('pt0a', 235, 1350, 330, 1265, '#3a4a3a'); pointer('pt0b', 845, 1350, 750, 1265, '#4a3636');
-        D.face('lf0a', 170, 1130 + Math.sin(u * 14) * 7, 0.62, { mood: 'laugh', suit: '#3a4a3a', tie: '#d9a521', tears: true, hair: '#4a3b2e' });
-        D.face('lf0b', 910, 1130 + Math.sin(u * 14 + 2) * 7, 0.62, { mood: 'laugh', suit: '#4a3636', tie: '#3d74c4', tears: true, hat: true, flip: true });
-        haha(t, 0.05, [[200, 800, -0.16], [880, 790, 0.14], [540, 1640, 0.03]], u);
-        const a = T.at(0, 'ほら吹き');
-        D.label('tag0', 'ほら吹き', 540, 700, 84, t, a, a + 0.3, { font: MARK, bold: true, fill: '#fff6cf', color: RED, rot: -0.05 });
-        if (t > a + 0.2) { ctx.save(); ctx.strokeStyle = RED; ctx.fillStyle = RED; ctx.lineWidth = 10; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(540, 790); ctx.lineTo(540, 850); ctx.stroke(); ctx.beginPath(); ctx.moveTo(540, 890); ctx.lineTo(512, 846); ctx.lineTo(568, 846); ctx.closePath(); ctx.fill(); ctx.restore(); }
+      [-1, v => {   // the man everybody laughed at, and what he built under their feet
+        underTokyo('u0', u, 1270, 40);
+        haya('h0', 540, 1270, { scale: 2.1, mood: 'stern', arm: 1.15, arm2: 1.15 });
+        D.label('tag0', 'ほら吹き', 540, 1050, 64, t, 0, null, { still: true, font: MARK, bold: true, fill: '#fff6cf', color: RED, rot: -0.06 });
+        [[170, '#3a4a3a', '#d9a521', false], [910, '#4a3636', '#3d74c4', true]].forEach(([x, suit, tie, flip], i) => D.person('lg0' + i, x, 1270, { scale: 1.6, suit, tie, mood: 'laugh', flip, arm: -0.35 + Math.sin(u * 9 + i) * 0.08, arm2: 1.2, bob: Math.sin(u * 12 + i * 2) * 4, hat: i === 1 }));
+        haha(t, 0.05, [[190, 790, -0.14], [890, 790, 0.14]], u);
       }],
       [T.at(0, '東京') - 0.08, v => {   // the very middle of Tokyo
         D.bg('sky');
@@ -141,12 +152,9 @@ window.SCENES = function (T) {
   scene(T.s(1) - 0.08, (t, u) => {
     const a = T.at(1, '追い出され');
     shots(t, [
-      [-1, v => {   // the years fly: 1927 → 1940
-        D.bg('wall');
-        const q = easeInOut(prog(t, T.s(1), T.to(1, '13年後') - T.s(1)));
-        const year = Math.round(lerp(1927, 1940, q));
-        for (let i = 0; i < 7; i++) { const f = clamp(q * 1.3 - i * 0.12); if (f > 0 && f < 1) D.at(lerp(600, 1150, f), lerp(900, 620 - i * 30, f), 0.6, () => rc.rectangle(-150, -110, 300, 220, O('fly' + i, { fill: '#fbf7ee' })), f * 2.4); }
-        D.calendar('cal1', 520, 1120, 2.05, String(year), q >= 1 ? '13年後' : '');
+      [-1, v => {   // the years fly by while his train runs: 1927 → 1940
+        underTokyo('u1', v, 1260, -200);
+        D.yearFlip('cal1', t, T.s(1), T.to(1, '13年後'), 1927, 1940, 540, 900, 1.35, '13年後');
       }],
       [T.at(1, '彼は') - 0.08, v => {   // pushed out of his own train, which leaves without him
         D.bg('wall');
@@ -441,9 +449,15 @@ window.SCENES = function (T) {
   scene(T.s(8) - 0.08, (t, u) => {
     const run = T.at(8, '東洋') - 0.08;
     shots(t, [
-      [-1, v => {   // the day
-        D.bg('wall');
-        D.calendar('cal8', 540, 1120, pin(t, T.s(8), 0.35) * 2.05, '1927', '12月30日');
+      [-1, v => {   // the opening day: flags at the entrance, people going down
+        D.bg('sky');
+        D.skyline('sk8a', 1300, [[-20, 200, 380, '#d9d0bd', 2], [560, 180, 300, '#cfc7b6', 2], [880, 200, 420, '#d6ccb8', 2]]);
+        rc.rectangle(-20, 1300, W + 40, 360, O('st8a', { fill: '#b8b2a6' })); D.bg('paper', 1660);
+        ctx.save(); ctx.strokeStyle = INK; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(-10, 1010); ctx.quadraticCurveTo(540, 1110, 1090, 1010); ctx.stroke(); ctx.restore();
+        for (let i = 0; i < 13; i++) { const x = 20 + i * 84, y = 1010 + Math.sin(i / 12 * Math.PI) * 50; rc.polygon([[x, y], [x + 56, y + 2], [x + 28, y + 64]], O('bt8' + i, { fill: ['#d6453a', '#fbf7ee', '#f6c543', '#3d74c4'][i % 4], strokeWidth: 3 })); }
+        entrance('en8a', 760, 1560, 1.15, '地下鉄', 300);
+        for (let i = 0; i < 3; i++) { const q = ((v * 0.35 + i * 0.3) % 1); D.person('go8' + i, lerp(160, 640, q), 1560 - i * 8, { scale: 1.15, suit: ['#7a3b4a', '#2f3f5a', '#3f8f7a'][i], plain: i === 1, arm: 1.2, arm2: 1.0, hat: i === 0, step: Math.sin(v * 7 + i) * 0.6, bob: Math.abs(Math.sin(v * 7 + i)) * -3 }); }
+        D.calendar('cal8', 270, 830, pin(t, T.s(8), 0.35) * 1.15, '1927', '12月30日');
       }],
       [T.at(8, '上野') - 0.08, v => {   // from Ueno to Asakusa, under the ground
         D.bg('sky');
@@ -484,19 +498,19 @@ window.SCENES = function (T) {
   // 9  たった2.2キロでしたが、初日は1時間待ちの行列ができます。
   scene(T.s(9) - 0.08, (t, u) => {
     shots(t, [
-      [-1, v => {   // only 2.2 km: two fingers can hold it
-        D.bg('paper');
+      [-1, v => {   // only 2.2 km: the whole line fits on a ruler
+        D.bg('wood');
         const a = T.at(9, '2.2');
-        rc.line(380, 1120, 700, 1120, O('ln9', { strokeWidth: 22, stroke: '#f39700' })); rc.circle(380, 1120, 66, O('s9a', { fill: '#fbf7ee', strokeWidth: 6 })); rc.circle(700, 1120, 66, O('s9b', { fill: '#fbf7ee', strokeWidth: 6 }));
-        D.text('上野', 380, 1010, 60, { font: MARK }); D.text('浅草', 700, 1010, 60, { font: MARK });
-        // a thumb and a finger pinch it
-        const g = (1 - easeOut(prog(v, 0, 0.5))) * 170;
-        rc.path('M 330 1760 C 300 1560, 420 1470, 540 1470 C 660 1470, 780 1560, 750 1760 Z', O('palm', { fill: '#f3c891', strokeWidth: 6 }));
-        for (const [tx, dir, id] of [[380 - g, -1, 'a'], [700 + g, 1, 'b']]) {
-          rc.path(`M ${tx - dir * 6} 1196 C ${tx + dir * 44} 1180, ${tx + dir * 70} 1230, ${tx + dir * 66} 1290 L ${540 + dir * 150} 1560 L ${540 + dir * 40} 1540 L ${tx - dir * 36} 1280 C ${tx - dir * 44} 1240, ${tx - dir * 34} 1206, ${tx - dir * 6} 1196 Z`, O('fg' + id, { fill: '#f3c891', strokeWidth: 6 }));
-          rc.ellipse(tx + dir * 14, 1226, 44, 52, O('nail' + id, { fill: '#fbe9d8', strokeWidth: 3.5 }));
-        }
-        D.label('km9', 'たった2.2キロ', 540, 800, 104, t, a, a + 0.25, { bold: true, fill: '#fff6cf', color: RED });
+        ctx.fillStyle = 'rgba(60,45,20,0.25)'; ctx.fillRect(110, 1110, 880, 230);
+        rc.rectangle(100, 1100, 880, 230, O('ruler', { fill: '#f2d77a', strokeWidth: 6 }));
+        for (let i = 0; i <= 22; i++) rc.line(140 + i * 36, 1100, 140 + i * 36, 1100 + (i % 10 === 0 ? 90 : i % 5 === 0 ? 64 : 40), O('tick' + i, { strokeWidth: 4 }));
+        D.text('0', 140, 1250, 50, { font: MARK }); D.text('1', 500, 1250, 50, { font: MARK }); D.text('2', 860, 1250, 50, { font: MARK }); D.text('km', 940, 1290, 36, { font: MARK });
+        const q = easeOut(prog(v, 0.1, 0.8));
+        rc.line(140, 1020, lerp(140, 932, q), 1020, O('ln9', { strokeWidth: 26, stroke: '#f39700' }));
+        rc.circle(140, 1020, 70, O('s9a', { fill: '#fbf7ee', strokeWidth: 6 })); if (q > 0.98) rc.circle(932, 1020, 70, O('s9b', { fill: '#fbf7ee', strokeWidth: 6 }));
+        D.text('上野', 140, 900, 64, { font: MARK }); if (q > 0.98) D.text('浅草', 932, 900, 64, { font: MARK });
+        car('rc9', lerp(80, 740, q), 1012, 0.3);
+        D.label('km9', 'たった2.2キロ', 540, 760, 104, t, a, a + 0.25, { bold: true, fill: '#fff6cf', color: RED });
       }],
       [T.at(9, '初日') - 0.08, v => {   // the first day: a line that winds and winds
         D.bg('paper');
@@ -529,13 +543,13 @@ window.SCENES = function (T) {
       rc.path('M -132 -110 C -132 -290, 132 -290, 132 -110 Z', O('rvhat', { fill: '#1c1c20' })); rc.line(-196, -110, 196, -110, O('rvb', { strokeWidth: 16 }));
     });
     shots(t, [
-      [-1, v => { D.bg('wall'); yearFlip('cal10', t, T.s(10), T.to(10, '13年後'), 1927, 1940, 520, 1120, 2.05, '13年後'); }],
+      [-1, v => { underTokyo('u10', v, 1260, 200); D.yearFlip('cal10', t, T.s(10), T.to(10, '13年後'), 1927, 1940, 540, 900, 1.35, '13年後'); }],
       [T.at(10, 'ライバル') - 0.08, v => {   // the rival railway looms over his company
         D.bg('wall'); D.ground(1560, '#bdb4a3');
         building('co10', 110, 1560, 330, 420, '#f2d77a', 3); rc.rectangle(100, 1060, 350, 84, O('cos', { fill: '#fbf7ee', strokeWidth: 5 })); D.text('早川の会社', 275, 1104, 54, { font: MARK });
         const k = easeOut(prog(v, 0, 0.5));
         shadow(lerp(1300, 760, k), 1010, 1.25);
-        rc.line(lerp(1200, 640, k), 1340, lerp(1200, 500, k), 1260, O('rarm', { strokeWidth: 60, stroke: '#2a2a2e' })); rc.circle(lerp(1200, 490, k), 1256, 96, O('rhand', { fill: '#2a2a2e' }));
+        rc.line(lerp(1300, 700, k), 1300, lerp(1200, 560, k), 1270, O('rarm', { strokeWidth: 70, stroke: '#2a2a2e' })); glove('gl10', lerp(1180, 500, k), 1268, 0.9, Math.PI);
         D.label('rv10', 'ライバルの鉄道会社', 700, 1480, 50, t, T.at(10, 'ライバル') + 0.3, T.to(10, '会社が'), { fill: '#2a2a2e', color: '#f3e9c6' });
       }],
       [T.at(10, '早川の') - 0.08, v => {   // the shares of his company, taken piece by piece
@@ -549,7 +563,7 @@ window.SCENES = function (T) {
         }
         rc.circle(cx, cy, 190, O('plc', { fill: '#fbf7ee', strokeWidth: 5 })); D.text('株', cx, cy + 4, 130, { font: MARK, color: '#3d74c4' });
         D.text('早川の会社', cx, cy + 372, 54, { font: MARK });
-        rc.line(1120, 800, 900, 900, O('rarm2', { strokeWidth: 70, stroke: '#2a2a2e' })); rc.circle(890, 904, 110, O('rhand2', { fill: '#2a2a2e' }));
+        rc.line(1140, 820, 960, 900, O('rarm2', { strokeWidth: 76, stroke: '#2a2a2e' })); glove('gl10b', 900, 920, 0.95, Math.PI + 0.35 + Math.sin(u * 5) * 0.05);
         haya('h10', 150, 1640, { scale: 1.5, hair: '#8d8a84', mood: t > a ? 'wow' : 'flat', worry: true, arm: t > a ? -1.2 : 1.1, arm2: 1.1 });
         if (t > a) D.sweat(210, 1290, u, 1.5);
       }],
@@ -637,7 +651,14 @@ window.SCENES = function (T) {
   // 14 2027年には、あの最初の線路が100歳になります。
   scene(T.s(14) - 0.08, (t, u) => {
     shots(t, [
-      [-1, v => { D.bg('wall'); D.calendar('cal14', 540, 1120, pin(t, T.s(14), 0.35) * 2.05, '2027'); }],
+      [-1, v => {   // a station of today: the orange line, the calendar of 2027
+        D.bg('wall');
+        rc.rectangle(-20, 1200, W + 40, 70, O('or14', { fill: '#f39700', strokeWidth: 4 }));
+        for (let x = -20; x < W; x += 120) for (let y = 640; y < 1200; y += 120) rc.rectangle(x, y, 120, 120, O('tile' + x + y, { stroke: '#cfc8ba', strokeWidth: 2, roughness: 0.3 }));
+        rc.rectangle(-20, 1270, W + 40, 60, O('pf14a', { fill: '#cfc8ba', strokeWidth: 4 })); rc.rectangle(-20, 1276, W + 40, 16, O('pf14y', { fill: '#f2c230', strokeWidth: 2.5 })); D.bg('paper', 1330);
+        [110, 290, 790, 970].forEach((x, i) => D.person('w14' + i, x, 1300 + (i % 2) * 6, { scale: 1.2, suit: ['#3a4a3a', '#7a3b4a', '#2f3f5a', '#3f8f7a'][i], plain: i % 2 === 1, arm: 1.2, arm2: 1.0, bob: Math.sin(v * 5 + i) * 2, flip: i > 1 }));
+        D.calendar('cal14', 540, 880, pin(t, T.s(14), 0.35) * 1.4, '2027');
+      }],
       [T.at(14, 'あの') - 0.08, v => {   // the first line turns 100
         D.bg('sky');
         D.rail('r14', 1060); car('car14', lerp(-700, 240, easeOut(prog(v, 0, 1.0))), 1060, 1.35);

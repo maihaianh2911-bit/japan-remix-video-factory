@@ -14,7 +14,7 @@ window.SCENES = function (T) {
   // ---------- the things that come back ----------
   const egg = (key, x, y, s, rot) => D.at(x, y, s, () => {   // the lie, as an egg
     rc.path('M 0 -210 C 130 -210, 196 -20, 196 66 C 196 176, 104 236, 0 236 C -104 236, -196 176, -196 66 C -196 -20, -130 -210, 0 -210 Z', O(key, { fill: '#fbf6e6', strokeWidth: 6 }));
-    D.text('ウソ', 0, 60, 120, { font: MARK, color: RED });
+    if (key !== 'egg0') D.text('ウソ', 0, 60, 120, { font: MARK, color: RED });
   }, rot);
   const rock = (key, x, y, s) => D.at(x, y, s, () => {   // the responsibility, as a rock
     rc.path('M -190 60 C -210 -40, -150 -140, -40 -160 C 60 -180, 170 -130, 196 -30 C 214 50, 170 130, 60 140 C -50 150, -170 140, -190 60 Z', O(key, { fill: '#9a9da2', strokeWidth: 6 }));
@@ -42,17 +42,27 @@ window.SCENES = function (T) {
     D.cloud('c1', 230 + u * 14, 760, 260); D.cloud('c2', 560 + u * 10, 900, 170);
     D.fuji('fj0', 250, 1420, 1.25);
     D.rail('rail0', 1420);
-    const ex = 760, ey = 1160;
-    egg('egg0', ex, ey + Math.sin(u * 22) * 3 * (1 - prog(u, 0, 1.2)), 1.75, 0.04);
-    const nose = lerp(360, 40, easeOut(prog(u, 0, 1.6)));
-    ctx.save(); ctx.beginPath(); ctx.rect(-20, 600, ex - 150, 900); ctx.clip();
-    D.train('tr0', nose, 1420, 1.25, { len: 1200 });
+    const ex = 720, ey = 1150, es = 1.75;
+    const eggPath = () => { ctx.beginPath(); ctx.moveTo(ex, ey - 210 * es); ctx.bezierCurveTo(ex + 130 * es, ey - 210 * es, ex + 196 * es, ey - 20 * es, ex + 196 * es, ey + 66 * es); ctx.bezierCurveTo(ex + 196 * es, ey + 176 * es, ex + 104 * es, ey + 236 * es, ex, ey + 236 * es); ctx.bezierCurveTo(ex - 104 * es, ey + 236 * es, ex - 196 * es, ey + 176 * es, ex - 196 * es, ey + 66 * es); ctx.bezierCurveTo(ex - 196 * es, ey - 20 * es, ex - 130 * es, ey - 210 * es, ex, ey - 210 * es); ctx.closePath(); };
+    // the crack: a zigzag down the left side of the egg
+    const crack = [[ex - 40, ey - 372], [ex - 110, ey - 280], [ex - 70, ey - 200], [ex - 150, ey - 110], [ex - 100, ey - 20], [ex - 170, ey + 70], [ex - 120, ey + 160], [ex - 190, ey + 250], [ex - 150, ey + 330], [ex - 200, ey + 420]];
+    D.shadow(ex, ey + 413, 560, 0.22);
+    // the inside of the shell, shaded
+    ctx.save(); eggPath(); ctx.clip();
+    const g = ctx.createRadialGradient(ex + 60, ey + 60, 40, ex, ey, 420); g.addColorStop(0, '#d9cba4'); g.addColorStop(1, '#b8a67a'); ctx.fillStyle = g; ctx.fillRect(ex - 400, ey - 420, 800, 860);
     ctx.restore();
-    // the broken shell round the hole
-    rc.polygon([[ex - 190, 1010], [ex - 120, 1060], [ex - 170, 1120], [ex - 110, 1190], [ex - 170, 1250], [ex - 120, 1320], [ex - 190, 1400], [ex - 250, 1340], [ex - 300, 1200], [ex - 250, 1060]], O('hole0', { fill: '#2a2a2e', strokeWidth: 5 }));
-    ctx.save(); ctx.beginPath(); ctx.rect(ex - 320, 990, 170, 430); ctx.clip(); D.train('tr0b', nose, 1420, 1.25, { len: 1200 }); ctx.restore();
-    for (const [dx, dy, r] of [[-360, -330, 0.5], [-250, -420, -0.4], [-420, -180, 1.1]]) { const f = easeOut(prog(u, 0.1, 0.9)); D.at(ex - 200 + dx * f, ey + dy * f + f * f * 120, 1, () => rc.polygon([[-34, -20], [30, -30], [40, 26], [-20, 34]], O('sh' + dx, { fill: '#fbf6e6', strokeWidth: 4 })), r + f * 3); }
-    D.label('hk1', '新幹線は、', W / 2, 345, 104, t, 0, null, { still: true, font: MARK, bold: true });
+    // the train comes out to the left: hidden inside the egg by the front shell that is still there
+    const nose = lerp(330, 20, easeOut(prog(u, 0, 1.6)));
+    D.train('tr0', nose, 1420, 1.3, { len: 1200 });
+    // the front shell, broken along the crack
+    ctx.save(); ctx.beginPath(); ctx.moveTo(ex - 40, ey - 460); crack.forEach(([x, y]) => ctx.lineTo(x, y)); ctx.lineTo(ex - 200, ey + 520); ctx.lineTo(ex + 500, ey + 520); ctx.lineTo(ex + 500, ey - 460); ctx.closePath(); ctx.clip();
+    egg('egg0', ex, ey, es, 0);
+    ctx.restore();
+    ctx.save(); eggPath(); ctx.clip(); rc.linearPath(crack, O('crack0', { strokeWidth: 7 })); ctx.restore();
+    D.text('ウソ', ex + 90, ey + 105, 150, { font: MARK, color: RED });
+    // pieces of shell fly off
+    for (const [dx, dy, r] of [[-380, -330, 0.5], [-260, -430, -0.4], [-450, -170, 1.1], [-120, -470, 0.2]]) { const f = easeOut(prog(u, 0.05, 1.0)); D.at(ex - 140 + dx * f, ey - 60 + dy * f + f * f * 140, 1.3, () => rc.polygon([[-34, -20], [30, -30], [40, 26], [-20, 34]], O('sh' + dx, { fill: '#fbf6e6', strokeWidth: 4 })), r + f * 3); }
+        D.label('hk1', '新幹線は、', W / 2, 345, 104, t, 0, null, { still: true, font: MARK, bold: true });
     D.label('hk2', 'ひとつの{ウソ}から生まれた', W / 2, 505, 74, t, 0, null, { still: true, font: MARK, bold: true });
   });
 
@@ -346,7 +356,15 @@ window.SCENES = function (T) {
   scene(T.s(11) - 0.08, (t, u) => {
     const gone = T.at(11, '十河は') - 0.08;
     shots(t, [
-      [-1, v => { D.bg('wall'); D.calendar('cal11', 540, 1120, pin(t, T.s(11), 0.35) * 2.05, '1964', '10月1日'); }],
+      [-1, v => {   // the day: the first train runs under the date
+        D.bg('dusk'); D.bg('paper', 1560);
+        rc.circle(820, 1210, 300, O('sun11a', { fill: '#f6b05a', strokeWidth: 5 }));
+        D.fuji('fj11a', 260, 1460, 1.1);
+        rc.rectangle(-20, 1380, W + 40, 90, O('hz11a', { fill: '#d9c9a4', strokeWidth: 4 }));
+        D.rail('rail11a', 1560);
+        D.train('tr11a', lerp(1100, -500, prog(v, 0, 2.6)), 1560, 1.0, { len: 1300 });
+        D.calendar('cal11', 540, 900, pin(t, T.s(11), 0.35) * 1.4, '1964', '10月1日');
+      }],
       [T.at(11, '新幹線') - 0.08, v => {   // the morning it first ran
         D.bg('dusk'); D.bg('paper', 1480);
         rc.circle(780, 1180, 420, O('sun11', { fill: '#f6b05a', strokeWidth: 5 })); D.burst('sunb', 780, 1180, 250 + Math.sin(u * 3) * 6, 16, '#f2a25a', 8);
@@ -398,9 +416,11 @@ window.SCENES = function (T) {
   scene(T.s(12) - 0.08, (t, u) => {
     shots(t, [
       [-1, v => {   // eighty years old
-        D.bg('room');
-        sogoFace('f12', 520, 1180, 1.45, { mood: 'flat' });
-        D.at(860, 800, pin(t, T.s(12) + 0.1, 0.3), () => { rc.circle(0, 0, 280, O('age12', { fill: '#fff6cf', strokeWidth: 7 })); D.text('80歳', 0, 8, 110, { font: MARK, color: RED }); });
+        D.bg('room'); D.ground(1560, '#b9c08f', 0.6);
+        rc.rectangle(80, 640, 380, 520, O('shoji12', { fill: '#fbf8ef', strokeWidth: 6 })); for (let i = 1; i < 3; i++) { rc.line(80 + i * 127, 640, 80 + i * 127, 1160, O('sj12' + i, { strokeWidth: 4 })); } for (let i = 1; i < 4; i++) rc.line(80, 640 + i * 130, 460, 640 + i * 130, O('sk12' + i, { strokeWidth: 4 }));
+        rc.rectangle(700, 700, 260, 360, O('kake12', { fill: '#efe4c4', strokeWidth: 5 })); rc.line(690, 700, 970, 700, O('kakeb12', { strokeWidth: 12, stroke: '#5a3d22' })); for (const [x1, y1, x2, y2] of [[790, 760, 800, 1000], [860, 770, 850, 990], [770, 860, 890, 850]]) rc.line(x1, y1, x2, y2, O('ink12' + x1 + y1, { strokeWidth: 14 }));
+        sogoFace('f12', 540, 1250, 1.3, { mood: 'flat' });
+        D.at(560, 860, pin(t, T.s(12) + 0.1, 0.3), () => { rc.circle(0, 0, 280, O('age12', { fill: '#fff6cf', strokeWidth: 7 })); D.text('80歳', 0, 8, 110, { font: MARK, color: RED }); });
       }],
       [T.at(12, '自宅') - 0.08, v => {   // at home, before the television
         D.bg('room'); D.ground(1600, '#b9c08f', 0.6);
@@ -424,13 +444,22 @@ window.SCENES = function (T) {
   scene(T.s(13) - 0.08, (t, u) => {
     const up = T.at(13, '十河の') - 0.08;
     shots(t, [
-      [-1, v => { D.bg('wall'); D.yearFlip('cal13', t, T.s(13), T.at(13, 'その'), 1964, 1973, 520, 1120, 2.05, '9年後'); }],
+      [-1, v => {   // nine years of trains at the same platform
+        D.bg('sky'); D.bg('paper', 1650);
+        D.platform('pf13a', 1560, { height: 860, yellow: true });
+        D.rail('rail13a', 1550); D.train('tr13a', lerp(1100, -900, (v * 0.9) % 1), 1550, 0.95, { len: 1300 });
+        rc.rectangle(-20, 1556, W + 40, 100, O('fl13a', { fill: '#c9c3b6', strokeWidth: 4 }));
+        D.yearFlip('cal13', t, T.s(13), T.at(13, 'その'), 1964, 1973, 540, 1010, 1.4, '9年後');
+      }],
       [T.at(13, 'その') - 0.08, v => {   // the same platform of Tokyo Station
         D.bg('sky'); D.bg('paper', 1650);
-        D.platform('pf13', 1560, { height: 860 });
-        rc.rectangle(300, 800, 480, 150, O('sg13', { fill: '#fbf7ee', strokeWidth: 6 })); D.text('東京', 540, 878, 110, { font: MARK });
-        ctx.save(); ctx.strokeStyle = INK; ctx.lineWidth = 7; ctx.setLineDash([22, 18]); ctx.strokeRect(390, 1100, 300, 460); ctx.restore();
-        D.text('？', 540, 1330, 180, { font: MARK, color: '#e2742b' });
+        D.platform('pf13', 1560, { height: 860, yellow: true });
+        D.rail('rail13', 1550); D.train('tr13', -260, 1550, 0.95, { len: 900 });
+        rc.rectangle(-20, 1556, W + 40, 100, O('fl13', { fill: '#c9c3b6', strokeWidth: 4 }));
+        rc.rectangle(80, 800, 400, 140, O('sg13', { fill: '#fbf7ee', strokeWidth: 6 })); D.text('東京', 280, 872, 104, { font: MARK });
+        ctx.save(); ctx.strokeStyle = INK; ctx.lineWidth = 7; ctx.setLineDash([22, 18]); ctx.strokeRect(710, 1080, 300, 470); ctx.restore();
+        D.text('？', 860, 1320, 180, { font: MARK, color: '#e2742b' });
+        [[200, '#3a4a3a'], [420, '#7a3b4a']].forEach(([x, suit], i) => D.person('p13' + i, x, 1560, { scale: 1.3, suit, plain: i === 1, arm: 1.2, arm2: 1.0, bag: i === 0, bob: Math.sin(v * 5 + i) * 2 }));
       }],
       [up, v => {   // his face in bronze
         D.bg('sky'); D.bg('paper', 1650);
@@ -459,9 +488,12 @@ window.SCENES = function (T) {
         D.at(x - 110, 1090, 1, () => { rc.rectangle(-60, -36, 120, 72, O('tk14', { fill: '#fff6cf', strokeWidth: 4 })); D.text('きっぷ', 0, 2, 32, { font: MARK }); }, -0.2);
       }],
       [T.at(14, '18番') - 0.08, v => {   // platforms 18 and 19
-        D.bg('wall');
-        [[300, '18', T.at(14, '18番')], [780, '19', T.at(14, '19番')]].forEach(([x, n, a]) => D.at(x, 1120, pin(t, a - 0.05, 0.3), () => {
-          rc.line(0, -470, 0, -210, O('sg' + n, { strokeWidth: 10 }));
+        D.bg('sky'); D.bg('paper', 1650);
+        rc.rectangle(-20, 600, W + 40, 50, O('roof14b', { fill: '#8b9aa5' }));
+        D.rail('rail14b', 1560); D.train('tr14b', -120, 1560, 1.15, { len: 1300 });
+        rc.rectangle(-20, 1566, W + 40, 90, O('fl14b', { fill: '#c9c3b6', strokeWidth: 4 })); rc.rectangle(-20, 1570, W + 40, 14, O('yl14b', { fill: '#f2c230', strokeWidth: 2.5 }));
+        [[300, '18', T.at(14, '18番')], [780, '19', T.at(14, '19番')]].forEach(([x, n, a]) => D.at(x, 1050, pin(t, a - 0.05, 0.3), () => {
+          rc.line(0, -400, 0, -210, O('sg' + n, { strokeWidth: 10 }));
           rc.rectangle(-200, -210, 400, 420, O('sq' + n, { fill: '#2f5fa8', strokeWidth: 7 }));
           D.text(n, 0, 10, 280, { font: MARK, color: '#fbf7ee' }); D.text('番線', 0, 250, 60, { font: MARK });
         }));

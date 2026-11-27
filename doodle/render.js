@@ -8,6 +8,9 @@ const { spawn, execFileSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
+// a little more colour and contrast than the flat drawing (the stills are graded the same way)
+const COLOUR = 'eq=saturation=1.14:contrast=1.04:gamma=0.98';
+
 (async () => {
   const story = path.resolve(process.argv[2]);
   const mode = process.argv[3] || 'stills';
@@ -37,7 +40,8 @@ const path = require('path');
     for (const [i, t] of times.entries()) {
       await page.evaluate(t => window.draw(t), t);
       const file = path.join(dir, `f${String(i).padStart(3, '0')}_${t.toFixed(2)}.jpg`);
-      await page.screenshot({ path: file, type: 'jpeg', quality: 88 });
+      await page.screenshot({ path: file + '.png', type: 'png' });
+      execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', file + '.png', '-vf', COLOUR, '-q:v', '3', file]); fs.rmSync(file + '.png');
       files.push(file);
     }
     const cols = 6, rows = Math.ceil(files.length / cols / 2);
@@ -51,7 +55,7 @@ const path = require('path');
     const until = process.argv[4] ? Math.min(total, Number(process.argv[4])) : total;   // a part only: … video 20
     const fps = 30, n = Math.round(until * fps);
     const ff = spawn('ffmpeg', ['-v', 'error', '-y', '-f', 'image2pipe', '-framerate', String(fps), '-i', '-',
-      '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '17', '-preset', 'medium', '-movflags', '+faststart', path.join(out, 'picture.mp4')], { stdio: ['pipe', 'inherit', 'inherit'] });
+      '-vf', COLOUR, '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '17', '-preset', 'medium', '-movflags', '+faststart', path.join(out, 'picture.mp4')], { stdio: ['pipe', 'inherit', 'inherit'] });
     for (let i = 0; i < n; i++) {
       await page.evaluate(t => window.draw(t), i / fps);
       const buf = await page.screenshot({ type: 'jpeg', quality: 95 });

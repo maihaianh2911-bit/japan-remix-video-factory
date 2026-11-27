@@ -46,6 +46,12 @@ drawn again whole that way (34 and 36 pictures). **Every drawn video is made thi
   carries (`shinkansen-uso`); the beans, the yellow car and the paper tag 「ほら吹き」 struck out for 「地下鉄の父」 at the
   end (`chikatetsu-horafuki`).
 - A real person is still a simple figure: no likeness.
+- **The finish** (27/11/2026, the owner: "kiểm tra lại 2 video m vừa dựng xem có dựng đẹp hơn đc ko"): people stand on a
+  soft shadow, with hands and shoes; big things (the monument, a tower of coins) have a shadow too; a warm light from
+  above and darker corners are laid over every frame (`page.html`), and the video gets a little more colour and
+  contrast (`COLOUR` in `render.js`, the stills too); every picture drifts in slowly while it is shown (`D.shots`).
+  No calendar alone on empty paper: a date stands over a picture of its time (the train running in its tunnel while
+  the years fly, the first Shinkansen passing under 1964年10月1日). Look for those faults first in a new story.
 
 ## Making a video
 A story is a folder `doodle/stories/<name>/` with `story.json` (the lines, the voice, the pace, the small sounds, the

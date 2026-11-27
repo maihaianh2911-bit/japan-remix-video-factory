@@ -150,6 +150,7 @@
   D.person = (key, x, y, o = {}) => {
     const suit = o.shade ? '#2a2a2e' : (o.suit || '#27304a'), skin = o.shade ? '#2a2a2e' : '#f3c891';
     ctx.save(); ctx.translate(x, y); const k = o.scale || 1; ctx.scale(k * (o.flip ? -1 : 1), k);
+    if (!o.noLegs && !o.noShadow) D.shadow(0, 2, 118 + Math.abs(o.step || 0) * 30);
     if (o.lean) ctx.rotate(o.lean);
     if (!o.noLegs) {
       const st = o.step || 0;
@@ -157,6 +158,8 @@
       rc.line(16, -52, 18 + st * 14, 0, O(key + 'l2', { strokeWidth: 6 }));
       rc.line(-18 - st * 14, 0, -30 - st * 14 + (o.walk ? 24 : 0), 0, O(key + 'f1', { strokeWidth: 6 }));
       rc.line(18 + st * 14, 0, 30 + st * 14 + (o.walk ? 12 : 0), 0, O(key + 'f2', { strokeWidth: 6 }));
+      ctx.fillStyle = o.shade ? '#1c1c20' : '#2b2622';   // shoes
+      ctx.beginPath(); ctx.ellipse(-26 - st * 14, -4, 15, 8, 0, 0, 7); ctx.ellipse(26 + st * 14, -4, 15, 8, 0, 0, 7); ctx.fill();
     }
     ctx.translate(0, o.bob || 0);
     rc.ellipse(0, -112, 92, 132, O(key + 'body', { fill: suit }));
@@ -169,6 +172,8 @@
       const ex = ax + Math.cos(a) * L * side, ey = ay + Math.sin(a) * L;
       rc.line(ax, ay, ex, ey, O(key + id, { strokeWidth: 15, stroke: INK }));
       rc.line(ax, ay, ex, ey, O(key + id, { strokeWidth: 8, stroke: suit }));
+      ctx.fillStyle = skin; ctx.strokeStyle = INK; ctx.lineWidth = 3.5;   // the hand
+      ctx.beginPath(); ctx.arc(ex + Math.cos(a) * 5 * side, ey + Math.sin(a) * 5, 10, 0, 7); ctx.fill(); ctx.stroke();
       return [ex, ey];
     };
     const hand = arm(o.arm == null ? 0.9 : o.arm, 1, 'arm');
@@ -264,6 +269,7 @@
     if (o.hat) { rc.path('M -132 -110 C -132 -290, 132 -290, 132 -110 Z', O(key + 'hat', { fill: o.hat === true ? '#3a3632' : o.hat })); rc.line(-196, -110, 196, -110, O(key + 'hatb', { strokeWidth: 16 })); }
     ctx.restore();
   };
+  D.shadow = (x, y, w, alpha = 0.22) => { ctx.save(); ctx.fillStyle = `rgba(50,35,15,${alpha})`; ctx.beginPath(); ctx.ellipse(x, y, w / 2, w * 0.09, 0, 0, 7); ctx.fill(); ctx.restore(); };
   D.sweat = (x, y, t, k = 1.9) => {
     for (let i = 0; i < 2; i++) {
       const ph = ((t * 1.1 + i * 0.5) % 1);
@@ -449,6 +455,7 @@
   // The memorial on the platform: a brick wall with a bronze plate that bears a face; (x, y) the middle of its foot
   D.monument = (key, x, y, s, o = {}) => {
     D.at(x, y, s, () => {
+      D.shadow(0, 0, 420, 0.25);
       rc.rectangle(-170, -30, 340, 30, O(key + 'base', { fill: '#b9b3a6' }));
       rc.rectangle(-150, -420, 300, 390, O(key + 'wall', { fill: '#b5553c' }));
       for (let by = -420 + 39, i = 0; by < -32; by += 39, i++) {
@@ -494,12 +501,13 @@
 
   // ---------- the second way of drawing (26/11/2026): one big picture for every part of a sentence ----------
   // shots(t, [[start, draw(v)], …]): the picture of the moment; each new one comes in with a small push.
-  // Give the first one the start -1 (no push at the very first frame of a scene).
+  // Give the first one the start -1: it starts with its scene (page.html sets D.sceneStart).
   D.shots = (t, list) => {
     let cur = list[0]; for (const s of list) if (t >= s[0]) cur = s;
-    const k = 1 + 0.05 * (1 - easeOut(clamp((t - cur[0]) / 0.22)));
-    ctx.save(); ctx.translate(540, 1100); ctx.scale(k, k); ctx.translate(-540, -1100);
-    cur[1](Math.max(0, t - cur[0])); ctx.restore();
+    const v = Math.max(0, t - (cur[0] < 0 ? D.sceneStart : cur[0]));   // a first picture given -1 starts with its scene
+    const k = (1 + 0.05 * (1 - easeOut(clamp(v / 0.22)))) * (1 + 0.035 * easeInOut(clamp(v / 3.5)));
+    ctx.save(); ctx.translate(540, 1150); ctx.scale(k, k); ctx.translate(-540, -1150);
+    cur[1](v); ctx.restore();
   };
   D.building = (key, x, y, w, h, color, cols = 3) => {
     rc.rectangle(x, y - h, w, h, O(key, { fill: color }));
@@ -517,7 +525,7 @@
   };
   D.beam = (x, y, len, dir = 1) => { ctx.save(); const g = ctx.createLinearGradient(x, y, x + len * dir, y); g.addColorStop(0, 'rgba(255,240,150,0.75)'); g.addColorStop(1, 'rgba(255,240,150,0)'); ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(x, y - 14); ctx.lineTo(x + len * dir, y - 130); ctx.lineTo(x + len * dir, y + 130); ctx.lineTo(x, y + 14); ctx.closePath(); ctx.fill(); ctx.restore(); };
   // a tower of coins: n coins high, (x, y) the middle of its foot
-  D.tower = (key, x, y, n, s = 1) => { ctx.save(); ctx.translate(x, y); ctx.scale(s, s); for (let i = 0; i < n; i++) rc.ellipse(Math.sin(i * 1.7) * 5, -i * 17 - 12, 150, 44, O(key + i, { fill: i % 2 ? '#f0c64a' : '#e8b93c', strokeWidth: 3.5, roughness: 0.5 })); ctx.restore(); };
+  D.tower = (key, x, y, n, s = 1) => { ctx.save(); ctx.translate(x, y); ctx.scale(s, s); D.shadow(0, -4, 210, 0.22); for (let i = 0; i < n; i++) rc.ellipse(Math.sin(i * 1.7) * 5, -i * 17 - 12, 150, 44, O(key + i, { fill: i % 2 ? '#f0c64a' : '#e8b93c', strokeWidth: 3.5, roughness: 0.5 })); ctx.restore(); };
 
   window.D = D;
 })();
