@@ -1,0 +1,392 @@
+{
+  "title": "「ほら吹き」と笑われた男が、日本で最初の地下鉄をつくった",
+  "voice": {
+    "speaker": "青山龍星",
+    "style": "ノーマル"
+  },
+  "pace": {
+    "speed": 1.2,
+    "line_pause": 0.1,
+    "scene_pause": 0.2
+  },
+  "music": {
+    "file": "music/k10-sao-truc.mp3",
+    "title": "竹笛",
+    "volume": 0.84
+  },
+  "sounds": [
+    {
+      "line": 0,
+      "at": "ほら吹き",
+      "sound": "pop"
+    },
+    {
+      "line": 0,
+      "at": "東京",
+      "shift": 0.25,
+      "sound": "thud"
+    },
+    {
+      "line": 0,
+      "at": "ど真ん中",
+      "sound": "pop"
+    },
+    {
+      "line": 0,
+      "at": "日本で",
+      "shift": -0.08,
+      "sound": "whoosh"
+    },
+    {
+      "line": 0,
+      "at": "最初",
+      "sound": "pop"
+    },
+    {
+      "line": 1,
+      "sound": "whoosh"
+    },
+    {
+      "line": 1,
+      "at": "追い出され",
+      "sound": "thud"
+    },
+    {
+      "line": 1,
+      "at": "追い出され",
+      "shift": 0.75,
+      "sound": "whoosh"
+    },
+    {
+      "line": 2,
+      "sound": "pop"
+    },
+    {
+      "line": 2,
+      "at": "早川徳次",
+      "sound": "pop"
+    },
+    {
+      "line": 2,
+      "at": "早川徳次",
+      "shift": 1.0,
+      "sound": "pop"
+    },
+    {
+      "line": 3,
+      "sound": "whoosh"
+    },
+    {
+      "line": 3,
+      "at": "地下鉄",
+      "shift": -0.08,
+      "sound": "whoosh"
+    },
+    {
+      "line": 3,
+      "at": "東京にも",
+      "sound": "pop"
+    },
+    {
+      "line": 3,
+      "at": "東京にも",
+      "shift": 0.25,
+      "sound": "pop"
+    },
+    {
+      "line": 4,
+      "shift": 0.3,
+      "sound": "pop"
+    },
+    {
+      "line": 4,
+      "at": "東京",
+      "sound": "pop"
+    },
+    {
+      "line": 4,
+      "at": "すぎる",
+      "sound": "thud"
+    },
+    {
+      "line": 4,
+      "at": "笑い",
+      "sound": "pop"
+    },
+    {
+      "line": 4,
+      "at": "笑い",
+      "shift": 0.15,
+      "sound": "pop"
+    },
+    {
+      "line": 5,
+      "shift": 0.15,
+      "sound": "pop"
+    },
+    {
+      "line": 5,
+      "at": "証拠",
+      "sound": "pop"
+    },
+    {
+      "line": 5,
+      "at": "証拠",
+      "shift": 0.15,
+      "sound": "thud"
+    },
+    {
+      "line": 6,
+      "sound": "pop"
+    },
+    {
+      "line": 6,
+      "at": "人の流れ",
+      "shift": -0.08,
+      "sound": "whoosh"
+    },
+    {
+      "line": 6,
+      "at": "ありません",
+      "sound": "thud"
+    },
+    {
+      "line": 7,
+      "at": "ポケット",
+      "shift": -0.08,
+      "sound": "pop"
+    },
+    {
+      "line": 7,
+      "at": "豆",
+      "sound": "pop"
+    },
+    {
+      "line": 7,
+      "at": "豆",
+      "shift": 0.36,
+      "sound": "pop"
+    },
+    {
+      "line": 7,
+      "at": "豆",
+      "shift": 0.72,
+      "sound": "pop"
+    },
+    {
+      "line": 7,
+      "at": "豆",
+      "shift": 1.08,
+      "sound": "pop"
+    },
+    {
+      "line": 7,
+      "at": "通る",
+      "shift": 0.12,
+      "sound": "pop"
+    },
+    {
+      "line": 7,
+      "at": "通る",
+      "shift": 0.48,
+      "sound": "pop"
+    },
+    {
+      "line": 7,
+      "at": "通る",
+      "shift": 0.84,
+      "sound": "pop"
+    },
+    {
+      "line": 7,
+      "at": "通る",
+      "shift": 1.2,
+      "sound": "pop"
+    },
+    {
+      "line": 8,
+      "sound": "thud"
+    },
+    {
+      "line": 8,
+      "at": "上野",
+      "sound": "pop"
+    },
+    {
+      "line": 8,
+      "at": "浅草",
+      "sound": "pop"
+    },
+    {
+      "line": 8,
+      "at": "東洋",
+      "shift": -0.08,
+      "sound": "whoosh"
+    },
+    {
+      "line": 9,
+      "at": "2.2",
+      "sound": "pop"
+    },
+    {
+      "line": 9,
+      "at": "初日",
+      "shift": -0.08,
+      "sound": "whoosh"
+    },
+    {
+      "line": 9,
+      "at": "1時間",
+      "shift": 0.1,
+      "sound": "thud"
+    },
+    {
+      "line": 10,
+      "sound": "whoosh"
+    },
+    {
+      "line": 10,
+      "at": "ライバル",
+      "shift": -0.08,
+      "sound": "thud"
+    },
+    {
+      "line": 10,
+      "at": "株",
+      "sound": "pop"
+    },
+    {
+      "line": 10,
+      "at": "株",
+      "shift": 0.26,
+      "sound": "pop"
+    },
+    {
+      "line": 10,
+      "at": "株",
+      "shift": 0.52,
+      "sound": "pop"
+    },
+    {
+      "line": 10,
+      "at": "株",
+      "shift": 0.78,
+      "sound": "pop"
+    },
+    {
+      "line": 11,
+      "at": "退き",
+      "sound": "thud"
+    },
+    {
+      "line": 11,
+      "at": "自分が",
+      "shift": -0.08,
+      "sound": "whoosh"
+    },
+    {
+      "line": 13,
+      "shift": 0.35,
+      "sound": "whoosh"
+    },
+    {
+      "line": 13,
+      "at": "何百万",
+      "sound": "thud"
+    },
+    {
+      "line": 14,
+      "sound": "pop"
+    },
+    {
+      "line": 14,
+      "at": "100歳",
+      "shift": -0.2,
+      "sound": "pop"
+    },
+    {
+      "line": 14,
+      "at": "100歳",
+      "sound": "thud"
+    },
+    {
+      "line": 15,
+      "at": "まちがって",
+      "sound": "whoosh"
+    },
+    {
+      "line": 15,
+      "at": "まちがって",
+      "shift": 0.5,
+      "sound": "thud"
+    }
+  ],
+  "lines": [
+    {
+      "text": "みんなに笑われた「ほら吹き」が、東京のど真ん中に、日本で最初の地下鉄をつくりました。",
+      "say": "みんなに笑われたほら吹きが、東京のど真ん中に、にほんで最初の地下鉄をつくりました。"
+    },
+    {
+      "text": "けれど13年後、彼はその地下鉄から追い出されます。",
+      "end": true
+    },
+    {
+      "text": "男の名前は、早川徳次といいます。",
+      "say": "男の名前は、はやかわのりつぐといいます。",
+      "end": true
+    },
+    {
+      "text": "1914年、ロンドンで地下鉄を見た早川は、東京にもつくろうと決めました。",
+      "end": true
+    },
+    {
+      "text": "けれど周りは、東京の地面はやわらかすぎると笑います。",
+      "end": true
+    },
+    {
+      "text": "お金を集めるには、証拠が必要でした。",
+      "end": true
+    },
+    {
+      "text": "しかも東京には、人の流れを調べた資料がありません。",
+      "end": true
+    },
+    {
+      "text": "そこで早川は銀座の交差点に立ち、ポケットの豆を一粒ずつ移して、通る人を数えたといいます。",
+      "end": true
+    },
+    {
+      "text": "1927年、上野と浅草のあいだに、東洋で初めての地下鉄が走りました。",
+      "end": true
+    },
+    {
+      "text": "たった2.2キロでしたが、初日は1時間待ちの行列ができます。",
+      "end": true
+    },
+    {
+      "text": "それから13年後、ライバルの鉄道会社が、早川の会社の株を買い集めました。",
+      "end": true
+    },
+    {
+      "text": "早川は社長を退き、自分がつくった地下鉄を去ります。",
+      "end": true
+    },
+    {
+      "text": "その2年後、61歳で亡くなりました。",
+      "end": true
+    },
+    {
+      "text": "いま東京の地下鉄は、毎日、何百万人もの人を運んでいます。",
+      "end": true
+    },
+    {
+      "text": "2027年には、あの最初の線路が100歳になります。",
+      "end": true
+    },
+    {
+      "text": "「ほら吹き」が豆で数えた答えは、まちがっていなかったのです。",
+      "end": true,
+      "say": "ほら吹きが豆で数えた答えは、まちがっていなかったのです。"
+    }
+  ]
+}
