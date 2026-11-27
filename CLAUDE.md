@@ -630,6 +630,17 @@ names are read on the Pexels page and kept in `scripts/authors.json`). It is ren
 channel file, no issue and no voice yet (`voiceFile` in `src/script.ts`). Open points: signs 3–5 and the ending, the
 voice, the channel's name and number.
 
+## The car-tips trial (`car-tips/`): a Remotion project of 27/11/2026, not a channel yet
+Owner, 27/11/2026: sent a horizontal Japanese car-tips video (a ranking 第N位, green-board frame, real photo in the
+middle, big outlined text with red keywords, subtitles, a stick figure with a pointer) and asked if it can be made;
+then chose: **vertical, about 65 s**, real pictures found by the search + pictures drawn by code, **AI pictures
+allowed for this format** (found on the web, or made by the owner from prompts Claude writes; Claude has no image
+generator). Claude chose the topic; the owner read the script (Japanese + Vietnamese) and said "Ok dựng thử xem nào".
+First video: 「雪の日にやりがちな、危ない行動3選」 (64.8 s, JAF figures), sent in the chat. **Read `car-tips/README.md`
+before a second one.** Its pictures came from the search-only story `stories/k10-2026-11-27-thu-yuki-ng3.json`; the
+voice is 青山龍星 made with `python -m doodle.voice`, the sound with `python -m doodle.sound`. Open points: the owner
+has not judged the video yet, no channel, no issue, the small sounds were never heard by Claude.
+
 ## Changing the pipeline
 Before pushing a change of `news/`, `tools/`, `channels/` or `tests/`: `bash tools/check.sh <out folder>` (add
 `--fx` when the effects' libraries, model and typeface are installed, see `fx` above), and look at
