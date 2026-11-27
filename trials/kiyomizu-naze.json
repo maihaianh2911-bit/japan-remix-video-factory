@@ -1,0 +1,26 @@
+{
+ "stage": "find",
+ "note": "Kênh mới (cảnh đẹp Nhật), bố cục khung ảnh: vì sao người thời Edo nhảy từ sân khấu 清水寺.",
+ "layout": "frame",
+ "header": ["清水の舞台から", "*本当に*飛び降りた？"],
+ "voice": ["もち子さん", "ノーマル"],
+ "speed": 1.2,
+ "tail": 0.6,
+ "scene_pause": 0.12,
+ "music": {"file": "music/k10-sao-truc.mp3", "title": "竹笛", "volume": 0.25},
+ "searches": [
+  "kiyomizu",
+  "kiyomizudera",
+  "清水寺",
+  "kyoto temple",
+  "photo:Kiyomizu-dera stage",
+  "photo:Kiyomizu-dera pillars",
+  "photo:Kiyomizu-dera autumn",
+  "photo:Kiyomizu-dera Kyoto view",
+  "photo:Harunobu Kiyomizu jumping",
+  "photo:Kiyomizu-dera ukiyo-e",
+  "photo:Kiyomizu-dera hondo",
+  "photo:Otowa waterfall Kiyomizu"
+ ],
+ "scenes": []
+}
