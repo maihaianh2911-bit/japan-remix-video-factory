@@ -61,6 +61,15 @@ STYLES = {
                    photo_tag_text="#2a1d10", value="#f1c96b", card="#f7eed6", card_ink="#2a1d10",
                    card_muted="#6f5d40", rule="#9c8a68", caption_box="", caption_text="#2a1d10", grain=True,
                    layout="story"),
+    # "gallery": the picture is the whole frame, for a video that explains a style of art or design (trial of
+    # 26/11/2026; owner: "làm thử"). Nothing dark is laid on the picture: the text runs down one side of it, written
+    # vertically (see "the gallery frame" below): the name of what the picture shows ("name", "note"), the captions,
+    # which light up as the voice reads them, the hook line (a quote) and the big title of a scene with a "value".
+    "gallery": Style(family="Serif", background="#0c1624", text="#f7f0e1", muted="#a3adba", accent="#d9b566",
+                     tag="#0c1624", tag_text="#d9b566", photo_bed="#0c1624", photo_tag="#0c1624",
+                     photo_tag_text="#f7f0e1", value="#f7f0e1", card="#0f1b2d", card_ink="#f7f0e1",
+                     card_muted="#c3ccd6", rule="#d9b566", caption_box="", caption_text="#f7f0e1", grain=False,
+                     layout="gallery"),
 }
 style = STYLES["news"]
 
@@ -216,7 +225,8 @@ def caption_chunks(line):
     def lines(group):
         return ["".join(line).strip() for line in balanced(group, one_line, face.getlength)]
 
-    captions = balanced(pieces, lambda group: len(lines(group)) <= 2, face.getlength)
+    rows = 1 if style.layout == "gallery" else 2   # "gallery": a caption is one column down the side of the picture
+    captions = balanced(pieces, lambda group: len(lines(group)) <= rows, face.getlength)
     return ["\n".join(lines(group)) for group in captions]
 
 
@@ -257,18 +267,26 @@ PHOTO_TOP, PHOTO_HEIGHT = 338, 700
 STORY_TOP, STORY_HEIGHT = 172, 1258     # "story": the picture from under the masthead to above the captions
 
 
+GALLERY_INK = (7, 13, 22)     # "gallery": the dark of the outline and the shadow of its text
+WHOLE_ROOM = (196, 306)       # "gallery": what a picture shown whole leaves free for the text on the left, on the right
+
+
 def photo_box():
     """Top and height of the picture in the current frame."""
+    if style.layout == "gallery":
+        return 0, H
     return (STORY_TOP, STORY_HEIGHT) if style.layout == "story" else (PHOTO_TOP, PHOTO_HEIGHT)
 
 
 def page_area():
     """The part of the frame that turns like a page, goes dark in a dip (the rest stays)."""
+    if style.layout == "gallery":
+        return (0, 0, W, H)
     return (0, 0, W, 1752) if style.layout == "story" else (0, 245, W, 1700)
 
 
 def caption_centre():
-    return 1590 if style.layout == "story" else 1598
+    return 1590 if style.layout == "story" else 1598   # ("gallery": its captions are columns, draw_gallery_caption)
 TEXT_IN, CAPTION_IN, PHOTO_FADE, TRANSITION = 0.45, 0.2, 0.5, 0.5   # seconds
 MOTIONS = ("in", "right", "out", "left")   # one per picture, in turn
 
@@ -289,18 +307,39 @@ def crop_photo(image, height, focus=(0.5, 0.5), zoom=1.0, shift=0.0):
 
 
 @lru_cache(maxsize=8)
-def backdrop(key, height):
+def backdrop(key, height, light=0.45):
     image = BACKDROPS[key]
     soft = crop_photo(image, height).resize((W // 8, height // 8)).filter(ImageFilter.GaussianBlur(6))
-    return Image.eval(soft.resize((W, height), Image.Resampling.BICUBIC), lambda level: level * 0.45)
+    return Image.eval(soft.resize((W, height), Image.Resampling.BICUBIC), lambda level: level * light)
 
 
 BACKDROPS = {}
 
 
-def whole_photo(image, position, height):
+@lru_cache(maxsize=8)
+def gallery_bed(key, height):
+    """What a picture shown whole stands on in the "gallery" frame: a blurred copy of itself, lifted halfway to the
+    colour of paper. Light, in the colours of the picture, and never a dark screen."""
+    return Image.blend(backdrop(key, height, 1.0), Image.new("RGB", (W, height), "#efe6d2"), 0.5)
+
+
+def whole_photo(image, position, height, side=""):
     """Show the whole picture (portraits, charts, documents) over a blurred copy of itself; it grows slowly."""
     BACKDROPS[id(image)] = image
+    if style.layout == "gallery":
+        # No dark bed (owner, 26/11/2026: "k nên để màn đen nữa"): the blurred copy is lifted towards the colour
+        # of paper, so that even a dark picture stands on a light mat (gallery_bed). The picture is
+        # not blown up beyond a quarter (it would look soft), keeps a thin gold line, and leaves the side the text
+        # runs down (`side`) free, so that the label and the captions stand beside it and never on it.
+        frame = gallery_bed(id(image), height).copy()
+        first, last = (WHOLE_ROOM[0], W - 22) if side == "left" else (22, W - WHOLE_ROOM[1]) if side == "right" else (0, W)
+        scale = min((last - first) / image.width, height * 0.86 / image.height, 1.25) * (0.9 + 0.1 * position)
+        size = (round(image.width * scale), round(image.height * scale))
+        left, top = first + (last - first - size[0]) // 2, (height - size[1]) // 2
+        frame.paste(image.resize(size, Image.Resampling.BICUBIC), (left, top))
+        ImageDraw.Draw(frame).rectangle((left - 3, top - 3, left + size[0] + 2, top + size[1] + 2),
+                                        outline=style.accent, width=2)
+        return frame
     frame = backdrop(id(image), height).copy()
     scale = min(W / image.width, height / image.height) * (0.86 + 0.14 * position)
     size = (round(image.width * scale), round(image.height * scale))
@@ -312,7 +351,7 @@ def moving_photo(photo, t, kind, height=PHOTO_HEIGHT):
     """The picture at time t (0 at its start, 1 at its end, a little more while it fades out)."""
     t = min(1.25, max(0.0, t))
     if photo.fit == "contain":
-        return whole_photo(photo.image, t if kind in ("in", "right") else 1 - min(1, t), height)
+        return whole_photo(photo.image, t if kind in ("in", "right") else 1 - min(1, t), height, photo.side)
     if kind == "in":
         return crop_photo(photo.image, height, photo.focus, zoom=1.0 + 0.2 * t)
     if kind == "out":
@@ -403,7 +442,7 @@ def named_photo(photo, t, name, seconds, height=PHOTO_HEIGHT, delay=0.0):
     if photo.fit == "contain":   # the whole picture: it grows, shrinks or stays
         small = 1 - clamp(0.035 * seconds, 0.10, 0.18)
         size = {"push-in": small + (1 - small) * min(1, p), "pull-back": 1 - (1 - small) * min(1, p)}.get(name, 1.0)
-        return whole_photo(photo.image, (size - 0.86) / 0.14, height)
+        return whole_photo(photo.image, (size - 0.86) / 0.14, height, photo.side)
     image = with_depth(photo, name, t if name in ("reveal", "punch-in") else p)
     # at least 16 % closer or wider, so that even a 2-second picture is seen to move; 30 % at most
     gain = clamp(0.05 * seconds, 0.16, 0.30)
@@ -457,6 +496,8 @@ def move_warning(photo, seconds=5.0, height=PHOTO_HEIGHT):
 # In the "story" frame the headline is printed on the foot of the picture and the hook line higher still: a face
 # whose middle lies in that part is under the text. The first picture is the best one of the video.
 HEADLINE_ZONE, HOOK_ZONE, HOOK_SIDE = 0.22, 0.34, 900
+TEXT_ZONES = {"story": (HEADLINE_ZONE, HOOK_ZONE)}   # the foot of the picture the text covers, by frame
+STRIP_SHARE = (0.2, 0.36)   # "gallery": the share of the width the strip of text takes (captions; the hook line)
 
 
 def frame_windows(photo, seconds=5.0, height=PHOTO_HEIGHT):
@@ -497,7 +538,7 @@ def face_warnings(photo, hook=False, seconds=5.0, height=PHOTO_HEIGHT):
     if not main:   # a crowd
         return []
     windows = frame_windows(photo, seconds, height)
-    zone = (HOOK_ZONE if hook else HEADLINE_ZONE) if style.layout == "story" else 0.0
+    zone = TEXT_ZONES.get(style.layout, (0.0, 0.0))[1 if hook else 0]
 
     def place(box, window):   # how far down the frame the middle of the face is (0 top, 1 bottom)
         return ((box[1] + box[3]) / 2 - window[1]) / max(0.001, window[3] - window[1])
@@ -505,6 +546,18 @@ def face_warnings(photo, hook=False, seconds=5.0, height=PHOTO_HEIGHT):
     kept = [box for box in main if all(inside(box, window) for window in windows)]
     under = bool(zone) and any(place(box, window) > 1 - zone for box in kept for window in windows)
     low = hook and any(place(box, windows[0]) > 0.5 for box in kept)
+    beside = False
+    if style.layout == "gallery":   # the text runs down one side: a face must not stand in that strip
+        low = False
+        if photo.side:   # (without "side" the calmer side is chosen, and a face counts against a side)
+            share = STRIP_SHARE[1 if hook else 0]
+            first, last = (V_RIGHT / W - share, V_RIGHT / W) if photo.side == "right" else (0.0, V_LEFT / W + share)
+
+            def across(box, window):   # where the face is across the frame (0 left, 1 right)
+                wide = max(0.001, window[2] - window[0])
+                return (box[0] - window[0]) / wide, (box[2] - window[0]) / wide
+            beside = any(right > first and left < last
+                         for box in kept for window in windows for left, right in [across(box, window)])
     advice = 'another move, the whole picture ("fit": "contain") or another picture'
     if cut and photo.move not in ("pan-right", "pan-left", "rise", "fall"):
         # the focus that puts the faces in the middle of the frame at its closest, if the frame can hold them then
@@ -528,6 +581,9 @@ def face_warnings(photo, hook=False, seconds=5.0, height=PHOTO_HEIGHT):
     elif low:
         said.append("the hook: the face is in the lower half of the first picture (it belongs in the upper half, "
                     "clear of the hook line): a picture or a framing with the face higher")
+    if beside:
+        said.append(f"a face stands in the strip of text on the {photo.side} side: put the text on the other side "
+                    '("side"), or frame the face away from it ("focus")')
     return said
 
 
@@ -538,7 +594,8 @@ def hook_warnings(photo):
     if min(photo.image.size) < HOOK_SIDE:
         said.append(f"the hook: the first picture is small ({photo.image.width}x{photo.image.height}, under "
                     f"{HOOK_SIDE} px on one side), it will look soft: open on the best picture of the video")
-    if photo.fit == "contain" or not photo.depth:
+    # "gallery": a painting or a poster is what the video is about, and it is marked flat for the depth effect
+    if photo.fit == "contain" or (not photo.depth and style.layout != "gallery"):
         said.append("the hook: the first picture is shown whole or marked flat (a document, a page, a collage): "
                     "open on a photograph of the person, the place or the thing")
     return said
@@ -663,6 +720,8 @@ def layout(beat, release, has_photo, demo):
     (it slides in at the start of the scene)."""
     if style.layout == "story":
         return story_layout(beat, release, has_photo, demo)
+    if style.layout == "gallery":   # the picture is the whole frame: its text is drawn over it (Scene.render_gallery)
+        return gallery_backdrop().copy(), Image.new("RGBA", (W, H), (0, 0, 0, 0)), []
     return (*plain_layout(beat, release, has_photo, demo), [])
 
 
@@ -728,6 +787,305 @@ def plain_layout(beat, release, has_photo, demo):
     return image, layer
 
 
+# --- the "gallery" frame: the picture is the whole frame and the text runs down one side of it ---
+# Owner, 26/11/2026, on the first trial, whose text lay across the foot of the picture on a dark shade: "cái màn đen
+# và chữ che mất nhiều tranh quá, k nên để màn đen nữa, còn chữ thì cho chạy dọc ở 1 bên (tùy theo ảnh, chọn bên nào
+# ít chi tiết để chữ chạy)". So nothing dark is laid on the picture: the text is written vertically, as Japanese
+# is, light with a dark outline, in a narrow strip on the left or the right of the frame, the side of each picture
+# that has less to see (calm_side, or the picture's "side").
+
+V_TOP, V_BOTTOM = 290, 1480     # the columns stand between these (above: the app's top bar; below: its caption)
+V_LEFT, V_RIGHT = 54, W - 150   # the outer edge of the strip; on the right it keeps clear of the app's buttons
+V_GAP, V_PAD = 20, 18           # between two columns; room around a character for its outline and shadow
+V_CAPTION, V_HOOK, V_TITLE = 58, 70, 124   # the size of a caption, of the hook line and of a big title (at most)
+V_NAME, V_NOTE = 38, 30         # the name of what a picture shows and, under it, who made it, when, where
+GLOW = 2.6                      # how many characters behind the voice a caption is still gold
+READING, NOTE_GOLD = "#f6cf74", "#ecc978"
+
+# Vertical writing: these are turned a quarter, these sit at the top right of their cell, these take half a cell.
+V_TURN = frozenset("ー－―—–…‥〜～「」『』（）()［］[]〈〉《》【】＝=:：;；-")
+V_CORNER = frozenset("、。，．,.")
+V_SMALL = frozenset("ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶ")
+V_HIGH = V_CORNER | frozenset("」』）)］]〉》】")   # their ink belongs to the top of the cell
+V_LOW = frozenset("「『（(［[〈《【")               # their ink belongs to the foot of the cell
+V_NARROW = V_HIGH | V_LOW | frozenset("・ 　")
+V_WIDE = {code: code + 0xFEE0 for code in range(0x21, 0x7F) if chr(code).isalnum()}   # 1896 → １８９６, upright
+V_STATE = {"side": "left", "outer": ()}   # where the strip is at this moment (Scene.strip); the captions follow it
+
+
+def rgba(colour, alpha=255):
+    """A "#rrggbb" colour with an opacity, for drawing on a transparent layer."""
+    return (*(int(colour[i:i + 2], 16) for i in (1, 3, 5)), alpha)
+
+
+def spaced_width(value, face, tracking):
+    return sum(face.getlength(char) for char in value) + tracking * max(0, len(value) - 1)
+
+
+def lay(image, mask, at, colour, amount=1.0):
+    """Paint a colour through a mask at a place of the frame, at an opacity."""
+    if amount <= 0:
+        return
+    image.paste(colour, at, mask.point(lambda level: round(level * amount)) if amount < 1 else mask)
+
+
+def with_shadow(body):
+    """A mask of outlined text with a soft shadow under it: light text then stands clear of any picture."""
+    soft = ImageChops.offset(body, 0, 3).filter(ImageFilter.GaussianBlur(5))
+    return ImageChops.lighter(body, soft.point(lambda level: min(255, round(level * 1.15))))
+
+
+@lru_cache(maxsize=1024)
+def v_glyph(char, size, rim, key):
+    """One character of a column on a square tile (a mask), turned or moved as vertical writing asks; `rim`: with
+    an outline of that many pixels."""
+    side = size + 2 * V_PAD
+    tile = Image.new("L", (side, side), 0)
+    ImageDraw.Draw(tile).text((side / 2, side / 2), char, font=font(size), fill=255, anchor="mm",
+                              stroke_width=rim, stroke_fill=255)
+    if char in V_TURN:
+        tile = tile.rotate(-90)
+    if char in V_CORNER or char in V_SMALL:
+        shift = round(size * (0.56 if char in V_CORNER else 0.09))
+        moved = Image.new("L", tile.size, 0)
+        moved.paste(tile, (shift, -shift))
+        tile = moved
+    return tile
+
+
+def v_cells(value):
+    """How many cells of its size a column of this text is long."""
+    return sum(0.56 if char in V_NARROW else 1.05 for char in value)
+
+
+@lru_cache(maxsize=128)
+def v_column(value, size, rim=4, key=""):
+    """A column of vertical text as masks: (ink, under, edges). `ink`: the characters; `under`: their dark outline
+    with a soft shadow; `edges`: the y, in the masks, of the top of every character and of the foot of the last.
+    The masks are size + 2 × V_PAD wide; letters and digits stand upright, one under the other."""
+    value = value.translate(V_WIDE)
+    width, tile = size + 2 * V_PAD, size + 2 * V_PAD
+    height = round(v_cells(value) * size) + 2 * V_PAD
+    ink, body = Image.new("L", (width, height), 0), Image.new("L", (width, height), 0)
+    y, edges = float(V_PAD), []
+    for char in value:
+        advance = size * (0.56 if char in V_NARROW else 1.05)
+        edges.append(y)
+        if not char.isspace():
+            middle = y + size / 2 if char in V_HIGH else y + advance - size / 2 if char in V_LOW else y + advance / 2
+            top = round(middle - tile / 2)
+            for mask, rim_width in ((ink, 0), (body, rim)):
+                box = (0, top, tile, top + tile)
+                mask.paste(ImageChops.lighter(mask.crop(box), v_glyph(char, size, rim_width, key)), box)
+        y += advance
+    edges.append(y)
+    return ink, with_shadow(body), tuple(edges)
+
+
+@lru_cache(maxsize=16)
+def v_sideways(value, size, rim=3, key=""):
+    """Latin words lying on their side in a column, read from the top down, with room between the letters (the name
+    of the style in capitals beside its big Japanese title). Masks as v_column, without edges."""
+    face, tracking = font(size), size * 0.18
+    width = round(spaced_width(value, face, tracking)) + 2 * V_PAD
+    masks = []
+    for rim_width in (0, rim):
+        row = Image.new("L", (width, size + 2 * V_PAD), 0)
+        draw, x = ImageDraw.Draw(row), float(V_PAD)
+        for char in value:
+            draw.text((x, V_PAD + size / 2), char, font=face, fill=255, anchor="lm",
+                      stroke_width=rim_width, stroke_fill=255)
+            x += face.getlength(char) + tracking
+        masks.append(row.rotate(-90, expand=True))
+    return masks[0], with_shadow(masks[1]), None
+
+
+def v_layout(side, outer, inner):
+    """The x of every column of the strip: (those of `outer`, those of `inner`), given their widths. `outer` is
+    what stands at the edge of the frame (the name of the picture, a big title), `inner` the captions or the hook
+    line beside it. Columns are read from the right: within each group the first is the rightmost."""
+    widths = [*outer, *inner] if side == "right" else [*inner, *outer]
+    x = V_RIGHT if side == "right" else V_LEFT + sum(widths) + V_GAP * (len(widths) - 1)
+    places = []
+    for width in widths:
+        x -= width
+        places.append(x)
+        x -= V_GAP
+    return (places[:len(outer)], places[len(outer):]) if side == "right" else (places[len(inner):], places[:len(inner)])
+
+
+def calm_side(pictures):
+    """The side of the frame with less to see, where the text goes (owner, 26/11/2026: "chọn bên nào ít chi tiết để
+    chữ chạy"). `pictures`: the frames of a scene as they are shown; one side for the whole scene, so that the text
+    does not jump across the frame while a sentence is read. Each side is measured by the edges (lines, textures)
+    in the strip the text would take there, and a face in that strip counts for much. The left wins a near tie:
+    on the right the text keeps clear of the app's buttons, so it lies further into the picture."""
+    from PIL import ImageStat
+    strips = {"left": (V_LEFT - 10, V_LEFT + 250), "right": (V_RIGHT - 250, V_RIGHT + 10)}
+    busy = {"left": 0.0, "right": 0.0}
+    for picture in pictures:
+        edges = picture.convert("L").resize((W // 6, H // 6), Image.Resampling.BILINEAR).filter(ImageFilter.FIND_EDGES)
+        for side, (left, right) in strips.items():
+            busy[side] += ImageStat.Stat(edges.crop((left // 6, V_TOP // 6, right // 6, V_BOTTOM // 6))).mean[0]
+        for box in faces.main_faces(faces.find(picture) or []) or []:
+            for side, (left, right) in strips.items():
+                if box[2] * W > left and box[0] * W < right:
+                    busy[side] += 60
+    return "left" if busy["left"] <= busy["right"] * 1.15 else "right"
+
+
+@lru_cache(maxsize=1)
+def gallery_backdrop():
+    """The dark blue of the frame where no picture is (a scene without a picture), a little lighter in its middle."""
+    base = Image.new("RGB", (W, H), STYLES["gallery"].background)
+    glow = Image.new("L", (W // 8, H // 8), 0)
+    ImageDraw.Draw(glow).ellipse((14, 30, W // 8 - 14, 150), fill=110)
+    glow = glow.filter(ImageFilter.GaussianBlur(26)).resize((W, H), Image.Resampling.BICUBIC)
+    return Image.composite(Image.new("RGB", (W, H), "#1c3250"), base, glow)
+
+
+@lru_cache(maxsize=64)
+def gallery_credit(credit, width=520):
+    """The credit of a picture on one row at the foot of the frame: a long one is cut, with "…" (credits.txt of the
+    video carries it whole)."""
+    face = font(20, False)
+    if face.getlength(credit) <= width:
+        return credit
+    while len(credit) > 1 and face.getlength(credit + "…") > width:
+        credit = credit[:-1]
+    return credit.rstrip(" ,/(") + "…"
+
+
+@lru_cache(maxsize=64)
+def gallery_furniture(side, kicker, era, voice, music, demo):
+    """What stays on the frame through a picture, small and outlined: the name of the video above the strip of text
+    (`kicker`; not on the hook scene, not with a big title), the year of the scene at the other top corner, the
+    credits of the music and the voice at the bottom right (the picture's own credit is drawn at the bottom left).
+    Returns (ink, under): a layer of the text and the mask of its dark outline."""
+    ink = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    body = Image.new("L", (W, H), 0)
+
+    def write(at, value, face, fill, anchor, rim=3):
+        ImageDraw.Draw(ink).text(at, value, font=face, fill=fill, anchor=anchor)
+        ImageDraw.Draw(body).text(at, value, font=face, fill=255, anchor=anchor, stroke_width=rim, stroke_fill=255)
+    right = side == "right"
+    if kicker:
+        write((V_RIGHT if right else V_LEFT, V_TOP - 34), kicker, font(28), rgba(style.accent), "rs" if right else "ls")
+    if era:
+        write((V_LEFT if right else W - 60, V_TOP - 30), era, font(44), rgba(style.accent), "ls" if right else "rs", 4)
+    if demo:
+        write((W // 2, 150), "動作確認", font(28), rgba(GOLD), "ms")
+    y, rows = 1878, [(voice, 20)] if voice else []
+    if music:   # a long title takes two rows; the rows are laid from the bottom up
+        words, size = fit(f"音楽  {music}", 470, 20, 1, bold=False, smallest=15)
+        rows += [(row, size) for row in reversed(words.splitlines())]
+    for row, size in rows:
+        write((W - 48, y), row, font(size, False), rgba(style.text, 225), "rs", 2)
+        y -= size + 8
+    return ink, with_shadow(body)
+
+
+@lru_cache(maxsize=64)
+def v_label(name, note, key=""):
+    """The name of what a picture shows, written down the edge of the strip: the name, and under it, smaller and in
+    gold, who made it, when, where. Returns (columns, width): each column is (masks, colour), one under the other."""
+    for scale in (1.0, 0.9, 0.8, 0.7, 0.6):
+        big, small = round(V_NAME * scale), round(V_NOTE * scale)
+        parts = [(v_column(name, big, 3, key), style.text)]
+        if note:
+            parts.append((v_column(note, small, 3, key), NOTE_GOLD))
+        if sum(art[0].height - 2 * V_PAD for art, _ in parts) + 24 * (len(parts) - 1) <= V_BOTTOM - V_TOP:
+            break
+    return parts, big
+
+
+def draw_label(frame, label, x, amount=1.0):
+    """The label of a picture in its column (x: the left of the column), at an opacity."""
+    parts, width = label
+    y = V_TOP
+    for (ink, under, _), colour in parts:
+        at = (round(x + width / 2 - ink.width / 2), round(y) - V_PAD + round(14 * (1 - amount)))
+        lay(frame, under, at, GALLERY_INK, amount)
+        lay(frame, ink, at, colour, amount)
+        y += ink.height - 2 * V_PAD + 24
+
+
+def v_title(beat, key=""):
+    """The big title of a scene with a "value": its headline (the name of the style, in Japanese) as one tall column,
+    and beside it the value lying on its side when it is in Latin letters ("ART NOUVEAU"), else as a smaller column.
+    A scene without a picture and without a value prints its headline alone. Returns [(masks, colour, width)] in
+    reading order: the title, then the small one."""
+    headline = "".join(beat.headline.split())
+    size = min(V_TITLE, int((V_BOTTOM - V_TOP) / v_cells(headline)))
+    columns = [(v_column(headline, size, 6, key), style.text, size)]
+    if beat.value and beat.value.isascii():
+        columns.append((v_sideways(beat.value, 36, 3, key), style.accent, 36))
+    elif beat.value:
+        small = min(46, int((V_BOTTOM - V_TOP) / v_cells(beat.value)))
+        columns.append((v_column(beat.value, small, 3, key), style.accent, small))
+    return columns
+
+
+def draw_title(frame, columns, places, age):
+    """The title at `age` seconds of its scene: each column is written from its top down, one after the other."""
+    for number, ((ink, under, _), colour, width) in enumerate(columns):
+        amount = ease((age - 0.1 - 0.45 * number) / 0.7)
+        if amount <= 0:
+            continue
+        at = (round(places[number] + width / 2 - ink.width / 2), V_TOP - V_PAD)
+        if amount < 1:   # a soft edge travels down the column
+            shown = Image.new("L", ink.size, 0)
+            foot = round((ink.height + SWEEP) * amount)
+            shown.paste(255, (0, 0, ink.width, max(0, foot - SWEEP)))
+            shown.paste(sweep_down(ink.width), (0, foot - SWEEP))
+            ink, under = ImageChops.multiply(ink, shown), ImageChops.multiply(under, shown)
+        lay(frame, under, at, GALLERY_INK)
+        lay(frame, ink, at, colour)
+
+
+@lru_cache(maxsize=4)
+def sweep_down(width):
+    return Image.linear_gradient("L").transpose(Image.Transpose.FLIP_TOP_BOTTOM).resize((width, SWEEP),
+                                                                                      Image.Resampling.BILINEAR)
+
+
+def v_read(size, edges, done):
+    """What the voice has read of a column, as a mask with a soft edge: `done` characters from its top."""
+    mask = Image.new("L", size, 0)
+    if done <= 0:
+        return mask
+    whole = min(int(done), len(edges) - 2)
+    y = round(edges[whole] + (edges[whole + 1] - edges[whole]) * min(1.0, done - whole)) + SWEEP // 2
+    mask.paste(255, (0, 0, size[0], max(0, y - SWEEP)))
+    mask.paste(sweep_down(size[0]), (0, y - SWEEP))
+    return mask
+
+
+def draw_gallery_caption(image, caption, age=1.0, span=None, marks=(), hook=False, opening=False):
+    """A caption of the "gallery" frame: one column in the strip, all there from the start, pale; the characters
+    the voice is reading are gold, and what it has read is light. Without a `span` (a still) or without "fx":
+    text, the whole caption is light. `hook`: a caption of the hook line (a quote), which is printed larger; it runs
+    down the side as the others do, column after column, so that it never covers the picture as a block would.
+    `opening`: the caption the video opens on, which stands there from frame 0 without coming in."""
+    value = caption.replace("\n", "")
+    size = min(V_HOOK if hook else V_CAPTION, int((V_BOTTOM - V_TOP) / max(1.0, v_cells(value))))
+    ink, under, edges = v_column(value, size, 5 if hook else 4, DISPLAY_FONT)
+    x = v_layout(V_STATE["side"], V_STATE["outer"], (size,))[1][0]
+    amount = ease(age / CAPTION_IN) if age < CAPTION_IN and not opening else 1.0
+    at = (x - V_PAD, V_TOP - V_PAD + round(14 * (1 - amount)))
+    lay(image, under, at, GALLERY_INK, amount)
+    if not (span and FX.get("text")):
+        return lay(image, ink, at, style.caption_text, amount)
+    total = len(value)
+    done = total * (read_share(marks, (age + 0.06) / span) if marks
+                    else clamp((age + 0.1) / max(0.3, span - 0.12), 0.0, 1.0))
+    glow = GLOW * clamp((span - age) / 0.25, 0.0, 1.0)   # at the end of the caption the gold catches up
+    lay(image, ink, at, style.caption_text, amount * 0.72)   # not yet read: a little dimmer, still easy to read
+    lay(image, ImageChops.multiply(ink, v_read(ink.size, edges, done)), at, READING, amount)
+    lay(image, ImageChops.multiply(ink, v_read(ink.size, edges, done - glow)), at, style.caption_text, amount)
+
+
+
 def faded(layer, amount):
     """The layer with its opacity multiplied by amount (0 to 1)."""
     alpha = layer.getchannel("A").point(lambda level: round(level * amount))
@@ -750,6 +1108,25 @@ class Scene:
         # the text layer is pasted over the picture each frame: keep only the part that holds text
         box = text_layer.getbbox() or (0, 0, 1, 1)
         self.text, self.text_at = text_layer.crop(box), box[:2]
+        if style.layout == "gallery":
+            # The text runs down one side of the picture: the side the story gives a picture ("side"); the other
+            # pictures of the scene take the first side given in it, else the calmer side of the scene's pictures
+            # that fill the frame, each as it is shown in the middle of its move (one side a scene: the text
+            # does not jump across the frame while a sentence is read).
+            side = next((photo.side for photo in self.photos if photo.side), "") or calm_side(
+                [named_photo(replace(photo, depth=False), 0.5, photo.move or "hold", 5.0, H)
+                 for photo in self.photos if photo.fit != "contain"])
+            self.photos = [replace(photo, side=photo.side or side) for photo in self.photos]
+            # A scene with a "value" (or without a picture) prints its title big; else every picture has the label
+            # that names it ("name", "note"), and pictures without a name share one made of the scene's headline.
+            self.title = v_title(beat, DISPLAY_FONT) if beat.value or not self.photos else None
+            self.labels = [v_label(photo.name, photo.note, DISPLAY_FONT) if photo.name else None
+                           for photo in self.photos]
+            if not self.title and self.photos and not any(self.labels):
+                self.labels = [v_label("".join(beat.headline.split()), beat.evidence, DISPLAY_FONT)] * len(self.photos)
+            self.kicker = release.kicker if index and not self.title else ""
+            self.credits = (beat.era, voice_credit(release),
+                            release.music.title.rsplit(".", 1)[0] if release.music else "", demo)
 
     def picture(self, moment):
         count = len(self.photos)
@@ -771,6 +1148,8 @@ class Scene:
         return moving_photo(photo, local, MOTIONS[(self.index + number) % len(MOTIONS)], self.height)
 
     def render(self, moment):
+        if style.layout == "gallery":
+            return self.render_gallery(moment)
         age = moment - self.start
         frame = self.background.copy()
         photo = None
@@ -800,6 +1179,65 @@ class Scene:
                 text(draw, 70, 1806, credit, credit_size, style.muted, bold=False)
         return frame
 
+
+    def strip(self, moment):
+        """Where the strip of text is at this moment and what stands at its edge: (side, the widths of the outer
+        columns, the picture on screen, seconds since it came, seconds until it goes). Also kept in V_STATE, which
+        the captions and the hook line follow."""
+        age = moment - self.start
+        number, since, left, side = 0, age, self.end - moment, "left"
+        if self.photos:
+            length = (self.end - self.start) / len(self.photos)
+            number = min(len(self.photos) - 1, max(0, int(age // length)))
+            since, left, side = age - number * length, (number + 1) * length - age, self.photos[number].side
+        outer = ()
+        if self.title:
+            outer = tuple(width for _, _, width in self.title)
+            if side != "right":   # on the left the big title stands at the edge, the small column beside it
+                outer = outer[::-1]
+        elif self.photos and self.labels[number]:
+            outer = (self.labels[number][1],)
+        V_STATE.update(side=side, outer=outer)
+        return side, outer, number, since, left
+
+    def render_gallery(self, moment):
+        """The "gallery" frame: the picture over the whole frame, with nothing dark laid on it; then what stays
+        (the name of the video above the strip, the credits at the bottom), then, at the edge of the strip, the
+        title of the scene or the label that names the picture on screen. The captions and the hook line stand
+        beside it; they are drawn afterwards, by encode()."""
+        age = moment - self.start
+        frame = self.background.copy()
+        side, outer, number, since, left = self.strip(moment)
+        photo = None
+        if self.photos:
+            picture, photo = self.picture(moment)
+            frame.paste(picture, (0, 0))
+        ink, under = gallery_furniture(side, self.kicker, *self.credits)
+        lay(frame, under, (0, 0), GALLERY_INK)
+        frame.paste(ink, (0, 0), ink)
+        places = v_layout(side, outer, ())[0]
+        moving = bool(FX.get("text"))
+        if self.title:
+            columns = self.title if side == "right" else self.title[::-1]
+            order = range(len(columns)) if side == "right" else range(len(columns) - 1, -1, -1)
+            draw_title(frame, [columns[index] for index in order], [places[index] for index in order],
+                       age - 0.6 * self.arrival if moving else 9.0)
+        elif self.photos and self.labels[number]:
+            shown = 1.0
+            if moving:   # it comes in with its picture and leaves before the next one of the scene
+                # (the label of the very first picture is there from frame 0, as the hook line is)
+                first = not self.index and not number
+                shown = 1.0 if first else ease((since - 0.12 - (0.6 * self.arrival if not number else 0.0)) / 0.4)
+                if number < len(self.photos) - 1:
+                    shown *= ease(left / 0.3)
+            if shown > 0:
+                draw_label(frame, self.labels[number], places[0], shown)
+        if photo:
+            credit = gallery_credit(f"写真  {photo.creator}" + (f" / {photo.license}" if photo.license else ""))
+            draw = ImageDraw.Draw(frame)
+            draw.text((48, 1878), credit, font=font(20, False), fill=style.text, anchor="ls",
+                      stroke_width=2, stroke_fill=GALLERY_INK)
+        return frame
 
     def draw_parts(self, frame, age):
         """The scene's text coming in piece by piece ("fx": text): the tag is wiped in from the left, a red rule is
@@ -851,6 +1289,8 @@ def transition(old, new, amount, cut=""):
     cut = cut or ("page" if style.grain else "fade")
     if cut == "fade":
         return Image.blend(old, new, amount)
+    if cut == "dip" and style.layout == "gallery":   # nothing goes dark in this frame: a slow cross-fade instead
+        return Image.blend(old, new, ease(amount))
     if cut == "dip":
         # Only the scene (picture and its text) goes dark; the header and the foot change quietly and the caption,
         # drawn afterwards, stays readable.
@@ -952,6 +1392,30 @@ def read_share(marks, moment):
     return before[0]
 
 
+def spoken_mask(size, edges, weights, done, pitch=83):
+    """The part of a caption the voice has read, as a mask with a soft edge: `done` units from its start (a unit:
+    one character with marks, else its reading weight), row after row (`pitch`: the height of a row)."""
+    spoken = Image.new("L", size, 0)
+    for line_index, (row_edges, row_weights) in enumerate(zip(edges, weights)):
+        band = (pitch * line_index, pitch * (line_index + 1) + (30 if line_index == len(edges) - 1 else 0))
+        row_total = sum(row_weights)
+        if done >= row_total:
+            spoken.paste(255, (0, band[0], W, band[1]))
+        elif done > 0:
+            passed, x = 0.0, row_edges[0]
+            for index, weight in enumerate(row_weights):
+                if passed + weight >= done:
+                    share = (done - passed) / weight if weight else 1.0
+                    x = row_edges[index] + (row_edges[index + 1] - row_edges[index]) * share
+                    break
+                passed += weight
+            x = round(x)
+            spoken.paste(255, (0, band[0], max(0, x - SWEEP // 2), band[1]))
+            spoken.paste(sweep_edge(band[1] - band[0]), (x - SWEEP // 2, band[0]))
+        done -= row_total
+    return spoken
+
+
 def draw_spoken_caption(image, caption, age, span, marks=()):
     """The caption of "fx": text: all of it is there from the start (paler), and it darkens to full ink from left
     to right as the voice reads it: with `marks` at the real moment of every character (a touch ahead of the
@@ -970,33 +1434,18 @@ def draw_spoken_caption(image, caption, age, span, marks=()):
         done = sum(map(len, weights)) * read_share(marks, (age + 0.06) / span)
     else:
         done = sum(map(sum, weights)) * clamp((age + 0.1) / max(0.3, span - 0.12), 0.0, 1.0)
-    spoken = Image.new("L", pale.size, 0)
-    for line_index, (row_edges, row_weights) in enumerate(zip(edges, weights)):
-        band = (83 * line_index, 83 * (line_index + 1) + (30 if line_index == len(edges) - 1 else 0))
-        row_total = sum(row_weights)
-        if done >= row_total:
-            spoken.paste(255, (0, band[0], W, band[1]))
-        elif done > 0:
-            passed, x = 0.0, row_edges[0]
-            for index, weight in enumerate(row_weights):
-                if passed + weight >= done:
-                    share = (done - passed) / weight if weight else 1.0
-                    x = row_edges[index] + (row_edges[index + 1] - row_edges[index]) * share
-                    break
-                passed += weight
-            x = round(x)
-            spoken.paste(255, (0, band[0], max(0, x - SWEEP // 2), band[1]))
-            spoken.paste(sweep_edge(band[1] - band[0]), (x - SWEEP // 2, band[0]))
-        done -= row_total
+    spoken = spoken_mask(pale.size, edges, weights, done)
     pale_layer = faded(pale, amount) if amount < 1 else pale
     image.paste(pale_layer, (0, top), pale_layer)
     ink = ImageChops.multiply(full.getchannel("A"), spoken)
     image.paste(full, (0, top), ink.point(lambda level: round(level * amount)) if amount < 1 else ink)
 
 
-def draw_captions(image, caption, age=1.0, span=None, marks=()):
+def draw_captions(image, caption, age=1.0, span=None, marks=(), hook=False, opening=False):
     """`span`: how long the caption is spoken; with "fx": text it then darkens as it is read (`marks`: when the
     voice reaches which part of it, see voice.Caption)."""
+    if style.layout == "gallery":   # (`hook`, `opening`: the "gallery" frame alone uses them)
+        return draw_gallery_caption(image, caption, age, span, marks, hook, opening)
     if span and FX.get("text"):
         return draw_spoken_caption(image, caption, age, span, marks)
     face = font(CAPTION_SIZE)
@@ -1020,7 +1469,9 @@ def draw_captions(image, caption, age=1.0, span=None, marks=()):
 QUOTE_IN = 0.35
 
 
-QUOTE_ON = False   # set by encode()/stills() while a quote is shown: the scene's own text waits meanwhile
+# Set by encode()/stills() while a quote is shown, to its line ("" otherwise): the scene's own text waits meanwhile
+# ("gallery": the card that names the picture stands above the quote instead).
+QUOTE_ON = ""
 
 
 @lru_cache(maxsize=8)
@@ -1132,6 +1583,8 @@ def frame_at(scenes, number, moment):
         old = scenes[number - 1].render(moment)
         amount = (moment - scenes[number].start) / length
         frame = transition(old, frame, amount if cut == "dip" else ease(amount), cut)
+        if style.layout == "gallery":   # the captions follow the strip of the scene that arrives, not of the old one
+            scenes[number].strip(moment)
     return frame
 
 
@@ -1196,14 +1649,14 @@ def encode(beats, release, photos, demo, intervals, captions, wav, out):
     scenes = scenes_for(beats, release, photos, demo, intervals)
     grain = Grain() if style.grain else None
     quotes = quote_lines(beats, captions)
-    QUOTE_ON = bool(quotes[0])
+    QUOTE_ON = quotes[0][0] if quotes[0] else ""
     cover = scenes[0].render(min(1.5, intervals[0][1] * 0.3))
-    QUOTE_ON = False
+    QUOTE_ON = ""
     scenes[0].__dict__.pop("quiet_until", None)   # the cover must not hold back the first scene's text
-    if quotes[0]:
+    if quotes[0] and style.layout != "gallery":
         draw_quote(cover, quotes[0][0], 1.0)
-    else:
-        draw_captions(cover, captions[0].text)
+    else:   # ("gallery": the hook line runs down the side as captions do, larger)
+        draw_captions(cover, captions[0].text, hook=bool(quotes[0]))
     cover.save(out / "cover.jpg", quality=92)
 
     duration = intervals[-1][1]
@@ -1226,15 +1679,16 @@ def encode(beats, release, photos, demo, intervals, captions, wav, out):
                         cue += 1
                     # in the silence between two lines the last caption (or quote) stays until the next one starts
                     shown = cue - 1 if cue and moment < captions[cue].start else cue
-                    QUOTE_ON = bool(quotes[shown])
+                    QUOTE_ON = quotes[shown][0] if quotes[shown] else ""
                     frame = frame_at(scenes, number, moment)
-                    QUOTE_ON = False
-                    if quotes[shown]:
+                    QUOTE_ON = ""
+                    if quotes[shown] and style.layout != "gallery":
                         draw_quote(frame, quotes[shown][0], moment - quotes[shown][1])
                     else:
                         draw_captions(frame, captions[shown].text, moment - captions[shown].start,
                                       captions[shown].end - captions[shown].start,
-                                      getattr(captions[shown], "marks", ()))
+                                      getattr(captions[shown], "marks", ()), bool(quotes[shown]),
+                                      captions[shown].start <= 0.0)
                     if grain:
                         frame = grain.apply(frame, frame_index)
                     process.stdin.write(frame.tobytes())
@@ -1254,13 +1708,13 @@ def stills(beats, release, photos, out):
         scene = Scene(index, beat, release, photos.get(index), False, 0.0, 10.0)   # a 10-second scene
         count = max(1, len(scene.photos))
         for number in range(count):
-            QUOTE_ON = 0 in beat.quotes and number == 0
+            QUOTE_ON = beat.lines[0] if 0 in beat.quotes and number == 0 else ""
             frame = scene.render(10 * (number + 0.5) / count)
-            QUOTE_ON = False
-            if 0 in beat.quotes and number == 0:
+            QUOTE_ON = ""
+            if 0 in beat.quotes and number == 0 and style.layout != "gallery":
                 draw_quote(frame, beat.lines[0], 1.0)
             else:
-                draw_captions(frame, caption_chunks(beat.lines[0])[0])
+                draw_captions(frame, caption_chunks(beat.lines[0])[0], hook=0 in beat.quotes)
             if grain:
                 frame = grain.apply(frame, index * 10 + number)
             name = f"scene-{index + 1:02}" + (f"-{number + 1}" if count > 1 else "")

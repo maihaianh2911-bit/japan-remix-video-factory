@@ -6,7 +6,7 @@
 #
 # It compiles the code, checks the channel files, every story and every posting caption, runs the picture search and
 # channel tests on made-up answers, draws the stills of every sample story (stories/mau-*.json) from the pictures of
-# tests/fixtures/pictures into <out>/mau-<channel>/sheet.jpg, encodes 3 seconds of video in the three frames and
+# tests/fixtures/pictures into <out>/mau-<channel>/sheet.jpg, encodes 3 seconds of video in the four frames and
 # every move and cut of the catalogue (<out>/moves.jpg, <out>/cuts.jpg).
 # --fx also runs tools/fx_test.py (<out>/fx/sheet.jpg): it needs numpy, opencv-python-headless and onnxruntime, the
 # depth model and the display typeface (CLAUDE.md, "fx"). GitHub always runs it.
@@ -47,7 +47,7 @@ for story in "${samples[@]}"; do
   python -m news.custom "$story" "$PICTURES"
   python -m news --story "$story" --pictures "$PICTURES" --stills "$OUT/$name"
 done
-step "3 seconds of video in the three frames"
+step "3 seconds of video in the four frames"
 python tools/encode_test.py "$SAMPLE" "$PICTURES" "$WORK/encode-test"
 step "every move and cut of the catalogue"
 python tools/edits_test.py "$SAMPLE" "$PICTURES" "$WORK/edits-test" 1

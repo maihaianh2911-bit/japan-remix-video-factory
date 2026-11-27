@@ -1,0 +1,206 @@
+{
+  "channel": "k10",
+  "stage": "render",
+  "trial": true,
+  "title": "【試し】アール・ヌーヴォー 日本の浮世絵に恋をした様式（新しい見た目の試し・約20秒）",
+  "date": "2026-11-26",
+  "kicker": "アール・ヌーヴォー",
+  "searches": [
+    "wiki:アルフォンス・ミュシャ",
+    "Mucha Zodiac 1896",
+    "Mucha Gismonda 1894 poster",
+    "Mucha Job 1896 poster",
+    "Mucha Reverie 1897",
+    "wiki:アール・ヌーヴォー",
+    "wiki:Paris Métro entrances by Hector Guimard",
+    "Guimard métro entrance Porte Dauphine",
+    "Guimard métro entrance Abbesses",
+    "wiki:タッセル邸",
+    "Hôtel Tassel staircase Horta",
+    "wiki:神奈川沖浪裏",
+    "wiki:喜多川歌麿",
+    "wiki:Siegfried Bing",
+    "Maison de l'Art Nouveau Bing",
+    "Le Japon artistique Bing",
+    "wiki:カサ・バトリョ",
+    "Tiffany lamp wisteria",
+    "Émile Gallé vase",
+    "web:ミュシャ 黄道十二宮 ポスター",
+    "web:ギマール パリ メトロ 入口 アール・ヌーヴォー",
+    "web:タッセル邸 階段 オルタ",
+    "web:サミュエル・ビング アール・ヌーヴォーの店 1895",
+    "music:Gymnopédie Satie piano",
+    "music:Debussy Arabesque piano",
+    "music:Debussy Clair de lune piano",
+    "url:https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Katsushika_Hokusai_-_The_Great_Wave_off_the_Coast_of_Kanagawa_LCCN2008660568.jpg/3840px-Katsushika_Hokusai_-_The_Great_Wave_off_the_Coast_of_Kanagawa_LCCN2008660568.jpg https://commons.wikimedia.org/wiki/File:Katsushika_Hokusai_-_The_Great_Wave_off_the_Coast_of_Kanagawa_LCCN2008660568.jpg"
+  ],
+  "scenes": [
+    {
+      "label": "様式",
+      "headline": "日本に恋をした\n一つの様式",
+      "lines": [
+        {
+          "text": "ミュシャの絵も、パリの地下鉄の入口も、日本の浮世絵に恋をした、一つの様式から生まれました。",
+          "say": "ミュシャの絵も、パリの地下鉄の入口も、にほんの浮世絵に恋をした、一つの様式から生まれました。",
+          "quote": true
+        }
+      ],
+      "photo": [
+        {
+          "pick": "2-1",
+          "focus": [
+            0.5,
+            0.4
+          ],
+          "move": "push-in",
+          "depth": false,
+          "name": "黄道十二宮",
+          "note": "ミュシャ・1896年"
+        },
+        {
+          "pick": "7-4",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "rise",
+          "name": "パリ地下鉄の入口",
+          "note": "ギマール・1900年"
+        },
+        {
+          "pick": "12-9",
+          "focus": [
+            0.5,
+            0.45
+          ],
+          "move": "pull-back",
+          "depth": false,
+          "name": "冨士三十六景",
+          "note": "歌川広重・1858年"
+        }
+      ],
+      "why": "Câu móc nhắc 3 thứ thì hiện đúng 3 ảnh: tranh nổi tiếng nhất của Mucha, cổng tàu điện Paris, rồi một bức tranh phù thế (sóng và núi Phú Sĩ của Hiroshige)."
+    },
+    {
+      "label": "名前",
+      "headline": "アール・ヌーヴォー",
+      "lines": [
+        {
+          "text": "その名は、アール・ヌーヴォー。フランス語で「新しい芸術」という意味です。",
+          "say": "その名は、アールヌーヴォー。フランス語で「新しい芸術」という意味です。"
+        }
+      ],
+      "value": "ART NOUVEAU",
+      "photo": [
+        {
+          "pick": "17-1",
+          "focus": [
+            0.5,
+            0.45
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "fade",
+      "why": "Tên phong cách viết dọc thật to ở mép trái, trên nền một toà nhà Art Nouveau (Casa Batlló); ảnh giữ nguyên độ sáng."
+    },
+    {
+      "label": "曲線",
+      "headline": "花や蔓草のような曲線",
+      "lines": [
+        "花や蔓草のように、どこまでもうねる曲線。"
+      ],
+      "photo": [
+        {
+          "pick": "10-3",
+          "fit": "contain",
+          "move": "push-in",
+          "name": "タッセル邸の階段",
+          "note": "オルタ・ブリュッセル 1893年"
+        }
+      ],
+      "cut": "fade",
+      "why": "Đường cong như dây leo: cầu thang nhà Tassel, hiện cả ảnh vì ảnh gốc nhỏ, phóng to sẽ mờ."
+    },
+    {
+      "label": "輪郭",
+      "headline": "くっきりした輪郭と\n大胆な構図",
+      "lines": [
+        "くっきりした輪郭と、大胆な構図。"
+      ],
+      "photo": [
+        {
+          "pick": "6-4",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in",
+          "depth": false,
+          "name": "果物",
+          "note": "ミュシャ・1897年",
+          "side": "left"
+        }
+      ],
+      "cut": "page",
+      "why": "Nét viền và bố cục: một tranh Mucha tràn màn hình, tiến chậm vào gương mặt; chữ chạy bên trái vì bên phải là giỏ quả."
+    },
+    {
+      "label": "浮世絵",
+      "headline": "海を渡った浮世絵",
+      "lines": [
+        "それは、海を渡った浮世絵から学んだものでした。"
+      ],
+      "photo": [
+        {
+          "pick": "27-1",
+          "focus": [
+            0.47,
+            0.5
+          ],
+          "move": "pan-left",
+          "depth": false,
+          "name": "神奈川沖浪裏",
+          "note": "葛飾北斎・1831年ごろ",
+          "side": "right"
+        }
+      ],
+      "cut": "fade",
+      "why": "Nguồn gốc: tranh sóng của Hokusai tràn màn hình, lia từ núi Phú Sĩ sang ngọn sóng; chữ chạy bên phải, trên phần trời."
+    },
+    {
+      "label": "名付け親",
+      "headline": "名前は画商の店から",
+      "lines": [
+        {
+          "text": "しかもこの名前は、パリで日本美術を売っていた画商の、店の名前だったのです。",
+          "say": "しかもこの名前は、パリでにほん美術を売っていた画商の、店の名前だったのです。"
+        }
+      ],
+      "photo": [
+        {
+          "pick": "14-5",
+          "fit": "contain",
+          "move": "push-in",
+          "name": "雑誌『芸術の日本』",
+          "note": "画商ビングが発行・1889年"
+        },
+        {
+          "pick": "15-2",
+          "move": "push-in",
+          "name": "ビングの店「アール・ヌーヴォー」",
+          "note": "パリ・1895年開店",
+          "fit": "contain"
+        }
+      ],
+      "cut": "fade",
+      "why": "Kết: tạp chí về mỹ thuật Nhật của nhà buôn Bing, rồi áp phích cửa hàng mang tên Art Nouveau của ông; cả hai hiện cả trang để đọc được chữ."
+    }
+  ],
+  "style": "gallery",
+  "music": {
+    "pick": "26-2",
+    "volume": 1
+  },
+  "review": "9/9"
+}

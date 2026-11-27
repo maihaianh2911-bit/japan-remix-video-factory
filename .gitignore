@@ -5,3 +5,5 @@ fonts/
 node_modules/
 doodle/stories/*/out/
 doodle/remotion/out/
+anim/node_modules/
+trials/media/
