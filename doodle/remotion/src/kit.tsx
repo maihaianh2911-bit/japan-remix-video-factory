@@ -1,8 +1,8 @@
 // The drawing kit of the Remotion trial (27/11/2026): flat illustration with outlines, soft shadows, a paper grain.
 // Everything is SVG in a 1080 × 1920 frame; a component draws the same thing for the same props.
 import React from 'react';
-import {spring} from 'remotion';
-import timing from './timing.json';
+import {AbsoluteFill, continueRender, delayRender, spring, useCurrentFrame} from 'remotion';
+import {useEffect, useState} from 'react';
 
 export const W = 1080, H = 1920;
 export const INK = '#2a2420';
@@ -23,13 +23,18 @@ export const pop = (t: number, a: number, stiff = 170) => (t < a ? 0 : spring({f
 export const blinkAt = (t: number, key: string) => ((t * 1000 + hash(key) * 3100) % 3100) < 120;
 
 // ---------- the voice's moments ----------
+// T.s(i) / T.e(i): when line i starts / ends; T.at(i, "words") / T.to(i, "words"): when the voice reaches / ends them
 type Line = {text: string; start: number; end: number; chars: number[][]};
-const L = (timing as {lines: Line[]}).lines;
-const find = (i: number, w: string) => { const at = L[i].text.indexOf(w); if (at < 0) throw new Error(`line ${i} does not say ${w}`); return at; };
-export const T = {
-  s: (i: number) => L[i].start, e: (i: number) => L[i].end,
-  at: (i: number, w: string) => L[i].start + L[i].chars[find(i, w)][0],
-  to: (i: number, w: string) => L[i].start + L[i].chars[find(i, w) + w.length - 1][1],
+export type Timing = {duration: number; lines: Line[]};
+export const makeT = (timing: Timing) => {
+  const L = timing.lines;
+  const find = (i: number, w: string) => { const at = L[i].text.indexOf(w); if (at < 0) throw new Error(`line ${i} does not say ${w}`); return at; };
+  return {
+    s: (i: number) => L[i].start, e: (i: number) => L[i].end,
+    at: (i: number, w: string) => L[i].start + L[i].chars[find(i, w)][0],
+    to: (i: number, w: string) => L[i].start + L[i].chars[find(i, w) + w.length - 1][1],
+    total: timing.duration + 1.4,   // the last picture stays this long after the last word
+  };
 };
 
 // ---------- the paper, the light, the shadows ----------
@@ -143,11 +148,11 @@ export const Stamp: React.FC<{t: number; text: string; x: number; y: number; siz
 };
 
 // ---------- people ----------
-type Mood = 'ok' | 'smile' | 'laugh' | 'stern' | 'wow' | 'sad' | 'doubt';
+type Mood = 'ok' | 'smile' | 'laugh' | 'stern' | 'wow' | 'sad' | 'doubt' | 'flat';
 export type PersonProps = {
   x: number; y: number; s?: number; flip?: boolean; t?: number; id?: string;
   suit?: string; pants?: string; tie?: string; shirt?: string; hair?: string; hairStyle?: 'part' | 'grey' | 'short' | 'none';
-  hat?: 'bowler' | 'boater' | null; hatColor?: string; glasses?: boolean; mustache?: boolean; mood?: Mood;
+  hat?: 'bowler' | 'boater' | 'helmet' | null; hatColor?: string; glasses?: boolean; mustache?: boolean; mood?: Mood;
   armL?: [number, number]; armR?: [number, number]; legs?: [number, number]; lean?: number; look?: number; bob?: number;
   noShadow?: boolean; holdR?: React.ReactNode; holdL?: React.ReactNode; vest?: boolean; pointR?: boolean;
 };
@@ -200,13 +205,13 @@ export const Person: React.FC<PersonProps> = (p) => {
   const brows = {
     ok: 'M -42 -552 Q -27 -560 -12 -552 M 12 -552 Q 27 -560 42 -552', smile: 'M -42 -552 Q -27 -562 -12 -552 M 12 -552 Q 27 -562 42 -552',
     laugh: 'M -42 -556 Q -27 -566 -12 -556 M 12 -556 Q 27 -566 42 -556', stern: 'M -44 -560 L -12 -548 M 44 -560 L 12 -548',
-    wow: 'M -44 -566 Q -27 -580 -10 -566 M 10 -566 Q 27 -580 44 -566', sad: 'M -42 -548 L -12 -558 M 42 -548 L 12 -558', doubt: 'M -42 -552 H -12 M 12 -566 L 42 -558',
+    wow: 'M -44 -566 Q -27 -580 -10 -566 M 10 -566 Q 27 -580 44 -566', sad: 'M -42 -548 L -12 -558 M 42 -548 L 12 -558', doubt: 'M -42 -552 H -12 M 12 -566 L 42 -558', flat: 'M -42 -554 H -12 M 12 -554 H 42',
   }[mood];
   const my = mustache ? 8 : 0;
   const mouth = () => {
     if (mood === 'laugh') return <g><path d={`M -30 ${-482 + my} Q 0 ${-430 + my} 30 ${-482 + my} Z`} fill="#7a2a22" stroke={INK} strokeWidth={4.5} strokeLinejoin="round" /><path d={`M -14 ${-458 + my} Q 0 ${-446 + my} 14 ${-458 + my} Q 0 ${-466 + my} -14 ${-458 + my} Z`} fill="#e88a7c" /></g>;
     if (mood === 'wow') return <ellipse cx={0} cy={-470 + my} rx={11} ry={15} fill="#7a2a22" stroke={INK} strokeWidth={4} />;
-    if (mood === 'stern') return <path d={`M -18 ${-472 + my} L 18 ${-474 + my}`} stroke={INK} strokeWidth={5} strokeLinecap="round" />;
+    if (mood === 'stern' || mood === 'flat') return <path d={`M -18 ${-472 + my} L 18 ${-474 + my}`} stroke={INK} strokeWidth={5} strokeLinecap="round" />;
     if (mood === 'sad') return <path d={`M -20 ${-466 + my} Q 0 ${-482 + my} 20 ${-466 + my}`} fill="none" stroke={INK} strokeWidth={5} strokeLinecap="round" />;
     if (mood === 'doubt') return <path d={`M -18 ${-470 + my} Q 0 ${-478 + my} 20 ${-468 + my}`} fill="none" stroke={INK} strokeWidth={5} strokeLinecap="round" />;
     return <path d={`M -22 ${-480 + my} Q 0 ${-458 + my} 22 ${-480 + my}`} fill="none" stroke={INK} strokeWidth={5} strokeLinecap="round" />;
@@ -219,6 +224,7 @@ export const Person: React.FC<PersonProps> = (p) => {
   };
   const hatPath = () => {
     if (hat === 'bowler') return <g><path d="M -64 -566 C -66 -656, 66 -656, 64 -566 Z" fill={hatColor} stroke={INK} strokeWidth={4.5} /><rect x={-64} y={-584} width={128} height={14} fill="#4a4540" stroke={INK} strokeWidth={3} /><ellipse cx={0} cy={-566} rx={94} ry={15} fill={hatColor} stroke={INK} strokeWidth={4.5} /></g>;
+    if (hat === 'helmet') return <g><path d="M -72 -560 C -70 -660, 70 -660, 72 -560 Z" fill="#f2c230" stroke={INK} strokeWidth={4.5} /><path d="M -8 -650 L 8 -650 L 8 -562 L -8 -562 Z" fill="#e0ad1c" stroke={INK} strokeWidth={3} /><ellipse cx={0} cy={-560} rx={92} ry={13} fill="#f2c230" stroke={INK} strokeWidth={4.5} /></g>;
     if (hat === 'boater') return <g><rect x={-62} y={-616} width={124} height={50} rx={6} fill="#e9d59a" stroke={INK} strokeWidth={4.5} /><rect x={-62} y={-590} width={124} height={16} fill="#2b3a5a" stroke={INK} strokeWidth={3} /><ellipse cx={0} cy={-566} rx={98} ry={14} fill="#e9d59a" stroke={INK} strokeWidth={4.5} /></g>;
     return null;
   };
@@ -417,3 +423,32 @@ export const Haha: React.FC<{x: number; y: number; t: number; a: number; rot?: n
   if (k <= 0) return null;
   return <g transform={`translate(${x} ${y + Math.sin(t * 12) * 5}) rotate(${rot}) scale(${k * s})`}><text textAnchor="middle" fontFamily={MARK} fontSize={72} fill="#e0702a" stroke="#fbf6ea" strokeWidth={14} paintOrder="stroke">ハハハ</text></g>;
 };
+
+// ---------- a whole video: its pictures one after the other, the words on top, the finish over all ----------
+export type Shot = {a: number; draw: (t: number, v: number) => React.ReactNode};
+export const Movie: React.FC<{shots: Shot[]; words: (t: number) => React.ReactNode; credit?: string; end?: number}> = ({shots, words, credit, end = Infinity}) => {
+  const t = useCurrentFrame() / 30;
+  const [handle] = useState(() => delayRender('fonts'));
+  useEffect(() => {   // every piece of both typefaces, so that no character falls back to another font
+    const all: Promise<unknown>[] = [];
+    document.fonts.forEach(f => { all.push(f.load().catch(() => null)); });
+    Promise.all(all).then(() => document.fonts.ready).then(() => continueRender(handle));
+  }, [handle]);
+  let cur = shots[0], next = Infinity;
+  shots.forEach((s, i) => { if (t >= s.a) { cur = s; next = i + 1 < shots.length ? shots[i + 1].a : Infinity; } });
+  const v = t - cur.a;
+  const k = (1 + 0.06 * (1 - easeOut(clamp(v / 0.25)))) * (1 + 0.04 * easeInOut(clamp(v / Math.min(3.5, next - cur.a))));
+  return (
+    <AbsoluteFill style={{backgroundColor: '#efe5cc'}}>
+      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
+        <Defs />
+        <g transform={`translate(540 1150) scale(${k}) translate(-540 -1150)`}>{cur.draw(t, v)}</g>
+        {words(t)}
+        {credit && t > end + 0.2 && <text x={W / 2} y={1730} textAnchor="middle" fontFamily={HAND} fontWeight={700} fontSize={32} fill="#5a5347" opacity={prog(t, end + 0.2, 0.5)}>{credit}</text>}
+        <Finish />
+      </svg>
+    </AbsoluteFill>
+  );
+};
+// the words of one line: rows of labels, shown from the start of the line (a little before) to the next
+export const lineOn = (t: number, T: ReturnType<typeof makeT>, i: number, n: number) => t >= T.s(i) - 0.08 && (i + 1 >= n || t < T.s(i + 1) - 0.08);

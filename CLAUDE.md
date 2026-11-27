@@ -496,7 +496,8 @@ caption (no new render). Write it before the closing comment and link it there.
 ## Drawn videos (`doodle/`): a trial of 26/11/2026, not a channel yet
 On 26/11/2026 the owner sent a hand-drawn explainer (a Vietnamese TikTok) and asked "dựng đc hình ảnh dạng này ko?",
 then chose a history story and had two videos made in that look: `doodle/stories/shinkansen-uso` (新幹線は、ひとつのウソから
-生まれた; 69.7 s) and `doodle/stories/chikatetsu-horafuki` (the first subway; 66.9 s), voice 青山龍星, the flute as music. Its pictures are drawn by code (`doodle/`: no photographs, no
+生まれた; 69.7 s) and `doodle/stories/chikatetsu-horafuki` (the first subway; 66.9 s), voice 青山龍星, the flute as music; since
+27/11/2026 they are drawn with Remotion (`doodle/remotion/`, the owner: "ổn hơn r, dựng lại 2 video kia theo cách này đi"). Its pictures are drawn by code (no photographs, no
 pictures of an image generator), its voice is VOICEVOX as everywhere. **Read `doodle/README.md` before a second one**:
 the owner's words about the script of such a video ("học cách viết chứ k phải sao chép", "của mình chỉ 65s thôi"), how
 a video is made, and the list of the drawn videos (a story that is there is not made again). Open points: the owner
