@@ -589,9 +589,13 @@ then chose a history story and had two videos made in that look: `doodle/stories
 27/11/2026 they are drawn with Remotion (`doodle/remotion/`, the owner: "ổn hơn r, dựng lại 2 video kia theo cách này đi"). Its pictures are drawn by code (no photographs, no
 pictures of an image generator), its voice is VOICEVOX as everywhere. **Read `doodle/README.md` before a second one**:
 the owner's words about the script of such a video ("học cách viết chứ k phải sao chép", "của mình chỉ 65s thôi"), how
-a video is made, and the list of the drawn videos (a story that is there is not made again). Open points: the owner
-has not said which channel the format is for, nor approved the look, the voice or the sounds; the code is on the
-session branch only (no workflow runs it), and such a video is delivered in the chat, not on `renders`.
+a video is made, and the list of the drawn videos (a story that is there is not made again). **Published like the
+other videos** (owner, 27/11/2026, asked why they were not in the issue list, then chose "Như video khác"): the code is
+on `main`, each video has an issue `[Vẽ] <Japanese title> — <idea>` (a title that does not start with `[K`, so the
+remix workflow leaves it alone) and a folder `renders/ve-<story>/` (`video.mp4`, `caption.txt`, `subtitles.srt`,
+`credits.txt`, `cover.jpg`, `status.json`) listed on `renders/ve.md`; the video is rendered in a session (no workflow
+runs Remotion here yet) and pushed to `renders` by hand. The weekly clean-up deletes such a folder 14 days after it was
+published (it has no story under `stories/`). Open points: the owner has not said which channel the format is for.
 
 ## Changing the pipeline
 Before pushing a change of `news/`, `tools/`, `channels/` or `tests/`: `bash tools/check.sh <out folder>` (add

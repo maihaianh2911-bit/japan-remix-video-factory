@@ -101,6 +101,10 @@ Render, then add the sound as before:
       --concurrency=4 --browser-executable=/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell
     cd ../.. && python -m doodle.sound doodle/stories/chikatetsu-horafuki      # (Shinkansen: composition Shinkansen)
 
+Publishing (owner, 27/11/2026: "Như video khác"): copy `out/video.mp4`, `subtitles.srt`, `cover.jpg` and the story's
+`caption.txt` with a `credits.txt` and a `status.json` into `ve-<story>/` on the `renders` branch, add its line to
+`renders/ve.md`, push `renders`, and open an issue `[Vẽ] <Japanese title> — <idea in Vietnamese>` that links them.
+
 About 4 minutes for 70 s here. The canvas kit of `doodle/` (`lib.js`, `page.html`, `render.js`, each story's
 `scenes.js`) made the first versions and stays as their record.
 
