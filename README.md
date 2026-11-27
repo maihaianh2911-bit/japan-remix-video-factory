@@ -93,8 +93,8 @@ bị xoá sau khi mày lưu về máy; danh sách này thì luôn giữ.
 
 ## Chưa làm
 
-- Giao diện và giọng riêng cho từng kênh (tiêu đề cố định, màu riêng, giọng khác): làm
-  sau, khi mày duyệt video thử 20 giây của từng kênh. Hiện kênh 10 dùng cách edit của Tin Nhật, giọng nữ もち子さん (cùng giọng mày chốt cho video Hoàng gia Nhật, 25/11) và nhạc sáo trúc mày gửi.
+- Giao diện riêng cho từng kênh (tiêu đề cố định, màu riêng): làm
+  sau, khi mày duyệt video thử 20 giây của từng kênh. Hiện kênh 10 dùng cách edit của Tin Nhật, giọng nam 青山龍星 (từ 27/11 mọi video của mọi kênh đều đọc bằng giọng này, máy tự khóa, không đổi nữa) và nhạc sáo trúc mày gửi.
 
 Chi tiết cho Claude: `CLAUDE.md` (luật, cách viết, cách edit, câu mở đầu), `AGENT_REMIX.md` (việc ở từng bước).
 Máy dựng là máy của kênh Tin Nhật (`japan-news-video-factory`).

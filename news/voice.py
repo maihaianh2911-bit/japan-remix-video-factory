@@ -7,6 +7,7 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 import wave
 
+from .channels import VOICE   # ("青山龍星", "ノーマル"): the one voice of every video (speaker_id)
 from .render import caption_chunks, reading_weight
 
 VOICEVOX = "http://127.0.0.1:50021"
@@ -143,8 +144,12 @@ def request(path, *, params=None, data=None):
         return response.read()
 
 
-def speaker_id(name, style_name):
-    """The engine's id of a voice: a speaker and one of its styles ("青山龍星", "ノーマル")."""
+def speaker_id(name=VOICE[0], style_name=VOICE[1]):
+    """The engine's id of the one voice, 青山龍星/ノーマル, whatever voice is asked (owner, 27/11/2026: "Ép tất cả các kênh quay về giọng nhật cũ, k đổi lung tung nữa, giọng nam cũ của kênh hoàng gia nhật ấy"). The
+    channel's videos, the drawn videos (doodle/, anim/) and the clip trials (tools/clip_trial.py) all get their
+    voice here, so none can come out in another; the voices tried on 25–26/11/2026 (もち子さん, 冥鳴ひまり, No.7)
+    are not used any more."""
+    name, style_name = VOICE
     speakers = json.loads(request("/speakers"))
     found = next((style["id"] for speaker in speakers if speaker["name"] == name
                   for style in speaker["styles"] if style["name"] == style_name), None)
@@ -158,7 +163,7 @@ def narration(beats, destination: Path, speed, line_pause=0.0, scene_pause=0.0, 
     """The voice of every line, one after the other, with `line_pause` seconds of silence after each line (a quote
     also gets one before it and a longer one after it) and `scene_pause` more at the end of each scene.
     `exact` ("fx": text): a caption starts when the voice reaches it, not at its share of the characters.
-    `voice`: (speaker, style), the voice of the story's channel (channels/<id>.json; Release.voice)."""
+    `voice`: (speaker, style), the voice of the story's channel (Release.voice): always 青山龍星 (speaker_id)."""
     if len(voice or ()) != 2:
         raise ValueError(f"no VOICEVOX voice given (the channel's voice, a speaker and a style), got {voice!r}")
     speaker = speaker_id(*voice)

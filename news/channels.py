@@ -6,7 +6,8 @@ A channel file holds
                       its sample stories/mau-k8.json; its videos are listed in kenh-8.md on the renders branch
     name_ja, name_vi  the channel's names, in Japanese and in Vietnamese
     tag               what the titles of its issues start with: "[K8]"
-    voice             its VOICEVOX voice, {"speaker": …, "style": …}: the narration and the credit VOICEVOX:<speaker>
+    voice             its VOICEVOX voice, {"speaker": "青山龍星", "style": "ノーマル"}: the one voice of every channel
+                      (owner, 27/11/2026: "k đổi lung tung nữa"); the check refuses any other
     hashtags          the hashtags every posting caption of the channel carries (captions/<story>.txt)
     edit              "tin-nhat": the channel edits as the Tin Nhật channel of japan-news-video-factory does (owner,
                       18/11/2026: "cho 4 kênh này học cách edit của kênh tin nhật"): the story frame, the four picture
@@ -33,6 +34,7 @@ import re
 import sys
 
 FOLDER = Path(__file__).resolve().parent.parent / "channels"
+VOICE = ("青山龍星", "ノーマル")   # the one voice of every channel (owner, 27/11/2026: "k đổi lung tung nữa")
 ID = re.compile(r"^k[1-9][0-9]*$")
 KEYS = {"id", "number", "name_ja", "name_vi", "tag", "voice", "hashtags", "edit", "defaults"}
 DEFAULT_KEYS = {"style", "kicker", "pace", "fx", "music", "audio"}
@@ -132,9 +134,9 @@ def problems(data, stem):
         if not isinstance(data.get(key), str) or not data[key].strip():
             found.append(f'{where}: "{key}" must be a non-empty string, got {data.get(key)!r}')
     voice = data.get("voice")
-    if (not isinstance(voice, dict) or set(voice) != {"speaker", "style"}
-            or not all(isinstance(value, str) and value.strip() for value in voice.values())):
-        found.append(f'{where}: "voice" must be {{"speaker": "<VOICEVOX speaker>", "style": "<style>"}}, got {voice!r}')
+    if voice != dict(zip(("speaker", "style"), VOICE)):   # owner, 27/11/2026: one voice, never changed again
+        found.append(f'{where}: "voice" must be {{"speaker": "青山龍星", "style": "ノーマル"}} (the one voice of every '
+                     f'channel, owner 27/11/2026: "k đổi lung tung nữa"), got {voice!r}')
     tags = data.get("hashtags")
     if (not isinstance(tags, list) or not 1 <= len(tags) <= 4 or len(set(map(str, tags))) != len(tags)
             or not all(isinstance(tag, str) and HASHTAG.match(tag) for tag in tags)):

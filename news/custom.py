@@ -3,9 +3,9 @@
 python -m news.custom stories/<name>.json [<find folder>]   checks a story (and its picks against the find index)
 
 Every story names its channel ("channel": "k8", news/channels.py): its file name starts with it, it inherits the
-channel's defaults (style, kicker, pace, fx) for the keys it leaves out, and it is voiced with the channel's voice.
-Only a trial ("trial": true) may set "voice": {"speaker": …, "style": …} to try another VOICEVOX voice before the
-owner chooses it for the channel (owner, 25/11/2026: "thử thay voice thành voice nữ"); a real video never does.
+channel's defaults (style, kicker, pace, fx) for the keys it leaves out, and it is voiced with the one voice of every
+channel, 青山龍星 (owner, 27/11/2026: "Ép tất cả các kênh quay về giọng nhật cũ, k đổi lung tung nữa"). A story's
+"voice" is not read: a real video may not carry one, and a trial's (the voices tried on 25/11/2026) only gets a warning.
 """
 from dataclasses import dataclass
 from datetime import date
@@ -231,11 +231,10 @@ def validate(data, name=None):
     if "voice" in data:
         trial_voice = data["voice"]
         if data.get("trial") is not True:
-            problems.append('"voice" is only for a trial ("trial": true): a video of the channel is voiced with the '
-                            "channel's voice (channels/<id>.json), changed there once the owner approves a trial")
-        elif (not isinstance(trial_voice, dict) or set(trial_voice) != {"speaker", "style"}
-              or not all(isinstance(value, str) and value.strip() for value in trial_voice.values())):
-            problems.append(f'"voice" must be {{"speaker": "<VOICEVOX speaker>", "style": "<style>"}}, '
+            problems.append('"voice" is only for a trial ("trial": true), and is not read even there: every video '
+                            "is voiced with 青山龍星 (owner, 27/11/2026); leave it out")
+        elif not isinstance(trial_voice, dict):
+            problems.append(f'"voice" must be {{"speaker": …, "style": …}} (better: leave it out, it is not read), '
                             f'got {trial_voice!r}')
     if "review" in data and not (isinstance(data["review"], str) and REVIEW.match(data["review"])):
         problems.append(f'"review" must be "<pictures that passed>/<pictures>", e.g. "23/23" (the picture review, '
@@ -516,10 +515,18 @@ def toned(image, tone):
 
 
 def voice_of(data, channel):
-    """(speaker, style): the channel's voice, or the one a trial story tries (\"voice\" with \"trial\": true)."""
-    voice = data.get("voice") if data.get("trial") is True and isinstance(data.get("voice"), dict) else None
-    voice = voice or channel["voice"]
-    return voice["speaker"], voice["style"]
+    """(speaker, style): always 青山龍星/ノーマル (owner, 27/11/2026: "Ép tất cả các kênh quay về giọng nhật cũ, k đổi
+    lung tung nữa"), whatever the channel file or a trial's "voice" says: the narration and the credit follow it."""
+    return channels.VOICE
+
+
+def voice_warnings(data):
+    """A trial that still names another voice (the trials of 25/11/2026): it is not read, say so."""
+    tried = data.get("voice")
+    if isinstance(tried, dict) and (tried.get("speaker"), tried.get("style", "ノーマル")) != channels.VOICE:
+        return [f'"voice": {tried.get("speaker")!r} is not used: every video is read by 青山龍星 (owner, 27/11/2026); '
+                f'leave the key out']
+    return []
 
 
 def load_story(path, pictures=None):
@@ -584,6 +591,8 @@ def main():
     except StoryError as error:
         sys.exit(f"error: {error}")
     report_without_picture(data)
+    for warning in voice_warnings(data):
+        print(f"warning: {warning}")
     warned = report_edit(data, sys.argv[1])
     caption = caption_path(sys.argv[1])
     if caption.exists():

@@ -32,7 +32,7 @@ import wave
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from news import captions, channels, render, voice   # noqa: E402
-from news.custom import StoryError, edit_warnings, load_story, read, validate   # noqa: E402
+from news.custom import StoryError, edit_warnings, load_story, read, validate, voice_warnings   # noqa: E402
 from news.story import voice_credit   # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent
@@ -229,7 +229,9 @@ def stand_in_engine(asked, seconds=0.5):
 
 
 def voice_of_channel():
-    """A stand-in channel k8 with another speaker: the story is voiced and credited with it."""
+    """One voice for every video, 青山龍星 (owner, 27/11/2026: "Ép tất cả các kênh quay về giọng nhật cũ, k đổi lung
+    tung nữa"): a channel file naming another voice is refused, and whatever a channel file, a trial or a caller asks,
+    the story is voiced and credited with 青山龍星."""
     real_folder, real_request, real_text = channels.FOLDER, voice.request, render.text
     with tempfile.TemporaryDirectory(prefix="channel-voice-") as scratch:
         scratch = Path(scratch)
@@ -243,18 +245,16 @@ def voice_of_channel():
         try:
             channels.FOLDER = scratch / "channels"
             channels.channels.cache_clear()
+            assert any('"voice" must be {"speaker": "青山龍星"' in found for found in channels.check()), channels.check()
             release, beats, photos = load_story(path)
-            assert release.voice == ("四国めたん", "あまあま") and release.channel == "k8", release
-            assert voice_credit(release) == "VOICEVOX:四国めたん", voice_credit(release)
+            assert release.voice == ("青山龍星", "ノーマル") and release.channel == "k8", release
+            assert voice_credit(release) == "VOICEVOX:青山龍星", voice_credit(release)
             voice.request = stand_in_engine(asked)
-            intervals, said = voice.narration(beats, scratch / "voice.wav", 1.2, voice=release.voice)
-            assert intervals and said and asked[0][0] == "/speakers", asked
-            assert {params.get("speaker") for path, params in asked[1:]} == {0}, asked   # 四国めたん/あまあま
-            try:
-                voice.narration(beats, scratch / "none.wav", 1.2, voice=("ずんだもん", "ノーマル"))
-                raise AssertionError("a voice the engine does not have must be refused")
-            except RuntimeError as error:
-                assert "ずんだもん/ノーマル not found" in str(error), error
+            for asked_for in (release.voice, ("四国めたん", "あまあま"), ("ずんだもん", "ノーマル")):
+                asked.clear()
+                intervals, said = voice.narration(beats, scratch / "voice.wav", 1.2, voice=asked_for)
+                assert intervals and said and asked[0][0] == "/speakers", asked
+                assert {params.get("speaker") for path, params in asked[1:]} == {13}, (asked_for, asked)   # 青山龍星
             try:
                 voice.narration(beats, scratch / "none.wav", 1.2, voice=())
                 raise AssertionError("a narration without the channel's voice must be refused")
@@ -266,20 +266,23 @@ def voice_of_channel():
                 render.use_style(name)
                 drawn.clear()
                 render.layout(beats[0], release, False, False)
-                assert "VOICEVOX:四国めたん" in drawn and "VOICEVOX:青山龍星" not in drawn, (name, drawn)
+                assert "VOICEVOX:青山龍星" in drawn and "VOICEVOX:四国めたん" not in drawn, (name, drawn)
         finally:
             channels.FOLDER, voice.request, render.text = real_folder, real_request, real_text
             channels.channels.cache_clear()
             render.use_style("news")
     assert channels.get("k8")["voice"]["speaker"] == "青山龍星"
-    # a trial may try another voice (owner, 25/11/2026), a real video may not
+    assert all(data["voice"] == {"speaker": "青山龍星", "style": "ノーマル"} for data in channels.channels().values())
+    # a trial's "voice" (the trials of 25/11/2026) is not read, only warned of; a real video may not carry one
     with tempfile.TemporaryDirectory(prefix="channel-trial-voice-") as scratch:
         path = Path(scratch) / "k8-2026-11-25-voice.json"
         tried = dict(STORY, trial=True, voice={"speaker": "冥鳴ひまり", "style": "ノーマル"})
         path.write_text(json.dumps(tried, ensure_ascii=False), encoding="utf-8")
         release, beats, photos = load_story(path)
-        assert release.voice == ("冥鳴ひまり", "ノーマル") and voice_credit(release) == "VOICEVOX:冥鳴ひまり", release
+        assert release.voice == ("青山龍星", "ノーマル") and voice_credit(release) == "VOICEVOX:青山龍星", release
         assert not [p for p in validate(tried, path.stem) if '"voice"' in p], validate(tried, path.stem)
+        assert any("冥鳴ひまり" in w and "not used" in w for w in voice_warnings(tried)), voice_warnings(tried)
+        assert voice_warnings(STORY) == [], voice_warnings(STORY)
         real = dict(STORY, voice={"speaker": "冥鳴ひまり", "style": "ノーマル"})
         assert any('"voice" is only for a trial' in p for p in validate(real, path.stem)), \
             validate(real, path.stem)
@@ -291,7 +294,7 @@ def voice_of_channel():
         release, beats, photos = load_story(path)
         assert release.music and release.music.path.endswith("music/k10-sao-truc.mp3"), release.music
         assert release.music.title == "竹笛" and release.music.volume == 0.84, release.music
-        assert release.voice == ("もち子さん", "ノーマル"), release.voice
+        assert release.voice == ("青山龍星", "ノーマル"), release.voice
         merged = channels.inherit(dict(story, music={"pick": "3-1"}))
         assert merged["music"] == {"pick": "3-1"}, merged["music"]   # a story's own music replaces it whole
         assert not [w for w in edit_warnings(channels.inherit(story)) if 'no "music' in w]

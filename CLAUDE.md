@@ -1,10 +1,12 @@
 # japan-remix-video-factory — notes for Claude
 
 ## Iron rules (owner, 16/11/2026) — they come before everything else in this file
-1. **The video is in the channel's language: Japanese (tiếng Nhật).** The voice is the channel's Japanese VOICEVOX voice (`voice` in `channels/<id>.json`: **もち子さん for k10** since 25/11/2026: the owner
-   first chose a female voice after a trial, 冥鳴ひまり ("Giọng nữ nào cg ổn"), then the same day the voice chosen for
-   the imperial-family videos of `japan-news-video-factory`, もち子さん: "tao vừa chốt voice ở chat hoàng gia nhật, m
-   có lấy voice nữ đó luôn đc ko"), and the script lines, subtitles and
+1. **The video is in the channel's language: Japanese (tiếng Nhật).** The voice is **青山龍星 (ノーマル) for every video, held by the machine** (owner,
+   27/11/2026: "Ép tất cả các kênh quay về giọng nhật cũ, k đổi lung tung nữa, giọng nam cũ của kênh hoàng gia nhật
+   ấy", then "Đừng dựng lại video cũ, chỉ cần để các video làm sau này về giọng đó là đc"): `python -m news.channels`
+   refuses a channel file with another `voice`, and `news/voice.py` (`speaker_id`) reads every line of every video —
+   the channel's, the trials, the drawn videos — with 青山龍星 whatever is asked. k10 was in もち子さん from 25/11/2026
+   (冥鳴ひまり for a few hours before it); the videos made then are not made again. And the script lines, subtitles and
    on-screen text are in Japanese (tiếng Nhật). A script that arrives in another language is translated faithfully into Japanese (tiếng Nhật)
    first. Never a voice or text of another language: check the language of `lines` and the voice before the voice
    step, and again on the finished video. A video in the wrong language is not delivered: fix it and render again.
@@ -150,14 +152,11 @@ same way.
 Each channel is a file `channels/<id>.json` (`news/channels.py`): its names, its issue tag, its VOICEVOX voice, the
 hashtags every caption of it carries, `"edit": "tin-nhat"` (it edits as Tin Nhật does, below), and the defaults its
 stories inherit (`style` `story`, the `kicker` 世界の王室, `pace` speed 1.2 with pauses of 0.1 and 0.2 s, the four
-picture effects `fx`, and k10's own music and sound, below). **Looks and voices
-of their own come later**: each channel may get additions on top of the Tin Nhật edit (a persistent title, its colours,
-another voice) only after the owner approves a 20-second trial of it (owner, 18/11/2026).
-Until then do not add any: the channel keeps the Tin Nhật edit, and its voice is もち子さん (owner 25/11/2026, the voice chosen
-for the imperial-family videos of `japan-news-video-factory` from a sampler of 13 voices; 冥鳴ひまり before it that day;
-on 26/11/2026 the owner turned that voice down for the imperial-family videos and went back to 青山龍星 there: for k10
-the owner has not said so yet). A new look or voice is a change of the
-channel file (and of the frame code when the look is new), never of each story.
+picture effects `fx`, and k10's own music and sound, below). **Looks of their
+own come later**: each channel may get additions on top of the Tin Nhật edit (a persistent title, its colours) only after the owner approves a 20-second trial of it (owner, 18/11/2026).
+Until then do not add any: the channel keeps the Tin Nhật edit. **The voice is not among these additions**: it is
+青山龍星 for every channel and is not changed again, not even in a trial (owner, 27/11/2026: "k đổi lung tung nữa";
+iron rule 1). A new look is a change of the channel file and of the frame code, never of each story.
 
 ### The rules and risks of the channel (`docs/KENH-NHAT.md`, told to the owner)
 - **The channel retells** another channel's video: YouTube penalises reused content, so rewrite in our own words, add
@@ -197,9 +196,8 @@ channel file (and of the frame code when the look is new), never of each story.
   4. The first picture: the couple (or the parent and child) together, looking at each other or smiling, faces large
      in the upper half, sharp; their best-known photograph.
   5. The ending comes back to the opening (the ending is free on the other channels; for k10 this is what worked).
-  When suggesting scripts, offer topics of this kind. The voice and the music stay the channel's (もち子さん and the
-  flute, chosen after the hit video was made with 青山龍星 and Nimrod): if the next three or four k10 love stories get
-  no views, say so to the owner and offer a trial with the male voice again.
+  When suggesting scripts, offer topics of this kind. The voice is 青山龍星 (iron rule 1; the hit video was made in it,
+  with Nimrod) and the music the channel's flute.
 
 ## A trial: videos that explain a style of art (the `gallery` frame) — not a channel yet
 Owner, 26/11/2026: sent three Vietnamese TikTok videos of one channel (each explains one style: Deco Noir, Art
@@ -276,7 +274,7 @@ asked "Đây là dạng nội dung gì? Dựng cho nhật đc ko? Có làm nhi�
   Not made: the drawn diagrams and maps of the source (the outline of a tower, colour swatches, a map with routes),
   moving footage, a new channel file. Each needs new code and the owner's word.
 - **The trial video:** `stories/k10-2026-11-26-thu-art-nouveau.json` (about 26 s, `"trial": true`; under k10 only
-  because a story needs a channel, so it has k10's voice もち子さん and loudness, its own music, Debussy's Clair de
+  because a story needs a channel, so it had k10's voice of that day, もち子さん, and its loudness, its own music, Debussy's Clair de
   lune from a `music:` search, and the one edit warning that its style is not `story`). Real pictures only, nine of
   them, all from Wikimedia Commons. Its find folder and its video were made by the workflow run from the session's
   branch (Run workflow with that branch as the ref: the workflow reads the story and the code of the branch it is
@@ -465,9 +463,8 @@ allow `main`.
    - **Inherited from the channel** (`defaults` of `channels/<id>.json`) when the story leaves them out: `style`,
      `kicker`, `pace`, `fx`. A story may set any of them (the edit warnings then say what departs from the Tin Nhật
      edit); a dict is merged key by key (`"fx": {"depth": false}` keeps the three other effects); `null` inherits
-     nothing. The voice is always the channel's; only a trial (`"trial": true`) may set `"voice": {"speaker": …,
-     "style": …}` to try another VOICEVOX voice before the owner chooses it for the channel (owner, 25/11/2026: "thử
-     thay voice thành voice nữ"), and the channel file changes only once the owner approves it. `"trial": true` marks a trial or sample
+     nothing. The voice is always 青山龍星 (iron rule 1): a story carries no `"voice"` (a real video is refused
+     with one; the trials of 25/11/2026 that name another keep it, are not read, and get a warning). `"trial": true` marks a trial or sample
      video (iron rule 2's exception: the machine renders it even under 61 s). `"review": "<n>/<n>"` records the
      picture review (step 3).
    - `scenes`: one idea each. `label` (short tag), `headline` (≤ 2 lines, `\n` between; longer ones get a smaller
