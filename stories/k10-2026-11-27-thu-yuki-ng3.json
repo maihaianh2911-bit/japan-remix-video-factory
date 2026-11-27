@@ -1,0 +1,46 @@
+{
+  "channel": "k10",
+  "stage": "find",
+  "trial": true,
+  "title": "【試し・画像検索のみ】雪の日にやりがちな危ない行動3選（車の豆知識 car-tips/ の写真さがし）",
+  "date": "2026-11-27",
+  "searches": [
+    "web:雪に埋もれた車 フリー写真素材 => a car almost buried in deep snow, photograph",
+    "web:pexels car buried in snow => a car covered and buried in deep snow, photograph",
+    "web:雪 駐車場 車 積雪 フリー素材 => cars parked in a snowy parking lot in Japan, photograph",
+    "web:フロントガラス 凍結 霜 フリー写真素材 => a car windshield covered with frost and ice, photograph",
+    "web:pexels frozen car windshield ice => a frozen car windshield covered with ice, close-up photograph",
+    "web:フロントガラス お湯 かける 凍結 => someone pouring hot water from a kettle onto a frozen car windshield",
+    "web:フロントガラス ひび割れ 線状 => a long crack running across a car windshield, close-up photograph",
+    "web:解氷スプレー フロントガラス 使用 => spraying de-icer spray onto a frozen car windshield",
+    "web:スクレーパー フロントガラス 氷 削る => a hand scraping ice off a car windshield with a plastic ice scraper",
+    "web:サイドブレーキ レバー 引く 車内 => a hand pulling the handbrake lever inside a car, close-up",
+    "web:パーキングブレーキ 凍結 雪国 => a car wheel and brake frozen with ice and snow",
+    "web:輪留め タイヤ 駐車 => a wheel chock placed against a car tire",
+    "web:シフトレバー P レンジ オートマ => an automatic car shift lever in park position P, close-up",
+    "web:マフラー 雪 埋まる 排気口 => a car exhaust pipe blocked and covered by snow",
+    "web:pexels car exhaust pipe snow => a car exhaust tailpipe in the snow, close-up photograph",
+    "web:車 除雪 スコップ 雪かき フリー素材 => a person shoveling snow around a car with a shovel, photograph",
+    "web:大雪 立ち往生 車 渋滞 => many cars stuck in heavy snow on a road in Japan",
+    "web:車内 窓 少し開ける 雪 => a car window opened slightly a few centimeters in winter",
+    "web:一酸化炭素 チェッカー 警報器 => a carbon monoxide detector alarm device",
+    "web:雪道 運転 車内 フロントガラス 視点 => a view through a car windshield driving on a snowy road in Japan, photograph",
+    "web:pexels snowy road japan car => a car driving on a snowy road in a Japanese town, photograph",
+    "web:冬の朝 雪 車 住宅街 フリー写真素材 => a car covered in snow in front of a house on a winter morning in Japan",
+    "car buried in snow => a car buried in deep snow, photograph",
+    "frozen windshield => a frozen car windshield, photograph",
+    "wheel chock => a wheel chock against a car tire, photograph"
+  ],
+  "scenes": [
+    {
+      "label": "雪",
+      "headline": "雪の日の\nNG行動3選",
+      "lines": [
+        {
+          "text": "雪に埋もれた車でエンジンをかけると、わずか1分24秒で、車内の一酸化炭素が警報レベルに達します。",
+          "quote": true
+        }
+      ]
+    }
+  ]
+}
