@@ -1,0 +1,131 @@
+{
+  "channel": "k10",
+  "issue": 21,
+  "stage": "find",
+  "title": "病める時も ウィリアム皇太子とキャサリン妃、がんと闘った一年",
+  "date": "2026-11-28",
+  "searches": [
+    "wiki:Catherine, Princess of Wales",
+    "wiki:William, Prince of Wales",
+    "wiki:Wedding of Prince William and Catherine Middleton",
+    "wiki:Westminster Abbey",
+    "wiki:Charles III",
+    "web:William Kate wedding 2011 balcony kiss => Prince William and Catherine smiling at each other on their wedding day in 2011",
+    "web:ウィリアム王子 キャサリン妃 結婚式 2011 => Prince William and Kate Middleton on their wedding day",
+    "web:William Kate wedding Westminster Abbey altar vows => Prince William and Catherine at the altar of Westminster Abbey",
+    "web:William Kate wedding carriage 2011 => Prince William and Catherine waving from a carriage on their wedding day",
+    "web:Prince William Princess Kate 2024 together smiling => Prince William and Princess Catherine smiling together in 2024",
+    "web:London Clinic Kate surgery January 2024 => the London Clinic hospital building in London",
+    "web:Kate cancer announcement video bench March 2024 => Princess Catherine sitting on a bench in a video message",
+    "web:キャサリン妃 がん 公表 ビデオ ベンチ => Princess Catherine on a wooden bench speaking in a video",
+    "web:Kate George Charlotte Louis 2024 => Princess Catherine with her three children George, Charlotte and Louis",
+    "web:William Kate holding hands 2024 => Prince William and Princess Catherine holding hands",
+    "web:King Charles cancer 2024 => King Charles III in 2024",
+    "web:Kate chemotherapy finished video September 2024 => Prince William and Princess Catherine hugging in a family video",
+    "web:Wales family video September 2024 Norfolk beach => the Wales family with their children on a beach in a 2024 video",
+    "web:Prince William Cape Town November 2024 reporters => Prince William speaking to reporters in Cape Town",
+    "web:Kate Royal Marsden January 2025 => Princess Catherine visiting the Royal Marsden hospital",
+    "web:William Kate 2025 smiling at each other => Prince William and Princess Catherine smiling at each other"
+  ],
+  "scenes": [
+    {
+      "label": "13年の誓い",
+      "era": "2011〜2024年",
+      "headline": "病める時も",
+      "lines": [
+        {
+          "text": "「病める時も」と誓い合ってから13年。がんと闘うキャサリン妃のそばには、いつもウィリアム皇太子がいました。",
+          "quote": true,
+          "say": "「やめる時も」と誓い合ってから13年。がんと闘うキャサリン妃のそばには、いつもウィリアム皇太子がいました。"
+        }
+      ]
+    },
+    {
+      "label": "結婚",
+      "era": "2011年4月",
+      "headline": "ウェストミンスター\n寺院で結婚",
+      "lines": [
+        "2011年4月、二人はウェストミンスター寺院で結婚しました。"
+      ]
+    },
+    {
+      "label": "手術",
+      "era": "2024年1月",
+      "headline": "見つかった\nがん",
+      "lines": [
+        "そして2024年1月、キャサリン妃はおなかの手術を受け、その後の検査で、がんが見つかります。"
+      ]
+    },
+    {
+      "label": "公表",
+      "era": "2024年3月",
+      "headline": "ひとりで\n公表",
+      "lines": [
+        "3月、彼女はひとりベンチに座ったビデオで、自らがんを公表しました。"
+      ]
+    },
+    {
+      "label": "子どもたち",
+      "era": "2024年3月",
+      "headline": "「私は\n大丈夫」",
+      "lines": [
+        "「ジョージ、シャーロット、ルイに、私は大丈夫だと伝えるのには、時間がかかりました」。"
+      ]
+    },
+    {
+      "label": "夫",
+      "era": "2024年3月",
+      "headline": "「ウィリアムが\nそばに」",
+      "lines": [
+        "そして、「ウィリアムがそばにいてくれることが、大きな慰めと安心になっています」。"
+      ]
+    },
+    {
+      "label": "国王も",
+      "era": "2024年",
+      "headline": "父の国王も\nがんに",
+      "lines": [
+        "同じ年、父のチャールズ国王も、がんの治療を受けていました。"
+      ]
+    },
+    {
+      "label": "9か月",
+      "era": "2024年9月",
+      "headline": "家族の\n9か月",
+      "lines": [
+        "9月、化学療法を終えたキャサリン妃は、家族5人で過ごす映像とともに、「この9か月は、家族にとって本当につらい時間でした」と語ります。"
+      ]
+    },
+    {
+      "label": "つらい一年",
+      "era": "2024年11月",
+      "headline": "人生で\nいちばんつらい年",
+      "lines": [
+        "その2か月後、ウィリアム皇太子も記者の前で、「正直に言って、ひどい一年でした。おそらく人生でいちばんつらい年です」と打ち明けました。"
+      ]
+    },
+    {
+      "label": "寛解",
+      "era": "2025年1月",
+      "headline": "がんの\n寛解",
+      "lines": [
+        {
+          "text": "そして翌年1月、キャサリン妃は、がんが寛解したと発表します。",
+          "say": "そして翌年1月、キャサリン妃は、がんがかんかいしたと発表します。"
+        }
+      ]
+    },
+    {
+      "label": "誓い",
+      "era": "2011〜2025年",
+      "headline": "守られた\n誓い",
+      "lines": [
+        {
+          "text": "「病める時も、健やかなる時も」。",
+          "say": "「やめる時も、すこやかなる時も」。"
+        },
+        "13年前の誓いは、その言葉どおりに守られていました。"
+      ]
+    }
+  ]
+}
