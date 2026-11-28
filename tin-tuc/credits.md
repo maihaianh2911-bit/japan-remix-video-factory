@@ -12,5 +12,7 @@ Tìm bằng máy tìm ảnh của repo (story `stories/k10-2026-11-28-thu-hounic
 | `koyo.jpg` | 10-17 | 2048×1536 | https://x.com/Anubis_369/status/2124369963251343490 |
 | `chart2.jpg` | 12-4 | 800×801 | https://www.travelvoice.jp/20261118-160889 |
 | `street.jpg` | 3-15 | 1600×1200 | https://news.allabout.co.jp/articles/o/91189/ |
+| `chinatourists.jpg` | 7-7 | 1200×748 | https://diamond.jp/articles/-/117433 |
+| `ntv.jpg` | 15-1 | 1200×675 | https://news.ntv.co.jp/category/society/53a3e4590f2848f18f870af45bd4d37a |
 
 Nhạc: Claude Debussy, 2nd Arabesque (JMC, Han), Wikimedia Commons, CC BY-SA 4.0.

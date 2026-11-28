@@ -650,7 +650,11 @@ A new channel, not Tin Nhật; on screen it is called 「数字で読むニュ�
 「訪日客、中国半減でも過去最多」 (68.3 s, JNTO figures of 18/11/2026), sent in the chat. **Read `tin-tuc/README.md`
 before a second one.** Pictures: search-only story `stories/k10-2026-11-28-thu-hounichi.json` (`web:` and `page:` of
 the articles); the article pictures used are Travel Voice's JNTO charts, which the article says may be reposted.
-Headlines of articles are redrawn, not screenshotted. Open points: the owner has not judged it; no channel file, no issue.
+Headlines of articles are redrawn, not screenshotted. **The hook shows real pictures from frame 0** (owner, after the
+first cut opened on a drawn card: "Phần hook có thể đưa hình ảnh bài báo và hình ảnh du khách trung quốc đến nhật luôn
+đc ko, như thế sẽ trực quan và mn sẽ ở lại"): a photo of the people the news is about with a red stamp of the key
+figure, then a news report's own picture of the story (here a 日テレNEWS frame) with the second stamp; an older photo
+is labelled 資料写真 in the source line. Open points: the owner has not judged it; no channel file, no issue.
 
 ## Changing the pipeline
 Before pushing a change of `news/`, `tools/`, `channels/` or `tests/`: `bash tools/check.sh <out folder>` (add

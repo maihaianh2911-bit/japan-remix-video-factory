@@ -13,24 +13,24 @@ const F = (sec: number) => Math.round(sec * FPS);
 const JNTO = '日本政府観光局（JNTO）2026年11月18日発表';
 
 const SHOTS: Shot[] = [
-  // ── Hook: chữ lớn từ frame 0, rồi ảnh đám đông + tem 過去最多 ──
+  // ── Hook: ảnh khách Trung Quốc + tem 「ほぼ半減」 từ frame 0, rồi ảnh bản tin + tem 「過去最多」 ──
   {
-    from: 0, to: at(0, '10月'),
-    draw: () => (
-      <Card>
-        <Label text="2026年10月 訪日外国人" top={80} />
-        <Headline text={'中国からの客\n{ほぼ半減}'} size={120} top={210} />
-        <div style={{ position: 'absolute', left: 0, width: '100%', top: 560, textAlign: 'center', fontFamily: '"Noto Serif JP"', fontWeight: 900, fontSize: 170, color: C.red }}>▼</div>
-      </Card>
+    from: 0, to: at(0, '10月'), src: 'diamond.jp（資料写真）',
+    draw: (d) => (
+      // lùi 10 frame để ảnh và tem đã hiện đủ ngay ở khung hình đầu (luật hook)
+      <Sequence from={-10} layout="none">
+        <Clipping src="chinatourists.jpg" dur={d + 10} caption="中国からの観光客が…" angle={-2} zoom={[1.0, 1.1]} focus={[0.45, 0.4]} />
+        <Stamp text="ほぼ半減 ▼" x={380} y={K.y + 470} size={96} angle={-8} />
+      </Sequence>
     ),
   },
   {
-    from: at(0, '10月'), to: s(1),
+    from: at(0, '10月'), to: s(1), src: '日テレNEWS',
     draw: (d) => (
       <>
-        <Clipping src="crowd.jpg" dur={d} caption="それでも訪日客は…" />
+        <Clipping src="ntv.jpg" dur={d} fit="contain" zoom={[1.0, 1.05]} caption="それでも訪日客は…" angle={1.5} />
         <Sequence from={F(at(0, '過去最多') - at(0, '10月'))}>
-          <Stamp text="過去最多" x={470} y={K.y + 560} size={84} />
+          <Stamp text="過去最多" x={470} y={K.y + 600} size={92} />
         </Sequence>
       </>
     ),
