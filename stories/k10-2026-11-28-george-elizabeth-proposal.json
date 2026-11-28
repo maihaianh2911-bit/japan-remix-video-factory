@@ -1,0 +1,150 @@
+{
+  "channel": "k10",
+  "issue": 23,
+  "stage": "find",
+  "title": "3度目のプロポーズ ジョージ6世とエリザベス王妃",
+  "date": "2026-11-28",
+  "searches": [
+    "wiki:George VI",
+    "wiki:Queen Elizabeth The Queen Mother",
+    "wiki:Wedding of Prince Albert and Lady Elizabeth Bowes-Lyon",
+    "wiki:King George VI Memorial Chapel",
+    "wiki:The King's Speech",
+    "wiki:Lionel Logue",
+    "web:Duke and Duchess of York 1923 engagement colorized => colorized photo of Prince Albert and Lady Elizabeth Bowes-Lyon smiling together in 1923",
+    "web:ジョージ6世 エリザベス 婚約 1923 => Prince Albert and Elizabeth Bowes-Lyon at their engagement in 1923",
+    "web:Prince Albert Elizabeth Bowes-Lyon wedding 1923 colorized => colorized wedding photo of Prince Albert and Elizabeth Bowes-Lyon in 1923",
+    "web:Lady Elizabeth Bowes-Lyon young portrait 1920s colorized => colorized portrait of young Lady Elizabeth Bowes-Lyon",
+    "web:Prince Albert Duke of York young 1920 => young Prince Albert, Duke of York, around 1920",
+    "web:Elizabeth Bowes-Lyon Glamis Castle young => young Lady Elizabeth Bowes-Lyon at Glamis Castle",
+    "web:Duke of York 1925 Wembley speech microphone => Prince Albert, Duke of York, speaking at a microphone",
+    "web:Lionel Logue King George VI => Lionel Logue the speech therapist with King George VI",
+    "web:The King's Speech Colin Firth Helena Bonham Carter => Colin Firth and Helena Bonham Carter in the film The King's Speech",
+    "web:英国王のスピーチ 映画 => a scene from the film The King's Speech",
+    "web:George VI Queen Elizabeth coronation 1937 colorized => colorized photo of King George VI and Queen Elizabeth crowned in 1937",
+    "web:King George VI Queen Elizabeth smiling together colorized => King George VI and Queen Elizabeth smiling together",
+    "web:King George VI funeral 1952 three queens mourning => three queens in black mourning at the funeral of King George VI in 1952",
+    "web:Queen Mother 100th birthday 2000 balcony => the Queen Mother celebrating her 100th birthday in 2000",
+    "web:Queen Mother smiling elderly => the elderly Queen Mother smiling in a hat",
+    "web:King George VI Memorial Chapel ledger stone => the ledger stone in the King George VI Memorial Chapel at Windsor",
+    "web:Duke Duchess of York 1920s together laughing => the Duke and Duchess of York laughing together in the 1920s"
+  ],
+  "scenes": [
+    {
+      "label": "3度目の求婚",
+      "era": "1923年",
+      "headline": "3度目の\nプロポーズ",
+      "lines": [
+        {
+          "text": "アルバート王子は、3度目のプロポーズでやっとエリザベスに受け入れられ、そして彼女の支えで、国王になりました。",
+          "quote": true
+        }
+      ]
+    },
+    {
+      "label": "出会い",
+      "era": "1920年",
+      "headline": "舞踏会で\n出会った人",
+      "lines": [
+        "1920年、イギリス国王の次男だった王子は、舞踏会で出会った貴族の娘エリザベスに、心を奪われます。"
+      ]
+    },
+    {
+      "label": "1度目",
+      "era": "1921年",
+      "headline": "1度目の\n「いいえ」",
+      "lines": [
+        "けれど翌年の求婚は断られました。",
+        "王室に入れば自由がなくなると、彼女はためらっていたといいます。"
+      ]
+    },
+    {
+      "label": "3度目",
+      "era": "1923年1月",
+      "headline": "3度目の\n「はい」",
+      "lines": [
+        "2度目の求婚も、答えは「いいえ」でした。",
+        "それでも王子はあきらめず、1923年1月、3度目の求婚で、ついに「はい」をもらいます。"
+      ]
+    },
+    {
+      "label": "電報",
+      "era": "1923年1月",
+      "headline": "「オーケー。\nバーティ」",
+      "lines": [
+        "両親に送った電報は、ひとこと、「オーケー。バーティ」。"
+      ]
+    },
+    {
+      "label": "結婚",
+      "era": "1923年4月",
+      "headline": "ウェストミンスター\n寺院で結婚",
+      "lines": [
+        "その年の4月、二人はウェストミンスター寺院で結婚しました。"
+      ]
+    },
+    {
+      "label": "吃音",
+      "era": "1920年代",
+      "headline": "人前で\n話せない王子",
+      "lines": [
+        {
+          "text": "王子には、子どものころから吃音があり、人前で話すことに苦しんでいました。",
+          "say": "王子には、子どものころからきつおんがあり、人前で話すことに苦しんでいました。"
+        }
+      ]
+    },
+    {
+      "label": "妻の支え",
+      "era": "1926年〜",
+      "headline": "夫のそばで",
+      "lines": [
+        "妻は、言語療法士のもとへ通う夫のそばで、支え続けたといいます。"
+      ]
+    },
+    {
+      "label": "映画",
+      "era": "2010年",
+      "headline": "『英国王の\nスピーチ』",
+      "lines": [
+        "この夫婦の物語は、のちに映画『英国王のスピーチ』になりました。"
+      ]
+    },
+    {
+      "label": "国王に",
+      "era": "1936年",
+      "headline": "望まない\n王位",
+      "lines": [
+        {
+          "text": "1936年、兄が王位を捨てたため、王子は望まないまま、ジョージ6世として国王になります。",
+          "say": "1936年、兄が王位を捨てたため、王子は望まないまま、ジョージろくせいとして国王になります。"
+        }
+      ]
+    },
+    {
+      "label": "別れ",
+      "era": "1952年",
+      "headline": "56歳の\n死",
+      "lines": [
+        "そして1952年、国王は56歳で亡くなりました。"
+      ]
+    },
+    {
+      "label": "50年",
+      "era": "1952〜2002年",
+      "headline": "それから\n50年",
+      "lines": [
+        "王妃はそれから50年を生き、2002年、101歳で亡くなります。"
+      ]
+    },
+    {
+      "label": "79年",
+      "era": "1923〜2002年",
+      "headline": "「はい」から\n79年",
+      "lines": [
+        "2度断られても、あきらめなかった3度目の求婚。",
+        "その「はい」から79年、二人は今、同じ礼拝堂に並んで眠っています。"
+      ]
+    }
+  ]
+}
