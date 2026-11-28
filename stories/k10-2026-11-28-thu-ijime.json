@@ -1,0 +1,37 @@
+{
+  "channel": "k10",
+  "stage": "find",
+  "trial": true,
+  "title": "【試し・画像検索のみ】いじめ79万件で過去最多、性的いじめ初調査8158件（ニュース tin-tuc/ の写真さがし）",
+  "date": "2026-11-28",
+  "searches": [
+    "web:誰もいない教室 机 椅子 日本 学校 => an empty Japanese school classroom with desks and chairs, photograph",
+    "web:学校 廊下 誰もいない 夕方 => an empty school corridor in Japan, photograph",
+    "web:ランドセル 小学生 後ろ姿 通学路 => Japanese elementary school children with randoseru backpacks walking away, seen from behind",
+    "web:子供 スマホ 手元 暗い部屋 => close-up of a child's hands holding a smartphone in a dark room",
+    "web:下駄箱 上履き 学校 玄関 => shoe lockers with indoor shoes at a Japanese school entrance, photograph",
+    "web:校舎 外観 日本 小学校 => the exterior of a Japanese school building, photograph",
+    "web:文部科学省 庁舎 外観 => the building of the Ministry of Education MEXT in Kasumigaseki Tokyo",
+    "web:子供 部屋 一人 窓 後ろ姿 => a child sitting alone by a window in a room seen from behind",
+    "web:生成AI ディープフェイク 画像 スマホ イメージ => a smartphone showing a fake AI generated image, illustration of deepfake",
+    "web:いじめ 過去最多 79万件 文科省 2026 => news photo about bullying statistics in Japanese schools",
+    "page:https://news.web.nhk/newsweb/na/nd-20261127de82139",
+    "page:https://www.chunichi.co.jp/article/1345072",
+    "page:https://news.yahoo.co.jp/articles/d21041b15abd94bcc94ddc51a2b06c9bcbd865e1",
+    "web:教室 黒板 机 夕日 => a Japanese classroom with a blackboard in the evening sun, photograph",
+    "music:Satie Gymnopédie 1 piano",
+    "music:Chopin Nocturne piano"
+  ],
+  "scenes": [
+    {
+      "label": "いじめ",
+      "headline": "いじめ\n過去最多",
+      "lines": [
+        {
+          "text": "学校のいじめが79万件を超えて過去最多に。初めて調べた「性的いじめ」は、8000件を超えました。",
+          "quote": true
+        }
+      ]
+    }
+  ]
+}
