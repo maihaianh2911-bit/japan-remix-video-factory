@@ -1,0 +1,38 @@
+{
+  "channel": "k10",
+  "stage": "find",
+  "trial": true,
+  "title": "【試し・画像検索のみ】訪日客、中国半減でも過去最多（ニュース新チャンネル tin-tuc/ の写真さがし）",
+  "date": "2026-11-28",
+  "searches": [
+    "web:京都 紅葉 外国人観光客 混雑 => crowds of foreign tourists at a temple in Kyoto with red autumn leaves, photograph",
+    "web:浅草 雷門 外国人観光客 混雑 => a crowd of foreign tourists at Kaminarimon gate in Asakusa Tokyo, photograph",
+    "web:渋谷 スクランブル交差点 外国人観光客 => a crowd of people crossing the Shibuya scramble crossing, photograph",
+    "web:成田空港 到着ロビー 外国人旅行者 => foreign travelers with suitcases in a Japanese airport arrival lobby, photograph",
+    "web:入国審査 外国人 行列 空港 日本 => a long queue of foreign travelers at passport control in a Japanese airport",
+    "web:中国便 減便 空港 カウンター 閑散 => an empty airline check-in counter area at an airport, photograph",
+    "web:中国人観光客 減少 銀座 => Chinese tourists shopping in Ginza Tokyo, photograph",
+    "web:韓国人観光客 福岡 増加 => Korean tourists walking in Fukuoka Japan, photograph",
+    "web:韓国人観光客 大阪 道頓堀 => tourists in Dotonbori Osaka with the Glico sign, photograph",
+    "web:嵐山 紅葉 観光客 => tourists in Arashiyama Kyoto in autumn with red leaves, photograph",
+    "web:紅葉 清水寺 観光客 => Kiyomizu-dera temple with autumn leaves and tourists, photograph",
+    "page:https://www.travelvoice.jp/20261118-160889",
+    "page:https://honichi.com/news/2026/11/18/inbound202610/",
+    "page:https://www.aviationwire.jp/?p=354817",
+    "web:訪日外国人 過去最多 2026年10月 => foreign tourists in Japan, news photograph",
+    "music:Debussy Arabesque piano",
+    "music:Satie Gnossienne piano"
+  ],
+  "scenes": [
+    {
+      "label": "訪日客",
+      "headline": "訪日客\n過去最多",
+      "lines": [
+        {
+          "text": "中国からの観光客がほぼ半分に減ったのに、10月に日本を訪れた外国人は、過去最多を更新しました。",
+          "quote": true
+        }
+      ]
+    }
+  ]
+}
