@@ -641,6 +641,17 @@ before a second one.** Its pictures came from the search-only story `stories/k10
 voice is 青山龍星 made with `python -m doodle.voice`, the sound with `python -m doodle.sound`. Open points: the owner
 has not judged the video yet, no channel, no issue, the small sounds were never heard by Claude.
 
+## The news trial (`tin-tuc/`): a Remotion project of 28/11/2026, not a channel yet
+Owner, 28/11/2026: sent a Vietnamese TikTok news video (cream paper, a square card with a thick black border, big
+counting numbers, black-and-red VS bars, a "TIN NÓNG" window, red stamps, a stick figure, karaoke subtitles with red
+keywords) and asked if it can be made for Japan; then "không cần dùng chung loại kịch bản, chỉ cần là dạng tin tức",
+real pictures and pictures of the articles from the picture search mixed in, "Kênh mới, đặt tên tin tức, làm thử đi".
+A new channel, not Tin Nhật; on screen it is called 「数字で読むニュース」 (Claude's choice, may change). First video:
+「訪日客、中国半減でも過去最多」 (68.3 s, JNTO figures of 18/11/2026), sent in the chat. **Read `tin-tuc/README.md`
+before a second one.** Pictures: search-only story `stories/k10-2026-11-28-thu-hounichi.json` (`web:` and `page:` of
+the articles); the article pictures used are Travel Voice's JNTO charts, which the article says may be reposted.
+Headlines of articles are redrawn, not screenshotted. Open points: the owner has not judged it; no channel file, no issue.
+
 ## Changing the pipeline
 Before pushing a change of `news/`, `tools/`, `channels/` or `tests/`: `bash tools/check.sh <out folder>` (add
 `--fx` when the effects' libraries, model and typeface are installed, see `fx` above), and look at
