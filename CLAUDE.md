@@ -654,7 +654,7 @@ Headlines of articles are redrawn, not screenshotted. **The hook shows real pict
 first cut opened on a drawn card: "Phần hook có thể đưa hình ảnh bài báo và hình ảnh du khách trung quốc đến nhật luôn
 đc ko, như thế sẽ trực quan và mn sẽ ở lại"): a photo of the people the news is about with a red stamp of the key
 figure, then a news report's own picture of the story (here a 日テレNEWS frame) with the second stamp; an older photo
-is labelled 資料写真 in the source line. Open points: the owner has not judged it; no channel file, no issue.
+is labelled 資料写真 in the source line. **Only fresh news** (owner: "đừng làm tin cũ"): search the news of the last days before writing. Second video (same day, the owner chose it from a list of that week's news): 「いじめ79万件で過去最多、性的いじめ初調査」 (70.2 s, MEXT survey published 26/11/2026; no children's faces, the 24時間子供SOSダイヤル at the end). Since then each video is `tin-tuc/stories/<name>/` + `src/videos/<Name>.tsx` + a composition `<name>` in `src/Root.tsx`. Open points: the owner has not judged them; no channel file, no issue.
 
 ## Changing the pipeline
 Before pushing a change of `news/`, `tools/`, `channels/` or `tests/`: `bash tools/check.sh <out folder>` (add

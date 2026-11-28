@@ -280,3 +280,55 @@ export const Reporter: React.FC<{ x?: number; y?: number; scale?: number; mood?:
     </svg>
   );
 };
+
+/** Cột đứng theo năm (số tăng dần), cột cuối màu đỏ. */
+export const YearBars: React.FC<{ data: { label: string; value: number }[]; dur: number; unit?: string; top?: number }> = ({ data, dur, unit = '', top = 230 }) => {
+  const f = useCurrentFrame();
+  const max = Math.max(...data.map((d) => d.value));
+  const bw = 120;
+  const gap = (760 - bw * data.length) / (data.length - 1);
+  return (
+    <div style={{ position: 'absolute', left: 70, top, width: 760, height: 560 }}>
+      <div style={{ position: 'absolute', left: 0, right: 0, bottom: 60, height: 6, background: C.ink }} />
+      {data.map((d, i) => {
+        const k = interpolate(f, [4 + i * 5, 18 + i * 5], [0, 1], { ...clamp, easing: Easing.out(Easing.cubic) });
+        const h = 420 * (d.value / max) * k;
+        const last = i === data.length - 1;
+        return (
+          <div key={i} style={{ position: 'absolute', left: i * (bw + gap), bottom: 66, width: bw }}>
+            <div style={{ fontFamily: SERIF, fontWeight: 900, fontSize: last ? 34 : 28, color: last ? C.red : C.ink, textAlign: 'center', marginBottom: 6, opacity: k }}>
+              {(d.value / 10000).toFixed(1)}万
+            </div>
+            <div style={{ height: h, background: last ? C.red : C.ink }} />
+            <div style={{ position: 'absolute', top: '100%', marginTop: 14, width: bw, textAlign: 'center', fontFamily: SANS, fontWeight: 700, fontSize: 28, color: C.ink }}>{d.label}</div>
+          </div>
+        );
+      })}
+      {unit && <div style={{ position: 'absolute', right: 0, top: -40, fontFamily: SANS, fontWeight: 700, fontSize: 26, color: C.grey }}>{unit}</div>}
+    </div>
+  );
+};
+
+/** Thanh ngang theo nhóm (ví dụ cấp học), thanh đầu màu đỏ. */
+export const HBars: React.FC<{ data: { label: string; value: number }[]; dur: number; top?: number; unit?: string }> = ({ data, top = 230, unit = '件' }) => {
+  const f = useCurrentFrame();
+  const max = Math.max(...data.map((d) => d.value));
+  return (
+    <div style={{ position: 'absolute', left: 60, top, width: 780 }}>
+      {data.map((d, i) => {
+        const k = interpolate(f, [4 + i * 6, 20 + i * 6], [0, 1], { ...clamp, easing: Easing.out(Easing.cubic) });
+        const first = i === 0;
+        return (
+          <div key={i} style={{ display: 'flex', alignItems: 'center', marginBottom: 34, opacity: Math.min(1, k * 2) }}>
+            <div style={{ width: 190, fontFamily: SERIF, fontWeight: 900, fontSize: 40, color: C.ink }}>{d.label}</div>
+            <div style={{ height: 70, width: 340 * (d.value / max) * k + 6, background: first ? C.red : C.ink }} />
+            <div style={{ marginLeft: 16, fontFamily: SERIF, fontWeight: 900, fontSize: first ? 52 : 40, color: first ? C.red : C.ink, whiteSpace: 'nowrap' }}>
+              {Math.round(d.value * k).toLocaleString('ja-JP')}
+              <span style={{ fontSize: 26 }}>{unit}</span>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};

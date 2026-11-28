@@ -4,10 +4,11 @@ set -e
 cd "$(dirname "$0")/.."
 mkdir -p out/stills
 FLAGS=${REMOTION_FLAGS:-"--browser-executable=/usr/bin/google-chrome --chrome-mode=chrome-for-testing"}
+COMP=${COMP:-ijime}
 SECS=${@:-"1 5 8 11 15 20 23 27 31 33 36 39 43 47 51 56 60 65"}
 for sec in $SECS; do
   f=$(python3 -c "print(int(round($sec*30)))")
-  npx remotion still src/index.ts News "out/stills/f_$(printf '%05.1f' $sec).png" --frame=$f $FLAGS --log=error >/dev/null
+  npx remotion still src/index.ts "$COMP" "out/stills/f_$(printf '%05.1f' $sec).png" --frame=$f $FLAGS --log=error >/dev/null
 done
 python3 - <<'PY'
 from PIL import Image, ImageDraw

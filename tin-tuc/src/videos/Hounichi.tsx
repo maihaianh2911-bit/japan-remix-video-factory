@@ -1,15 +1,15 @@
 // 訪日客、中国半減でも過去最多 — từng cảnh bám theo giọng đọc (time.ts).
 import React from 'react';
-import { AbsoluteFill, Sequence, useCurrentFrame } from 'remotion';
-import { useFonts } from './fonts';
-import { at, chunks, e, FPS, LINES, s } from './time';
+import { Sequence } from 'remotion';
+import { makeTime } from '../time';
+import timing from './hounichi.timing.json';
+import { F, NewsFrame, Shot } from '../frame';
 import {
-  BigNumber, BigQuestion, C, Card, Clipping, GoalBar, Grid, Headline, K, Label, Masthead, NewsWindow, Paper, Reporter, SANS,
-  Source, Stamp, VSBars,
-} from './kit';
+  BigNumber, BigQuestion, C, Card, Clipping, GoalBar, Grid, Headline, K, Label, NewsWindow, Reporter, SANS, Stamp, VSBars,
+} from '../kit';
 
-type Shot = { from: number; to: number; src?: string; draw: (dur: number) => React.ReactNode };
-const F = (sec: number) => Math.round(sec * FPS);
+const time = makeTime(timing);
+const { s, e, at } = time;
 const JNTO = '日本政府観光局（JNTO）2026年11月18日発表';
 
 const SHOTS: Shot[] = [
@@ -19,7 +19,7 @@ const SHOTS: Shot[] = [
     draw: (d) => (
       // lùi 10 frame để ảnh và tem đã hiện đủ ngay ở khung hình đầu (luật hook)
       <Sequence from={-10} layout="none">
-        <Clipping src="chinatourists.jpg" dur={d + 10} caption="中国からの観光客が…" angle={-2} zoom={[1.0, 1.1]} focus={[0.45, 0.4]} />
+        <Clipping src="hounichi/chinatourists.jpg" dur={d + 10} caption="中国からの観光客が…" angle={-2} zoom={[1.0, 1.1]} focus={[0.45, 0.4]} />
         <Stamp text="ほぼ半減 ▼" x={380} y={K.y + 470} size={96} angle={-8} />
       </Sequence>
     ),
@@ -28,7 +28,7 @@ const SHOTS: Shot[] = [
     from: at(0, '10月'), to: s(1), src: '日テレNEWS',
     draw: (d) => (
       <>
-        <Clipping src="ntv.jpg" dur={d} fit="contain" zoom={[1.0, 1.05]} caption="それでも訪日客は…" angle={1.5} />
+        <Clipping src="hounichi/ntv.jpg" dur={d} fit="contain" zoom={[1.0, 1.05]} caption="それでも訪日客は…" angle={1.5} />
         <Sequence from={F(at(0, '過去最多') - at(0, '10月'))}>
           <Stamp text="過去最多" x={470} y={K.y + 600} size={92} />
         </Sequence>
@@ -47,7 +47,7 @@ const SHOTS: Shot[] = [
   },
   {
     from: at(1, '今年'), to: at(1, '391'), src: 'トラベルボイス（JNTO資料より）',
-    draw: (d) => <Clipping src="chart1.jpg" dur={d} fit="contain" zoom={[1, 1.04]} caption="月別の訪日客（赤が2026年）" angle={1.5} />,
+    draw: (d) => <Clipping src="hounichi/chart1.jpg" dur={d} fit="contain" zoom={[1, 1.04]} caption="月別の訪日客（赤が2026年）" angle={1.5} />,
   },
   {
     from: at(1, '391'), to: s(2), src: JNTO,
@@ -73,7 +73,7 @@ const SHOTS: Shot[] = [
   // ── Trung Quốc −47% ──
   {
     from: s(3), to: at(3, '37万'), src: JNTO,
-    draw: (d) => <Clipping src="china.jpg" dur={d} caption="中国からの旅行者は…" angle={2} />,
+    draw: (d) => <Clipping src="hounichi/china.jpg" dur={d} caption="中国からの旅行者は…" angle={2} />,
   },
   {
     from: at(3, '37万'), to: s(4), src: JNTO,
@@ -90,7 +90,7 @@ const SHOTS: Shot[] = [
     from: s(4), to: s(5), src: 'JNTO、報道各社',
     draw: (d) => (
       <>
-        <Clipping src="airport.jpg" dur={d} caption="渡航の注意喚起・航空便の減便" angle={-1.5} />
+        <Clipping src="hounichi/airport.jpg" dur={d} caption="渡航の注意喚起・航空便の減便" angle={-1.5} />
       </>
     ),
   },
@@ -116,7 +116,7 @@ const SHOTS: Shot[] = [
   // ── Hàn Quốc 103万 ──
   {
     from: e(6) + 0.08, to: at(7, 'ひと月'), src: JNTO,
-    draw: (d) => <Clipping src="korea.jpg" dur={d} caption="韓国からの旅行者" angle={-2} />,
+    draw: (d) => <Clipping src="hounichi/korea.jpg" dur={d} caption="韓国からの旅行者" angle={-2} />,
   },
   {
     from: at(7, 'ひと月'), to: s(8), src: JNTO,
@@ -148,14 +148,14 @@ const SHOTS: Shot[] = [
     from: s(9), to: s(10), src: JNTO,
     draw: (d) => (
       <>
-        <Clipping src="koyo.jpg" dur={d} caption="紅葉シーズンも追い風" angle={1.5} />
+        <Clipping src="hounichi/koyo.jpg" dur={d} caption="紅葉シーズンも追い風" angle={1.5} />
       </>
     ),
   },
   // ── Tổng 10 tháng −2.5% ──
   {
     from: s(10), to: at(10, '去年'), src: 'トラベルボイス（JNTO資料より）',
-    draw: (d) => <Clipping src="chart2.jpg" dur={d} fit="contain" zoom={[1, 1.04]} caption="1〜10月の累計" angle={-1.5} />,
+    draw: (d) => <Clipping src="hounichi/chart2.jpg" dur={d} fit="contain" zoom={[1, 1.04]} caption="1〜10月の累計" angle={-1.5} />,
   },
   {
     from: at(10, '去年'), to: s(11), src: JNTO,
@@ -184,7 +184,7 @@ const SHOTS: Shot[] = [
   // ── Kết ──
   {
     from: s(12), to: s(13),
-    draw: (d) => <Clipping src="street.jpg" dur={d} caption="人の波は止まらなかった" angle={-1.5} />,
+    draw: (d) => <Clipping src="hounichi/street.jpg" dur={d} caption="人の波は止まらなかった" angle={-1.5} />,
   },
   {
     from: s(13), to: 999,
@@ -202,61 +202,11 @@ const SHOTS: Shot[] = [
 // Từ khóa tô đỏ trong phụ đề khi giọng đọc tới.
 const HOT = ['ほぼ半分', '過去最多', '391万2500人', '3000人', '47パーセント', '韓国', '103万5800人', '100万人', '19パーセント', '20', '紅葉シーズン', '2.5パーセント', '804万人', '止まりませんでした'];
 
-const Subtitles: React.FC = () => {
-  const t = useCurrentFrame() / FPS;
-  let cur = -1;
-  for (let i = 0; i < chunks.length; i++) {
-    const next = chunks[i + 1];
-    if (t >= chunks[i].start - 0.05 && t < (next ? next.start - 0.05 : chunks[i].end + 3)) cur = i;
-  }
-  if (cur < 0) return null;
-  const c = chunks[cur];
-  const line = LINES[c.li];
-  const hot = new Set<number>();
-  for (const w of HOT) {
-    let k = c.text.indexOf(w);
-    while (k >= 0) {
-      for (let j = 0; j < w.length; j++) hot.add(k + j);
-      k = c.text.indexOf(w, k + 1);
-    }
-  }
-  return (
-    <div style={{ position: 'absolute', top: K.y + K.h + 80, left: 70, width: 860, textAlign: 'center', fontFamily: SANS, fontWeight: 900, fontSize: c.text.length > 16 ? 50 : 56, lineHeight: 1.35 }}>
-      {[...c.text].map((ch, i) => {
-        const said = t >= line.start + line.chars[c.b + i][0];
-        return (
-          <span key={i} style={{ color: said ? (hot.has(i) ? C.red : C.ink) : '#a39a8c' }}>
-            {ch}
-          </span>
-        );
-      })}
-    </div>
-  );
-};
-
-export const News: React.FC = () => {
-  useFonts(
-    LINES.map((l) => l.text).join('') +
-      '数字で読むニュース報出典日本政府観光局JNTO発表年月日訪日外国人中国客ほぼ半減それでも訪日客は過去最多単月更新差わずか人旅行者渡航注意喚起航空便減便報道各社その穴を埋めたのは誰韓国から前年比突破主な国地域紅葉シーズン追い風累計同期比まだ前年割れ年間記録まで去年残りか月あと万人波止まらなかったあなたの街でも増えたと感じますかコメントで教えてVS−%▼？…・、〜',
-  );
-  const f = useCurrentFrame();
-  const t = f / FPS;
-  const shot = SHOTS.find((x) => t >= x.from && t < x.to);
-  return (
-    <AbsoluteFill>
-      <Paper />
-      <Masthead />
-      {SHOTS.map((x, i) => {
-        const from = F(x.from);
-        const dur = Math.max(1, F(Math.min(x.to, 999)) - from);
-        return (
-          <Sequence key={i} from={from} durationInFrames={dur} layout="none">
-            {x.draw(dur)}
-          </Sequence>
-        );
-      })}
-      {shot?.src && <Source text={shot.src} />}
-      <Subtitles />
-    </AbsoluteFill>
-  );
-};
+export const Hounichi: React.FC = () => (
+  <NewsFrame
+    time={time}
+    shots={SHOTS}
+    hot={HOT}
+    glyphs="日本政府観光局JNTO発表年月日訪日外国人中国客ほぼ半減それでも訪日客は過去最多単月更新差わずか人旅行者渡航注意喚起航空便減便報道各社その穴を埋めたのは誰韓国から前年比突破主な国地域紅葉シーズン追い風累計同期比まだ前年割れ年間記録まで去年残りか月あと万人波止まらなかったあなたの街でも増えたと感じますかコメントで教えてVS−%▼？…・、〜資料写真ダイヤモンド日テレNEWSトラベルボイス別"
+  />
+);
