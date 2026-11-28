@@ -7,9 +7,10 @@ Bố cục là của mình: tên trên màn hình 「数字で読むニュース
 cắt có băng dính cho ảnh thật (`src/kit.tsx`). Chưa có file kênh, chưa có issue.
 
 **Chỉ làm tin mới** (chủ kênh, 28/11/2026: "Cập nhật dữ liệu mới nhất đến hôm nay đi, có thể tìm kiếm trên mạng,
-đừng làm tin cũ"): tìm tin của mấy ngày gần nhất trên mạng trước khi viết. **Hai mảng: kinh tế và chính trị**,
-không làm tin nghệ sĩ (chủ kênh, 28/11/2026: "bỏ dạng tin tức nghệ sĩ … làm thêm 1 dạng tin tức chính trị"). Tin chính
-trị: ô đỏ 「政治」, chỉ sự việc, con số và lời của cả hai phía, không ý kiến riêng; tin chưa xác nhận thì bỏ.
+đừng làm tin cũ"): tìm tin của mấy ngày gần nhất trên mạng trước khi viết. **Mỗi ngày 2 tin, không chính trị, không nghệ sĩ** (chủ kênh, 28/11/2026: "bỏ dạng tin tức nghệ sĩ", rồi "giảm
+xuống 2 tin, bỏ tin chính trị"): tin kinh tế và đời sống có con số (thuế, lương, giá cả, du lịch, giáo dục…).
+Cách chọn: tin vừa đang được tìm nhiều trên Google Trends Nhật (https://trends.google.co.jp/trending?geo=JP), vừa có
+con số rõ, vừa đụng tới đời sống; tin chưa xác nhận thì bỏ. Video `seki` (chính trị) đã làm trước khi bỏ mảng này.
 Đầu video là đầu bản tin (dải đen, NEWS, ngày, tiêu đề lớn đứng suốt video); phụ đề kiểu テロップ.
 
 | Tên (`stories/<tên>`) | Tiêu đề | Độ dài | Số liệu |
