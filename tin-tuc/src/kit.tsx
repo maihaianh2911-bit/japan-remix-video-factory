@@ -332,3 +332,32 @@ export const HBars: React.FC<{ data: { label: string; value: number }[]; dur: nu
     </div>
   );
 };
+
+/** Thanh phiếu: số phiếu có được, vạch đỏ ở mức cần để thông qua, phần thiếu sọc đỏ, chữ 「あとN票」. */
+export const VoteLine: React.FC<{ have: number; need: number; dur: number; label?: string; max?: number }> = ({ have, need, dur, label = '賛成', max }) => {
+  const f = useCurrentFrame();
+  const m = max ?? Math.ceil(need * 1.08);
+  const k = interpolate(f, [4, Math.min(30, dur * 0.5)], [0, 1], { ...clamp, easing: Easing.out(Easing.cubic) });
+  const miss = interpolate(f, [Math.min(30, dur * 0.5), Math.min(44, dur * 0.7)], [0, 1], clamp);
+  const W = 760;
+  const wHave = W * (have / m) * k;
+  const xNeed = W * (need / m);
+  return (
+    <div style={{ position: 'absolute', left: 70, top: 300, width: W }}>
+      <div style={{ position: 'relative', height: 60 }}>
+        <div style={{ position: 'absolute', right: Math.max(0, W - xNeed - 40), whiteSpace: 'nowrap', textAlign: 'right', fontFamily: SERIF, fontWeight: 900, fontSize: 38, color: C.red }}>可決ライン {need}票 ▼</div>
+      </div>
+      <div style={{ position: 'relative', height: 120, border: `6px solid ${C.ink}`, background: C.card, marginTop: 10 }}>
+        <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: wHave, background: C.ink }} />
+        <div style={{ position: 'absolute', left: wHave, top: 0, bottom: 0, width: Math.max(0, xNeed - wHave - 6) * miss, background: `repeating-linear-gradient(45deg, ${C.red}, ${C.red} 14px, #d8615c 14px, #d8615c 28px)` }} />
+        <div style={{ position: 'absolute', left: xNeed - 9, top: -16, bottom: -16, width: 6, background: C.red }} />
+      </div>
+      <div style={{ marginTop: 18, fontFamily: SERIF, fontWeight: 900, fontSize: 50, color: C.ink }}>
+        {label} {Math.round(have * k)}票
+      </div>
+      <div style={{ textAlign: 'right', marginTop: 30, opacity: miss }}>
+        <span style={{ fontFamily: SERIF, fontWeight: 900, fontSize: 96, color: C.red }}>あと{need - have}票</span>
+      </div>
+    </div>
+  );
+};

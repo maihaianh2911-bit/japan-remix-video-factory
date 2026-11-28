@@ -7,12 +7,16 @@ Bố cục là của mình: tên trên màn hình 「数字で読むニュース
 cắt có băng dính cho ảnh thật (`src/kit.tsx`). Chưa có file kênh, chưa có issue.
 
 **Chỉ làm tin mới** (chủ kênh, 28/11/2026: "Cập nhật dữ liệu mới nhất đến hôm nay đi, có thể tìm kiếm trên mạng,
-đừng làm tin cũ"): tìm tin của mấy ngày gần nhất trên mạng trước khi viết.
+đừng làm tin cũ"): tìm tin của mấy ngày gần nhất trên mạng trước khi viết. **Hai mảng: kinh tế và chính trị**,
+không làm tin nghệ sĩ (chủ kênh, 28/11/2026: "bỏ dạng tin tức nghệ sĩ … làm thêm 1 dạng tin tức chính trị"). Tin chính
+trị: ô đỏ 「政治」, chỉ sự việc, con số và lời của cả hai phía, không ý kiến riêng; tin chưa xác nhận thì bỏ.
+Đầu video là đầu bản tin (dải đen, NEWS, ngày, tiêu đề lớn đứng suốt video); phụ đề kiểu テロップ.
 
 | Tên (`stories/<tên>`) | Tiêu đề | Độ dài | Số liệu |
 | --- | --- | --- | --- |
 | `hounichi` | 訪日客、中国半減でも過去最多 | 68 s | JNTO, công bố 18/11/2026 |
 | `ijime` | いじめ79万件で過去最多、性的いじめ初調査8158件 | 70 s | 文部科学省, công bố 26/11/2026 |
+| `seki` | 関文科相の問責決議案、4票差で否決 (政治) | 70 s | 参院本会議 27/11/2026 (共同, ロイター) |
 
 Mỗi video: `stories/<tên>/story.json` (lời đọc, nhạc, tiếng động), `caption.txt`, `music/`; ảnh trong
 `public/images/<tên>/`; cảnh trong `src/videos/<Tên>.tsx` (dùng `NewsFrame` của `src/frame.tsx` và đồ của

@@ -36,3 +36,18 @@ Tìm bằng story `stories/k10-2026-11-28-thu-ijime.json`. Ảnh tin của NHK, 
 | `ijime/randsel.jpg` | 3-11 | 1400×1400 | https://rand-land.com/why-randoseru-not-abolished-reason/ |
 
 Nhạc: Erik Satie, Gymnopédie No.1, Wikimedia Commons, Public domain.
+
+## 「関文科相の問責決議案、4票差で否決」 (`stories/seki`)
+
+Tìm bằng story `stories/k10-2026-11-28-thu-seki.json`. Ảnh báo (朝日新聞, 東京新聞) và khung bản tin (auone): không rõ giấy phép, ghi tên trang; ảnh tòa nhà nghị sĩ từ Wikimedia Commons. Ảnh Thủ tướng là ảnh tư liệu (資料写真). Số liệu: 共同通信, ロイター (27/11/2026).
+
+| File | Pick | Cỡ | Trang |
+| --- | --- | --- | --- |
+| `seki/hook.jpg` | 3-12 | 2000×1333 | https://smart.asahi.com/v/article/ASVCV3VDWVCVUTFK010M.php  |
+| `seki/party.jpg` | 5-17 | 1200×675 | https://article.auone.jp/efc72efb-e1fd-483e-9e91-f05af627ee91  |
+| `seki/kaikan.jpg` | 6-9 | 3920×2204 | https://commons.wikimedia.org/wiki/File:%E6%96%B0%E8%A1%86%E8%AD%B0%E9%99%A2%E7%AC%AC%E4%B8%80%E8%AD%B0%E5%93%A1%E4%BC%9A%E9%A4%A8.jpg (Yuukokusya, CC BY-SA 3.0) |
+| `seki/kaiken.jpg` | 2-2 | 1200×800 | https://www.tokyo-np.co.jp/article/530315  |
+| `seki/honkaigi.jpg` | 3-2 | 1200×852 | https://www.tokyo-np.co.jp/article/531205  |
+| `seki/takaichi.jpg` | 8-19 | 1200×764 | https://www.tokyo-np.co.jp/article/523022  |
+
+Nhạc: Erik Satie, Gnossienne No.1, Wikimedia Commons, Public domain.
