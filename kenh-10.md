@@ -4,4 +4,5 @@ Video của kênh, mới nhất ở trên. Bấm **video**, rồi nút tải v�
 
 Video bị xóa khỏi đây 2 ngày sau khi đóng phiếu, hoặc sau 14 ngày phiếu không có hoạt động: hãy tải về sớm.
 
+- 2026-11-28 · **2度断られても3度目のプロポーズ エリザベス女王の両親、ジョージ6世とエリザベス王妃の物語** (1:16) — [video](k10-2026-11-28-george-elizabeth-proposal/video.mp4) · [caption](k10-2026-11-28-george-elizabeth-proposal/caption.txt) · [phụ đề](k10-2026-11-28-george-elizabeth-proposal/subtitles.srt) · [nguồn ảnh](k10-2026-11-28-george-elizabeth-proposal/credits.txt)
 - 2026-11-28 · **「病める時も」と誓ってから13年 がんと闘うキャサリン妃のそばにいたウィリアム皇太子** (1:03) — [video](k10-2026-11-28-kate-william-vow/video.mp4) · [caption](k10-2026-11-28-kate-william-vow/caption.txt) · [phụ đề](k10-2026-11-28-kate-william-vow/subtitles.srt) · [nguồn ảnh](k10-2026-11-28-kate-william-vow/credits.txt)
