@@ -1,0 +1,338 @@
+{
+  "title": "点字ブロックは、ひとりの男が友のために自腹でつくった",
+  "voice": {
+    "speaker": "青山龍星",
+    "style": "ノーマル"
+  },
+  "pace": {
+    "speed": 1.2,
+    "line_pause": 0.1,
+    "scene_pause": 0.2
+  },
+  "music": {
+    "file": "music/k10-sao-truc.mp3",
+    "title": "竹笛",
+    "volume": 0.84
+  },
+  "sounds": [
+    {
+      "line": 0,
+      "at": "一人の男",
+      "shift": -0.08,
+      "sound": "whoosh"
+    },
+    {
+      "line": 0,
+      "at": "自腹",
+      "sound": "thud"
+    },
+    {
+      "line": 0,
+      "at": "でこぼこ",
+      "shift": -0.08,
+      "sound": "whoosh"
+    },
+    {
+      "line": 0,
+      "at": "並べ",
+      "sound": "pop"
+    },
+    {
+      "line": 1,
+      "sound": "whoosh"
+    },
+    {
+      "line": 1,
+      "at": "彼は",
+      "shift": -0.08,
+      "sound": "whoosh"
+    },
+    {
+      "line": 2,
+      "sound": "pop"
+    },
+    {
+      "line": 2,
+      "at": "三宅精一",
+      "sound": "pop"
+    },
+    {
+      "line": 3,
+      "sound": "whoosh"
+    },
+    {
+      "line": 3,
+      "at": "目の病気",
+      "sound": "whoosh"
+    },
+    {
+      "line": 3,
+      "at": "岩橋英行",
+      "sound": "pop"
+    },
+    {
+      "line": 4,
+      "sound": "whoosh"
+    },
+    {
+      "line": 4,
+      "at": "安全に",
+      "sound": "pop"
+    },
+    {
+      "line": 5,
+      "sound": "whoosh"
+    },
+    {
+      "line": 5,
+      "at": "車が",
+      "sound": "whoosh"
+    },
+    {
+      "line": 5,
+      "at": "走り抜け",
+      "sound": "thud"
+    },
+    {
+      "line": 6,
+      "sound": "pop"
+    },
+    {
+      "line": 6,
+      "at": "コケ",
+      "shift": -0.08,
+      "sound": "whoosh"
+    },
+    {
+      "line": 6,
+      "at": "境",
+      "sound": "pop"
+    },
+    {
+      "line": 6,
+      "at": "足の",
+      "sound": "whoosh"
+    },
+    {
+      "line": 6,
+      "at": "という",
+      "sound": "pop"
+    },
+    {
+      "line": 7,
+      "sound": "whoosh"
+    },
+    {
+      "line": 7,
+      "at": "道の点字",
+      "sound": "pop"
+    },
+    {
+      "line": 8,
+      "sound": "whoosh"
+    },
+    {
+      "line": 8,
+      "at": "弟",
+      "sound": "pop"
+    },
+    {
+      "line": 8,
+      "at": "何度も",
+      "shift": -0.08,
+      "sound": "whoosh"
+    },
+    {
+      "line": 8,
+      "at": "何度も",
+      "shift": 0.25,
+      "sound": "pop"
+    },
+    {
+      "line": 8,
+      "at": "何度も",
+      "shift": 0.69,
+      "sound": "pop"
+    },
+    {
+      "line": 8,
+      "at": "何度も",
+      "shift": 1.13,
+      "sound": "pop"
+    },
+    {
+      "line": 8,
+      "at": "何度も",
+      "shift": 1.35,
+      "sound": "pop"
+    },
+    {
+      "line": 9,
+      "sound": "whoosh"
+    },
+    {
+      "line": 9,
+      "at": "230枚",
+      "shift": -0.08,
+      "sound": "whoosh"
+    },
+    {
+      "line": 10,
+      "sound": "whoosh"
+    },
+    {
+      "line": 10,
+      "at": "自腹",
+      "sound": "thud"
+    },
+    {
+      "line": 11,
+      "sound": "whoosh"
+    },
+    {
+      "line": 11,
+      "at": "注文は",
+      "shift": -0.08,
+      "sound": "whoosh"
+    },
+    {
+      "line": 12,
+      "sound": "whoosh"
+    },
+    {
+      "line": 12,
+      "at": "底をつき",
+      "shift": 0.45,
+      "sound": "thud"
+    },
+    {
+      "line": 12,
+      "at": "何度も",
+      "shift": -0.08,
+      "sound": "whoosh"
+    },
+    {
+      "line": 13,
+      "sound": "whoosh"
+    },
+    {
+      "line": 13,
+      "at": "三宅は",
+      "shift": -0.08,
+      "sound": "whoosh"
+    },
+    {
+      "line": 14,
+      "sound": "whoosh"
+    },
+    {
+      "line": 14,
+      "at": "世界の",
+      "shift": -0.08,
+      "sound": "whoosh"
+    },
+    {
+      "line": 14,
+      "at": "70",
+      "sound": "pop"
+    },
+    {
+      "line": 15,
+      "sound": "whoosh"
+    },
+    {
+      "line": 15,
+      "at": "ふんだら",
+      "shift": 0.15,
+      "sound": "pop"
+    },
+    {
+      "line": 15,
+      "at": "思い出して",
+      "sound": "pop"
+    },
+    {
+      "line": 16,
+      "sound": "whoosh"
+    },
+    {
+      "line": 16,
+      "at": "友の",
+      "sound": "pop"
+    }
+  ],
+  "lines": [
+    {
+      "text": "目が見えなくなっていく友のために、一人の男が、自腹で道にでこぼこを並べました。"
+    },
+    {
+      "text": "それがいま世界中の駅にあることを、彼は見ずに亡くなりました。",
+      "end": true
+    },
+    {
+      "text": "その男の名は、三宅精一です。",
+      "say": "その男の名は、みやけせいいちです。",
+      "end": true
+    },
+    {
+      "text": "岡山に住む三宅には、目の病気で光を失っていく友、岩橋英行がいました。",
+      "end": true
+    },
+    {
+      "text": "目の見えない人が、安全に歩ける道はつくれないのか。",
+      "end": true
+    },
+    {
+      "text": "ある日、白い杖の人の目の前を、車が走り抜けていきました。",
+      "end": true
+    },
+    {
+      "text": "ヒントは、「コケと土の境は、足の感覚を通して分かる」という、友のひと言だったといいます。",
+      "end": true
+    },
+    {
+      "text": "足の裏で読める、道の点字をつくればいい。",
+      "end": true
+    },
+    {
+      "text": "三宅は弟と二人で、でこぼこの形を何度もためしました。",
+      "say": "みやけは弟と二人で、でこぼこの形を何度もためしました。",
+      "end": true
+    },
+    {
+      "text": "1967年、岡山の盲学校の近くに、230枚のブロックが並びます。",
+      "end": true
+    },
+    {
+      "text": "お金は、すべて三宅の自腹です。",
+      "say": "お金は、すべてみやけの自腹です。",
+      "end": true
+    },
+    {
+      "text": "けれど、ただで配っても、注文はほとんど来ません。",
+      "end": true
+    },
+    {
+      "text": "お金は底をつき、何度もあきらめかけたそうです。",
+      "end": true
+    },
+    {
+      "text": "1982年、ブロックが広がりきる前に、三宅は56歳で世を去ります。",
+      "say": "1982年、ブロックが広がりきる前に、みやけは56歳で世を去ります。",
+      "end": true
+    },
+    {
+      "text": "いま、この黄色い道は、世界の70をこえる国にあります。",
+      "say": "いま、この黄色い道は、世界のななじゅうをこえる国にあります。",
+      "end": true
+    },
+    {
+      "text": "次に駅でこのでこぼこをふんだら、思い出してください。",
+      "end": true
+    },
+    {
+      "text": "それは一人の男が、友のために敷いた道なのです。",
+      "end": true
+    }
+  ]
+}

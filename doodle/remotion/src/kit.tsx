@@ -152,7 +152,7 @@ type Mood = 'ok' | 'smile' | 'laugh' | 'stern' | 'wow' | 'sad' | 'doubt' | 'flat
 export type PersonProps = {
   x: number; y: number; s?: number; flip?: boolean; t?: number; id?: string;
   suit?: string; pants?: string; tie?: string; shirt?: string; hair?: string; hairStyle?: 'part' | 'grey' | 'short' | 'none';
-  hat?: 'bowler' | 'boater' | 'helmet' | null; hatColor?: string; glasses?: boolean; mustache?: boolean; mood?: Mood;
+  hat?: 'bowler' | 'boater' | 'helmet' | null; hatColor?: string; glasses?: boolean; shades?: boolean; mustache?: boolean; mood?: Mood;
   armL?: [number, number]; armR?: [number, number]; legs?: [number, number]; lean?: number; look?: number; bob?: number;
   noShadow?: boolean; holdR?: React.ReactNode; holdL?: React.ReactNode; vest?: boolean; pointR?: boolean;
 };
@@ -164,7 +164,7 @@ const limb = (sx: number, sy: number, side: number, a1: number, a2: number, l1: 
   return {ex, ey, hx, hy};
 };
 export const Person: React.FC<PersonProps> = (p) => {
-  const {x, y, s = 1, flip, t = 0, id = 'p', suit = '#33415e', pants = '#2a3350', tie = '#b3372b', shirt = '#fbfaf4', hair = '#2b2622', hairStyle = 'part', hat = null, hatColor = '#2b2826', glasses, mustache, mood = 'ok', armL = [12, 8], armR = [12, 8], legs = [4, -4], lean = 0, look = 0, bob = 0, noShadow, holdR, holdL, vest, pointR} = p;
+  const {x, y, s = 1, flip, t = 0, id = 'p', suit = '#33415e', pants = '#2a3350', tie = '#b3372b', shirt = '#fbfaf4', hair = '#2b2622', hairStyle = 'part', hat = null, hatColor = '#2b2826', glasses, shades, mustache, mood = 'ok', armL = [12, 8], armR = [12, 8], legs = [4, -4], lean = 0, look = 0, bob = 0, noShadow, holdR, holdL, vest, pointR} = p;
   const blink = mood !== 'laugh' && blinkAt(t, id);
   const arm = (side: number, a: [number, number], key: string, hold?: React.ReactNode, point?: boolean) => {
     const {ex, ey, hx, hy} = limb(70 * side, -424, side, a[0], a[1], 104, 94);
@@ -254,6 +254,7 @@ export const Person: React.FC<PersonProps> = (p) => {
           {eyes()}
           <path d={brows} fill="none" stroke={INK} strokeWidth={6} strokeLinecap="round" />
           <path d="M -3 -510 Q 8 -500 -1 -494" fill="none" stroke={INK} strokeWidth={4} strokeLinecap="round" />
+          {shades && <g stroke={INK} strokeWidth={4.5}><ellipse cx={-28} cy={-524} rx={26} ry={21} fill="#1f1d22" /><ellipse cx={28} cy={-524} rx={26} ry={21} fill="#1f1d22" /><path d="M -2 -528 Q 0 -532 2 -528 M -54 -528 L -72 -532 M 54 -528 L 72 -532" fill="none" /><path d="M -40 -532 Q -32 -538 -24 -534 M 16 -532 Q 24 -538 32 -534" stroke="#8c8a96" strokeWidth={4} fill="none" /></g>}
           {glasses && <g fill="rgba(255,255,255,0.12)" stroke={INK} strokeWidth={4.5}><circle cx={-27} cy={-524} r={23} /><circle cx={27} cy={-524} r={23} /><path d="M -4 -526 Q 0 -530 4 -526 M -50 -528 L -70 -532 M 50 -528 L 70 -532" fill="none" /></g>}
           {mustache && <path d="M -30 -486 Q -14 -500 0 -490 Q 14 -500 30 -486 Q 14 -482 0 -485 Q -14 -482 -30 -486 Z" fill={hair === '#2b2622' ? '#2b2622' : '#8d8a84'} stroke={INK} strokeWidth={2.5} />}
           {mouth()}
