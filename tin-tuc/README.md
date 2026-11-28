@@ -11,6 +11,18 @@ cắt có băng dính cho ảnh thật (`src/kit.tsx`). Chưa có file kênh, ch
 xuống 2 tin, bỏ tin chính trị"): tin kinh tế và đời sống có con số (thuế, lương, giá cả, du lịch, giáo dục…).
 Cách chọn: tin vừa đang được tìm nhiều trên Google Trends Nhật (https://trends.google.co.jp/trending?geo=JP), vừa có
 con số rõ, vừa đụng tới đời sống; tin chưa xác nhận thì bỏ. Video `seki` (chính trị) đã làm trước khi bỏ mảng này.
+**Cách tìm tin mỗi ngày** (chủ kênh, 28/11/2026, sau khi Claude bỏ sót tin 「第3子生まれたら1000万円」 đứng số 4 bảng đọc
+nhiều của Yahoo: "Vấn đề là m có thể tìm tin tức như thế hàng ngày ko", rồi "tao sẽ là ng gọi m"; chủ kênh nhắn mỗi
+ngày, Claude đi đủ danh sách này rồi mới đề xuất, không tìm theo chữ khóa đoán trước):
+1. Bảng đọc nhiều nhất của Yahoo!ニュース (trong nước, kinh tế): mở thẳng trang ranking thì trả về bản cũ, nên đọc
+   qua tìm kiếm và các trang bài báo (bài nào cũng có アクセスランキング kèm theo); bảng của dメニューニュース cũng vậy.
+2. Bảng xếp hạng tin của テレ朝, 日テレ, TBS, FNN, ABEMA.
+3. Google Trends Nhật: https://trends.google.co.jp/trending?geo=JP (đọc được trực tiếp).
+4. Kênh TikTok tiếng Việt "Kiến thức kinh tế" (@kienthuckinhte28) mà chủ kênh gửi: Claude không mở được TikTok,
+   chủ kênh gửi video là tin mẫu.
+5. Lọc: tin về tiền của dân (trợ cấp, thuế, lương, giá cả, lương hưu, du lịch, dân số) là kinh tế, kể cả khi
+   một đảng hay chính phủ đề xuất; bỏ scandal chính trị và tin nghệ sĩ. Đề xuất 4 tin, chủ kênh chọn 2.
+
 Đầu video là đầu bản tin (dải đen, NEWS, ngày, tiêu đề lớn đứng suốt video); phụ đề kiểu テロップ.
 
 | Tên (`stories/<tên>`) | Tiêu đề | Độ dài | Số liệu |
