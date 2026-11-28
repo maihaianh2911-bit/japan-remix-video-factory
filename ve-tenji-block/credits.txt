@@ -1,0 +1,5 @@
+画像: すべて描きおろしのイラスト（コードで描画。写真・画像生成AIは使っていません）
+声: VOICEVOX:青山龍星
+音楽: 竹笛
+文字: Zen Maru Gothic、Yusei Magic（SIL Open Font License）
+制作: Remotion
