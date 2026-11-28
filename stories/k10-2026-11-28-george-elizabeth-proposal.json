@@ -1,7 +1,7 @@
 {
   "channel": "k10",
   "issue": 23,
-  "stage": "find",
+  "stage": "render",
   "title": "3度目のプロポーズ ジョージ6世とエリザベス王妃",
   "date": "2026-11-28",
   "searches": [
@@ -39,7 +39,26 @@
           "text": "アルバート王子は、3度目のプロポーズでやっとエリザベスに受け入れられ、そして彼女の支えで、国王になりました。",
           "quote": true
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "7-9",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "9-1",
+          "focus": [
+            0.43,
+            0.0
+          ],
+          "move": "push-in"
+        }
+      ],
+      "why": "Mở đầu: ảnh đính hôn 1923, hai người mặt to ở nửa trên; rồi ảnh hai người bản tô màu. Câu mở đầu in to."
     },
     {
       "label": "出会い",
@@ -47,7 +66,24 @@
       "headline": "舞踏会で\n出会った人",
       "lines": [
         "1920年、イギリス国王の次男だった王子は、舞踏会で出会った貴族の娘エリザベスに、心を奪われます。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "10-2",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "11-2",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "cut": "dip",
+      "why": "Lùi về 1920: tiểu thư Elizabeth (tô màu) rồi hoàng tử Albert trẻ."
     },
     {
       "label": "1度目",
@@ -56,7 +92,27 @@
       "lines": [
         "けれど翌年の求婚は断られました。",
         "王室に入れば自由がなくなると、彼女はためらっていたといいます。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "10-6",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "10-17",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "fade",
+      "why": "Elizabeth trẻ, ngần ngại: lần cầu hôn đầu bị từ chối."
     },
     {
       "label": "3度目",
@@ -65,7 +121,24 @@
       "lines": [
         "2度目の求婚も、答えは「いいえ」でした。",
         "それでも王子はあきらめず、1923年1月、3度目の求婚で、ついに「はい」をもらいます。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "7-1",
+          "fit": "contain",
+          "move": "push-in"
+        },
+        {
+          "pick": "8-1",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "fade",
+      "why": "Lần thứ ba được nhận lời: ảnh đính hôn tháng 1/1923."
     },
     {
       "label": "電報",
@@ -73,7 +146,19 @@
       "headline": "「オーケー。\nバーティ」",
       "lines": [
         "両親に送った電報は、ひとこと、「オーケー。バーティ」。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "7-7",
+          "focus": [
+            0.5,
+            0.4
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "fade",
+      "why": "Bức điện 'Ổn rồi. Bertie': ảnh hai người đính hôn."
     },
     {
       "label": "結婚",
@@ -81,7 +166,19 @@
       "headline": "ウェストミンスター\n寺院で結婚",
       "lines": [
         "その年の4月、二人はウェストミンスター寺院で結婚しました。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "7-3",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "page",
+      "why": "Đám cưới tháng 4/1923, ảnh cưới bản tô màu."
     },
     {
       "label": "吃音",
@@ -92,7 +189,27 @@
           "text": "王子には、子どものころから吃音があり、人前で話すことに苦しんでいました。",
           "say": "王子には、子どものころからきつおんがあり、人前で話すことに苦しんでいました。"
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "11-7",
+          "focus": [
+            0.6,
+            0.3
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "11-2",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "dip",
+      "why": "Hoàng tử Albert, người nói lắp từ nhỏ."
     },
     {
       "label": "妻の支え",
@@ -100,7 +217,19 @@
       "headline": "夫のそばで",
       "lines": [
         "妻は、言語療法士のもとへ通う夫のそばで、支え続けたといいます。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "8-7",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "fade",
+      "why": "Vợ chồng nhìn nhau: bà luôn ở bên nâng đỡ chồng."
     },
     {
       "label": "映画",
@@ -108,7 +237,16 @@
       "headline": "『英国王の\nスピーチ』",
       "lines": [
         "この夫婦の物語は、のちに映画『英国王のスピーチ』になりました。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "15-1",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "cut": "hard",
+      "why": "Phim 'Nhà vua nói lắp' (2010): Colin Firth và Helena Bonham Carter."
     },
     {
       "label": "国王に",
@@ -119,7 +257,24 @@
           "text": "1936年、兄が王位を捨てたため、王子は望まないまま、ジョージ6世として国王になります。",
           "say": "1936年、兄が王位を捨てたため、王子は望まないまま、ジョージろくせいとして国王になります。"
         }
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "17-2",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "17-17",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "cut": "page",
+      "why": "Lễ đăng quang 1937: Albert thành vua George VI, bên cạnh là vợ."
     },
     {
       "label": "別れ",
@@ -127,7 +282,19 @@
       "headline": "56歳の\n死",
       "lines": [
         "そして1952年、国王は56歳で亡くなりました。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "19-6",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        }
+      ],
+      "cut": "dip",
+      "why": "Năm 1952 nhà vua mất: ba hoàng hậu mặc tang."
     },
     {
       "label": "50年",
@@ -135,7 +302,24 @@
       "headline": "それから\n50年",
       "lines": [
         "王妃はそれから50年を生き、2002年、101歳で亡くなります。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "21-6",
+          "focus": [
+            0.5,
+            0.3
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "21-11",
+          "fit": "contain",
+          "move": "push-in"
+        }
+      ],
+      "cut": "fade",
+      "why": "Bà sống thêm 50 năm: lúc về già, và sinh nhật 100 tuổi năm 2000."
     },
     {
       "label": "79年",
@@ -144,7 +328,28 @@
       "lines": [
         "2度断られても、あきらめなかった3度目の求婚。",
         "その「はい」から79年、二人は今、同じ礼拝堂に並んで眠っています。"
-      ]
+      ],
+      "photo": [
+        {
+          "pick": "8-1",
+          "focus": [
+            0.5,
+            0.35
+          ],
+          "move": "push-in"
+        },
+        {
+          "pick": "22-5",
+          "focus": [
+            0.0,
+            0.55
+          ],
+          "move": "pull-back"
+        }
+      ],
+      "cut": "fade",
+      "why": "Kết: quay lại hai người năm 1923, rồi tấm bia khắc tên GEORGE VI và ELIZABETH nằm cạnh nhau."
     }
-  ]
+  ],
+  "review": "21/21"
 }

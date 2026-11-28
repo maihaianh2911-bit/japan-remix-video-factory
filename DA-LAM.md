@@ -22,6 +22,7 @@ Cùng một người thì được làm tiếp, cùng một chuyện thì không
 | 27/11/2026 | 初めて会った日と同じ瞳 エリザベス女王の最後のクリスマスメッセージ | Giáng sinh 2021, Nữ hoàng nói ánh mắt Philip đến cuối đời vẫn sáng như lần đầu gặp | `k10-2026-11-27-philip-eyes` |
 | 27/11/2026 | 母との最後の電話 ダイアナ妃とウィリアム王子・ハリー王子 | Vài giờ trước khi Diana mất, hai con trai vội cúp máy khi mẹ gọi; 20 năm sau vẫn hối hận | `k10-2026-11-27-diana-last-call` |
 | 28/11/2026 | 病める時も ウィリアム皇太子とキャサリン妃、がんと闘った一年 | William luôn ở bên Kate trong năm cô chống chọi ung thư; lời thề cưới "dù khi ốm đau" được giữ | `k10-2026-11-28-kate-william-vow` |
+| 28/11/2026 | 3度目のプロポーズ ジョージ6世とエリザベス王妃 | Hoàng tử Albert cầu hôn 3 lần mới được Elizabeth nhận lời; bà giúp ông vượt tật nói lắp, thành vua George VI | `k10-2026-11-28-george-elizabeth-proposal` |
 
 Bản thử, không tính là video: `k10-2026-11-25-thu-giong-nu-himari`, `k10-2026-11-25-thu-giong-nu-no7` (thử giọng nữ, 25/11/2026).
 
