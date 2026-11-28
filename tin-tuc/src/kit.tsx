@@ -46,7 +46,9 @@ export const Masthead: React.FC = () => (
 /** Khung vuông chính: viền đen dày, bóng đổ cứng. Nảy nhẹ khi đổi cảnh. */
 export const Card: React.FC<{ children?: React.ReactNode; tone?: 'card' | 'red' | 'ink'; pop?: boolean }> = ({ children, tone = 'card', pop = true }) => {
   const p = usePop(0, 16);
-  const s = pop ? 0.94 + 0.06 * p : 1;
+  const f = useCurrentFrame();
+  // Khung chữ cũng không đứng yên: tiến lại rất chậm (khoảng 4 % trong 12 giây).
+  const s = (pop ? 0.94 + 0.06 * p : 1) * (1 + Math.min(f, 360) * 0.00011);
   const bg = tone === 'red' ? C.red : tone === 'ink' ? C.ink : C.card;
   return (
     <div style={{ position: 'absolute', left: K.x, top: K.y, width: K.w, height: K.h, transform: `scale(${s})` }}>
@@ -130,14 +132,20 @@ export const Clipping: React.FC<{ src: string; dur: number; focus?: [number, num
 }) => {
   const f = useCurrentFrame();
   const p = usePop(0, 14);
-  const z = interpolate(f, [0, dur], zoom, clamp);
+  // Ảnh luôn chuyển động rõ (chủ kênh: "lại dính lỗi ảnh đứng yên"): phóng to ít nhất 22 % (ảnh để nguyên khung: 14 %)
+  // trong suốt cảnh, và trượt ngang 4 % về một phía (phía đổi theo tên ảnh, để hai ảnh liền nhau không trôi cùng chiều).
+  const span = Math.max(zoom[1] - zoom[0], fit === 'contain' ? 0.14 : 0.22);
+  const t = interpolate(f, [0, Math.max(1, dur)], [0, 1], clamp);
+  const z = zoom[0] + span * Easing.inOut(Easing.sin)(t);
+  const dir = [...src].reduce((a, ch) => a + ch.charCodeAt(0), 0) % 2 === 0 ? 1 : -1;
+  const pan = dir * (t - 0.5) * 4;
   const ih = caption ? K.h - 150 : K.h - 70;
   return (
     <div style={{ position: 'absolute', left: K.x - 10, top: K.y - 10, width: K.w + 20, height: K.h + 20, transform: `rotate(${angle * p}deg) translateY(${(1 - p) * 60}px)`, opacity: Math.min(1, p * 1.6) }}>
       <div style={{ position: 'absolute', left: 14, top: 14, width: '100%', height: '100%', background: 'rgba(0,0,0,0.85)' }} />
       <div style={{ position: 'absolute', inset: 0, background: '#fbf8f1', border: `6px solid ${C.ink}`, padding: 26 }}>
         <div style={{ width: '100%', height: ih, overflow: 'hidden', border: `3px solid ${C.ink}`, background: '#ddd' }}>
-          <Img src={staticFile(`images/${src}`)} style={{ width: '100%', height: '100%', objectFit: fit, objectPosition: `${focus[0] * 100}% ${focus[1] * 100}%`, transform: `scale(${z})`, transformOrigin: `${focus[0] * 100}% ${focus[1] * 100}%` }} />
+          <Img src={staticFile(`images/${src}`)} style={{ width: '100%', height: '100%', objectFit: fit, objectPosition: `${focus[0] * 100}% ${focus[1] * 100}%`, transform: `scale(${z}) translateX(${pan}%)`, transformOrigin: `${focus[0] * 100}% ${focus[1] * 100}%` }} />
         </div>
         {caption && <div style={{ fontFamily: SERIF, fontWeight: 900, fontSize: 48, color: C.ink, marginTop: 18, lineHeight: 1.2 }}>{caption}</div>}
       </div>
