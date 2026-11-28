@@ -87,11 +87,14 @@ GitHub release page and runs without Docker: `./run --host 127.0.0.1 --port 5002
 | --- | --- | --- | --- |
 | 26/11/2026 | `shinkansen-uso` | 新幹線は、ひとつのウソから生まれた | Ông Sogō Shinji nói dối về ngân sách để làm được Shinkansen, rồi không được mời tới lễ xuất phát |
 | 26/11/2026 | `chikatetsu-horafuki` | 「ほら吹き」と笑われた男が、日本で最初の地下鉄をつくった | Ông Hayakawa Noritsugu bị cười là nói khoác, đếm người bằng hạt đậu, làm tàu điện ngầm đầu tiên, rồi bị đẩy khỏi nó |
+| 28/11/2026 | `tenji-block` | 目が見えなくなっていく友のために、男は自腹で道にでこぼこを並べた | Ông Miyake Seiichi tự bỏ tiền làm gạch dẫn đường cho người bạn đang mù dần, gần như không ai mua, ông mất trước khi nó có ở khắp thế giới |
 
 ## Remotion: the way of the drawn videos since 27/11/2026 (`doodle/remotion/`)
 The owner saw the trial below and said "ổn hơn r, dựng lại 2 video kia theo cách này đi": both stories are drawn again
 whole with Remotion: `src/Subway.tsx` (`chikatetsu-horafuki`, 34 pictures) and `src/Shinkansen.tsx`
-(`shinkansen-uso`, 36 pictures), on the shared kit `src/kit.tsx` (people, Ginza, trains, labels, the finish, the
+(`shinkansen-uso`, 36 pictures); the third story was drawn this way from the start: `src/Tenji.tsx` (`tenji-block`, 35
+pictures, 28/11/2026; its hook is the second of three the owner was offered: "2"). All on the shared kit `src/kit.tsx`
+(people, with `shades` for dark glasses, Ginza, trains, labels, the finish, the
 `Movie` runner) and `src/parts.tsx` (the Shinkansen, the Diet, the egg and the rock, the three follies, the monument,
 the platform, calendars, confetti…). Each story file holds its pictures (`shots`, each starting at a moment of the
 voice from `src/timings/<story>.json`, copied from `doodle/stories/<story>/out/timing.json`) and its words (`words`).
