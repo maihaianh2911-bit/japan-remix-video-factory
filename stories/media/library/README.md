@@ -17,3 +17,7 @@ lại ảnh ở đây bằng một câu tìm `file:stories/media/library/<video>
 | [k10-2026-11-25-victoria-albert](k10-2026-11-25-victoria-albert/) | 40年の喪服とウエディングベール ヴィクトリア女王とアルバート公 | 20 |
 | [k10-2026-11-26-philip-oath](k10-2026-11-26-philip-oath/) | 妻への誓い フィリップ殿下とエリザベス女王の戴冠式 | 14 |
 | [k10-2026-11-26-philip-ring](k10-2026-11-26-philip-ring/) | すべてを捨てた王子 フィリップ殿下とエリザベス女王の婚約指輪 | 19 |
+| [k10-2026-11-27-diana-last-call](k10-2026-11-27-diana-last-call/) | 母との最後の電話 ダイアナ妃とウィリアム王子・ハリー王子 | 18 |
+| [k10-2026-11-27-philip-eyes](k10-2026-11-27-philip-eyes/) | 初めて会った日と同じ瞳 エリザベス女王の最後のクリスマスメッセージ | 14 |
+| [k10-2026-11-26-thu-art-nouveau](k10-2026-11-26-thu-art-nouveau/) | アール・ヌーヴォー（bản thử video phong cách mỹ thuật, không phải kênh 10） | 9 |
+| [k10-2026-11-27-thu-taisho-roman](k10-2026-11-27-thu-taisho-roman/) | 大正ロマン（bản thử video phong cách mỹ thuật, không phải kênh 10; có ảnh AI tìm được, ghi rõ trong credits.txt） | 23 |

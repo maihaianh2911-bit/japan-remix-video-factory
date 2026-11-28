@@ -1,0 +1,232 @@
+{
+ "36-4.jpg": {
+  "scene": "夜の浅草と 袴にブーツ",
+  "search": "web:鬼滅の刃 浅草 夜 街 壁紙 高画質",
+  "title": "aestheticz_hub on X: \"鬼滅の刃4K壁紙がリリースされました ...",
+  "page": "https://x.com/aestheticzhub/status/2125214125538349189/photo/18",
+  "artist": "x.com",
+  "license": "",
+  "width": 1152,
+  "height": 2048
+ },
+ "40-1.jpg": {
+  "scene": "夜の浅草と 袴にブーツ",
+  "search": "web:袴 ブーツ 女学生 大正 レトロ 写真 全身 レンガ",
+  "title": "伊田チヨ子🎀ステッキガール2巻🦯 on X: \"【女学生は袴にブーツ ...",
+  "page": "https://x.com/chiyocooooo73/status/1192310857608249344",
+  "artist": "x.com",
+  "license": "",
+  "width": 1536,
+  "height": 2048
+ },
+ "1-16.jpg": {
+  "scene": "夜の浅草と 袴にブーツ",
+  "search": "wiki:竹久夢二",
+  "title": "File:TakehisaYumeji-1920-12 Scenes at Nagasaki Meganebashi.png",
+  "page": "https://commons.wikimedia.org/wiki/File:TakehisaYumeji-1920-12_Scenes_at_Nagasaki_Meganebashi.png",
+  "artist": "Yumeji Takehisa",
+  "license": "Public domain",
+  "width": 3787,
+  "height": 5299
+ },
+ "26-16.jpg": {
+  "scene": "着物に革のブーツ",
+  "search": "web:卒業式 袴 ブーツ 女子大生",
+  "title": "卒業式 袴ブーツ ブーツ 袴 ブーツ ショート 「卒業式の袴ブーツ ...",
+  "page": "https://giftmall.co.jp/giftfJDqay/",
+  "artist": "giftmall.co.jp",
+  "license": "",
+  "width": 1600,
+  "height": 1600
+ },
+ "40-4.jpg": {
+  "scene": "着物に革のブーツ",
+  "search": "web:袴 ブーツ 女学生 大正 レトロ 写真 全身 レンガ",
+  "title": "上：女学生の遠足 大正2年 下：袴姿の少女 大正15年 | - Japaaan",
+  "page": "https://mag.japaaan.com/archives/111490/da621264b714ee51300aebead0f7fefd-e1572754485902",
+  "artist": "mag.japaaan.com",
+  "license": "",
+  "width": 1158,
+  "height": 1600
+ },
+ "6-2.jpg": {
+  "scene": "大正ロマン",
+  "search": "wiki:凌雲閣",
+  "title": "File:Jintan 12kai.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Jintan_12kai.jpg",
+  "artist": "Unknown",
+  "license": "Public domain",
+  "width": 1092,
+  "height": 1680
+ },
+ "16-4.jpg": {
+  "scene": "電灯とカフェーの街",
+  "search": "web:大正時代 浅草 活動写真館 絵葉書 着色",
+  "title": "ROKKU BROADWAY OFFICIAL SITE｜浅草六区の歴史写真館",
+  "page": "https://asakusarokku.com/history",
+  "artist": "asakusarokku.com",
+  "license": "",
+  "width": 800,
+  "height": 600
+ },
+ "4-8.jpg": {
+  "scene": "電灯とカフェーの街",
+  "search": "wiki:杉浦非水",
+  "title": "File:Mitsukoshi Gofukuten, Shinkan Rakusei poster by Hisui Sugiura.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Mitsukoshi_Gofukuten,_Shinkan_Rakusei_poster_by_Hisui_Sugiura.jpg",
+  "artist": "Hisui Sugiura",
+  "license": "Public domain",
+  "width": 2039,
+  "height": 2894
+ },
+ "8-7.jpg": {
+  "scene": "電灯とカフェーの街",
+  "search": "web:大正時代 浅草六区 夜景 絵葉書",
+  "title": "小金井で江戸東京博物館特別展示 「明治時代の台所」ミニチュア ...",
+  "page": "https://tachikawa.keizai.biz/photoflash/1696/",
+  "artist": "tachikawa.keizai.biz",
+  "license": "",
+  "width": 1200,
+  "height": 768
+ },
+ "14-2.jpg": {
+  "scene": "電灯とカフェーの街",
+  "search": "web:大正時代 カフェー 女給 写真",
+  "title": "カフェーの女給たち] | ToMuCo - Tokyo Museum Collection",
+  "page": "https://museumcollection.tokyo/works/6496646/",
+  "artist": "museumcollection.tokyo",
+  "license": "",
+  "width": 636,
+  "height": 1000
+ },
+ "21-1.jpg": {
+  "scene": "矢がすり、赤れんが、 ステンドグラス",
+  "search": "web:矢絣 着物 えび茶 袴",
+  "title": "袴 レンタル 先生 教員 卒業式 卒園式 女子袴 着物 紫中矢がすり ...",
+  "page": "https://store.shopping.yahoo.co.jp/frou-frou/msh108.html",
+  "artist": "store.shopping.yahoo.co.jp",
+  "license": "",
+  "width": 900,
+  "height": 900
+ },
+ "12-2.jpg": {
+  "scene": "矢がすり、赤れんが、 ステンドグラス",
+  "search": "Tokyo Station Marunouchi building night",
+  "title": "File:Tokyo Station Marunouchi Building P5228775.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Tokyo_Station_Marunouchi_Building_P5228775.jpg",
+  "artist": "Kestrel",
+  "license": "CC BY-SA 4.0",
+  "width": 1920,
+  "height": 2560
+ },
+ "17-3.jpg": {
+  "scene": "矢がすり、赤れんが、 ステンドグラス",
+  "search": "wiki:鳩山会館",
+  "title": "File:Hatoyama Hall (stained grass).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Hatoyama_Hall_(stained_grass).jpg",
+  "artist": "Lombroso",
+  "license": "Public domain",
+  "width": 1500,
+  "height": 2000
+ },
+ "42-18.jpg": {
+  "scene": "沈んだ色と電球の光",
+  "search": "web:大正 カフェー 店内 写真 着色 レトロ喫茶",
+  "title": "フリー素材】大正ロマンの喫茶店（3枚）",
+  "page": "https://game-materials.com/a-coffee-shop-with-a-taisho-era-romantic-atmosphere/",
+  "artist": "game-materials.com",
+  "license": "",
+  "width": 1920,
+  "height": 1080
+ },
+ "1-22.jpg": {
+  "scene": "竹久夢二の美人画",
+  "search": "wiki:竹久夢二",
+  "title": "File:TakehisaYumeji-1921-Ten Themes of Woman Girl in Kiba.png",
+  "page": "https://commons.wikimedia.org/wiki/File:TakehisaYumeji-1921-Ten_Themes_of_Woman_Girl_in_Kiba.png",
+  "artist": "Yumeji Takehisa",
+  "license": "Public domain",
+  "width": 3812,
+  "height": 5324
+ },
+ "1-24.jpg": {
+  "scene": "竹久夢二の美人画",
+  "search": "wiki:竹久夢二",
+  "title": "File:TakehisaYumeji-1921-Ten Themes of Woman To the Light of Morning.png",
+  "page": "https://commons.wikimedia.org/wiki/File:TakehisaYumeji-1921-Ten_Themes_of_Woman_To_the_Light_of_Morning.png",
+  "artist": "Yumeji Takehisa",
+  "license": "Public domain",
+  "width": 3843,
+  "height": 5284
+ },
+ "1-13.jpg": {
+  "scene": "竹久夢二の美人画",
+  "search": "wiki:竹久夢二",
+  "title": "File:TakehisaYumeji-1920-12 Scenes at Nagasaki Dejima.png",
+  "page": "https://commons.wikimedia.org/wiki/File:TakehisaYumeji-1920-12_Scenes_at_Nagasaki_Dejima.png",
+  "artist": "Yumeji Takehisa",
+  "license": "Public domain",
+  "width": 4711,
+  "height": 6395
+ },
+ "4-9.jpg": {
+  "scene": "新しいものも、 古いものも",
+  "search": "wiki:杉浦非水",
+  "title": "File:Mitsukoshigofukuten Haru no shingara chinretsu-kai by Hisui Sugiura.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Mitsukoshigofukuten_Haru_no_shingara_chinretsu-kai_by_Hisui_Sugiura.jpg",
+  "artist": "Hisui Sugiura",
+  "license": "Public domain",
+  "width": 4282,
+  "height": 5901
+ },
+ "28-18.jpg": {
+  "scene": "新しいものも、 古いものも",
+  "search": "web:大正ロマン 洋館 応接室 和洋折衷",
+  "title": "和洋折衷、大正ロマンの家 | 未来工房｜福岡・佐賀・熊本の木の ...",
+  "page": "https://www.mirai-kohboh.co.jp/works/68-2/",
+  "artist": "mirai-kohboh.co.jp",
+  "license": "",
+  "width": 1642,
+  "height": 2400
+ },
+ "6-12.jpg": {
+  "scene": "関東大震災",
+  "search": "wiki:凌雲閣",
+  "title": "File:Ryounkaku - after 1923 earthquake.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Ryounkaku_-_after_1923_earthquake.jpg",
+  "artist": "Unknown authorUnknown author",
+  "license": "Public domain",
+  "width": 1084,
+  "height": 1940
+ },
+ "24-17.jpg": {
+  "scene": "短かったからこそ",
+  "search": "wiki:銀山温泉",
+  "title": "File:Ginzan Onsen, the other side.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Ginzan_Onsen,_the_other_side.jpg",
+  "artist": "lumoplank",
+  "license": "CC0",
+  "width": 3825,
+  "height": 5100
+ },
+ "11-14.jpg": {
+  "scene": "卒業式の袴",
+  "search": "web:袴 編み上げブーツ 足元 大正ロマン",
+  "title": "卒業式の袴にはブーツ？草履？それぞれのメリットやブーツの ...",
+  "page": "https://www.maimu.co.jp/contents/hakama/42122/",
+  "artist": "maimu.co.jp",
+  "license": "",
+  "width": 1600,
+  "height": 1066
+ },
+ "24-16.jpg": {
+  "scene": "あなたの大正ロマン",
+  "search": "wiki:銀山温泉",
+  "title": "File:Architecture of Ginzan Onsen.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Architecture_of_Ginzan_Onsen.jpg",
+  "artist": "lumoplank",
+  "license": "CC0",
+  "width": 5084,
+  "height": 3813
+ }
+}

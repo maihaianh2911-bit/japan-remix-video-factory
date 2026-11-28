@@ -1,0 +1,92 @@
+{
+ "2-1.jpg": {
+  "scene": "日本に恋をした 一つの様式",
+  "search": "Mucha Zodiac 1896",
+  "title": "File:Alphonse Mucha - Zodiac, 1869.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Alphonse_Mucha_-_Zodiac,_1869.jpg",
+  "artist": "Alphonse Mucha",
+  "license": "Public domain",
+  "width": 2046,
+  "height": 2717
+ },
+ "7-4.jpg": {
+  "scene": "日本に恋をした 一つの様式",
+  "search": "wiki:Paris Métro entrances by Hector Guimard",
+  "title": "File:Abbesses entrance 2.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Abbesses_entrance_2.jpg",
+  "artist": "Steve Cadman (©)",
+  "license": "CC BY-SA 2.0",
+  "width": 2448,
+  "height": 3264
+ },
+ "12-9.jpg": {
+  "scene": "日本に恋をした 一つの様式",
+  "search": "wiki:神奈川沖浪裏",
+  "title": "File:23 - The Sea off Satta.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:23_-_The_Sea_off_Satta.jpg",
+  "artist": "Utagawa Hiroshige",
+  "license": "Public domain",
+  "width": 5902,
+  "height": 8583
+ },
+ "17-1.jpg": {
+  "scene": "アール・ヌーヴォー",
+  "search": "wiki:カサ・バトリョ",
+  "title": "File:Casa Batllo Overview Barcelona Spain cut.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Casa_Batllo_Overview_Barcelona_Spain_cut.jpg",
+  "artist": "ChristianSchd",
+  "license": "CC BY-SA 3.0",
+  "width": 2244,
+  "height": 2765
+ },
+ "10-3.jpg": {
+  "scene": "花や蔓草のような曲線",
+  "search": "wiki:タッセル邸",
+  "title": "File:Tassel House stairway.JPG",
+  "page": "https://commons.wikimedia.org/wiki/File:Tassel_House_stairway.JPG",
+  "artist": "Henry Townsend",
+  "license": "Public domain",
+  "width": 1700,
+  "height": 1440
+ },
+ "6-4.jpg": {
+  "scene": "くっきりした輪郭と 大胆な構図",
+  "search": "wiki:アール・ヌーヴォー",
+  "title": "File:Alfons Mucha - Fruit2.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Alfons_Mucha_-_Fruit2.jpg",
+  "artist": "Alphonse Mucha",
+  "license": "Public domain",
+  "width": 2617,
+  "height": 4138
+ },
+ "27-1.jpg": {
+  "scene": "海を渡った浮世絵",
+  "search": "url:https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Katsushika_Hokusai_-_The_Great_Wave_off_the_Coast_of_Kanagawa_LCCN2008660568.jpg/3840px-Katsushika_Hokusai_-_The_Great_Wave_off_the_Coast_of_Kanagawa_LCCN2008660568.jpg https://commons.wikimedia.org/wiki/File:Katsushika_Hokusai_-_The_Great_Wave_off_the_Coast_of_Kanagawa_LCCN2008660568.jpg",
+  "title": "3840px-Katsushika_Hokusai_-_The_Great_Wave_off_the_Coast_of_Kanagawa_LCCN2008660568.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Katsushika_Hokusai_-_The_Great_Wave_off_the_Coast_of_Kanagawa_LCCN2008660568.jpg",
+  "artist": "commons.wikimedia.org",
+  "license": "",
+  "width": 2400,
+  "height": 1693
+ },
+ "14-5.jpg": {
+  "scene": "名前は画商の店から",
+  "search": "wiki:Siegfried Bing",
+  "title": "File:Le Japon artistique décembre 1889.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Le_Japon_artistique_d%C3%A9cembre_1889.jpg",
+  "artist": "Unknown authorUnknown author",
+  "license": "Public domain",
+  "width": 742,
+  "height": 1001
+ },
+ "15-2.jpg": {
+  "scene": "名前は画商の店から",
+  "search": "Maison de l'Art Nouveau Bing",
+  "title": "File:Affiche pour la Maison de l'Art nouveau (musée des arts décoratifs, Paris) (cropped).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Affiche_pour_la_Maison_de_l%27Art_nouveau_(mus%C3%A9e_des_arts_d%C3%A9coratifs,_Paris)_(cropped).jpg",
+  "artist": "de l'affiche Félix Vallotton (1865-1925) et de la photo Jean-Pierre Dalbéra from Paris, France, 2018-11-18 15:21",
+  "license": "CC BY 2.0",
+  "width": 2053,
+  "height": 2895
+ }
+}

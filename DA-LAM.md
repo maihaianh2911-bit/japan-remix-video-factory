@@ -28,3 +28,5 @@ Bản thử, không tính là video: `k10-2026-11-25-thu-giong-nu-himari`, `k10-
 Bản thử dạng video giải thích một phong cách mỹ thuật (chưa có kênh, tạm để dưới tên kênh 10; không phải video kênh 10),
 ghi ở đây để không làm trùng đề tài: `k10-2026-11-26-thu-art-nouveau` (アール・ヌーヴォー, 26 giây, 26/11/2026),
 `k10-2026-11-27-thu-taisho-roman` (大正ロマン, 71 giây, 27/11/2026).
+
+Bản thử khác, đã xoá video ngày 28/11/2026 (chỉ giữ tên): `k10-2026-11-27-thu-yuki-ng3` (mẹo xe 「雪の日にやりがちな、危ない行動3選」, mã ở `car-tips/`, ảnh đã chép vào `car-tips/public/images/`), `k10-2026-11-27-thu-suimin-sign5` (sức khỏe 「睡眠不足のサイン5選」, chỉ tìm ảnh, mã ở `health-sign5/`, ảnh đã chép vào `health-sign5/public/images/`).

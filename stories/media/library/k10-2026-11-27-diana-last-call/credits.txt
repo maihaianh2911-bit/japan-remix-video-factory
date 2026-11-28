@@ -1,0 +1,182 @@
+{
+ "14-1.jpg": {
+  "scene": "母との 最後の電話",
+  "search": "web:young Prince William Prince Harry laughing 1990s => young Prince William and Prince Harry laughing together",
+  "title": "65716288-1264-4123-ac06- ...",
+  "page": "https://www.romper.com/entertainment/photos-of-royals-laughing-having-good-time",
+  "artist": "romper.com",
+  "license": "",
+  "width": 1200,
+  "height": 1200
+ },
+ "9-4.jpg": {
+  "scene": "母との 最後の電話",
+  "search": "web:Princess Diana hugging sons William Harry => Princess Diana hugging her young sons",
+  "title": "Vintage Photos of Princess Diana with Young William and Harry",
+  "page": "https://people.com/most-heartwarming-photos-of-princess-diana-with-william-and-harry-12009863",
+  "artist": "people.com",
+  "license": "",
+  "width": 1500,
+  "height": 1000
+ },
+ "11-11.jpg": {
+  "scene": "バルモラル城の 夏休み",
+  "search": "web:Balmoral Castle summer => Balmoral Castle in Scotland in summer",
+  "title": "Balmoral: The Queen's summer home that holds years of royal ...",
+  "page": "https://www.independent.co.uk/news/uk/balmoral-victoria-boris-johnson-diana-liz-truss-b2162694.html",
+  "artist": "independent.co.uk",
+  "license": "",
+  "width": 2400,
+  "height": 1600
+ },
+ "10-7.jpg": {
+  "scene": "バルモラル城の 夏休み",
+  "search": "web:Prince William Prince Harry Balmoral 1997 => teenage Prince William and young Prince Harry in Scotland",
+  "title": "The Real Story Behind The Charles, Prince William And Prince ...",
+  "page": "https://graziadaily.co.uk/life/in-the-news/charles-william-harry-balmoral-scotland-pictures/",
+  "artist": "graziadaily.co.uk",
+  "license": "",
+  "width": 2400,
+  "height": 1350
+ },
+ "12-2.jpg": {
+  "scene": "パリからの 電話",
+  "search": "web:Princess Diana August 1997 last summer => Princess Diana smiling in the summer of 1997",
+  "title": "A “Twist of Fate” Changed Princess Diana's Last Summer—and ...",
+  "page": "https://www.vanityfair.com/story/princess-dianas-changed-summer-plans",
+  "artist": "vanityfair.com",
+  "license": "",
+  "width": 1605,
+  "height": 2400
+ },
+ "7-19.jpg": {
+  "scene": "パリからの 電話",
+  "search": "web:Princess Diana William Harry laughing => Princess Diana laughing with her two young sons William and Harry",
+  "title": "Princess Diana's Personal Letters Highlight How \"Inseparable ...",
+  "page": "https://www.yahoo.com/entertainment/princess-dianas-personal-letters-highlight-163555302.html",
+  "artist": "yahoo.com",
+  "license": "",
+  "width": 1200,
+  "height": 1200
+ },
+ "23-17.jpg": {
+  "scene": "「もう 行っていい？」",
+  "search": "web:Prince William 2017 interview mother Diana => Prince William in 2017 talking about his mother",
+  "title": "Princess Diana's Death: Prince Harry and Prince William's ...",
+  "page": "https://www.vogue.com/article/princess-diana-death-prince-harry-william-bbc",
+  "artist": "vogue.com",
+  "license": "",
+  "width": 2000,
+  "height": 2000
+ },
+ "14-20.jpg": {
+  "scene": "「もう 行っていい？」",
+  "search": "web:young Prince William Prince Harry laughing 1990s => young Prince William and Prince Harry laughing together",
+  "title": "Childhood photos of Prince Harry and William - May 4, 2023 ...",
+  "page": "https://www.reuters.com/pictures/childhood-photos-prince-harry-william-2023-05-04/DQNHGQSXZJPQHDWNZT4FZTV3KE/",
+  "artist": "reuters.com",
+  "license": "",
+  "width": 1200,
+  "height": 1693
+ },
+ "15-9.jpg": {
+  "scene": "36歳の 死",
+  "search": "web:Pont de l'Alma tunnel Paris night => the Pont de l'Alma tunnel in Paris at night",
+  "title": "Prince Harry Asked His Driver to Race Through Same Paris ...",
+  "page": "https://www.cheatsheet.com/news/prince-harry-driver-same-paris-tunnel-princess-diana-fateful-car-crash-no-reason-anyone-should-ever-die-inside-it.html/",
+  "artist": "cheatsheet.com",
+  "license": "",
+  "width": 1600,
+  "height": 800
+ },
+ "16-10.jpg": {
+  "scene": "36歳の 死",
+  "search": "web:Kensington Palace flowers Diana 1997 => a sea of flowers at Kensington Palace after Diana's death in 1997",
+  "title": "People leaving flowers at Kensington Palace after the death ...",
+  "page": "https://www.reddit.com/r/pics/comments/qrmja2/people_leaving_flowers_at_kensington_palace_after/",
+  "artist": "reddit.com",
+  "license": "",
+  "width": 2400,
+  "height": 1738
+ },
+ "17-20.jpg": {
+  "scene": "母の棺の 後ろを",
+  "search": "web:Diana funeral William Harry walk behind coffin => Prince William and Prince Harry walking behind their mother's coffin in 1997",
+  "title": "Why Prince Harry and Prince William Walked Behind Princess ...",
+  "page": "https://www.instyle.com/prince-william-prince-harry-walking-behind-princess-diana-coffin-decision-12064389",
+  "artist": "instyle.com",
+  "license": "",
+  "width": 1500,
+  "height": 1365
+ },
+ "18-7.jpg": {
+  "scene": "宛名は 「ママ」",
+  "search": "web:Diana coffin white roses Mummy card => Diana's coffin with white roses and a card reading Mummy",
+  "title": "Meghan Markle Cried Aged 16 at Prince Harry's Funeral ...",
+  "page": "https://www.newsweek.com/meghan-markle-cried-aged-16-prince-harry-funeral-flowers-mummy-princess-diana-andrew-morton-1635131",
+  "artist": "newsweek.com",
+  "license": "",
+  "width": 1600,
+  "height": 1078
+ },
+ "18-3.jpg": {
+  "scene": "宛名は 「ママ」",
+  "search": "web:Diana coffin white roses Mummy card => Diana's coffin with white roses and a card reading Mummy",
+  "title": "Diana's Funeral – part 1 – tape 1272 | VHiStory",
+  "page": "https://vhistory.wordpress.com/2016/08/08/dianas-funeral-part-1-tape-1272/",
+  "artist": "vhistory.wordpress.com",
+  "license": "",
+  "width": 741,
+  "height": 563
+ },
+ "20-1.jpg": {
+  "scene": "ウィリアム王子の 後悔",
+  "search": "web:Diana Our Mother documentary 2017 William Harry => Prince William and Prince Harry in the 2017 documentary about their mother",
+  "title": "Princess Diana 'Our Mother' documentary on ITV: Prince ...",
+  "page": "https://www.standard.co.uk/culture/tvfilm/princess-diana-our-mother-documentary-on-itv-prince-william-and-harry-remember-their-late-mother-on-the-20th-anniversary-of-her-death-a3595051.html",
+  "artist": "standard.co.uk",
+  "license": "",
+  "width": 1000,
+  "height": 575
+ },
+ "21-6.jpg": {
+  "scene": "ウィリアム王子の 後悔",
+  "search": "web:William Harry Diana memorial garden Kensington 2017 => Prince William and Prince Harry looking at tributes to their mother in 2017",
+  "title": "3906.jpg?width=1200&height= ...",
+  "page": "https://www.theguardian.com/uk-news/2017/aug/30/william-harry-remember-princess-diana-memorial-garden-kensington-palace",
+  "artist": "theguardian.com",
+  "license": "",
+  "width": 1200,
+  "height": 1200
+ },
+ "22-12.jpg": {
+  "scene": "ハリー王子の 後悔",
+  "search": "web:Prince Harry 2017 interview mother Diana => Prince Harry in 2017 talking about his mother",
+  "title": "_95664492_harry_pa.jpg",
+  "page": "https://www.bbc.com/news/uk-39618169",
+  "artist": "bbc.com",
+  "license": "",
+  "width": 1200,
+  "height": 675
+ },
+ "20-9.jpg": {
+  "scene": "ハリー王子の 後悔",
+  "search": "web:Diana Our Mother documentary 2017 William Harry => Prince William and Prince Harry in the 2017 documentary about their mother",
+  "title": "Prince William and Prince Harry Open Up About Diana",
+  "page": "https://people.com/royals/prince-harry-princess-diana-last-phone-call-diana-our-mother/",
+  "artist": "people.com",
+  "license": "",
+  "width": 1500,
+  "height": 1957
+ },
+ "9-9.jpg": {
+  "scene": "母と息子たちの 最後の会話",
+  "search": "web:Princess Diana hugging sons William Harry => Princess Diana hugging her young sons",
+  "title": "Review: Princes William and Harry's Guarded Confessions in ...",
+  "page": "https://www.newyorker.com/culture/cultural-comment/princes-william-and-harrys-guarded-confessions-in-diana-our-mother",
+  "artist": "newyorker.com",
+  "license": "",
+  "width": 2400,
+  "height": 1800
+ }
+}
