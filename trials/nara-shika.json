@@ -2,12 +2,22 @@
  "stage": "find",
  "note": "Kênh mới (cảnh đẹp Nhật), bố cục khung ảnh: vì sao Nara có nhiều hươu.",
  "layout": "frame",
- "header": ["なぜ奈良には", "*鹿*がこんなにいる？"],
- "voice": ["もち子さん", "ノーマル"],
+ "header": [
+  "なぜ奈良には",
+  "*鹿*がこんなにいる？"
+ ],
+ "voice": [
+  "もち子さん",
+  "ノーマル"
+ ],
  "speed": 1.2,
  "tail": 0.6,
  "scene_pause": 0.12,
- "music": {"file": "music/k10-sao-truc.mp3", "title": "竹笛", "volume": 0.25},
+ "music": {
+  "file": "music/k10-sao-truc.mp3",
+  "title": "竹笛",
+  "volume": 0.25
+ },
  "searches": [
   "nara deer",
   "nara park",
@@ -20,7 +30,15 @@
   "photo:Shika senbei",
   "photo:Kasugayama forest Nara",
   "photo:Todai-ji deer",
-  "print:Kashima deer Kasuga mandala"
+  "print:Kashima deer Kasuga mandala",
+  "print:Kasuga Deer Mandala",
+  "print:春日鹿曼荼羅",
+  "photo:Kasuga Grand Shrine lanterns",
+  "photo:Kasuga-taisha chumon",
+  "photo:deer bowing Nara park",
+  "photo:Nara deer herd Tobihino",
+  "photo:Nara deer sleeping",
+  "photo:Kashima Jingu"
  ],
  "scenes": []
 }
