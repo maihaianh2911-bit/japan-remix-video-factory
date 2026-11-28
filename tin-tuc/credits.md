@@ -51,3 +51,20 @@ Tìm bằng story `stories/k10-2026-11-28-thu-seki.json`. Ảnh báo (朝日新�
 | `seki/takaichi.jpg` | 8-19 | 1200×764 | https://www.tokyo-np.co.jp/article/523022  |
 
 Nhạc: Erik Satie, Gnossienne No.1, Wikimedia Commons, Public domain.
+
+## 「第3子生まれたら1000万円」 (`stories/daisanshi`)
+
+Tìm bằng story `stories/k10-2026-11-28-thu-daisanshi.json`. Khung bản tin FNN, ảnh minh họa (イメージ) từ các trang ghi bên dưới; ảnh Thủ tướng dùng lại ảnh tư liệu của `seki`. Số liệu: テレ朝NEWS/ABEMA (27–28/11/2026), 厚生労働省 人口動態統計 2025.
+
+| File | Pick | Cỡ | Trang |
+| --- | --- | --- | --- |
+| `daisanshi/baby.jpg` | 1-13 | 2400×1600 | https://www.pakutaso.com/20170103020post-10093.html |
+| `daisanshi/news.jpg` | 6-3 | 1280×720 | https://www.youtube.com/watch?v=fzHwnbh551w |
+| `daisanshi/ward.jpg` | 7-12 | 2400×1601 | https://www.ofa-yokohama.com/ladies/blog/212.html |
+| `daisanshi/hoiku.jpg` | 10-6 | 2400×1800 | https://edogawa-ohisama.or.jp/nishikasai-ohisama/blog/dir2026/20260507-145650 |
+| `daisanshi/konkatsu.jpg` | 11-2 | 2400×1600 | https://storyweb.jp/lifestyle/324061/ |
+| `daisanshi/senior.jpg` | 12-4 | 1400×933 | https://www.kinezuka.jp/knowledge/knowledge-661/ |
+| `daisanshi/family.jpg` | 2-12 | 710×670 | https://grapee.jp/1833118 |
+| `daisanshi/takaichi.jpg` | (= seki/takaichi.jpg) | | https://www.tokyo-np.co.jp/article/523022 (資料写真) |
+
+Nhạc: Robert Schumann, Träumerei (Kinderszenen op. 15 số 7), Wikimedia Commons, Public domain.

@@ -30,6 +30,7 @@ ngày, Claude đi đủ danh sách này rồi mới đề xuất, không tìm th
 | `hounichi` | 訪日客、中国半減でも過去最多 | 68 s | JNTO, công bố 18/11/2026 |
 | `ijime` | いじめ79万件で過去最多、性的いじめ初調査8158件 | 70 s | 文部科学省, công bố 26/11/2026 |
 | `seki` | 関文科相の問責決議案、4票差で否決 (政治) | 70 s | 参院本会議 27/11/2026 (共同, ロイター) |
+| `daisanshi` | 第3子生まれたら1000万円 (自民提言) | 66 s | テレ朝/ABEMA 27–28/11/2026, 人口動態統計 2025 |
 
 Mỗi video: `stories/<tên>/story.json` (lời đọc, nhạc, tiếng động), `caption.txt`, `music/`; ảnh trong
 `public/images/<tên>/`; cảnh trong `src/videos/<Tên>.tsx` (dùng `NewsFrame` của `src/frame.tsx` và đồ của
