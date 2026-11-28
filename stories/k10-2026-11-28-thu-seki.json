@@ -1,0 +1,36 @@
+{
+  "channel": "k10",
+  "stage": "find",
+  "trial": true,
+  "title": "【試し・画像検索のみ】関文科相の問責決議案、4票差で否決（ニュース tin-tuc/ の写真さがし）",
+  "date": "2026-11-28",
+  "scenes": [
+    {
+      "label": "問責",
+      "headline": "問責決議案\n4票差で否決",
+      "lines": [
+        {
+          "text": "文部科学大臣への問責決議案は、わずか4票差で否決されました。",
+          "quote": true
+        }
+      ]
+    }
+  ],
+  "searches": [
+    "wiki:関芳弘",
+    "web:関芳弘 文科相 => a Japanese male minister in a suit speaking at a press conference",
+    "web:関文科相 問責決議案 参院本会議 => the Japanese House of Councillors plenary session voting",
+    "web:参院本会議 採決 投票 => Japanese lawmakers walking to cast votes in the upper house chamber",
+    "web:関文科相 パーティー 官僚 記者会見 => a Japanese minister answering questions at a press conference",
+    "wiki:衆議院第一議員会館",
+    "web:議員会館 外観 => the exterior of the members office building of the Japanese Diet",
+    "web:高市首相 記者団 => Japanese prime minister Takaichi speaking to reporters",
+    "wiki:国会議事堂",
+    "page:https://news.yahoo.co.jp/pickup/6604161",
+    "page:https://kumanichi.com/articles/2058706",
+    "page:https://www.kobe-np.co.jp/news/society/202611/0021045176.shtml",
+    "web:政治資金パーティー 会場 => a political fundraising party in a hotel ballroom in Japan",
+    "music:Satie Gnossienne piano",
+    "music:Bach prelude piano"
+  ]
+}
