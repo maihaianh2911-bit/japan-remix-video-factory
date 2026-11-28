@@ -1,0 +1,38 @@
+{
+  "channel": "k10",
+  "stage": "find",
+  "trial": true,
+  "title": "【試し・画像検索のみ】第3子生まれたら1000万円（ニュース tin-tuc/ の写真さがし）",
+  "date": "2026-11-28",
+  "scenes": [
+    {
+      "label": "1000万円",
+      "headline": "第3子に\n1000万円",
+      "lines": [
+        {
+          "text": "3人目の子どもが生まれたら1000万円。自民党が、そんな少子化対策を政府に求めます。",
+          "quote": true
+        }
+      ]
+    }
+  ],
+  "searches": [
+    "web:新生児 赤ちゃん 寝顔 => a sleeping newborn baby wrapped in a white blanket",
+    "web:三人兄弟 後ろ姿 家族 => a family with three young children walking seen from behind",
+    "page:https://news.yahoo.co.jp/articles/7fc586592be1faa84b8b26efcb148a3cac9e0209",
+    "page:https://times.abema.tv/articles/-/10292705",
+    "page:https://times.abema.tv/articles/-/10292586",
+    "web:第3子 1000万円 自民 人口戦略本部 => a Japanese ruling party policy meeting",
+    "web:産婦人科 新生児室 => a hospital newborn nursery with baby cots in Japan",
+    "web:出生数 過去最少 2025 67万 => a chart of births in Japan falling",
+    "page:https://www.nippon.com/ja/japan-data/h02802/",
+    "web:保育園 子ども 後ろ姿 => children at a Japanese nursery school seen from behind",
+    "web:婚活アプリ スマホ => a smartphone showing a dating app",
+    "web:高齢者 働く 日本 => an elderly Japanese man working",
+    "web:高市首相 => Japanese prime minister Takaichi",
+    "web:一万円札 束 => a stack of Japanese 10000 yen banknotes",
+    "web:妊婦 お腹 => a pregnant woman holding her belly",
+    "music:Schumann Träumerei piano",
+    "music:Debussy Clair de lune piano"
+  ]
+}
