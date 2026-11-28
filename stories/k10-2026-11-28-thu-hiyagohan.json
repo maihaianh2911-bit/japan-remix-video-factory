@@ -1,0 +1,54 @@
+{
+  "channel": "k10",
+  "stage": "find",
+  "trial": true,
+  "title": "【試し・画像検索のみ】冷やご飯の秘密（健康チャンネル health-sign5/ の写真さがし）",
+  "date": "2026-11-28",
+  "searches": [
+    "wiki:デンプン",
+    "wiki:レジスタントスターチ",
+    "wiki:腸内細菌叢",
+    "wiki:酪酸",
+    "wiki:大腸",
+    "wiki:セレウス菌",
+    "wiki:アミロース",
+    "starch granules scanning electron micrograph => starch granules seen under a scanning electron microscope",
+    "starch grains polarized light microscope => starch grains with maltese crosses under polarized light microscope",
+    "rice starch microscope => rice starch granules under a microscope",
+    "gut bacteria scanning electron micrograph => rod-shaped bacteria seen under a scanning electron microscope",
+    "Bifidobacterium microscope => Bifidobacterium bacteria under a microscope",
+    "colon mucosa histology => microscope image of the lining of the large intestine",
+    "Blausen digestive system => a medical illustration of the human digestive system without text",
+    "large intestine illustration 3D => a 3D medical illustration of the human large intestine",
+    "Butyric acid 3D balls => a ball-and-stick 3D molecular model",
+    "Bacillus cereus micrograph => rod-shaped Bacillus cereus bacteria under a microscope",
+    "web:pexels steaming bowl of white rice => a steaming bowl of freshly cooked white rice, close-up photograph",
+    "web:炊きたて ご飯 湯気 茶碗 フリー写真素材 => a bowl of freshly cooked Japanese white rice with steam, photograph",
+    "web:炊飯器 炊きたて ご飯 湯気 => an open rice cooker full of freshly cooked white rice with steam, photograph",
+    "web:冷やご飯 保存容器 冷蔵庫 => cooked white rice stored in a plastic container in a refrigerator, photograph",
+    "web:pexels cooked rice in plastic container => cooked white rice in a plastic food container, photograph",
+    "web:pexels open refrigerator food containers => an open refrigerator with food storage containers inside, photograph",
+    "web:ご飯 小分け ラップ 保存 => portions of cooked rice wrapped in plastic wrap for storage, photograph",
+    "web:pexels microwave oven heating food => a microwave oven heating a bowl of food, photograph",
+    "web:pexels blood glucose meter finger => a person checking blood sugar with a glucose meter, close-up photograph",
+    "web:pexels asian woman eating rice bowl chopsticks => an Asian woman eating a bowl of rice with chopsticks, photograph",
+    "web:pexels japanese family dinner table rice => an Asian family eating dinner together with bowls of rice, photograph",
+    "web:pexels onigiri rice balls => Japanese onigiri rice balls on a plate, photograph",
+    "web:pexels leftover rice trash => leftover cooked rice being thrown away into a trash bin, photograph",
+    "web:pexels rice cooker kitchen => a rice cooker on a kitchen counter, photograph",
+    "music:Grieg Morning Mood",
+    "music:Debussy Arabesque piano"
+  ],
+  "scenes": [
+    {
+      "label": "冷やご飯",
+      "headline": "冷やご飯の\n秘密",
+      "lines": [
+        {
+          "text": "冷蔵庫の冷やご飯は、実は炊きたてより、血糖値が上がりにくいごはんに変わっています。",
+          "quote": true
+        }
+      ]
+    }
+  ]
+}
