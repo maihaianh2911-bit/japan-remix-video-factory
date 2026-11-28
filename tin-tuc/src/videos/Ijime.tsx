@@ -14,12 +14,12 @@ const I = (n: string) => `ijime/${n}.jpg`;
 const SHOTS: Shot[] = [
   // ── Hook: ảnh lớp học trống + 「79万件」「過去最多」 hiện ngay từ khung hình đầu ──
   {
-    from: 0, to: s(1), src: 'NHK NEWS WEB（2026年11月27日）',
+    from: 0, to: s(1), src: 'adire.jp（イメージ写真）',
     draw: (d) => (
       <Sequence from={-10} layout="none">
-        <Clipping src={I('classroom')} dur={d + 10} caption="学校のいじめ 79万件" angle={-2} zoom={[1.0, 1.1]} focus={[0.45, 0.5]} />
-        <Stamp text="79万件" x={120} y={K.y + 120} size={110} angle={-6} />
-        <Stamp text="過去最多" x={480} y={K.y + 560} size={96} angle={-8} />
+        <Clipping src={I('bully')} dur={d + 10} caption="学校のいじめ 79万件" angle={-2} zoom={[1.0, 1.1]} focus={[0.3, 0.45]} />
+        <Stamp text="79万件" x={560} y={K.y + 50} size={100} angle={6} />
+        <Stamp text="過去最多" x={500} y={K.y + 580} size={96} angle={-8} />
       </Sequence>
     ),
   },
@@ -201,6 +201,7 @@ const HOT = ['79万件', '過去最多', '性的いじめ', '8000件', '79万178
 
 export const Ijime: React.FC = () => (
   <NewsFrame
+    title={"学校のいじめ{79万件} {過去最多}\n「性的いじめ」初調査で{8158件}"} tag="社会" date="2026年11月28日"
     time={time}
     shots={SHOTS}
     hot={HOT}

@@ -204,6 +204,7 @@ const HOT = ['ほぼ半分', '過去最多', '391万2500人', '3000人', '47パ�
 
 export const Hounichi: React.FC = () => (
   <NewsFrame
+    title={"訪日客 10月は{過去最多}\n中国客は{ほぼ半減}でも"} tag="経済" date="2026年11月28日"
     time={time}
     shots={SHOTS}
     hot={HOT}

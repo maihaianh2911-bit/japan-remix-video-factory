@@ -6,7 +6,7 @@ import { AbsoluteFill, Easing, Img, interpolate, spring, staticFile, useCurrentF
 export const W = 1080;
 export const H = 1920;
 /** Khung chính. Chữ quan trọng không ra ngoài x 60–940, y < 1560 (nút và chữ của TikTok). */
-export const K = { x: 70, y: 330, w: 900, h: 900 };
+export const K = { x: 70, y: 480, w: 900, h: 900 };
 
 export const SERIF = '"Noto Serif JP", serif';
 export const SANS = '"Noto Sans JP", sans-serif';

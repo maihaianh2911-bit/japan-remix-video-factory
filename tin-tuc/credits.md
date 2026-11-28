@@ -26,7 +26,7 @@ Tìm bằng story `stories/k10-2026-11-28-thu-ijime.json`. Ảnh tin của NHK, 
 
 | File | Pick | Cỡ | Trang |
 | --- | --- | --- | --- |
-| `ijime/classroom.jpg` | 10-16 | 1920×1080 | https://news.web.nhk/newsweb/na/nd-20261127de82139 |
+| `ijime/bully.jpg` | 17-1 | 1200×800 | https://www.adire.jp/lega_life_lab/law/column2112/ (ảnh minh họa, hook) |
 | `ijime/abc.jpg` | 10-13 | 1920×1080 | https://www.asahi.co.jp/webnews/pages/abc_63826.html |
 | `ijime/mext.jpg` | 10-19 | 1920×1080 | https://news.web.nhk/newsweb/na/nd-20261126de81643 |
 | `ijime/ntv.jpg` | 10-10 | 1280×720 | https://www.youtube.com/watch?v=AHwRU72OLYY |
