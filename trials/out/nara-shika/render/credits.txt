@@ -1,0 +1,19 @@
+映像:
+hook: Wikimedia Commons — Todai-ji, Nara (3810557145).jpg — Andrea Schaffer from Sydney, Australia — CC BY 2.0 — https://commons.wikimedia.org/wiki/File:Todai-ji,_Nara_(3810557145).jpg
+hook: Wikimedia Commons — Nara Todai-ji Nandai-mon South Side 4.jpg — Zairon — CC BY 4.0 — https://commons.wikimedia.org/wiki/File:Nara_Todai-ji_Nandai-mon_South_Side_4.jpg
+hook: Wikimedia Commons — Deer @ Todai-ji Temple @ Nara (13324369345).jpg — Guilhem Vellut from Annecy, France — CC BY 2.0 — https://commons.wikimedia.org/wiki/File:Deer_@_Todai-ji_Temple_@_Nara_(13324369345).jpg
+origin: Wikimedia Commons — Kasuga-taisha, chumon-2.jpg — Saigen Jiro — CC0 — https://commons.wikimedia.org/wiki/File:Kasuga-taisha,_chumon-2.jpg
+origin: Wikimedia Commons — Kasuga Deer Mandala (Nara National Museum).jpg — Unknown authorUnknown author — Public domain — https://commons.wikimedia.org/wiki/File:Kasuga_Deer_Mandala_(Nara_National_Museum).jpg
+origin: Wikimedia Commons — Inner Sando of Kashima Shrine.jpg — そらみみ — CC BY-SA 3.0 — https://commons.wikimedia.org/wiki/File:Inner_Sando_of_Kashima_Shrine.jpg
+messenger: Wikimedia Commons — Kasuga-taisha HDSR IMG 3582.jpg — Hyppolyte de Saint-Rambert — CC BY-SA 4.0 — https://commons.wikimedia.org/wiki/File:Kasuga-taisha_HDSR_IMG_3582.jpg
+wild: Wikimedia Commons — Deer (Cervus nippon centralis) drinking from a ditch, Nara Park, Nara, 2016.jpg — DimiTalen — CC0 — https://commons.wikimedia.org/wiki/File:Deer_(Cervus_nippon_centralis)_drinking_from_a_ditch,_Nara_Park,_Nara,_2016.jpg
+wild: Wikimedia Commons — Japan, Nara - Kasugayama primeval forest 2011 2.jpg — C.K. Tse — CC BY-SA 2.0 — https://commons.wikimedia.org/wiki/File:Japan,_Nara_-_Kasugayama_primeval_forest_2011_2.jpg
+wild: Wikimedia Commons — Nara (49048860358).jpg — xiquinhosilva from Cacau — CC BY 2.0 — https://commons.wikimedia.org/wiki/File:Nara_(49048860358).jpg
+monument: Wikimedia Commons — Sika deer in Nara Park, November 2016.jpg — Martin Falbisoner — CC BY-SA 4.0 — https://commons.wikimedia.org/wiki/File:Sika_deer_in_Nara_Park,_November_2016.jpg
+study: Wikimedia Commons — 202505 Deer in Nara 06.jpg — Jonashtand — CC BY-SA 4.0 — https://commons.wikimedia.org/wiki/File:202505_Deer_in_Nara_06.jpg
+study: Wikimedia Commons — Nara, Todai-ji 20140203.JPG — Degueulasse — CC BY-SA 3.0 — https://commons.wikimedia.org/wiki/File:Nara,_Todai-ji_20140203.JPG
+bow: Wikimedia Commons — 鹿せんべい欲しさに群がる鹿 (17111564657).jpg — nobu3withfoxy from Iga,Mie, Japan — CC BY 2.0 — https://commons.wikimedia.org/wiki/File:%E9%B9%BF%E3%81%9B%E3%82%93%E3%81%B9%E3%81%84%E6%AC%B2%E3%81%97%E3%81%95%E3%81%AB%E7%BE%A4%E3%81%8C%E3%82%8B%E9%B9%BF_(17111564657).jpg
+bow: Wikimedia Commons — Sika Deer next to sign.jpg — Ominae — CC BY-SA 4.0 — https://commons.wikimedia.org/wiki/File:Sika_Deer_next_to_sign.jpg
+end: Wikimedia Commons — Deer and Monk (6088647244).jpg — rumpleteaser from Nagoya, Japan — CC BY 2.0 — https://commons.wikimedia.org/wiki/File:Deer_and_Monk_(6088647244).jpg
+end: Wikimedia Commons — Todai-ji, Nara (3810557145).jpg — Andrea Schaffer from Sydney, Australia — CC BY 2.0 — https://commons.wikimedia.org/wiki/File:Todai-ji,_Nara_(3810557145).jpg
+音楽: 竹笛
