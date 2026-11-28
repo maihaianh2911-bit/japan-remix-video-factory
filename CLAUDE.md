@@ -632,6 +632,21 @@ names are read on the Pexels page and kept in `scripts/authors.json`). It is ren
 channel file, no issue and no voice yet (`voiceFile` in `src/script.ts`). Open points: signs 3–5 and the ending, the
 voice, the channel's name and number.
 
+## The health explainer trial (`health-explain/`): a Remotion project of 28/11/2026, not a channel yet
+Owner, 28/11/2026: sent a Vietnamese health TikTok (Y Học Tâm Trí, 2 min 40 s: cold rice in the fridge becomes
+resistant starch; a scientific picture in a white card per part, big subtitles, a "doctor" in the corner) and asked
+"Làm đc dạng này k". Its pictures are AI pictures that channel made (Vietnamese words drawn in them), not found ones;
+the owner chose **real pictures from this repo's search + pictures drawn by code**, the same topic, the Vietnamese
+script shortened. First video `hiyagohan` (66.3 s, voice 青山龍星), sent in the chat. **Read `health-explain/README.md`
+before a second one.** Two lessons of that day: (1) **every change of a script, a new hook too, is shown again as the
+whole script (Japanese in one piece, then the Vietnamese meaning) and waits for "ok làm đi"** — Claude rebuilt after
+changing the hook without showing it, the owner: "m k thèm dịch kịch bản cho tao đọc, m tự sửa tự làm luôn à ? M phá
+luật à"; (2) **the hook follows the source** (what everyone believes, then the "secret"; shortened when the source's is
+long), not k10's hook rule of telling the whole story plainly ("Có ai viết hook ngu như thế ko"). No "doctor" on screen
+(we are not doctors); a claim the research does not back is left out or corrected, and said so to the owner. Its
+pictures came from the search-only story `stories/k10-2026-11-28-thu-hiyagohan.json`, run from the session's branch.
+Open points: no channel, no issue; the owner has not judged the video yet.
+
 ## The car-tips trial (`car-tips/`): a Remotion project of 27/11/2026, not a channel yet
 Owner, 27/11/2026: sent a horizontal Japanese car-tips video (a ranking 第N位, green-board frame, real photo in the
 middle, big outlined text with red keywords, subtitles, a stick figure with a pointer) and asked if it can be made;

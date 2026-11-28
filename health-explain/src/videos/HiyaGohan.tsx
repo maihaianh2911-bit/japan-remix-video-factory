@@ -113,22 +113,22 @@ const GutRoute: React.FC<{ len: number }> = ({ len }) => {
 const SHOTS: Shot[] = [
   // ── Hook: chữ lớn từ khung hình đầu ──
   {
-    from: 0, to: s(1), title: '冷蔵庫に残った、{昨日の冷やご飯}', explain: '',
+    from: 0, to: s(1), title: '前の晩の{冷やご飯}', explain: '',
     draw: (d) => (
       <>
         <Pic src={I('fridge-rice')} dur={d} zoom={[1.0, 1.1]} box={PIC_TALL} focus={[0.45, 0.6]} />
         <Tag at={F(at(0, '栄養'))} x={PIC.x + 280} y={PIC.y + 470} dx={0} dy={-250} text="栄養がない？" tone="ink" size={40} />
         <Tag at={F(at(0, 'おなか'))} x={PIC.x + 640} y={PIC.y + 560} dx={20} dy={-200} text="おなかが冷える？" tone="ink" size={40} />
-        <BigText text={'その冷やご飯、\n{捨てていませんか？}'} y={PIC_TALL.y + PIC_TALL.h - 290} size={92} />
+        <BigText text={'一晩おいた冷やご飯、\n{捨てるべき？}'} y={PIC_TALL.y + PIC_TALL.h - 270} size={78} />
       </>
     ),
   },
   {
-    from: s(1), to: s(2), title: 'その一杯に、\n{腸を変える秘密}', explain: '秘密のカギは {でんぷん}',
+    from: s(1), to: s(2), title: '消化器を丸ごと変える{秘密}', explain: '秘密のカギは {でんぷん}',
     draw: (d) => (
       <>
         <Pic src={I('rice-close')} dur={d} zoom={[1.05, 1.2]} />
-        <Lens at={F(at(1, '腸')) - F(s(1))} cx={PIC.x + PIC.w - 220} cy={PIC.y + 250} r={190} from={[PIC.x + 330, PIC.y + 470]} src={I('starch-sem')} label="顕微鏡で見たでんぷん" dur={d} />
+        <Lens at={F(at(1, '秘密')) - F(s(1))} cx={PIC.x + PIC.w - 220} cy={PIC.y + 250} r={190} from={[PIC.x + 330, PIC.y + 470]} src={I('starch-sem')} label="顕微鏡で見たでんぷん" dur={d} />
       </>
     ),
   },
@@ -261,7 +261,7 @@ const SHOTS: Shot[] = [
     draw: () => (
       <>
         <Board tall />
-        <Step at={F(at(8, 'ごはん') - s(8))} n={1} x={PIC.x + 40} y={PIC.y + 80} w={270} h={720} src={I('cooker')} text="多めに炊く" focus={[0.45, 0.5]} />
+        <Step at={F(0.15)} n={1} x={PIC.x + 40} y={PIC.y + 80} w={270} h={720} src={I('cooker')} text="多めに炊く" focus={[0.45, 0.5]} />
         <Step at={F(at(8, '小分け') - s(8))} n={2} x={PIC.x + 340} y={PIC.y + 80} w={270} h={720} src={I('portions')} text="小分け" />
         <Step at={F(at(8, 'すぐ') - s(8))} n={3} x={PIC.x + 640} y={PIC.y + 80} w={250} h={720} src={I('fridge')} text="すぐ冷蔵庫" focus={[0.5, 0.45]} />
       </>
@@ -296,7 +296,7 @@ const SHOTS: Shot[] = [
   },
 ];
 
-const HOT = ['冷やご飯', '秘密', '腸を変える', 'でんぷん', '血糖値', 'レジスタントスターチ', '約2.5倍', '2割', '大腸', '腸内細菌', '酪酸', 'エネルギー', '小分け', '冷蔵庫', '注意', '食中毒', 'OK', '贈りもの', '家族'];
+const HOT = ['冷やご飯', '秘密', '消化器', 'でんぷん', '血糖値', 'レジスタントスターチ', '約2.5倍', '2割', '大腸', '腸内細菌', '酪酸', 'エネルギー', '小分け', '冷蔵庫', '注意', '食中毒', 'OK', '贈りもの', '家族'];
 
 export const HiyaGohan: React.FC = () => (
   <ExplainFrame time={time} shots={SHOTS} hot={HOT} glyphs="0123456789.g％％（）：「」…？ポイ栄養顕微鏡" series="からだの科学" name="冷やご飯の秘密" />

@@ -40,7 +40,7 @@ export const makeTime = (timing: { duration: number; lines: unknown[] }) => {
       if (b < 0) b = k;
       cur += ch;
       const plain = cur.replace(/[、。]/g, '');
-      if ((ch === '、' || ch === '。') && (plain.length >= 9 || ch === '。')) flush(k);
+      if ((ch === '、' || ch === '。') && (plain.length >= 7 || ch === '。' || ch === '？')) flush(k);
     });
     if (cur) flush(l.text.length - 1);
   });
